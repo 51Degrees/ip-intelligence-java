@@ -72,7 +72,7 @@ if (RebuildSwig)
         message(WARNING "SWIG does not include Java support so will not be run")
     else()
         message(STATUS "Rebuilding SWIG interfaces")
-        execute_process(COMMAND ${SWIG_EXECUTABLE} -c++ -java -package fiftyone.ipintelligence.hash.engine.onpremise.interop.swig -outdir ${SRCOUT}/interop/swig -o ${CMAKE_CURRENT_LIST_DIR}/Java_Hash_Engine.cpp ${CMAKE_CURRENT_LIST_DIR}/hash_java.i)
+        execute_process(COMMAND ${SWIG_EXECUTABLE} -c++ -java -package fiftyone.ipintelligence.hash.engine.onpremise.interop.swig -outdir ${SRCOUT}/interop/swig -o ${CMAKE_CURRENT_LIST_DIR}/Java_Ipi_Engine.cpp ${CMAKE_CURRENT_LIST_DIR}/hash_java.i)
     endif()
 endif()
 message(STATUS "Done SWIG interfaces")
@@ -85,10 +85,10 @@ set(JAVA_AWT_LIBRARY None)
 set(JAVA_JVM_LIBRARY None)
 find_package(JNI REQUIRED)
 
-add_library(fiftyone-hash-java SHARED
-    ${CMAKE_CURRENT_LIST_DIR}/Java_Hash_Engine.cpp)
+add_library(fiftyone-ip-intelligence-java SHARED
+    ${CMAKE_CURRENT_LIST_DIR}/Java_Ipi_Engine.cpp)
 
-set_target_properties(fiftyone-hash-java
+set_target_properties(fiftyone-ip-intelligence-java
     PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${RES}"
     LIBRARY_OUTPUT_DIRECTORY "${RES}"
@@ -96,24 +96,24 @@ set_target_properties(fiftyone-hash-java
     PREFIX ""
     OUTPUT_NAME "IPIntelligenceHashEngine-${OS}-${ARCH}"
 )
-target_link_libraries(fiftyone-hash-java fiftyone-hash-cxx)
+target_link_libraries(fiftyone-ip-intelligence-java fiftyone-ip-intelligence-cxx)
 if (NOT MSVC)
-    target_compile_options(fiftyone-hash-java INTERFACE "-static-libgcc -static-libstdc++")
+    target_compile_options(fiftyone-ip-intelligence-java INTERFACE "-static-libgcc -static-libstdc++")
 endif()
 
 if (MSVC)
-	target_compile_options(fiftyone-hash-java PRIVATE "/D_CRT_SECURE_NO_WARNINGS" "/W4" "/WX")
+	target_compile_options(fiftyone-ip-intelligence-java PRIVATE "/D_CRT_SECURE_NO_WARNINGS" "/W4" "/WX")
 else()
-	target_compile_options(fiftyone-hash-java PRIVATE ${COMPILE_OPTION_DEBUG} "-Werror")
+	target_compile_options(fiftyone-ip-intelligence-java PRIVATE ${COMPILE_OPTION_DEBUG} "-Werror")
 endif()
 
-target_include_directories(fiftyone-hash-java PUBLIC ${JAVA_INCLUDE_PATH})
+target_include_directories(fiftyone-ip-intelligence-java PUBLIC ${JAVA_INCLUDE_PATH})
 if(WIN32)
-    target_include_directories(fiftyone-hash-java PUBLIC ${JAVA_INCLUDE_PATH}/win32)
+    target_include_directories(fiftyone-ip-intelligence-java PUBLIC ${JAVA_INCLUDE_PATH}/win32)
 endif()
 if(APPLE)
-    target_include_directories(fiftyone-hash-java PUBLIC ${JAVA_INCLUDE_PATH}/darwin)
+    target_include_directories(fiftyone-ip-intelligence-java PUBLIC ${JAVA_INCLUDE_PATH}/darwin)
 endif()
 if(UNIX AND NOT APPLE)
-    target_include_directories(fiftyone-hash-java PUBLIC ${JAVA_INCLUDE_PATH}/linux)
+    target_include_directories(fiftyone-ip-intelligence-java PUBLIC ${JAVA_INCLUDE_PATH}/linux)
 endif()
