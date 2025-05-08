@@ -6,7 +6,7 @@
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.interop.swig;
+package fiftyone.ipintelligence.engine.onpremise.interop.swig;
 
 public class EngineBaseSwig implements AutoCloseable {
   private transient long swigCPtr;
@@ -81,10 +81,6 @@ public class EngineBaseSwig implements AutoCloseable {
 
   public void refreshData(String fileName) {
     IpIntelligenceEngineModuleJNI.EngineBaseSwig_refreshData__SWIG_1(swigCPtr, this, fileName);
-  }
-
-  public void refreshData(byte[] data) {
-    IpIntelligenceEngineModuleJNI.EngineBaseSwig_refreshData__SWIG_2(swigCPtr, this, data);
   }
 
   public String getDataUpdateUrl() {

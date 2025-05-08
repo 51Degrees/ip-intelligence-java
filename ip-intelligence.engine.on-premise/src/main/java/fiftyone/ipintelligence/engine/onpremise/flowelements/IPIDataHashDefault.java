@@ -43,7 +43,7 @@ import static fiftyone.pipeline.util.StringManipulation.stringJoin;
 
 /**
  * Internal implementation of the {@link IPIDataHash} interface. This can
- * only be constructed by the {@link IPIntelligenceHashEngine}.
+ * only be constructed by the {@link IPIntelligenceOnPremiseEngine}.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-on-premise.md#element-data">Specification</a>
  */
 public class IPIDataHashDefault
@@ -80,7 +80,7 @@ public class IPIDataHashDefault
     IPIDataHashDefault(
         Logger logger,
         FlowData flowData,
-        IPIntelligenceHashEngine engine,
+        IPIntelligenceOnPremiseEngine engine,
         MissingPropertyService missingPropertyService) {
         super(logger, flowData, engine, missingPropertyService);
     }

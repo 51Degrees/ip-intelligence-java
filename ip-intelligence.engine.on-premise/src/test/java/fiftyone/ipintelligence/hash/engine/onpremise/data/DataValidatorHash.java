@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.hash.engine.onpremise.data;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngine;
+import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
 import fiftyone.ipintelligence.shared.IPIData;
 import fiftyone.ipintelligence.shared.testhelpers.data.DataValidator;
 import fiftyone.pipeline.core.data.FlowData;
@@ -39,9 +39,9 @@ import static org.junit.Assert.*;
 
 public class DataValidatorHash implements DataValidator {
 
-    private IPIntelligenceHashEngine engine;
+    private IPIntelligenceOnPremiseEngine engine;
 
-    public DataValidatorHash(IPIntelligenceHashEngine engine) {
+    public DataValidatorHash(IPIntelligenceOnPremiseEngine engine) {
         this.engine = engine;
     }
 

@@ -290,6 +290,627 @@ template <typename T> T SwigValueInit() {
 #endif
 
 
+#if defined(SWIG_NOINCLUDE) || defined(SWIG_NOARRAYS)
+
+
+static int SWIG_JavaArrayInBool (JNIEnv *jenv, jboolean **jarr, bool **carr, jbooleanArray input);
+static void SWIG_JavaArrayArgoutBool (JNIEnv *jenv, jboolean *jarr, bool *carr, jbooleanArray input);
+static jbooleanArray SWIG_JavaArrayOutBool (JNIEnv *jenv, bool *result, jsize sz);
+
+
+static int SWIG_JavaArrayInSchar (JNIEnv *jenv, jbyte **jarr, signed char **carr, jbyteArray input);
+static void SWIG_JavaArrayArgoutSchar (JNIEnv *jenv, jbyte *jarr, signed char *carr, jbyteArray input);
+static jbyteArray SWIG_JavaArrayOutSchar (JNIEnv *jenv, signed char *result, jsize sz);
+
+
+static int SWIG_JavaArrayInUchar (JNIEnv *jenv, jshort **jarr, unsigned char **carr, jshortArray input);
+static void SWIG_JavaArrayArgoutUchar (JNIEnv *jenv, jshort *jarr, unsigned char *carr, jshortArray input);
+static jshortArray SWIG_JavaArrayOutUchar (JNIEnv *jenv, unsigned char *result, jsize sz);
+
+
+static int SWIG_JavaArrayInShort (JNIEnv *jenv, jshort **jarr, short **carr, jshortArray input);
+static void SWIG_JavaArrayArgoutShort (JNIEnv *jenv, jshort *jarr, short *carr, jshortArray input);
+static jshortArray SWIG_JavaArrayOutShort (JNIEnv *jenv, short *result, jsize sz);
+
+
+static int SWIG_JavaArrayInUshort (JNIEnv *jenv, jint **jarr, unsigned short **carr, jintArray input);
+static void SWIG_JavaArrayArgoutUshort (JNIEnv *jenv, jint *jarr, unsigned short *carr, jintArray input);
+static jintArray SWIG_JavaArrayOutUshort (JNIEnv *jenv, unsigned short *result, jsize sz);
+
+
+static int SWIG_JavaArrayInInt (JNIEnv *jenv, jint **jarr, int **carr, jintArray input);
+static void SWIG_JavaArrayArgoutInt (JNIEnv *jenv, jint *jarr, int *carr, jintArray input);
+static jintArray SWIG_JavaArrayOutInt (JNIEnv *jenv, int *result, jsize sz);
+
+
+static int SWIG_JavaArrayInUint (JNIEnv *jenv, jlong **jarr, unsigned int **carr, jlongArray input);
+static void SWIG_JavaArrayArgoutUint (JNIEnv *jenv, jlong *jarr, unsigned int *carr, jlongArray input);
+static jlongArray SWIG_JavaArrayOutUint (JNIEnv *jenv, unsigned int *result, jsize sz);
+
+
+static int SWIG_JavaArrayInLong (JNIEnv *jenv, jint **jarr, long **carr, jintArray input);
+static void SWIG_JavaArrayArgoutLong (JNIEnv *jenv, jint *jarr, long *carr, jintArray input);
+static jintArray SWIG_JavaArrayOutLong (JNIEnv *jenv, long *result, jsize sz);
+
+
+static int SWIG_JavaArrayInUlong (JNIEnv *jenv, jlong **jarr, unsigned long **carr, jlongArray input);
+static void SWIG_JavaArrayArgoutUlong (JNIEnv *jenv, jlong *jarr, unsigned long *carr, jlongArray input);
+static jlongArray SWIG_JavaArrayOutUlong (JNIEnv *jenv, unsigned long *result, jsize sz);
+
+
+static int SWIG_JavaArrayInLonglong (JNIEnv *jenv, jlong **jarr, long long **carr, jlongArray input);
+static void SWIG_JavaArrayArgoutLonglong (JNIEnv *jenv, jlong *jarr, long long *carr, jlongArray input);
+static jlongArray SWIG_JavaArrayOutLonglong (JNIEnv *jenv, long long *result, jsize sz);
+
+
+static int SWIG_JavaArrayInFloat (JNIEnv *jenv, jfloat **jarr, float **carr, jfloatArray input);
+static void SWIG_JavaArrayArgoutFloat (JNIEnv *jenv, jfloat *jarr, float *carr, jfloatArray input);
+static jfloatArray SWIG_JavaArrayOutFloat (JNIEnv *jenv, float *result, jsize sz);
+
+
+static int SWIG_JavaArrayInDouble (JNIEnv *jenv, jdouble **jarr, double **carr, jdoubleArray input);
+static void SWIG_JavaArrayArgoutDouble (JNIEnv *jenv, jdouble *jarr, double *carr, jdoubleArray input);
+static jdoubleArray SWIG_JavaArrayOutDouble (JNIEnv *jenv, double *result, jsize sz);
+
+
+#else
+
+
+/* bool[] support */
+static int SWIG_JavaArrayInBool (JNIEnv *jenv, jboolean **jarr, bool **carr, jbooleanArray input) {
+  int i;
+  jsize sz;
+  if (!input) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
+    return 0;
+  }
+  sz = jenv->GetArrayLength(input);
+  *jarr = jenv->GetBooleanArrayElements(input, 0);
+  if (!*jarr)
+    return 0; 
+  *carr = new bool[sz]; 
+  if (!*carr) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
+    return 0;
+  }
+  for (i=0; i<sz; i++)
+    (*carr)[i] = ((*jarr)[i] != 0);
+  return 1;
+}
+
+static void SWIG_JavaArrayArgoutBool (JNIEnv *jenv, jboolean *jarr, bool *carr, jbooleanArray input) {
+  int i;
+  jsize sz = jenv->GetArrayLength(input);
+  for (i=0; i<sz; i++)
+    jarr[i] = (jboolean)carr[i];
+  jenv->ReleaseBooleanArrayElements(input, jarr, 0);
+}
+
+static jbooleanArray SWIG_JavaArrayOutBool (JNIEnv *jenv, bool *result, jsize sz) {
+  jboolean *arr;
+  int i;
+  jbooleanArray jresult = jenv->NewBooleanArray(sz);
+  if (!jresult)
+    return NULL;
+  arr = jenv->GetBooleanArrayElements(jresult, 0);
+  if (!arr)
+    return NULL;
+  for (i=0; i<sz; i++)
+    arr[i] = (jboolean)result[i];
+  jenv->ReleaseBooleanArrayElements(jresult, arr, 0);
+  return jresult;
+}
+
+
+/* signed char[] support */
+static int SWIG_JavaArrayInSchar (JNIEnv *jenv, jbyte **jarr, signed char **carr, jbyteArray input) {
+  int i;
+  jsize sz;
+  if (!input) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
+    return 0;
+  }
+  sz = jenv->GetArrayLength(input);
+  *jarr = jenv->GetByteArrayElements(input, 0);
+  if (!*jarr)
+    return 0; 
+  *carr = new signed char[sz]; 
+  if (!*carr) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
+    return 0;
+  }
+  for (i=0; i<sz; i++)
+    (*carr)[i] = (signed char)(*jarr)[i];
+  return 1;
+}
+
+static void SWIG_JavaArrayArgoutSchar (JNIEnv *jenv, jbyte *jarr, signed char *carr, jbyteArray input) {
+  int i;
+  jsize sz = jenv->GetArrayLength(input);
+  for (i=0; i<sz; i++)
+    jarr[i] = (jbyte)carr[i];
+  jenv->ReleaseByteArrayElements(input, jarr, 0);
+}
+
+static jbyteArray SWIG_JavaArrayOutSchar (JNIEnv *jenv, signed char *result, jsize sz) {
+  jbyte *arr;
+  int i;
+  jbyteArray jresult = jenv->NewByteArray(sz);
+  if (!jresult)
+    return NULL;
+  arr = jenv->GetByteArrayElements(jresult, 0);
+  if (!arr)
+    return NULL;
+  for (i=0; i<sz; i++)
+    arr[i] = (jbyte)result[i];
+  jenv->ReleaseByteArrayElements(jresult, arr, 0);
+  return jresult;
+}
+
+
+/* unsigned char[] support */
+static int SWIG_JavaArrayInUchar (JNIEnv *jenv, jshort **jarr, unsigned char **carr, jshortArray input) {
+  int i;
+  jsize sz;
+  if (!input) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
+    return 0;
+  }
+  sz = jenv->GetArrayLength(input);
+  *jarr = jenv->GetShortArrayElements(input, 0);
+  if (!*jarr)
+    return 0; 
+  *carr = new unsigned char[sz]; 
+  if (!*carr) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
+    return 0;
+  }
+  for (i=0; i<sz; i++)
+    (*carr)[i] = (unsigned char)(*jarr)[i];
+  return 1;
+}
+
+static void SWIG_JavaArrayArgoutUchar (JNIEnv *jenv, jshort *jarr, unsigned char *carr, jshortArray input) {
+  int i;
+  jsize sz = jenv->GetArrayLength(input);
+  for (i=0; i<sz; i++)
+    jarr[i] = (jshort)carr[i];
+  jenv->ReleaseShortArrayElements(input, jarr, 0);
+}
+
+static jshortArray SWIG_JavaArrayOutUchar (JNIEnv *jenv, unsigned char *result, jsize sz) {
+  jshort *arr;
+  int i;
+  jshortArray jresult = jenv->NewShortArray(sz);
+  if (!jresult)
+    return NULL;
+  arr = jenv->GetShortArrayElements(jresult, 0);
+  if (!arr)
+    return NULL;
+  for (i=0; i<sz; i++)
+    arr[i] = (jshort)result[i];
+  jenv->ReleaseShortArrayElements(jresult, arr, 0);
+  return jresult;
+}
+
+
+/* short[] support */
+static int SWIG_JavaArrayInShort (JNIEnv *jenv, jshort **jarr, short **carr, jshortArray input) {
+  int i;
+  jsize sz;
+  if (!input) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
+    return 0;
+  }
+  sz = jenv->GetArrayLength(input);
+  *jarr = jenv->GetShortArrayElements(input, 0);
+  if (!*jarr)
+    return 0; 
+  *carr = new short[sz]; 
+  if (!*carr) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
+    return 0;
+  }
+  for (i=0; i<sz; i++)
+    (*carr)[i] = (short)(*jarr)[i];
+  return 1;
+}
+
+static void SWIG_JavaArrayArgoutShort (JNIEnv *jenv, jshort *jarr, short *carr, jshortArray input) {
+  int i;
+  jsize sz = jenv->GetArrayLength(input);
+  for (i=0; i<sz; i++)
+    jarr[i] = (jshort)carr[i];
+  jenv->ReleaseShortArrayElements(input, jarr, 0);
+}
+
+static jshortArray SWIG_JavaArrayOutShort (JNIEnv *jenv, short *result, jsize sz) {
+  jshort *arr;
+  int i;
+  jshortArray jresult = jenv->NewShortArray(sz);
+  if (!jresult)
+    return NULL;
+  arr = jenv->GetShortArrayElements(jresult, 0);
+  if (!arr)
+    return NULL;
+  for (i=0; i<sz; i++)
+    arr[i] = (jshort)result[i];
+  jenv->ReleaseShortArrayElements(jresult, arr, 0);
+  return jresult;
+}
+
+
+/* unsigned short[] support */
+static int SWIG_JavaArrayInUshort (JNIEnv *jenv, jint **jarr, unsigned short **carr, jintArray input) {
+  int i;
+  jsize sz;
+  if (!input) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
+    return 0;
+  }
+  sz = jenv->GetArrayLength(input);
+  *jarr = jenv->GetIntArrayElements(input, 0);
+  if (!*jarr)
+    return 0; 
+  *carr = new unsigned short[sz]; 
+  if (!*carr) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
+    return 0;
+  }
+  for (i=0; i<sz; i++)
+    (*carr)[i] = (unsigned short)(*jarr)[i];
+  return 1;
+}
+
+static void SWIG_JavaArrayArgoutUshort (JNIEnv *jenv, jint *jarr, unsigned short *carr, jintArray input) {
+  int i;
+  jsize sz = jenv->GetArrayLength(input);
+  for (i=0; i<sz; i++)
+    jarr[i] = (jint)carr[i];
+  jenv->ReleaseIntArrayElements(input, jarr, 0);
+}
+
+static jintArray SWIG_JavaArrayOutUshort (JNIEnv *jenv, unsigned short *result, jsize sz) {
+  jint *arr;
+  int i;
+  jintArray jresult = jenv->NewIntArray(sz);
+  if (!jresult)
+    return NULL;
+  arr = jenv->GetIntArrayElements(jresult, 0);
+  if (!arr)
+    return NULL;
+  for (i=0; i<sz; i++)
+    arr[i] = (jint)result[i];
+  jenv->ReleaseIntArrayElements(jresult, arr, 0);
+  return jresult;
+}
+
+
+/* int[] support */
+static int SWIG_JavaArrayInInt (JNIEnv *jenv, jint **jarr, int **carr, jintArray input) {
+  int i;
+  jsize sz;
+  if (!input) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
+    return 0;
+  }
+  sz = jenv->GetArrayLength(input);
+  *jarr = jenv->GetIntArrayElements(input, 0);
+  if (!*jarr)
+    return 0; 
+  *carr = new int[sz]; 
+  if (!*carr) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
+    return 0;
+  }
+  for (i=0; i<sz; i++)
+    (*carr)[i] = (int)(*jarr)[i];
+  return 1;
+}
+
+static void SWIG_JavaArrayArgoutInt (JNIEnv *jenv, jint *jarr, int *carr, jintArray input) {
+  int i;
+  jsize sz = jenv->GetArrayLength(input);
+  for (i=0; i<sz; i++)
+    jarr[i] = (jint)carr[i];
+  jenv->ReleaseIntArrayElements(input, jarr, 0);
+}
+
+static jintArray SWIG_JavaArrayOutInt (JNIEnv *jenv, int *result, jsize sz) {
+  jint *arr;
+  int i;
+  jintArray jresult = jenv->NewIntArray(sz);
+  if (!jresult)
+    return NULL;
+  arr = jenv->GetIntArrayElements(jresult, 0);
+  if (!arr)
+    return NULL;
+  for (i=0; i<sz; i++)
+    arr[i] = (jint)result[i];
+  jenv->ReleaseIntArrayElements(jresult, arr, 0);
+  return jresult;
+}
+
+
+/* unsigned int[] support */
+static int SWIG_JavaArrayInUint (JNIEnv *jenv, jlong **jarr, unsigned int **carr, jlongArray input) {
+  int i;
+  jsize sz;
+  if (!input) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
+    return 0;
+  }
+  sz = jenv->GetArrayLength(input);
+  *jarr = jenv->GetLongArrayElements(input, 0);
+  if (!*jarr)
+    return 0; 
+  *carr = new unsigned int[sz]; 
+  if (!*carr) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
+    return 0;
+  }
+  for (i=0; i<sz; i++)
+    (*carr)[i] = (unsigned int)(*jarr)[i];
+  return 1;
+}
+
+static void SWIG_JavaArrayArgoutUint (JNIEnv *jenv, jlong *jarr, unsigned int *carr, jlongArray input) {
+  int i;
+  jsize sz = jenv->GetArrayLength(input);
+  for (i=0; i<sz; i++)
+    jarr[i] = (jlong)carr[i];
+  jenv->ReleaseLongArrayElements(input, jarr, 0);
+}
+
+static jlongArray SWIG_JavaArrayOutUint (JNIEnv *jenv, unsigned int *result, jsize sz) {
+  jlong *arr;
+  int i;
+  jlongArray jresult = jenv->NewLongArray(sz);
+  if (!jresult)
+    return NULL;
+  arr = jenv->GetLongArrayElements(jresult, 0);
+  if (!arr)
+    return NULL;
+  for (i=0; i<sz; i++)
+    arr[i] = (jlong)result[i];
+  jenv->ReleaseLongArrayElements(jresult, arr, 0);
+  return jresult;
+}
+
+
+/* long[] support */
+static int SWIG_JavaArrayInLong (JNIEnv *jenv, jint **jarr, long **carr, jintArray input) {
+  int i;
+  jsize sz;
+  if (!input) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
+    return 0;
+  }
+  sz = jenv->GetArrayLength(input);
+  *jarr = jenv->GetIntArrayElements(input, 0);
+  if (!*jarr)
+    return 0; 
+  *carr = new long[sz]; 
+  if (!*carr) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
+    return 0;
+  }
+  for (i=0; i<sz; i++)
+    (*carr)[i] = (long)(*jarr)[i];
+  return 1;
+}
+
+static void SWIG_JavaArrayArgoutLong (JNIEnv *jenv, jint *jarr, long *carr, jintArray input) {
+  int i;
+  jsize sz = jenv->GetArrayLength(input);
+  for (i=0; i<sz; i++)
+    jarr[i] = (jint)carr[i];
+  jenv->ReleaseIntArrayElements(input, jarr, 0);
+}
+
+static jintArray SWIG_JavaArrayOutLong (JNIEnv *jenv, long *result, jsize sz) {
+  jint *arr;
+  int i;
+  jintArray jresult = jenv->NewIntArray(sz);
+  if (!jresult)
+    return NULL;
+  arr = jenv->GetIntArrayElements(jresult, 0);
+  if (!arr)
+    return NULL;
+  for (i=0; i<sz; i++)
+    arr[i] = (jint)result[i];
+  jenv->ReleaseIntArrayElements(jresult, arr, 0);
+  return jresult;
+}
+
+
+/* unsigned long[] support */
+static int SWIG_JavaArrayInUlong (JNIEnv *jenv, jlong **jarr, unsigned long **carr, jlongArray input) {
+  int i;
+  jsize sz;
+  if (!input) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
+    return 0;
+  }
+  sz = jenv->GetArrayLength(input);
+  *jarr = jenv->GetLongArrayElements(input, 0);
+  if (!*jarr)
+    return 0; 
+  *carr = new unsigned long[sz]; 
+  if (!*carr) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
+    return 0;
+  }
+  for (i=0; i<sz; i++)
+    (*carr)[i] = (unsigned long)(*jarr)[i];
+  return 1;
+}
+
+static void SWIG_JavaArrayArgoutUlong (JNIEnv *jenv, jlong *jarr, unsigned long *carr, jlongArray input) {
+  int i;
+  jsize sz = jenv->GetArrayLength(input);
+  for (i=0; i<sz; i++)
+    jarr[i] = (jlong)carr[i];
+  jenv->ReleaseLongArrayElements(input, jarr, 0);
+}
+
+static jlongArray SWIG_JavaArrayOutUlong (JNIEnv *jenv, unsigned long *result, jsize sz) {
+  jlong *arr;
+  int i;
+  jlongArray jresult = jenv->NewLongArray(sz);
+  if (!jresult)
+    return NULL;
+  arr = jenv->GetLongArrayElements(jresult, 0);
+  if (!arr)
+    return NULL;
+  for (i=0; i<sz; i++)
+    arr[i] = (jlong)result[i];
+  jenv->ReleaseLongArrayElements(jresult, arr, 0);
+  return jresult;
+}
+
+
+/* long long[] support */
+static int SWIG_JavaArrayInLonglong (JNIEnv *jenv, jlong **jarr, long long **carr, jlongArray input) {
+  int i;
+  jsize sz;
+  if (!input) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
+    return 0;
+  }
+  sz = jenv->GetArrayLength(input);
+  *jarr = jenv->GetLongArrayElements(input, 0);
+  if (!*jarr)
+    return 0; 
+  *carr = new long long[sz]; 
+  if (!*carr) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
+    return 0;
+  }
+  for (i=0; i<sz; i++)
+    (*carr)[i] = (long long)(*jarr)[i];
+  return 1;
+}
+
+static void SWIG_JavaArrayArgoutLonglong (JNIEnv *jenv, jlong *jarr, long long *carr, jlongArray input) {
+  int i;
+  jsize sz = jenv->GetArrayLength(input);
+  for (i=0; i<sz; i++)
+    jarr[i] = (jlong)carr[i];
+  jenv->ReleaseLongArrayElements(input, jarr, 0);
+}
+
+static jlongArray SWIG_JavaArrayOutLonglong (JNIEnv *jenv, long long *result, jsize sz) {
+  jlong *arr;
+  int i;
+  jlongArray jresult = jenv->NewLongArray(sz);
+  if (!jresult)
+    return NULL;
+  arr = jenv->GetLongArrayElements(jresult, 0);
+  if (!arr)
+    return NULL;
+  for (i=0; i<sz; i++)
+    arr[i] = (jlong)result[i];
+  jenv->ReleaseLongArrayElements(jresult, arr, 0);
+  return jresult;
+}
+
+
+/* float[] support */
+static int SWIG_JavaArrayInFloat (JNIEnv *jenv, jfloat **jarr, float **carr, jfloatArray input) {
+  int i;
+  jsize sz;
+  if (!input) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
+    return 0;
+  }
+  sz = jenv->GetArrayLength(input);
+  *jarr = jenv->GetFloatArrayElements(input, 0);
+  if (!*jarr)
+    return 0; 
+  *carr = new float[sz]; 
+  if (!*carr) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
+    return 0;
+  }
+  for (i=0; i<sz; i++)
+    (*carr)[i] = (float)(*jarr)[i];
+  return 1;
+}
+
+static void SWIG_JavaArrayArgoutFloat (JNIEnv *jenv, jfloat *jarr, float *carr, jfloatArray input) {
+  int i;
+  jsize sz = jenv->GetArrayLength(input);
+  for (i=0; i<sz; i++)
+    jarr[i] = (jfloat)carr[i];
+  jenv->ReleaseFloatArrayElements(input, jarr, 0);
+}
+
+static jfloatArray SWIG_JavaArrayOutFloat (JNIEnv *jenv, float *result, jsize sz) {
+  jfloat *arr;
+  int i;
+  jfloatArray jresult = jenv->NewFloatArray(sz);
+  if (!jresult)
+    return NULL;
+  arr = jenv->GetFloatArrayElements(jresult, 0);
+  if (!arr)
+    return NULL;
+  for (i=0; i<sz; i++)
+    arr[i] = (jfloat)result[i];
+  jenv->ReleaseFloatArrayElements(jresult, arr, 0);
+  return jresult;
+}
+
+
+/* double[] support */
+static int SWIG_JavaArrayInDouble (JNIEnv *jenv, jdouble **jarr, double **carr, jdoubleArray input) {
+  int i;
+  jsize sz;
+  if (!input) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null array");
+    return 0;
+  }
+  sz = jenv->GetArrayLength(input);
+  *jarr = jenv->GetDoubleArrayElements(input, 0);
+  if (!*jarr)
+    return 0; 
+  *carr = new double[sz]; 
+  if (!*carr) {
+    SWIG_JavaThrowException(jenv, SWIG_JavaOutOfMemoryError, "array memory allocation failed");
+    return 0;
+  }
+  for (i=0; i<sz; i++)
+    (*carr)[i] = (double)(*jarr)[i];
+  return 1;
+}
+
+static void SWIG_JavaArrayArgoutDouble (JNIEnv *jenv, jdouble *jarr, double *carr, jdoubleArray input) {
+  int i;
+  jsize sz = jenv->GetArrayLength(input);
+  for (i=0; i<sz; i++)
+    jarr[i] = (jdouble)carr[i];
+  jenv->ReleaseDoubleArrayElements(input, jarr, 0);
+}
+
+static jdoubleArray SWIG_JavaArrayOutDouble (JNIEnv *jenv, double *result, jsize sz) {
+  jdouble *arr;
+  int i;
+  jdoubleArray jresult = jenv->NewDoubleArray(sz);
+  if (!jresult)
+    return NULL;
+  arr = jenv->GetDoubleArrayElements(jresult, 0);
+  if (!arr)
+    return NULL;
+  for (i=0; i<sz; i++)
+    arr[i] = (jdouble)result[i];
+  jenv->ReleaseDoubleArrayElements(jresult, arr, 0);
+  return jresult;
+}
+
+
+#endif
+
+
 #include <typeinfo>
 #include <stdexcept>
 
@@ -877,7 +1498,7 @@ SWIGINTERN void std_vector_Sl_WeightedValue_Sl_double_Sg__Sg__doRemoveRange(std:
 extern "C" {
 #endif
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1MapStringStringSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1MapStringStringSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   std::map< std::string,std::string > *result = 0 ;
   
@@ -889,7 +1510,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1MapStringStringSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1MapStringStringSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   std::map< std::string,std::string > *arg1 = 0 ;
   std::map< std::string,std::string > *result = 0 ;
@@ -908,7 +1529,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1Iterator_1getNextUnchecked(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1Iterator_1getNextUnchecked(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   std::map< std::string,std::string >::iterator *arg1 = (std::map< std::string,std::string >::iterator *) 0 ;
   std::map< std::string,std::string,std::less< std::string > >::iterator result;
@@ -923,7 +1544,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1Iterator_1isNot(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1Iterator_1isNot(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   jboolean jresult = 0 ;
   std::map< std::string,std::string >::iterator *arg1 = (std::map< std::string,std::string >::iterator *) 0 ;
   std::map< std::string,std::string >::iterator arg2 ;
@@ -947,7 +1568,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1Iterator_1getKey(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1Iterator_1getKey(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   std::map< std::string,std::string >::iterator *arg1 = (std::map< std::string,std::string >::iterator *) 0 ;
   std::string result;
@@ -962,7 +1583,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1Iterator_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1Iterator_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   std::map< std::string,std::string >::iterator *arg1 = (std::map< std::string,std::string >::iterator *) 0 ;
   std::string result;
@@ -977,7 +1598,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1Iterator_1setValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1Iterator_1setValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   std::map< std::string,std::string >::iterator *arg1 = (std::map< std::string,std::string >::iterator *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -998,7 +1619,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1MapStringStringSwig_1Iterator(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1MapStringStringSwig_1Iterator(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   std::map< std::string,std::string >::iterator *arg1 = (std::map< std::string,std::string >::iterator *) 0 ;
   
   (void)jenv;
@@ -1057,7 +1678,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1isEmpty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1isEmpty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   bool result;
@@ -1072,7 +1693,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   
   (void)jenv;
@@ -1083,7 +1704,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1find(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1find(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jlong jresult = 0 ;
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   std::string *arg2 = 0 ;
@@ -1108,7 +1729,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1begin(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1begin(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   std::map< std::string,std::string >::iterator result;
@@ -1123,7 +1744,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1end(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1end(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   std::map< std::string,std::string >::iterator result;
@@ -1138,7 +1759,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1sizeImpl(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1sizeImpl(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   jint result;
@@ -1158,7 +1779,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1containsImpl(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1containsImpl(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jboolean jresult = 0 ;
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   std::string *arg2 = 0 ;
@@ -1183,7 +1804,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1putUnchecked(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2, jstring jarg3) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1putUnchecked(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2, jstring jarg3) {
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   std::string *arg2 = 0 ;
   std::string *arg3 = 0 ;
@@ -1214,7 +1835,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1removeUnchecked(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MapStringStringSwig_1removeUnchecked(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   std::map< std::string,std::string,std::less< std::string > >::iterator arg2 ;
   std::map< std::string,std::string,std::less< std::string > >::iterator const *argp2 ;
@@ -1234,7 +1855,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1MapStringStringSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1MapStringStringSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   std::map< std::string,std::string > *arg1 = (std::map< std::string,std::string > *) 0 ;
   
   (void)jenv;
@@ -1293,7 +1914,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1VectorStringSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1VectorStringSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   std::vector< std::string > *result = 0 ;
   
@@ -1305,7 +1926,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1VectorStringSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1VectorStringSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   std::vector< std::string > *arg1 = 0 ;
   std::vector< std::string > *result = 0 ;
@@ -1324,7 +1945,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1isEmpty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1isEmpty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   bool result;
@@ -1339,7 +1960,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   
   (void)jenv;
@@ -1350,7 +1971,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1VectorStringSwig_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jint jarg1, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1VectorStringSwig_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jint jarg1, jstring jarg2) {
   jlong jresult = 0 ;
   jint arg1 ;
   std::string *arg2 = 0 ;
@@ -1379,7 +2000,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   jint result;
@@ -1399,7 +2020,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doReserve(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doReserve(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   jint arg2 ;
   
@@ -1420,7 +2041,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   jint result;
@@ -1440,7 +2061,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doAdd_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doAdd_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   std::vector< std::string >::value_type *arg2 = 0 ;
   
@@ -1461,7 +2082,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doAdd_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jstring jarg3) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doAdd_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jstring jarg3) {
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   jint arg2 ;
   std::vector< std::string >::value_type *arg3 = 0 ;
@@ -1489,7 +2110,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doRemove(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doRemove(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jstring jresult = 0 ;
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   jint arg2 ;
@@ -1511,7 +2132,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doGet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doGet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jstring jresult = 0 ;
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   jint arg2 ;
@@ -1533,7 +2154,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doSet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jstring jarg3) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doSet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jstring jarg3) {
   jstring jresult = 0 ;
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   jint arg2 ;
@@ -1565,7 +2186,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doRemoveRange(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jint jarg3) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringSwig_1doRemoveRange(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jint jarg3) {
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   jint arg2 ;
   jint arg3 ;
@@ -1585,7 +2206,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1VectorStringSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1VectorStringSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   
   (void)jenv;
@@ -1644,7 +2265,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1RequiredPropertiesConfigSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1RequiredPropertiesConfigSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   RequiredPropertiesConfig *result = 0 ;
   
@@ -1705,7 +2326,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1RequiredPropertiesConfigSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1RequiredPropertiesConfigSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   std::vector< std::string > *arg1 = (std::vector< std::string > *) 0 ;
   RequiredPropertiesConfig *result = 0 ;
@@ -1769,7 +2390,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1RequiredPropertiesConfigSwig_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jstring jarg1) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1RequiredPropertiesConfigSwig_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jstring jarg1) {
   jlong jresult = 0 ;
   char *arg1 = (char *) 0 ;
   RequiredPropertiesConfig *result = 0 ;
@@ -1837,7 +2458,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1RequiredPropertiesConfigSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1RequiredPropertiesConfigSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   RequiredPropertiesConfig *arg1 = (RequiredPropertiesConfig *) 0 ;
   
   (void)jenv;
@@ -1896,7 +2517,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_RequiredPropertiesConfigSwig_1getProperties(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_RequiredPropertiesConfigSwig_1getProperties(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   RequiredPropertiesConfig *arg1 = (RequiredPropertiesConfig *) 0 ;
   std::vector< std::string > result;
@@ -1960,7 +2581,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1StringValueSwig(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1StringValueSwig(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   Value< std::string > *result = 0 ;
   
@@ -2021,7 +2642,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_StringValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_StringValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   Value< std::string > *arg1 = (Value< std::string > *) 0 ;
   bool result;
@@ -2085,7 +2706,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_StringValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_StringValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   Value< std::string > *arg1 = (Value< std::string > *) 0 ;
   char *result = 0 ;
@@ -2149,7 +2770,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_StringValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_StringValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   Value< std::string > *arg1 = (Value< std::string > *) 0 ;
   std::string result;
@@ -2213,7 +2834,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1StringValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1StringValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Value< std::string > *arg1 = (Value< std::string > *) 0 ;
   
   (void)jenv;
@@ -2272,7 +2893,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1BoolValueSwig(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1BoolValueSwig(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   Value< bool > *result = 0 ;
   
@@ -2333,7 +2954,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_BoolValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_BoolValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   Value< bool > *arg1 = (Value< bool > *) 0 ;
   bool result;
@@ -2397,7 +3018,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_BoolValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_BoolValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   Value< bool > *arg1 = (Value< bool > *) 0 ;
   char *result = 0 ;
@@ -2461,7 +3082,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_BoolValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_BoolValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   Value< bool > *arg1 = (Value< bool > *) 0 ;
   bool result;
@@ -2525,7 +3146,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1BoolValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1BoolValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Value< bool > *arg1 = (Value< bool > *) 0 ;
   
   (void)jenv;
@@ -2584,7 +3205,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1IntegerValueSwig(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1IntegerValueSwig(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   Value< int > *result = 0 ;
   
@@ -2645,7 +3266,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IntegerValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IntegerValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   Value< int > *arg1 = (Value< int > *) 0 ;
   bool result;
@@ -2709,7 +3330,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IntegerValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IntegerValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   Value< int > *arg1 = (Value< int > *) 0 ;
   char *result = 0 ;
@@ -2773,7 +3394,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IntegerValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IntegerValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   Value< int > *arg1 = (Value< int > *) 0 ;
   int result;
@@ -2837,7 +3458,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1IntegerValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1IntegerValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Value< int > *arg1 = (Value< int > *) 0 ;
   
   (void)jenv;
@@ -2896,7 +3517,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1VectorStringValuesSwig(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1VectorStringValuesSwig(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   Value< std::vector< std::string > > *result = 0 ;
   
@@ -2957,7 +3578,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringValuesSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringValuesSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   Value< std::vector< std::string > > *arg1 = (Value< std::vector< std::string > > *) 0 ;
   bool result;
@@ -3021,7 +3642,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringValuesSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringValuesSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   Value< std::vector< std::string > > *arg1 = (Value< std::vector< std::string > > *) 0 ;
   char *result = 0 ;
@@ -3085,7 +3706,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringValuesSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_VectorStringValuesSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   Value< std::vector< std::string > > *arg1 = (Value< std::vector< std::string > > *) 0 ;
   std::vector< std::string > result;
@@ -3149,7 +3770,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1VectorStringValuesSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1VectorStringValuesSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Value< std::vector< std::string > > *arg1 = (Value< std::vector< std::string > > *) 0 ;
   
   (void)jenv;
@@ -3208,7 +3829,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1DoubleValueSwig(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1DoubleValueSwig(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   Value< double > *result = 0 ;
   
@@ -3269,7 +3890,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_DoubleValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_DoubleValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   Value< double > *arg1 = (Value< double > *) 0 ;
   bool result;
@@ -3333,7 +3954,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_DoubleValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_DoubleValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   Value< double > *arg1 = (Value< double > *) 0 ;
   char *result = 0 ;
@@ -3397,7 +4018,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jdouble JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_DoubleValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jdouble JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_DoubleValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jdouble jresult = 0 ;
   Value< double > *arg1 = (Value< double > *) 0 ;
   double result;
@@ -3461,7 +4082,7 @@ SWIGEXPORT jdouble JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1DoubleValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1DoubleValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Value< double > *arg1 = (Value< double > *) 0 ;
   
   (void)jenv;
@@ -3520,7 +4141,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ResultsBaseSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ResultsBaseSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   
   (void)jenv;
@@ -3579,7 +4200,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getAvailableProperties(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getAvailableProperties(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   int result;
@@ -3643,7 +4264,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1containsProperty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1containsProperty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jboolean jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   std::string *arg2 = 0 ;
@@ -3717,7 +4338,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getProperties(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getProperties(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   std::vector< std::string > result;
@@ -3781,7 +4402,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getPropertyName(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getPropertyName(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jstring jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   int arg2 ;
@@ -3847,7 +4468,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValues_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValues_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jlong jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   std::string *arg2 = 0 ;
@@ -3921,7 +4542,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValues_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValues_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   int arg2 ;
@@ -3987,7 +4608,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValueAsString_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValueAsString_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jlong jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   std::string *arg2 = 0 ;
@@ -4061,7 +4682,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValueAsString_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValueAsString_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   int arg2 ;
@@ -4127,7 +4748,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValueAsBool_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValueAsBool_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jlong jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   std::string *arg2 = 0 ;
@@ -4201,7 +4822,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValueAsBool_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValueAsBool_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   int arg2 ;
@@ -4267,7 +4888,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValueAsInteger_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValueAsInteger_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jlong jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   std::string *arg2 = 0 ;
@@ -4341,7 +4962,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValueAsInteger_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValueAsInteger_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   int arg2 ;
@@ -4407,7 +5028,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValueAsDouble_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValueAsDouble_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jlong jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   std::string *arg2 = 0 ;
@@ -4481,7 +5102,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValueAsDouble_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsBaseSwig_1getValueAsDouble_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   int arg2 ;
@@ -4547,7 +5168,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Date_1getYear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Date_1getYear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   Date *arg1 = (Date *) 0 ;
   int result;
@@ -4611,7 +5232,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Date_1getMonth(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Date_1getMonth(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   Date *arg1 = (Date *) 0 ;
   int result;
@@ -4675,7 +5296,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Date_1getDay(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Date_1getDay(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   Date *arg1 = (Date *) 0 ;
   int result;
@@ -4739,7 +5360,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1Date(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1Date(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Date *arg1 = (Date *) 0 ;
   
   (void)jenv;
@@ -4798,7 +5419,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getName(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getName(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   PropertyMetaData *arg1 = (PropertyMetaData *) 0 ;
   std::string result;
@@ -4862,7 +5483,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getDataFilesWherePresent(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getDataFilesWherePresent(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   PropertyMetaData *arg1 = (PropertyMetaData *) 0 ;
   std::vector< std::string > result;
@@ -4926,7 +5547,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getType(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getType(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   PropertyMetaData *arg1 = (PropertyMetaData *) 0 ;
   std::string result;
@@ -4990,7 +5611,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getCategory(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getCategory(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   PropertyMetaData *arg1 = (PropertyMetaData *) 0 ;
   std::string result;
@@ -5054,7 +5675,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getUrl(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getUrl(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   PropertyMetaData *arg1 = (PropertyMetaData *) 0 ;
   std::string result;
@@ -5118,7 +5739,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getAvailable(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getAvailable(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   PropertyMetaData *arg1 = (PropertyMetaData *) 0 ;
   bool result;
@@ -5182,7 +5803,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getDisplayOrder(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getDisplayOrder(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   PropertyMetaData *arg1 = (PropertyMetaData *) 0 ;
   int result;
@@ -5246,7 +5867,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getIsMandatory(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getIsMandatory(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   PropertyMetaData *arg1 = (PropertyMetaData *) 0 ;
   bool result;
@@ -5310,7 +5931,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getIsList(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getIsList(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   PropertyMetaData *arg1 = (PropertyMetaData *) 0 ;
   bool result;
@@ -5374,7 +5995,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getIsObsolete(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getIsObsolete(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   PropertyMetaData *arg1 = (PropertyMetaData *) 0 ;
   bool result;
@@ -5438,7 +6059,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getShow(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getShow(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   PropertyMetaData *arg1 = (PropertyMetaData *) 0 ;
   bool result;
@@ -5502,7 +6123,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getShowValues(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getShowValues(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   PropertyMetaData *arg1 = (PropertyMetaData *) 0 ;
   bool result;
@@ -5566,7 +6187,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getDescription(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataSwig_1getDescription(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   PropertyMetaData *arg1 = (PropertyMetaData *) 0 ;
   std::string result;
@@ -5630,7 +6251,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1PropertyMetaDataSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1PropertyMetaDataSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   PropertyMetaData *arg1 = (PropertyMetaData *) 0 ;
   
   (void)jenv;
@@ -5689,7 +6310,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ComponentMetaDataSwig_1getComponentIdAsInt(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ComponentMetaDataSwig_1getComponentIdAsInt(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   ComponentMetaData *arg1 = (ComponentMetaData *) 0 ;
   int result;
@@ -5753,7 +6374,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT int JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ComponentMetaDataSwig_1getComponentId(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT int JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ComponentMetaDataSwig_1getComponentId(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   int jresult = 0 ;
   ComponentMetaData *arg1 = (ComponentMetaData *) 0 ;
   byte result;
@@ -5817,7 +6438,7 @@ SWIGEXPORT int JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_intero
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ComponentMetaDataSwig_1getName(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ComponentMetaDataSwig_1getName(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   ComponentMetaData *arg1 = (ComponentMetaData *) 0 ;
   std::string result;
@@ -5881,7 +6502,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ComponentMetaDataSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ComponentMetaDataSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   ComponentMetaData *arg1 = (ComponentMetaData *) 0 ;
   
   (void)jenv;
@@ -5940,7 +6561,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ProfileMetaDataSwig_1getProfileId(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ProfileMetaDataSwig_1getProfileId(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   ProfileMetaData *arg1 = (ProfileMetaData *) 0 ;
   uint32_t result;
@@ -6004,7 +6625,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ProfileMetaDataSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ProfileMetaDataSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   ProfileMetaData *arg1 = (ProfileMetaData *) 0 ;
   
   (void)jenv;
@@ -6063,7 +6684,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1ValueMetaDataKeySwig(JNIEnv *jenv, jclass jcls, jstring jarg1, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1ValueMetaDataKeySwig(JNIEnv *jenv, jclass jcls, jstring jarg1, jstring jarg2) {
   jlong jresult = 0 ;
   std::string arg1 ;
   std::string arg2 ;
@@ -6142,7 +6763,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ValueMetaDataKeySwig_1getPropertyName(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ValueMetaDataKeySwig_1getPropertyName(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   ValueMetaDataKey *arg1 = (ValueMetaDataKey *) 0 ;
   std::string result;
@@ -6206,7 +6827,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ValueMetaDataKeySwig_1getValueName(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ValueMetaDataKeySwig_1getValueName(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   ValueMetaDataKey *arg1 = (ValueMetaDataKey *) 0 ;
   std::string result;
@@ -6270,7 +6891,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ValueMetaDataKeySwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ValueMetaDataKeySwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   ValueMetaDataKey *arg1 = (ValueMetaDataKey *) 0 ;
   
   (void)jenv;
@@ -6329,7 +6950,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ValueMetaDataSwig_1getName(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ValueMetaDataSwig_1getName(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   ValueMetaData *arg1 = (ValueMetaData *) 0 ;
   std::string result;
@@ -6393,7 +7014,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ValueMetaDataSwig_1getDescription(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ValueMetaDataSwig_1getDescription(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   ValueMetaData *arg1 = (ValueMetaData *) 0 ;
   std::string result;
@@ -6457,7 +7078,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ValueMetaDataSwig_1getUrl(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ValueMetaDataSwig_1getUrl(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   ValueMetaData *arg1 = (ValueMetaData *) 0 ;
   std::string result;
@@ -6521,7 +7142,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ValueMetaDataSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ValueMetaDataSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   ValueMetaData *arg1 = (ValueMetaData *) 0 ;
   
   (void)jenv;
@@ -6580,7 +7201,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ComponentMetaDataCollectionSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ComponentMetaDataCollectionSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Collection< byte,ComponentMetaData > *arg1 = (Collection< byte,ComponentMetaData > *) 0 ;
   
   (void)jenv;
@@ -6639,7 +7260,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ComponentMetaDataCollectionSwig_1getByKey(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, int jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ComponentMetaDataCollectionSwig_1getByKey(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, int jarg2) {
   jlong jresult = 0 ;
   Collection< byte,ComponentMetaData > *arg1 = (Collection< byte,ComponentMetaData > *) 0 ;
   byte arg2 ;
@@ -6708,7 +7329,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ComponentMetaDataCollectionSwig_1getByIndex(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ComponentMetaDataCollectionSwig_1getByIndex(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
   jlong jresult = 0 ;
   Collection< byte,ComponentMetaData > *arg1 = (Collection< byte,ComponentMetaData > *) 0 ;
   uint32_t arg2 ;
@@ -6774,7 +7395,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ComponentMetaDataCollectionSwig_1getSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ComponentMetaDataCollectionSwig_1getSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   Collection< byte,ComponentMetaData > *arg1 = (Collection< byte,ComponentMetaData > *) 0 ;
   uint32_t result;
@@ -6838,7 +7459,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1PropertyMetaDataCollectionSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1PropertyMetaDataCollectionSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Collection< std::string,PropertyMetaData > *arg1 = (Collection< std::string,PropertyMetaData > *) 0 ;
   
   (void)jenv;
@@ -6897,7 +7518,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataCollectionSwig_1getByKey(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataCollectionSwig_1getByKey(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jlong jresult = 0 ;
   Collection< std::string,PropertyMetaData > *arg1 = (Collection< std::string,PropertyMetaData > *) 0 ;
   std::string arg2 ;
@@ -6970,7 +7591,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataCollectionSwig_1getByIndex(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataCollectionSwig_1getByIndex(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
   jlong jresult = 0 ;
   Collection< std::string,PropertyMetaData > *arg1 = (Collection< std::string,PropertyMetaData > *) 0 ;
   uint32_t arg2 ;
@@ -7036,7 +7657,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataCollectionSwig_1getSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_PropertyMetaDataCollectionSwig_1getSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   Collection< std::string,PropertyMetaData > *arg1 = (Collection< std::string,PropertyMetaData > *) 0 ;
   uint32_t result;
@@ -7100,7 +7721,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ProfileMetaDataCollectionSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ProfileMetaDataCollectionSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Collection< uint32_t,ProfileMetaData > *arg1 = (Collection< uint32_t,ProfileMetaData > *) 0 ;
   
   (void)jenv;
@@ -7159,7 +7780,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ProfileMetaDataCollectionSwig_1getByKey(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ProfileMetaDataCollectionSwig_1getByKey(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
   jlong jresult = 0 ;
   Collection< uint32_t,ProfileMetaData > *arg1 = (Collection< uint32_t,ProfileMetaData > *) 0 ;
   uint32_t arg2 ;
@@ -7225,7 +7846,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ProfileMetaDataCollectionSwig_1getByIndex(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ProfileMetaDataCollectionSwig_1getByIndex(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
   jlong jresult = 0 ;
   Collection< uint32_t,ProfileMetaData > *arg1 = (Collection< uint32_t,ProfileMetaData > *) 0 ;
   uint32_t arg2 ;
@@ -7291,7 +7912,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ProfileMetaDataCollectionSwig_1getSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ProfileMetaDataCollectionSwig_1getSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   Collection< uint32_t,ProfileMetaData > *arg1 = (Collection< uint32_t,ProfileMetaData > *) 0 ;
   uint32_t result;
@@ -7355,7 +7976,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ValueMetaDataCollectionSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ValueMetaDataCollectionSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Collection< ValueMetaDataKey,ValueMetaData > *arg1 = (Collection< ValueMetaDataKey,ValueMetaData > *) 0 ;
   
   (void)jenv;
@@ -7414,7 +8035,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ValueMetaDataCollectionSwig_1getByKey(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ValueMetaDataCollectionSwig_1getByKey(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   Collection< ValueMetaDataKey,ValueMetaData > *arg1 = (Collection< ValueMetaDataKey,ValueMetaData > *) 0 ;
   SwigValueWrapper< ValueMetaDataKey > arg2 ;
@@ -7487,7 +8108,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ValueMetaDataCollectionSwig_1getByIndex(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ValueMetaDataCollectionSwig_1getByIndex(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
   jlong jresult = 0 ;
   Collection< ValueMetaDataKey,ValueMetaData > *arg1 = (Collection< ValueMetaDataKey,ValueMetaData > *) 0 ;
   uint32_t arg2 ;
@@ -7553,7 +8174,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ValueMetaDataCollectionSwig_1getSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ValueMetaDataCollectionSwig_1getSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   Collection< ValueMetaDataKey,ValueMetaData > *arg1 = (Collection< ValueMetaDataKey,ValueMetaData > *) 0 ;
   uint32_t result;
@@ -7617,7 +8238,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1MetaDataSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1MetaDataSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   MetaData *arg1 = (MetaData *) 0 ;
   
   (void)jenv;
@@ -7676,7 +8297,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getComponents(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getComponents(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   MetaData *arg1 = (MetaData *) 0 ;
   Collection< byte,ComponentMetaData > *result = 0 ;
@@ -7740,7 +8361,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getProperties(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getProperties(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   MetaData *arg1 = (MetaData *) 0 ;
   Collection< std::string,PropertyMetaData > *result = 0 ;
@@ -7804,7 +8425,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getProfiles(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getProfiles(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   MetaData *arg1 = (MetaData *) 0 ;
   Collection< uint32_t,ProfileMetaData > *result = 0 ;
@@ -7868,7 +8489,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getValues(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getValues(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   MetaData *arg1 = (MetaData *) 0 ;
   Collection< ValueMetaDataKey,ValueMetaData > *result = 0 ;
@@ -7932,7 +8553,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getValuesForProperty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getValuesForProperty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   MetaData *arg1 = (MetaData *) 0 ;
   PropertyMetaData *arg2 = (PropertyMetaData *) 0 ;
@@ -7999,7 +8620,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getValuesForProfile(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getValuesForProfile(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   MetaData *arg1 = (MetaData *) 0 ;
   ProfileMetaData *arg2 = (ProfileMetaData *) 0 ;
@@ -8066,7 +8687,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getComponentForProfile(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getComponentForProfile(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   MetaData *arg1 = (MetaData *) 0 ;
   ProfileMetaData *arg2 = (ProfileMetaData *) 0 ;
@@ -8133,7 +8754,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getComponentForProperty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getComponentForProperty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   MetaData *arg1 = (MetaData *) 0 ;
   PropertyMetaData *arg2 = (PropertyMetaData *) 0 ;
@@ -8200,7 +8821,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getDefaultProfileForComponent(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getDefaultProfileForComponent(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   MetaData *arg1 = (MetaData *) 0 ;
   ComponentMetaData *arg2 = (ComponentMetaData *) 0 ;
@@ -8267,7 +8888,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getDefaultValueForProperty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getDefaultValueForProperty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   MetaData *arg1 = (MetaData *) 0 ;
   PropertyMetaData *arg2 = (PropertyMetaData *) 0 ;
@@ -8334,7 +8955,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getPropertiesForComponent(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getPropertiesForComponent(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   MetaData *arg1 = (MetaData *) 0 ;
   ComponentMetaData *arg2 = (ComponentMetaData *) 0 ;
@@ -8401,7 +9022,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getPropertyForValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_MetaDataSwig_1getPropertyForValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   MetaData *arg1 = (MetaData *) 0 ;
   ValueMetaData *arg2 = (ValueMetaData *) 0 ;
@@ -8468,7 +9089,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1EngineBaseSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1EngineBaseSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   EngineBase *arg1 = (EngineBase *) 0 ;
   
   (void)jenv;
@@ -8527,7 +9148,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1setLicenseKey(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1setLicenseKey(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   EngineBase *arg1 = (EngineBase *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -8597,7 +9218,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1setDataUpdateUrl(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1setDataUpdateUrl(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   EngineBase *arg1 = (EngineBase *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -8667,7 +9288,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getMetaData(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getMetaData(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   EngineBase *arg1 = (EngineBase *) 0 ;
   MetaData *result = 0 ;
@@ -8731,7 +9352,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getAutomaticUpdatesEnabled(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getAutomaticUpdatesEnabled(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   EngineBase *arg1 = (EngineBase *) 0 ;
   bool result;
@@ -8795,7 +9416,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1processBase(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1processBase(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   EngineBase *arg1 = (EngineBase *) 0 ;
   EvidenceBase *arg2 = (EvidenceBase *) 0 ;
@@ -8862,7 +9483,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1refreshData_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1refreshData_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   EngineBase *arg1 = (EngineBase *) 0 ;
   
   (void)jenv;
@@ -8922,7 +9543,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1refreshData_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1refreshData_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   EngineBase *arg1 = (EngineBase *) 0 ;
   char *arg2 = (char *) 0 ;
   
@@ -8989,105 +9610,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1refreshData_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2) {
-  EngineBase *arg1 = (EngineBase *) 0 ;
-  unsigned char *arg2 = (unsigned char *) (unsigned char *)0 ;
-  long arg3 ;
-  
-  (void)jenv;
-  (void)jcls;
-  (void)jarg1_;
-  arg1 = *(EngineBase **)&jarg1; 
-  {
-    if (jarg2 != NULL) {
-      // Get the number of bytes in the byte array.
-      arg3 = jenv->GetArrayLength(jarg2);
-      // Allocate memory for the destination byte array used internally by
-      // the data set. This memory is required for the lifetime of the data
-      // set.
-      arg2 = (unsigned char*)malloc(arg3);
-      if (arg2 == NULL) {
-        SWIG_JavaThrowException(
-          jenv,
-          SWIG_JavaRuntimeException,
-          "Failed to allocate memory to copy the input byte array.");
-        return ;
-      }
-      // Attempt to get a pointer to the data within the jbyteArray.
-      jbyte* data = jenv->GetByteArrayElements(jarg2, NULL);
-      if (data == NULL) {
-        SWIG_JavaThrowException(
-          jenv,
-          SWIG_JavaRuntimeException,
-          "Failed to obtain pointer to the input byte array.");
-        return ;
-      }
-      // Copy the input byte array to the destination and release the
-      // reference to source pointer.
-      memcpy(arg2, data, arg3);
-      jenv->ReleaseByteArrayElements(jarg2, data, JNI_ABORT);
-    }
-    else {
-      // Let the underlying C implementation throw the null pointer exception.
-      arg2 = (unsigned char*)NULL;
-      arg3 = 0;
-    }
-  }
-  {
-    try {
-      (arg1)->refreshData(arg2,arg3);;
-    }
-    catch(FatalException& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return ; 
-      };
-    }
-    catch(NotImplementedException& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return ; 
-      };
-    }
-    catch(InvalidPropertyException& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return ; 
-      };
-    }
-    catch(EvidenceException& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return ; 
-      };
-    }
-    catch(TooManyValuesException& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return ; 
-      };
-    }
-    catch(NoValuesAvailableException& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return ; 
-      };
-    }	
-    catch(StatusCodeException& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return ; 
-      };
-    }
-    catch(runtime_error& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return ; 
-      };
-    }
-    catch(invalid_argument& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_ValueError, e.what()); return ; 
-      };
-    }
-  }
-  
-}
-
-
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getDataUpdateUrl(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getDataUpdateUrl(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   EngineBase *arg1 = (EngineBase *) 0 ;
   std::string result;
@@ -9151,7 +9674,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getPublishedTime(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getPublishedTime(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   EngineBase *arg1 = (EngineBase *) 0 ;
   Date result;
@@ -9215,7 +9738,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getUpdateAvailableTime(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getUpdateAvailableTime(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   EngineBase *arg1 = (EngineBase *) 0 ;
   Date result;
@@ -9279,7 +9802,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getDataFilePath(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getDataFilePath(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   EngineBase *arg1 = (EngineBase *) 0 ;
   std::string result;
@@ -9343,7 +9866,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getDataFileTempPath(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getDataFileTempPath(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   EngineBase *arg1 = (EngineBase *) 0 ;
   std::string result;
@@ -9407,7 +9930,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getProduct(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getProduct(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   EngineBase *arg1 = (EngineBase *) 0 ;
   std::string result;
@@ -9471,7 +9994,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getType(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getType(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   EngineBase *arg1 = (EngineBase *) 0 ;
   std::string result;
@@ -9535,7 +10058,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getKeys(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getKeys(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   EngineBase *arg1 = (EngineBase *) 0 ;
   std::vector< std::string > *result = 0 ;
@@ -9599,7 +10122,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getIsThreadSafe(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineBaseSwig_1getIsThreadSafe(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   EngineBase *arg1 = (EngineBase *) 0 ;
   bool result;
@@ -9663,7 +10186,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1UTF8StringSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1UTF8StringSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   std::vector< uint8_t > *result = 0 ;
   
@@ -9724,7 +10247,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1UTF8StringSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1UTF8StringSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   std::vector< uint8_t > *arg1 = 0 ;
   std::vector< uint8_t > *result = 0 ;
@@ -9792,7 +10315,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1isEmpty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1isEmpty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
   bool result;
@@ -9856,7 +10379,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
   
   (void)jenv;
@@ -9916,7 +10439,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1UTF8StringSwig_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jint jarg1, jshort jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1UTF8StringSwig_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jint jarg1, jshort jarg2) {
   jlong jresult = 0 ;
   jint arg1 ;
   unsigned char *arg2 = 0 ;
@@ -9988,7 +10511,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
   jint result;
@@ -10057,7 +10580,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doReserve(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doReserve(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
   jint arg2 ;
   
@@ -10127,7 +10650,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
   jint result;
@@ -10196,7 +10719,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doAdd_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jshort jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doAdd_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jshort jarg2) {
   std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
   std::vector< unsigned char >::value_type *arg2 = 0 ;
   std::vector< unsigned char >::value_type temp2 ;
@@ -10260,7 +10783,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doAdd_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jshort jarg3) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doAdd_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jshort jarg3) {
   std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
   jint arg2 ;
   std::vector< unsigned char >::value_type *arg3 = 0 ;
@@ -10331,7 +10854,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jshort JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doRemove(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jshort JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doRemove(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jshort jresult = 0 ;
   std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
   jint arg2 ;
@@ -10402,7 +10925,7 @@ SWIGEXPORT jshort JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_int
 }
 
 
-SWIGEXPORT jshort JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doGet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jshort JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doGet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jshort jresult = 0 ;
   std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
   jint arg2 ;
@@ -10473,7 +10996,7 @@ SWIGEXPORT jshort JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_int
 }
 
 
-SWIGEXPORT jshort JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doSet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jshort jarg3) {
+SWIGEXPORT jshort JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doSet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jshort jarg3) {
   jshort jresult = 0 ;
   std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
   jint arg2 ;
@@ -10548,7 +11071,7 @@ SWIGEXPORT jshort JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_int
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doRemoveRange(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jint jarg3) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_UTF8StringSwig_1doRemoveRange(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jint jarg3) {
   std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
   jint arg2 ;
   jint arg3 ;
@@ -10617,7 +11140,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1UTF8StringSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1UTF8StringSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   std::vector< uint8_t > *arg1 = (std::vector< uint8_t > *) 0 ;
   
   (void)jenv;
@@ -10676,7 +11199,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueStringSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueStringSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   WeightedValue< std::string > *arg1 = (WeightedValue< std::string > *) 0 ;
   std::string result;
@@ -10740,7 +11263,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueStringSwig_1setValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueStringSwig_1setValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   WeightedValue< std::string > *arg1 = (WeightedValue< std::string > *) 0 ;
   std::string arg2 ;
   
@@ -10809,7 +11332,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jfloat JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueStringSwig_1getWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jfloat JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueStringSwig_1getWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jfloat jresult = 0 ;
   WeightedValue< std::string > *arg1 = (WeightedValue< std::string > *) 0 ;
   float result;
@@ -10873,7 +11396,7 @@ SWIGEXPORT jfloat JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_int
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueStringSwig_1getRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueStringSwig_1getRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   WeightedValue< std::string > *arg1 = (WeightedValue< std::string > *) 0 ;
   uint16_t result;
@@ -10937,7 +11460,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueStringSwig_1setRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueStringSwig_1setRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   WeightedValue< std::string > *arg1 = (WeightedValue< std::string > *) 0 ;
   uint16_t arg2 ;
   
@@ -10999,7 +11522,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedValueStringSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedValueStringSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   WeightedValue< std::string > *arg1 = (WeightedValue< std::string > *) 0 ;
   
   (void)jenv;
@@ -11058,7 +11581,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueUTF8StringSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueUTF8StringSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   WeightedValue< std::vector< uint8_t > > *arg1 = (WeightedValue< std::vector< uint8_t > > *) 0 ;
   std::vector< uint8_t > result;
@@ -11122,7 +11645,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueUTF8StringSwig_1setValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueUTF8StringSwig_1setValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   WeightedValue< std::vector< uint8_t > > *arg1 = (WeightedValue< std::vector< uint8_t > > *) 0 ;
   std::vector< uint8_t > arg2 ;
   std::vector< uint8_t > *argp2 ;
@@ -11191,7 +11714,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jfloat JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueUTF8StringSwig_1getWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jfloat JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueUTF8StringSwig_1getWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jfloat jresult = 0 ;
   WeightedValue< std::vector< uint8_t > > *arg1 = (WeightedValue< std::vector< uint8_t > > *) 0 ;
   float result;
@@ -11255,7 +11778,7 @@ SWIGEXPORT jfloat JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_int
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueUTF8StringSwig_1getRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueUTF8StringSwig_1getRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   WeightedValue< std::vector< uint8_t > > *arg1 = (WeightedValue< std::vector< uint8_t > > *) 0 ;
   uint16_t result;
@@ -11319,7 +11842,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueUTF8StringSwig_1setRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueUTF8StringSwig_1setRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   WeightedValue< std::vector< uint8_t > > *arg1 = (WeightedValue< std::vector< uint8_t > > *) 0 ;
   uint16_t arg2 ;
   
@@ -11381,7 +11904,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedValueUTF8StringSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedValueUTF8StringSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   WeightedValue< std::vector< uint8_t > > *arg1 = (WeightedValue< std::vector< uint8_t > > *) 0 ;
   
   (void)jenv;
@@ -11440,7 +11963,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueBoolSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueBoolSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   WeightedValue< bool > *arg1 = (WeightedValue< bool > *) 0 ;
   bool result;
@@ -11504,7 +12027,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueBoolSwig_1setValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jboolean jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueBoolSwig_1setValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jboolean jarg2) {
   WeightedValue< bool > *arg1 = (WeightedValue< bool > *) 0 ;
   bool arg2 ;
   
@@ -11566,7 +12089,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jfloat JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueBoolSwig_1getWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jfloat JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueBoolSwig_1getWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jfloat jresult = 0 ;
   WeightedValue< bool > *arg1 = (WeightedValue< bool > *) 0 ;
   float result;
@@ -11630,7 +12153,7 @@ SWIGEXPORT jfloat JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_int
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueBoolSwig_1getRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueBoolSwig_1getRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   WeightedValue< bool > *arg1 = (WeightedValue< bool > *) 0 ;
   uint16_t result;
@@ -11694,7 +12217,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueBoolSwig_1setRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueBoolSwig_1setRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   WeightedValue< bool > *arg1 = (WeightedValue< bool > *) 0 ;
   uint16_t arg2 ;
   
@@ -11756,7 +12279,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedValueBoolSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedValueBoolSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   WeightedValue< bool > *arg1 = (WeightedValue< bool > *) 0 ;
   
   (void)jenv;
@@ -11815,7 +12338,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueIntSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueIntSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   WeightedValue< int > *arg1 = (WeightedValue< int > *) 0 ;
   int result;
@@ -11879,7 +12402,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueIntSwig_1setValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueIntSwig_1setValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   WeightedValue< int > *arg1 = (WeightedValue< int > *) 0 ;
   int arg2 ;
   
@@ -11941,7 +12464,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jfloat JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueIntSwig_1getWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jfloat JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueIntSwig_1getWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jfloat jresult = 0 ;
   WeightedValue< int > *arg1 = (WeightedValue< int > *) 0 ;
   float result;
@@ -12005,7 +12528,7 @@ SWIGEXPORT jfloat JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_int
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueIntSwig_1getRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueIntSwig_1getRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   WeightedValue< int > *arg1 = (WeightedValue< int > *) 0 ;
   uint16_t result;
@@ -12069,7 +12592,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueIntSwig_1setRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueIntSwig_1setRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   WeightedValue< int > *arg1 = (WeightedValue< int > *) 0 ;
   uint16_t arg2 ;
   
@@ -12131,7 +12654,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedValueIntSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedValueIntSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   WeightedValue< int > *arg1 = (WeightedValue< int > *) 0 ;
   
   (void)jenv;
@@ -12190,7 +12713,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jdouble JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueDoubleSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jdouble JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueDoubleSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jdouble jresult = 0 ;
   WeightedValue< double > *arg1 = (WeightedValue< double > *) 0 ;
   double result;
@@ -12254,7 +12777,7 @@ SWIGEXPORT jdouble JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueDoubleSwig_1setValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jdouble jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueDoubleSwig_1setValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jdouble jarg2) {
   WeightedValue< double > *arg1 = (WeightedValue< double > *) 0 ;
   double arg2 ;
   
@@ -12316,7 +12839,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jfloat JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueDoubleSwig_1getWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jfloat JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueDoubleSwig_1getWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jfloat jresult = 0 ;
   WeightedValue< double > *arg1 = (WeightedValue< double > *) 0 ;
   float result;
@@ -12380,7 +12903,7 @@ SWIGEXPORT jfloat JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_int
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueDoubleSwig_1getRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueDoubleSwig_1getRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   WeightedValue< double > *arg1 = (WeightedValue< double > *) 0 ;
   uint16_t result;
@@ -12444,7 +12967,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueDoubleSwig_1setRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedValueDoubleSwig_1setRawWeight(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   WeightedValue< double > *arg1 = (WeightedValue< double > *) 0 ;
   uint16_t arg2 ;
   
@@ -12506,7 +13029,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedValueDoubleSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedValueDoubleSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   WeightedValue< double > *arg1 = (WeightedValue< double > *) 0 ;
   
   (void)jenv;
@@ -12565,7 +13088,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_FIFTYONE_1DEGREES_1IP_1TYPE_1INVALID_1get(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_FIFTYONE_1DEGREES_1IP_1TYPE_1INVALID_1get(JNIEnv *jenv, jclass jcls) {
   jint jresult = 0 ;
   e_fiftyone_degrees_ip_type result;
   
@@ -12626,7 +13149,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_FIFTYONE_1DEGREES_1IP_1TYPE_1IPV4_1get(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_FIFTYONE_1DEGREES_1IP_1TYPE_1IPV4_1get(JNIEnv *jenv, jclass jcls) {
   jint jresult = 0 ;
   e_fiftyone_degrees_ip_type result;
   
@@ -12687,7 +13210,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_FIFTYONE_1DEGREES_1IP_1TYPE_1IPV6_1get(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_FIFTYONE_1DEGREES_1IP_1TYPE_1IPV6_1get(JNIEnv *jenv, jclass jcls) {
   jint jresult = 0 ;
   e_fiftyone_degrees_ip_type result;
   
@@ -12748,73 +13271,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1IpAddressSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2) {
-  jlong jresult = 0 ;
-  unsigned char *arg1 = (unsigned char *) (unsigned char *)0 ;
-  fiftyoneDegreesIpType arg2 ;
-  IpAddress *result = 0 ;
-  
-  (void)jenv;
-  (void)jcls;
-  arg1 = *(unsigned char **)&jarg1; 
-  arg2 = (fiftyoneDegreesIpType)jarg2; 
-  {
-    try {
-      result = (IpAddress *)new IpAddress((unsigned char const (*))arg1,arg2);;
-    }
-    catch(FatalException& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return 0; 
-      };
-    }
-    catch(NotImplementedException& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return 0; 
-      };
-    }
-    catch(InvalidPropertyException& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return 0; 
-      };
-    }
-    catch(EvidenceException& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return 0; 
-      };
-    }
-    catch(TooManyValuesException& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return 0; 
-      };
-    }
-    catch(NoValuesAvailableException& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return 0; 
-      };
-    }	
-    catch(StatusCodeException& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return 0; 
-      };
-    }
-    catch(runtime_error& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return 0; 
-      };
-    }
-    catch(invalid_argument& e) {
-      {
-        SWIG_JavaException(jenv, SWIG_ValueError, e.what()); return 0; 
-      };
-    }
-  }
-  *(IpAddress **)&jresult = result; 
-  
-  return jresult;
-}
-
-
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1IpAddressSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jstring jarg1) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1IpAddressSwig(JNIEnv *jenv, jclass jcls, jstring jarg1) {
   jlong jresult = 0 ;
   char *arg1 = (char *) 0 ;
   IpAddress *result = 0 ;
@@ -12882,16 +13339,17 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IpAddressSwig_1getCopyOfIpAddress(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IpAddressSwig_1getCopyOfIpAddress(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2, jlong jarg3) {
   IpAddress *arg1 = (IpAddress *) 0 ;
   unsigned char *arg2 = (unsigned char *) (unsigned char *)0 ;
   uint32_t arg3 ;
+  jshort *jarr2 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
   arg1 = *(IpAddress **)&jarg1; 
-  arg2 = *(unsigned char **)&jarg2; 
+  if (!SWIG_JavaArrayInUchar(jenv, &jarr2, (unsigned char **)&arg2, jarg2)) return ; 
   arg3 = (uint32_t)jarg3; 
   {
     try {
@@ -12943,11 +13401,12 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
       };
     }
   }
-  
+  SWIG_JavaArrayArgoutUchar(jenv, jarr2, (unsigned char *)arg2, jarg2); 
+  delete [] arg2; 
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IpAddressSwig_1getType(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IpAddressSwig_1getType(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   IpAddress *arg1 = (IpAddress *) 0 ;
   fiftyoneDegreesIpType result;
@@ -13011,7 +13470,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1IpAddressSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1IpAddressSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   IpAddress *arg1 = (IpAddress *) 0 ;
   
   (void)jenv;
@@ -13070,7 +13529,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedStringListSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedStringListSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< std::string > > *result = 0 ;
   
@@ -13131,7 +13590,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedStringListSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedStringListSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< std::string > > *arg1 = 0 ;
   std::vector< WeightedValue< std::string > > *result = 0 ;
@@ -13199,7 +13658,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1isEmpty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1isEmpty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   std::vector< WeightedValue< std::string > > *arg1 = (std::vector< WeightedValue< std::string > > *) 0 ;
   bool result;
@@ -13263,7 +13722,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   std::vector< WeightedValue< std::string > > *arg1 = (std::vector< WeightedValue< std::string > > *) 0 ;
   
   (void)jenv;
@@ -13323,7 +13782,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedStringListSwig_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jint jarg1, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedStringListSwig_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jint jarg1, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   jint arg1 ;
   WeightedValue< std::string > *arg2 = 0 ;
@@ -13398,7 +13857,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   std::vector< WeightedValue< std::string > > *arg1 = (std::vector< WeightedValue< std::string > > *) 0 ;
   jint result;
@@ -13467,7 +13926,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doReserve(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doReserve(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   std::vector< WeightedValue< std::string > > *arg1 = (std::vector< WeightedValue< std::string > > *) 0 ;
   jint arg2 ;
   
@@ -13537,7 +13996,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   std::vector< WeightedValue< std::string > > *arg1 = (std::vector< WeightedValue< std::string > > *) 0 ;
   jint result;
@@ -13606,7 +14065,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doAdd_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doAdd_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   std::vector< WeightedValue< std::string > > *arg1 = (std::vector< WeightedValue< std::string > > *) 0 ;
   std::vector< WeightedValue< std::string > >::value_type *arg2 = 0 ;
   
@@ -13673,7 +14132,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doAdd_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doAdd_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
   std::vector< WeightedValue< std::string > > *arg1 = (std::vector< WeightedValue< std::string > > *) 0 ;
   jint arg2 ;
   std::vector< WeightedValue< std::string > >::value_type *arg3 = 0 ;
@@ -13747,7 +14206,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doRemove(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doRemove(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< std::string > > *arg1 = (std::vector< WeightedValue< std::string > > *) 0 ;
   jint arg2 ;
@@ -13818,7 +14277,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doGet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doGet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< std::string > > *arg1 = (std::vector< WeightedValue< std::string > > *) 0 ;
   jint arg2 ;
@@ -13889,7 +14348,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doSet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doSet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< std::string > > *arg1 = (std::vector< WeightedValue< std::string > > *) 0 ;
   jint arg2 ;
@@ -13967,7 +14426,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doRemoveRange(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jint jarg3) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListSwig_1doRemoveRange(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jint jarg3) {
   std::vector< WeightedValue< std::string > > *arg1 = (std::vector< WeightedValue< std::string > > *) 0 ;
   jint arg2 ;
   jint arg3 ;
@@ -14036,7 +14495,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedStringListSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedStringListSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   std::vector< WeightedValue< std::string > > *arg1 = (std::vector< WeightedValue< std::string > > *) 0 ;
   
   (void)jenv;
@@ -14095,7 +14554,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedUTF8StringListSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedUTF8StringListSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< std::vector< uint8_t > > > *result = 0 ;
   
@@ -14156,7 +14615,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedUTF8StringListSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedUTF8StringListSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = 0 ;
   std::vector< WeightedValue< std::vector< uint8_t > > > *result = 0 ;
@@ -14224,7 +14683,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1isEmpty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1isEmpty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
   bool result;
@@ -14288,7 +14747,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
   
   (void)jenv;
@@ -14348,7 +14807,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedUTF8StringListSwig_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jint jarg1, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedUTF8StringListSwig_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jint jarg1, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   jint arg1 ;
   WeightedValue< std::vector< uint8_t > > *arg2 = 0 ;
@@ -14423,7 +14882,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
   jint result;
@@ -14492,7 +14951,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doReserve(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doReserve(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
   jint arg2 ;
   
@@ -14562,7 +15021,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
   jint result;
@@ -14631,7 +15090,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doAdd_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doAdd_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
   std::vector< WeightedValue< std::vector< unsigned char > > >::value_type *arg2 = 0 ;
   
@@ -14698,7 +15157,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doAdd_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doAdd_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
   std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
   jint arg2 ;
   std::vector< WeightedValue< std::vector< unsigned char > > >::value_type *arg3 = 0 ;
@@ -14772,7 +15231,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doRemove(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doRemove(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
   jint arg2 ;
@@ -14843,7 +15302,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doGet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doGet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
   jint arg2 ;
@@ -14914,7 +15373,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doSet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doSet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
   jint arg2 ;
@@ -14992,7 +15451,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doRemoveRange(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jint jarg3) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListSwig_1doRemoveRange(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jint jarg3) {
   std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
   jint arg2 ;
   jint arg3 ;
@@ -15061,7 +15520,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedUTF8StringListSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedUTF8StringListSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   std::vector< WeightedValue< std::vector< uint8_t > > > *arg1 = (std::vector< WeightedValue< std::vector< uint8_t > > > *) 0 ;
   
   (void)jenv;
@@ -15120,7 +15579,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedBoolListSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedBoolListSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< bool > > *result = 0 ;
   
@@ -15181,7 +15640,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedBoolListSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedBoolListSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< bool > > *arg1 = 0 ;
   std::vector< WeightedValue< bool > > *result = 0 ;
@@ -15249,7 +15708,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1isEmpty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1isEmpty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   std::vector< WeightedValue< bool > > *arg1 = (std::vector< WeightedValue< bool > > *) 0 ;
   bool result;
@@ -15313,7 +15772,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   std::vector< WeightedValue< bool > > *arg1 = (std::vector< WeightedValue< bool > > *) 0 ;
   
   (void)jenv;
@@ -15373,7 +15832,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedBoolListSwig_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jint jarg1, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedBoolListSwig_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jint jarg1, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   jint arg1 ;
   WeightedValue< bool > *arg2 = 0 ;
@@ -15448,7 +15907,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   std::vector< WeightedValue< bool > > *arg1 = (std::vector< WeightedValue< bool > > *) 0 ;
   jint result;
@@ -15517,7 +15976,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doReserve(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doReserve(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   std::vector< WeightedValue< bool > > *arg1 = (std::vector< WeightedValue< bool > > *) 0 ;
   jint arg2 ;
   
@@ -15587,7 +16046,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   std::vector< WeightedValue< bool > > *arg1 = (std::vector< WeightedValue< bool > > *) 0 ;
   jint result;
@@ -15656,7 +16115,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doAdd_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doAdd_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   std::vector< WeightedValue< bool > > *arg1 = (std::vector< WeightedValue< bool > > *) 0 ;
   std::vector< WeightedValue< bool > >::value_type *arg2 = 0 ;
   
@@ -15723,7 +16182,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doAdd_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doAdd_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
   std::vector< WeightedValue< bool > > *arg1 = (std::vector< WeightedValue< bool > > *) 0 ;
   jint arg2 ;
   std::vector< WeightedValue< bool > >::value_type *arg3 = 0 ;
@@ -15797,7 +16256,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doRemove(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doRemove(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< bool > > *arg1 = (std::vector< WeightedValue< bool > > *) 0 ;
   jint arg2 ;
@@ -15868,7 +16327,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doGet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doGet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< bool > > *arg1 = (std::vector< WeightedValue< bool > > *) 0 ;
   jint arg2 ;
@@ -15939,7 +16398,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doSet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doSet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< bool > > *arg1 = (std::vector< WeightedValue< bool > > *) 0 ;
   jint arg2 ;
@@ -16017,7 +16476,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doRemoveRange(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jint jarg3) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListSwig_1doRemoveRange(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jint jarg3) {
   std::vector< WeightedValue< bool > > *arg1 = (std::vector< WeightedValue< bool > > *) 0 ;
   jint arg2 ;
   jint arg3 ;
@@ -16086,7 +16545,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedBoolListSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedBoolListSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   std::vector< WeightedValue< bool > > *arg1 = (std::vector< WeightedValue< bool > > *) 0 ;
   
   (void)jenv;
@@ -16145,7 +16604,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedIntListSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedIntListSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< int > > *result = 0 ;
   
@@ -16206,7 +16665,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedIntListSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedIntListSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< int > > *arg1 = 0 ;
   std::vector< WeightedValue< int > > *result = 0 ;
@@ -16274,7 +16733,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1isEmpty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1isEmpty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   std::vector< WeightedValue< int > > *arg1 = (std::vector< WeightedValue< int > > *) 0 ;
   bool result;
@@ -16338,7 +16797,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   std::vector< WeightedValue< int > > *arg1 = (std::vector< WeightedValue< int > > *) 0 ;
   
   (void)jenv;
@@ -16398,7 +16857,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedIntListSwig_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jint jarg1, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedIntListSwig_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jint jarg1, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   jint arg1 ;
   WeightedValue< int > *arg2 = 0 ;
@@ -16473,7 +16932,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   std::vector< WeightedValue< int > > *arg1 = (std::vector< WeightedValue< int > > *) 0 ;
   jint result;
@@ -16542,7 +17001,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doReserve(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doReserve(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   std::vector< WeightedValue< int > > *arg1 = (std::vector< WeightedValue< int > > *) 0 ;
   jint arg2 ;
   
@@ -16612,7 +17071,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   std::vector< WeightedValue< int > > *arg1 = (std::vector< WeightedValue< int > > *) 0 ;
   jint result;
@@ -16681,7 +17140,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doAdd_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doAdd_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   std::vector< WeightedValue< int > > *arg1 = (std::vector< WeightedValue< int > > *) 0 ;
   std::vector< WeightedValue< int > >::value_type *arg2 = 0 ;
   
@@ -16748,7 +17207,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doAdd_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doAdd_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
   std::vector< WeightedValue< int > > *arg1 = (std::vector< WeightedValue< int > > *) 0 ;
   jint arg2 ;
   std::vector< WeightedValue< int > >::value_type *arg3 = 0 ;
@@ -16822,7 +17281,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doRemove(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doRemove(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< int > > *arg1 = (std::vector< WeightedValue< int > > *) 0 ;
   jint arg2 ;
@@ -16893,7 +17352,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doGet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doGet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< int > > *arg1 = (std::vector< WeightedValue< int > > *) 0 ;
   jint arg2 ;
@@ -16964,7 +17423,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doSet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doSet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< int > > *arg1 = (std::vector< WeightedValue< int > > *) 0 ;
   jint arg2 ;
@@ -17042,7 +17501,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doRemoveRange(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jint jarg3) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListSwig_1doRemoveRange(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jint jarg3) {
   std::vector< WeightedValue< int > > *arg1 = (std::vector< WeightedValue< int > > *) 0 ;
   jint arg2 ;
   jint arg3 ;
@@ -17111,7 +17570,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedIntListSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedIntListSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   std::vector< WeightedValue< int > > *arg1 = (std::vector< WeightedValue< int > > *) 0 ;
   
   (void)jenv;
@@ -17170,7 +17629,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedDoubleListSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedDoubleListSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< double > > *result = 0 ;
   
@@ -17231,7 +17690,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedDoubleListSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedDoubleListSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< double > > *arg1 = 0 ;
   std::vector< WeightedValue< double > > *result = 0 ;
@@ -17299,7 +17758,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1isEmpty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1isEmpty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   std::vector< WeightedValue< double > > *arg1 = (std::vector< WeightedValue< double > > *) 0 ;
   bool result;
@@ -17363,7 +17822,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1clear(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   std::vector< WeightedValue< double > > *arg1 = (std::vector< WeightedValue< double > > *) 0 ;
   
   (void)jenv;
@@ -17423,7 +17882,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedDoubleListSwig_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jint jarg1, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedDoubleListSwig_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jint jarg1, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   jint arg1 ;
   WeightedValue< double > *arg2 = 0 ;
@@ -17498,7 +17957,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   std::vector< WeightedValue< double > > *arg1 = (std::vector< WeightedValue< double > > *) 0 ;
   jint result;
@@ -17567,7 +18026,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doReserve(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doReserve(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   std::vector< WeightedValue< double > > *arg1 = (std::vector< WeightedValue< double > > *) 0 ;
   jint arg2 ;
   
@@ -17637,7 +18096,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doSize(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   std::vector< WeightedValue< double > > *arg1 = (std::vector< WeightedValue< double > > *) 0 ;
   jint result;
@@ -17706,7 +18165,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doAdd_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doAdd_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   std::vector< WeightedValue< double > > *arg1 = (std::vector< WeightedValue< double > > *) 0 ;
   std::vector< WeightedValue< double > >::value_type *arg2 = 0 ;
   
@@ -17773,7 +18232,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doAdd_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doAdd_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
   std::vector< WeightedValue< double > > *arg1 = (std::vector< WeightedValue< double > > *) 0 ;
   jint arg2 ;
   std::vector< WeightedValue< double > >::value_type *arg3 = 0 ;
@@ -17847,7 +18306,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doRemove(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doRemove(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< double > > *arg1 = (std::vector< WeightedValue< double > > *) 0 ;
   jint arg2 ;
@@ -17918,7 +18377,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doGet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doGet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< double > > *arg1 = (std::vector< WeightedValue< double > > *) 0 ;
   jint arg2 ;
@@ -17989,7 +18448,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doSet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doSet(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jlong jarg3, jobject jarg3_) {
   jlong jresult = 0 ;
   std::vector< WeightedValue< double > > *arg1 = (std::vector< WeightedValue< double > > *) 0 ;
   jint arg2 ;
@@ -18067,7 +18526,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doRemoveRange(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jint jarg3) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListSwig_1doRemoveRange(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jint jarg3) {
   std::vector< WeightedValue< double > > *arg1 = (std::vector< WeightedValue< double > > *) 0 ;
   jint arg2 ;
   jint arg3 ;
@@ -18136,7 +18595,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedDoubleListSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedDoubleListSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   std::vector< WeightedValue< double > > *arg1 = (std::vector< WeightedValue< double > > *) 0 ;
   
   (void)jenv;
@@ -18195,7 +18654,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedStringListValueSwig(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedStringListValueSwig(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   Value< std::vector< WeightedValue< std::string > > > *result = 0 ;
   
@@ -18256,7 +18715,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   Value< std::vector< WeightedValue< std::string > > > *arg1 = (Value< std::vector< WeightedValue< std::string > > > *) 0 ;
   bool result;
@@ -18320,7 +18779,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   Value< std::vector< WeightedValue< std::string > > > *arg1 = (Value< std::vector< WeightedValue< std::string > > > *) 0 ;
   char *result = 0 ;
@@ -18384,7 +18843,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedStringListValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   Value< std::vector< WeightedValue< std::string > > > *arg1 = (Value< std::vector< WeightedValue< std::string > > > *) 0 ;
   std::vector< WeightedValue< std::string > > result;
@@ -18448,7 +18907,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedStringListValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedStringListValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Value< std::vector< WeightedValue< std::string > > > *arg1 = (Value< std::vector< WeightedValue< std::string > > > *) 0 ;
   
   (void)jenv;
@@ -18507,7 +18966,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedUTF8StringListValueSwig(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedUTF8StringListValueSwig(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *result = 0 ;
   
@@ -18568,7 +19027,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *arg1 = (Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *) 0 ;
   bool result;
@@ -18632,7 +19091,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *arg1 = (Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *) 0 ;
   char *result = 0 ;
@@ -18696,7 +19155,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedUTF8StringListValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *arg1 = (Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *) 0 ;
   std::vector< WeightedValue< std::vector< uint8_t > > > result;
@@ -18760,7 +19219,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedUTF8StringListValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedUTF8StringListValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *arg1 = (Value< std::vector< WeightedValue< std::vector< uint8_t > > > > *) 0 ;
   
   (void)jenv;
@@ -18819,7 +19278,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedBoolListValueSwig(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedBoolListValueSwig(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   Value< std::vector< WeightedValue< bool > > > *result = 0 ;
   
@@ -18880,7 +19339,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   Value< std::vector< WeightedValue< bool > > > *arg1 = (Value< std::vector< WeightedValue< bool > > > *) 0 ;
   bool result;
@@ -18944,7 +19403,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   Value< std::vector< WeightedValue< bool > > > *arg1 = (Value< std::vector< WeightedValue< bool > > > *) 0 ;
   char *result = 0 ;
@@ -19008,7 +19467,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedBoolListValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   Value< std::vector< WeightedValue< bool > > > *arg1 = (Value< std::vector< WeightedValue< bool > > > *) 0 ;
   std::vector< WeightedValue< bool > > result;
@@ -19072,7 +19531,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedBoolListValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedBoolListValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Value< std::vector< WeightedValue< bool > > > *arg1 = (Value< std::vector< WeightedValue< bool > > > *) 0 ;
   
   (void)jenv;
@@ -19131,7 +19590,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedIntListValueSwig(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedIntListValueSwig(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   Value< std::vector< WeightedValue< int > > > *result = 0 ;
   
@@ -19192,7 +19651,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   Value< std::vector< WeightedValue< int > > > *arg1 = (Value< std::vector< WeightedValue< int > > > *) 0 ;
   bool result;
@@ -19256,7 +19715,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   Value< std::vector< WeightedValue< int > > > *arg1 = (Value< std::vector< WeightedValue< int > > > *) 0 ;
   char *result = 0 ;
@@ -19320,7 +19779,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedIntListValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   Value< std::vector< WeightedValue< int > > > *arg1 = (Value< std::vector< WeightedValue< int > > > *) 0 ;
   std::vector< WeightedValue< int > > result;
@@ -19384,7 +19843,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedIntListValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedIntListValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Value< std::vector< WeightedValue< int > > > *arg1 = (Value< std::vector< WeightedValue< int > > > *) 0 ;
   
   (void)jenv;
@@ -19443,7 +19902,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedDoubleListValueSwig(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1WeightedDoubleListValueSwig(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   Value< std::vector< WeightedValue< double > > > *result = 0 ;
   
@@ -19504,7 +19963,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   Value< std::vector< WeightedValue< double > > > *arg1 = (Value< std::vector< WeightedValue< double > > > *) 0 ;
   bool result;
@@ -19568,7 +20027,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   Value< std::vector< WeightedValue< double > > > *arg1 = (Value< std::vector< WeightedValue< double > > > *) 0 ;
   char *result = 0 ;
@@ -19632,7 +20091,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_WeightedDoubleListValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   Value< std::vector< WeightedValue< double > > > *arg1 = (Value< std::vector< WeightedValue< double > > > *) 0 ;
   std::vector< WeightedValue< double > > result;
@@ -19696,7 +20155,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedDoubleListValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1WeightedDoubleListValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Value< std::vector< WeightedValue< double > > > *arg1 = (Value< std::vector< WeightedValue< double > > > *) 0 ;
   
   (void)jenv;
@@ -19755,7 +20214,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1IpAddressValueSwig(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1IpAddressValueSwig(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   Value< IpAddress > *result = 0 ;
   
@@ -19816,7 +20275,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IpAddressValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IpAddressValueSwig_1hasValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   Value< IpAddress > *arg1 = (Value< IpAddress > *) 0 ;
   bool result;
@@ -19880,7 +20339,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IpAddressValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IpAddressValueSwig_1getNoValueMessage(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   Value< IpAddress > *arg1 = (Value< IpAddress > *) 0 ;
   char *result = 0 ;
@@ -19944,7 +20403,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IpAddressValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IpAddressValueSwig_1getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   Value< IpAddress > *arg1 = (Value< IpAddress > *) 0 ;
   SwigValueWrapper< IpAddress > result;
@@ -20008,7 +20467,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1IpAddressValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1IpAddressValueSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   Value< IpAddress > *arg1 = (Value< IpAddress > *) 0 ;
   
   (void)jenv;
@@ -20067,7 +20526,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ResultsIpiSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ResultsIpiSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   
   (void)jenv;
@@ -20126,7 +20585,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedStringList_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedStringList_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jlong jresult = 0 ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   std::string *arg2 = 0 ;
@@ -20200,7 +20659,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedStringList_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedStringList_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   int arg2 ;
@@ -20266,7 +20725,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedUTF8StringList_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedUTF8StringList_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jlong jresult = 0 ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   std::string *arg2 = 0 ;
@@ -20340,7 +20799,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedUTF8StringList_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedUTF8StringList_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   int arg2 ;
@@ -20406,7 +20865,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedWKTStringList_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2, jshort jarg3) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedWKTStringList_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2, jshort jarg3) {
   jlong jresult = 0 ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   std::string *arg2 = 0 ;
@@ -20482,7 +20941,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedWKTStringList_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jshort jarg3) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedWKTStringList_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2, jshort jarg3) {
   jlong jresult = 0 ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   int arg2 ;
@@ -20550,7 +21009,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedBoolList_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedBoolList_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jlong jresult = 0 ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   std::string *arg2 = 0 ;
@@ -20624,7 +21083,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedBoolList_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedBoolList_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   int arg2 ;
@@ -20690,7 +21149,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedIntegerList_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedIntegerList_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jlong jresult = 0 ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   std::string *arg2 = 0 ;
@@ -20764,7 +21223,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedIntegerList_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedIntegerList_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   int arg2 ;
@@ -20830,7 +21289,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedDoubleList_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedDoubleList_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jlong jresult = 0 ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   std::string *arg2 = 0 ;
@@ -20904,7 +21363,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedDoubleList_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValuesAsWeightedDoubleList_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   int arg2 ;
@@ -20970,7 +21429,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValueAsIpAddress_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValueAsIpAddress_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jlong jresult = 0 ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   std::string *arg2 = 0 ;
@@ -21044,7 +21503,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValueAsIpAddress_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1getValueAsIpAddress_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   jlong jresult = 0 ;
   ResultsIpi *arg1 = (ResultsIpi *) 0 ;
   int arg2 ;
@@ -21110,7 +21569,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ConfigBaseSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ConfigBaseSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   ConfigBase *arg1 = (ConfigBase *) 0 ;
   
   (void)jenv;
@@ -21169,7 +21628,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1setUseUpperPrefixHeaders(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jboolean jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1setUseUpperPrefixHeaders(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jboolean jarg2) {
   ConfigBase *arg1 = (ConfigBase *) 0 ;
   bool arg2 ;
   
@@ -21231,7 +21690,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1setUseTempFile(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jboolean jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1setUseTempFile(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jboolean jarg2) {
   ConfigBase *arg1 = (ConfigBase *) 0 ;
   bool arg2 ;
   
@@ -21293,7 +21752,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1setReuseTempFile(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jboolean jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1setReuseTempFile(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jboolean jarg2) {
   ConfigBase *arg1 = (ConfigBase *) 0 ;
   bool arg2 ;
   
@@ -21355,7 +21814,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1setTempDirectories(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1setTempDirectories(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   ConfigBase *arg1 = (ConfigBase *) 0 ;
   std::vector< std::string > arg2 ;
   std::vector< std::string > *argp2 ;
@@ -21424,7 +21883,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1getUseUpperPrefixHeaders(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1getUseUpperPrefixHeaders(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   ConfigBase *arg1 = (ConfigBase *) 0 ;
   bool result;
@@ -21488,7 +21947,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1getUseTempFile(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1getUseTempFile(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   ConfigBase *arg1 = (ConfigBase *) 0 ;
   bool result;
@@ -21552,7 +22011,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1getReuseTempFile(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1getReuseTempFile(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   ConfigBase *arg1 = (ConfigBase *) 0 ;
   bool result;
@@ -21616,7 +22075,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1getTempDirectories(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1getTempDirectories(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   ConfigBase *arg1 = (ConfigBase *) 0 ;
   std::vector< std::string > result;
@@ -21680,7 +22139,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1getConcurrency(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigBaseSwig_1getConcurrency(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   ConfigBase *arg1 = (ConfigBase *) 0 ;
   uint16_t result;
@@ -21744,7 +22203,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1CollectionConfigSwig(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1CollectionConfigSwig(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   CollectionConfig *result = 0 ;
   
@@ -21805,7 +22264,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_CollectionConfigSwig_1setCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_CollectionConfigSwig_1setCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
   CollectionConfig *arg1 = (CollectionConfig *) 0 ;
   uint32_t arg2 ;
   
@@ -21867,7 +22326,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_CollectionConfigSwig_1setConcurrency(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_CollectionConfigSwig_1setConcurrency(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   CollectionConfig *arg1 = (CollectionConfig *) 0 ;
   uint16_t arg2 ;
   
@@ -21929,7 +22388,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_CollectionConfigSwig_1setLoaded(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_CollectionConfigSwig_1setLoaded(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
   CollectionConfig *arg1 = (CollectionConfig *) 0 ;
   uint32_t arg2 ;
   
@@ -21991,7 +22450,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_CollectionConfigSwig_1getCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_CollectionConfigSwig_1getCapacity(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   CollectionConfig *arg1 = (CollectionConfig *) 0 ;
   uint32_t result;
@@ -22055,7 +22514,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_CollectionConfigSwig_1getConcurrency(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_CollectionConfigSwig_1getConcurrency(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   CollectionConfig *arg1 = (CollectionConfig *) 0 ;
   uint16_t result;
@@ -22119,7 +22578,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_CollectionConfigSwig_1getLoaded(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_CollectionConfigSwig_1getLoaded(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   CollectionConfig *arg1 = (CollectionConfig *) 0 ;
   uint32_t result;
@@ -22183,7 +22642,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1CollectionConfigSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1CollectionConfigSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   CollectionConfig *arg1 = (CollectionConfig *) 0 ;
   
   (void)jenv;
@@ -22242,7 +22701,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1ConfigIpiSwig(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1ConfigIpiSwig(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   ConfigIpi *result = 0 ;
   
@@ -22303,7 +22762,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1setHighPerformance(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1setHighPerformance(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   
   (void)jenv;
@@ -22363,7 +22822,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1setBalanced(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1setBalanced(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   
   (void)jenv;
@@ -22423,7 +22882,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1setBalancedTemp(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1setBalancedTemp(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   
   (void)jenv;
@@ -22483,7 +22942,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1setLowMemory(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1setLowMemory(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   
   (void)jenv;
@@ -22543,7 +23002,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1setMaxPerformance(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1setMaxPerformance(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   
   (void)jenv;
@@ -22603,7 +23062,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1setConcurrency(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1setConcurrency(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   uint16_t arg2 ;
   
@@ -22665,7 +23124,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getStrings(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getStrings(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   CollectionConfig *result = 0 ;
@@ -22729,7 +23188,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getComponents(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getComponents(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   CollectionConfig *result = 0 ;
@@ -22793,7 +23252,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getMaps(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getMaps(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   CollectionConfig *result = 0 ;
@@ -22857,7 +23316,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getProperties(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getProperties(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   CollectionConfig *result = 0 ;
@@ -22921,7 +23380,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getValues(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getValues(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   CollectionConfig *result = 0 ;
@@ -22985,7 +23444,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getProfiles(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getProfiles(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   CollectionConfig *result = 0 ;
@@ -23049,7 +23508,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getGraphs(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getGraphs(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   CollectionConfig *result = 0 ;
@@ -23113,7 +23572,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getProfileGroups(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getProfileGroups(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   CollectionConfig *result = 0 ;
@@ -23177,7 +23636,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getProfileOffsets(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getProfileOffsets(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   CollectionConfig *result = 0 ;
@@ -23241,7 +23700,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getPropertyTypes(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getPropertyTypes(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   CollectionConfig *result = 0 ;
@@ -23305,7 +23764,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getGraph(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getGraph(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   CollectionConfig *result = 0 ;
@@ -23369,7 +23828,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getConcurrency(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1getConcurrency(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jint jresult = 0 ;
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   uint16_t result;
@@ -23433,7 +23892,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ConfigIpiSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1ConfigIpiSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   ConfigIpi *arg1 = (ConfigIpi *) 0 ;
   
   (void)jenv;
@@ -23492,7 +23951,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1EvidenceBaseSwig(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1EvidenceBaseSwig(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   EvidenceBase *result = 0 ;
   
@@ -23553,7 +24012,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1EvidenceBaseSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1EvidenceBaseSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   EvidenceBase *arg1 = (EvidenceBase *) 0 ;
   
   (void)jenv;
@@ -23612,7 +24071,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1EvidenceIpiSwig(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1EvidenceIpiSwig(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   EvidenceIpi *result = 0 ;
   
@@ -23673,7 +24132,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1EvidenceIpiSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1EvidenceIpiSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   EvidenceIpi *arg1 = (EvidenceIpi *) 0 ;
   
   (void)jenv;
@@ -23732,7 +24191,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1EngineIpiSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jstring jarg1, jlong jarg2, jobject jarg2_, jlong jarg3, jobject jarg3_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1EngineIpiSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jstring jarg1, jlong jarg2, jobject jarg2_, jlong jarg3, jobject jarg3_) {
   jlong jresult = 0 ;
   std::string *arg1 = 0 ;
   ConfigIpi *arg2 = (ConfigIpi *) 0 ;
@@ -23809,7 +24268,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1EngineIpiSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jlong jarg3, jobject jarg3_, jlong jarg4, jobject jarg4_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1EngineIpiSwig_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jlong jarg3, jobject jarg3_, jlong jarg4, jobject jarg4_) {
   jlong jresult = 0 ;
   unsigned char *arg1 = (unsigned char *) (unsigned char *)0 ;
   long arg2 ;
@@ -23822,39 +24281,8 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
   (void)jarg3_;
   (void)jarg4_;
   {
-    if (jarg1 != NULL) {
-      // Get the number of bytes in the byte array.
-      arg2 = jenv->GetArrayLength(jarg1);
-      // Allocate memory for the destination byte array used internally by
-      // the data set. This memory is required for the lifetime of the data
-      // set.
-      arg1 = (unsigned char*)malloc(arg2);
-      if (arg1 == NULL) {
-        SWIG_JavaThrowException(
-          jenv,
-          SWIG_JavaRuntimeException,
-          "Failed to allocate memory to copy the input byte array.");
-        return 0;
-      }
-      // Attempt to get a pointer to the data within the jbyteArray.
-      jbyte* data = jenv->GetByteArrayElements(jarg1, NULL);
-      if (data == NULL) {
-        SWIG_JavaThrowException(
-          jenv,
-          SWIG_JavaRuntimeException,
-          "Failed to obtain pointer to the input byte array.");
-        return 0;
-      }
-      // Copy the input byte array to the destination and release the
-      // reference to source pointer.
-      memcpy(arg1, data, arg2);
-      jenv->ReleaseByteArrayElements(jarg1, data, JNI_ABORT);
-    }
-    else {
-      // Let the underlying C implementation throw the null pointer exception.
-      arg1 = (unsigned char*)NULL;
-      arg2 = 0;
-    }
+    arg1 = jenv->GetByteArrayElements(jarg1, NULL);
+    arg2 = jenv->GetArrayLength(jarg1);
   }
   arg3 = *(ConfigIpi **)&jarg3; 
   arg4 = *(RequiredPropertiesConfig **)&jarg4; 
@@ -23909,12 +24337,13 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
     }
   }
   *(EngineIpi **)&jresult = result; 
+  SWIG_JavaArrayArgoutUchar(jenv, jarr1, (unsigned char *)arg1, jarg1); 
   
   return jresult;
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1getPublishedTime(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1getPublishedTime(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   EngineIpi *arg1 = (EngineIpi *) 0 ;
   Date result;
@@ -23978,7 +24407,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1getUpdateAvailableTime(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1getUpdateAvailableTime(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   EngineIpi *arg1 = (EngineIpi *) 0 ;
   Date result;
@@ -24042,7 +24471,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1getDataFilePath(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1getDataFilePath(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   EngineIpi *arg1 = (EngineIpi *) 0 ;
   std::string result;
@@ -24106,7 +24535,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1getDataFileTempPath(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1getDataFileTempPath(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   EngineIpi *arg1 = (EngineIpi *) 0 ;
   std::string result;
@@ -24170,7 +24599,7 @@ SWIGEXPORT jstring JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_in
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1refreshData_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1refreshData_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   EngineIpi *arg1 = (EngineIpi *) 0 ;
   
   (void)jenv;
@@ -24230,7 +24659,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1refreshData_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1refreshData_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   EngineIpi *arg1 = (EngineIpi *) 0 ;
   char *arg2 = (char *) 0 ;
   
@@ -24297,7 +24726,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1process_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1process_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   EngineIpi *arg1 = (EngineIpi *) 0 ;
   EvidenceIpi *arg2 = (EvidenceIpi *) 0 ;
@@ -24364,7 +24793,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1process_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1process_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   jlong jresult = 0 ;
   EngineIpi *arg1 = (EngineIpi *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -24435,19 +24864,20 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1process_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jint jarg3, jint jarg4) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1process_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2, jint jarg3, jint jarg4) {
   jlong jresult = 0 ;
   EngineIpi *arg1 = (EngineIpi *) 0 ;
   unsigned char *arg2 = (unsigned char *) (unsigned char *)0 ;
   long arg3 ;
   fiftyoneDegreesIpType arg4 ;
+  jshort *jarr2 ;
   ResultsIpi *result = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
   arg1 = *(EngineIpi **)&jarg1; 
-  arg2 = *(unsigned char **)&jarg2; 
+  if (!SWIG_JavaArrayInUchar(jenv, &jarr2, (unsigned char **)&arg2, jarg2)) return 0; 
   arg3 = (long)jarg3; 
   arg4 = (fiftyoneDegreesIpType)jarg4; 
   {
@@ -24501,12 +24931,13 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
     }
   }
   *(ResultsIpi **)&jresult = result; 
-  
+  SWIG_JavaArrayArgoutUchar(jenv, jarr2, (unsigned char *)arg2, jarg2); 
+  delete [] arg2; 
   return jresult;
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1processBase(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1processBase(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   EngineIpi *arg1 = (EngineIpi *) 0 ;
   EvidenceBase *arg2 = (EvidenceBase *) 0 ;
@@ -24573,7 +25004,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1EngineIpiSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_delete_1EngineIpiSwig(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   EngineIpi *arg1 = (EngineIpi *) 0 ;
   
   (void)jenv;
@@ -24632,7 +25063,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Evidence_1AddFromBytes(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2, jbyteArray jarg4) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Evidence_1AddFromBytes(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2, jbyteArray jarg4) {
   EvidenceBase *arg1 = (EvidenceBase *) 0 ;
   char *arg2 = (char *) (char *)0 ;
   size_t arg3 ;
@@ -24722,7 +25153,7 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Results_1GetValueAsString(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Results_1GetValueAsString(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2) {
   jlong jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   char *arg2 = (char *) (char *)0 ;
@@ -24801,7 +25232,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Results_1GetValues(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Results_1GetValues(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2) {
   jlong jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   char *arg2 = (char *) (char *)0 ;
@@ -24880,7 +25311,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Results_1GetValueAsBool(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Results_1GetValueAsBool(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2) {
   jlong jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   char *arg2 = (char *) (char *)0 ;
@@ -24959,7 +25390,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Results_1GetValueAsInteger(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Results_1GetValueAsInteger(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2) {
   jlong jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   char *arg2 = (char *) (char *)0 ;
@@ -25038,7 +25469,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Results_1GetValueAsDouble(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Results_1GetValueAsDouble(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2) {
   jlong jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   char *arg2 = (char *) (char *)0 ;
@@ -25117,7 +25548,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Results_1ContainsProperty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2) {
+SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_Results_1ContainsProperty(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2) {
   jboolean jresult = 0 ;
   ResultsBase *arg1 = (ResultsBase *) 0 ;
   char *arg2 = (char *) (char *)0 ;
@@ -25196,7 +25627,7 @@ SWIGEXPORT jboolean JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_i
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1SWIGUpcast(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ResultsIpiSwig_1SWIGUpcast(JNIEnv *jenv, jclass jcls, jlong jarg1) {
     jlong baseptr = 0;
     (void)jenv;
     (void)jcls;
@@ -25204,7 +25635,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
     return baseptr;
 }
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1SWIGUpcast(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_ConfigIpiSwig_1SWIGUpcast(JNIEnv *jenv, jclass jcls, jlong jarg1) {
     jlong baseptr = 0;
     (void)jenv;
     (void)jcls;
@@ -25212,7 +25643,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
     return baseptr;
 }
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EvidenceBaseSwig_1SWIGUpcast(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EvidenceBaseSwig_1SWIGUpcast(JNIEnv *jenv, jclass jcls, jlong jarg1) {
     jlong baseptr = 0;
     (void)jenv;
     (void)jcls;
@@ -25220,7 +25651,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
     return baseptr;
 }
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EvidenceIpiSwig_1SWIGUpcast(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EvidenceIpiSwig_1SWIGUpcast(JNIEnv *jenv, jclass jcls, jlong jarg1) {
     jlong baseptr = 0;
     (void)jenv;
     (void)jcls;
@@ -25228,7 +25659,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
     return baseptr;
 }
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1SWIGUpcast(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1SWIGUpcast(JNIEnv *jenv, jclass jcls, jlong jarg1) {
     jlong baseptr = 0;
     (void)jenv;
     (void)jcls;

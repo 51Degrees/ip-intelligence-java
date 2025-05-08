@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngine;
+import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
 import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.ConfigHashSwig;
 import fiftyone.ipintelligence.shared.testhelpers.FileUtils;
 import fiftyone.pipeline.core.flowelements.FlowElement;
@@ -67,19 +67,19 @@ public class IPIntelligenceOnPremisePipelineBuilderTest {
                 .setShareUsage(false);
     }
 
-    private IPIntelligenceHashEngine getEngine(Pipeline pipeline) {
-        return (IPIntelligenceHashEngine) pipeline.getFlowElements().get(0);
+    private IPIntelligenceOnPremiseEngine getEngine(Pipeline pipeline) {
+        return (IPIntelligenceOnPremiseEngine) pipeline.getFlowElements().get(0);
     }
 
     private DataFileConfiguration getDataFileConfiguration(Pipeline pipeline) {
-        IPIntelligenceHashEngine engine = getEngine(pipeline);
+        IPIntelligenceOnPremiseEngine engine = getEngine(pipeline);
         List<AspectEngineDataFile> engineDataFiles = engine.getDataFiles();
         FiftyOneDataFileDefault fiftyOneDataFileDefault = (FiftyOneDataFileDefault) engineDataFiles.get(0);
         return fiftyOneDataFileDefault.getConfiguration();
     }
 
     private ConfigHashSwig getConfigHashSwig(Pipeline pipeline) throws NoSuchFieldException, IllegalAccessException {
-        IPIntelligenceHashEngine engine = getEngine(pipeline);
+        IPIntelligenceOnPremiseEngine engine = getEngine(pipeline);
         Field configSwigField = engine.getClass().getDeclaredField("config");
         configSwigField.setAccessible(true);
         return (ConfigHashSwig) configSwigField.get(engine);

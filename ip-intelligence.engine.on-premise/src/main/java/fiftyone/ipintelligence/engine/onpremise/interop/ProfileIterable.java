@@ -23,7 +23,7 @@
 package fiftyone.ipintelligence.hash.engine.onpremise.interop;
 
 import fiftyone.ipintelligence.hash.engine.onpremise.data.ProfileMetaDataHash;
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngine;
+import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
 import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.ProfileMetaDataCollectionSwig;
 import fiftyone.pipeline.engines.fiftyone.data.CollectionIterableBase;
 import fiftyone.pipeline.engines.fiftyone.data.ProfileMetaData;
@@ -37,7 +37,7 @@ public class ProfileIterable
 
     private final ProfileMetaDataCollectionSwig collection;
 
-    private final IPIntelligenceHashEngine engine;
+    private final IPIntelligenceOnPremiseEngine engine;
 
     /**
      * Create a new instance.
@@ -45,7 +45,7 @@ public class ProfileIterable
      * @param collection the native collection of profiles
      */
     public ProfileIterable(
-            IPIntelligenceHashEngine engine,
+            IPIntelligenceOnPremiseEngine engine,
             ProfileMetaDataCollectionSwig collection) {
         super(collection.getSize());
         this.engine = engine;

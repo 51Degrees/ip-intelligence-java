@@ -50,7 +50,7 @@ import static org.apache.commons.lang3.BooleanUtils.isFalse;
  * them e.g. DeviceType or ReleaseDate.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-on-premise.md">Specification</a>
  */
-public class IPIntelligenceHashEngine
+public class IPIntelligenceOnPremiseEngine
     extends FiftyOneOnPremiseAspectEngineBase<IPIDataHash,
     FiftyOneAspectPropertyMetaData> {
     private EngineHashSwig engine = null;
@@ -63,7 +63,7 @@ public class IPIntelligenceHashEngine
     private final Random rand = new Random();
 
     /**
-     * Construct a new instance of the {@link IPIntelligenceHashEngine}.
+     * Construct a new instance of the {@link IPIntelligenceOnPremiseEngine}.
      * @param logger logger instance to use for logging
      * @param dataFile data file to read the data set from
      * @param config native configuration which was configured by the builder
@@ -75,7 +75,7 @@ public class IPIntelligenceHashEngine
      * @param tempDataFileDir the file where a temporary data file copy
      *                        will be stored if one is created
      */
-    IPIntelligenceHashEngine(
+    IPIntelligenceOnPremiseEngine(
         Logger logger,
         AspectEngineDataFile dataFile,
         ConfigHashSwig config,
@@ -514,7 +514,7 @@ public class IPIntelligenceHashEngine
     public void addDataFile(AspectEngineDataFile dataFile) {
         if (getDataFiles().size() >  0) {
             throw new IllegalArgumentException(
-                "IPIntelligenceHashEngine already has a configured data " +
+                "IPIntelligenceOnPremiseEngine already has a configured data " +
                 "source.");
         }
         super.addDataFile(dataFile);

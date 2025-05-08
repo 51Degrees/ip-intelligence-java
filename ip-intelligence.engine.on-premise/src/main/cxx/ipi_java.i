@@ -61,36 +61,36 @@ nofinalize(ResultsHash);
 %extend EvidenceBase {
 %proxycode %{
   public void addFromBytes(byte[] key, byte[] value) {
-    IPIntelligenceHashEngineModule.Evidence_AddFromBytes(this, key, value);
+    IPIntelligenceOnPremiseEngineModule.Evidence_AddFromBytes(this, key, value);
   }
 %}
 }
 %extend ResultsBase {
 %proxycode %{
   public StringValueSwig getValueAsString(byte[] bytes) {
-    return IPIntelligenceHashEngineModule.Results_GetValueAsString(this, bytes);
+    return IPIntelligenceOnPremiseEngineModule.Results_GetValueAsString(this, bytes);
   }
   public VectorStringValuesSwig getValues(byte[] bytes) {
-    return IPIntelligenceHashEngineModule.Results_GetValues(this, bytes);
+    return IPIntelligenceOnPremiseEngineModule.Results_GetValues(this, bytes);
   }
   public BoolValueSwig getValueAsBool(byte[] bytes) {
-    return IPIntelligenceHashEngineModule.Results_GetValueAsBool(this, bytes);
+    return IPIntelligenceOnPremiseEngineModule.Results_GetValueAsBool(this, bytes);
   }
   public IntegerValueSwig getValueAsInteger(byte[] bytes) {
-    return IPIntelligenceHashEngineModule.Results_GetValueAsInteger(this, bytes);
+    return IPIntelligenceOnPremiseEngineModule.Results_GetValueAsInteger(this, bytes);
   }
   public DoubleValueSwig getValueAsDouble(byte[] bytes) {
-    return IPIntelligenceHashEngineModule.Results_GetValueAsDouble(this, bytes);
+    return IPIntelligenceOnPremiseEngineModule.Results_GetValueAsDouble(this, bytes);
   }
   public boolean containsProperty(byte[] bytes) {
-    return IPIntelligenceHashEngineModule.Results_ContainsProperty(this, bytes);
+    return IPIntelligenceOnPremiseEngineModule.Results_ContainsProperty(this, bytes);
   }
 %}
 }
 
 /* Load the native library automatically. */
 %pragma(java) jniclassimports=%{
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngine;
+import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
 import fiftyone.ipintelligence.hash.engine.onpremise.interop.Constants;
 import fiftyone.pipeline.engines.fiftyone.flowelements.interop.LibLoader;
 import java.nio.ByteBuffer;
@@ -98,7 +98,7 @@ import java.nio.ByteBuffer;
 %pragma(java) jniclasscode=%{
   static {
     try {
-      LibLoader.load(IPIntelligenceHashEngine.class);
+      LibLoader.load(IPIntelligenceOnPremiseEngine.class);
     } catch (UnsatisfiedLinkError e) {
       if (e.getMessage().contains("libatomic")) {
         throw new UnsatisfiedLinkError(

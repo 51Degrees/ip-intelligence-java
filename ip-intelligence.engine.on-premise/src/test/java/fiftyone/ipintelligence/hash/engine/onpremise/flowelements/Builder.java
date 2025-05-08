@@ -31,11 +31,11 @@ import org.slf4j.LoggerFactory;
 public class Builder {
     protected static final ILoggerFactory loggerFactory = LoggerFactory.getILoggerFactory();
 
-    private IPIntelligenceHashEngineBuilder builder;
+    private IPIntelligenceOnPremiseEngineBuilder builder;
 
     @Before
     public void init() {
-        builder = new IPIntelligenceHashEngineBuilder(loggerFactory);
+        builder = new IPIntelligenceOnPremiseEngineBuilder(loggerFactory);
     }
 
     /**

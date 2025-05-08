@@ -6,7 +6,7 @@
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.interop.swig;
+package fiftyone.ipintelligence.engine.onpremise.interop.swig;
 
 public class EvidenceBaseSwig extends MapStringStringSwig implements AutoCloseable {
   private transient long swigCPtr;
@@ -53,7 +53,7 @@ public class EvidenceBaseSwig extends MapStringStringSwig implements AutoCloseab
   }
 
   public void addFromBytes(byte[] key, byte[] value) {
-    IPIntelligenceHashEngineModule.Evidence_AddFromBytes(this, key, value);
+    IPIntelligenceOnPremiseEngineModule.Evidence_AddFromBytes(this, key, value);
   }
 
 }

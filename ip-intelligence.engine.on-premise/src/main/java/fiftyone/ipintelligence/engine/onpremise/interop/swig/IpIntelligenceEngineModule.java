@@ -6,7 +6,7 @@
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.interop.swig;
+package fiftyone.ipintelligence.engine.onpremise.interop.swig;
 
 public class IpIntelligenceEngineModule {
   public static void Evidence_AddFromBytes(EvidenceBaseSwig evidence, String key, String value) {

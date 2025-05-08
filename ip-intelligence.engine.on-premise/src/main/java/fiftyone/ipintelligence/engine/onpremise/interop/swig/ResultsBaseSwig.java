@@ -6,7 +6,7 @@
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.interop.swig;
+package fiftyone.ipintelligence.engine.onpremise.interop.swig;
 
 public class ResultsBaseSwig implements AutoCloseable {
   private transient long swigCPtr;
@@ -105,22 +105,22 @@ public class ResultsBaseSwig implements AutoCloseable {
   }
 
   public StringValueSwig getValueAsString(byte[] bytes) {
-    return IPIntelligenceHashEngineModule.Results_GetValueAsString(this, bytes);
+    return IPIntelligenceOnPremiseEngineModule.Results_GetValueAsString(this, bytes);
   }
   public VectorStringValuesSwig getValues(byte[] bytes) {
-    return IPIntelligenceHashEngineModule.Results_GetValues(this, bytes);
+    return IPIntelligenceOnPremiseEngineModule.Results_GetValues(this, bytes);
   }
   public BoolValueSwig getValueAsBool(byte[] bytes) {
-    return IPIntelligenceHashEngineModule.Results_GetValueAsBool(this, bytes);
+    return IPIntelligenceOnPremiseEngineModule.Results_GetValueAsBool(this, bytes);
   }
   public IntegerValueSwig getValueAsInteger(byte[] bytes) {
-    return IPIntelligenceHashEngineModule.Results_GetValueAsInteger(this, bytes);
+    return IPIntelligenceOnPremiseEngineModule.Results_GetValueAsInteger(this, bytes);
   }
   public DoubleValueSwig getValueAsDouble(byte[] bytes) {
-    return IPIntelligenceHashEngineModule.Results_GetValueAsDouble(this, bytes);
+    return IPIntelligenceOnPremiseEngineModule.Results_GetValueAsDouble(this, bytes);
   }
   public boolean containsProperty(byte[] bytes) {
-    return IPIntelligenceHashEngineModule.Results_ContainsProperty(this, bytes);
+    return IPIntelligenceOnPremiseEngineModule.Results_ContainsProperty(this, bytes);
   }
 
 }

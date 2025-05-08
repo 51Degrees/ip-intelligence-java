@@ -6,7 +6,7 @@
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.interop.swig;
+package fiftyone.ipintelligence.engine.onpremise.interop.swig;
 
 public class EngineIpiSwig extends EngineBaseSwig {
   private transient long swigCPtr;
@@ -90,8 +90,8 @@ public class EngineIpiSwig extends EngineBaseSwig {
     return (cPtr == 0) ? null : new ResultsIpiSwig(cPtr, true);
   }
 
-  public ResultsIpiSwig process(SWIGTYPE_p_unsigned_char ipAddress, int length, IpTypeSwig type) {
-    long cPtr = IpIntelligenceEngineModuleJNI.EngineIpiSwig_process__SWIG_2(swigCPtr, this, SWIGTYPE_p_unsigned_char.getCPtr(ipAddress), length, type.swigValue());
+  public ResultsIpiSwig process(byte[] ipAddress, int length, IpTypeSwig type) {
+    long cPtr = IpIntelligenceEngineModuleJNI.EngineIpiSwig_process__SWIG_2(swigCPtr, this, ipAddress, length, type.swigValue());
     return (cPtr == 0) ? null : new ResultsIpiSwig(cPtr, true);
   }
 

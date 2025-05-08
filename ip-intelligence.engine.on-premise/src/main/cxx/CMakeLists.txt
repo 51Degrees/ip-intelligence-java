@@ -3,7 +3,7 @@ set (CMAKE_C_STANDARD 11)
 set (CMAKE_CXX_STANDARD 11)
 
 # Include the C API
-project(IPIntelligenceHashEngine VERSION 4.3.0 LANGUAGES CXX C)
+project(IPIntelligenceOnPremiseEngine VERSION 4.3.0 LANGUAGES CXX C)
 
 if (MSVC)
     add_compile_options(/wd5105 /wd4100)
@@ -58,7 +58,7 @@ message(STATUS "OS name: ${OS}")
 
 include(${CMAKE_CURRENT_LIST_DIR}/ip-intelligence-cxx/CMakeLists.txt NO_POLICY_SCOPE)
 
-set(SRCOUT ${CMAKE_CURRENT_LIST_DIR}/../java/fiftyone/ipintelligence/hash/engine/onpremise)
+set(SRCOUT ${CMAKE_CURRENT_LIST_DIR}/../java/fiftyone/ipintelligence/engine/onpremise)
 set(RES ${CMAKE_CURRENT_LIST_DIR}/../../../target/classes)
 
 
@@ -72,7 +72,7 @@ if (RebuildSwig)
         message(WARNING "SWIG does not include Java support so will not be run")
     else()
         message(STATUS "Rebuilding SWIG interfaces")
-        execute_process(COMMAND ${SWIG_EXECUTABLE} -c++ -java -package fiftyone.ipintelligence.hash.engine.onpremise.interop.swig -outdir ${SRCOUT}/interop/swig -o ${CMAKE_CURRENT_LIST_DIR}/Java_Ipi_Engine.cpp ${CMAKE_CURRENT_LIST_DIR}/hash_java.i)
+        execute_process(COMMAND ${SWIG_EXECUTABLE} -c++ -java -package fiftyone.ipintelligence.engine.onpremise.interop.swig -outdir ${SRCOUT}/interop/swig -o ${CMAKE_CURRENT_LIST_DIR}/Java_Ipi_Engine.cpp ${CMAKE_CURRENT_LIST_DIR}/ipi_java.i)
     endif()
 endif()
 message(STATUS "Done SWIG interfaces")
@@ -94,7 +94,7 @@ set_target_properties(fiftyone-ip-intelligence-java
     LIBRARY_OUTPUT_DIRECTORY "${RES}"
     RUNTIME_OUTPUT_DIRECTORY_RELEASE "${RES}"
     PREFIX ""
-    OUTPUT_NAME "IPIntelligenceHashEngine-${OS}-${ARCH}"
+    OUTPUT_NAME "IPIntelligenceOnPremiseEngine-${OS}-${ARCH}"
 )
 target_link_libraries(fiftyone-ip-intelligence-java fiftyone-ip-intelligence-cxx)
 if (NOT MSVC)

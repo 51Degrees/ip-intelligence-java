@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.hash.engine.onpremise.data;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngine;
+import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
 import fiftyone.ipintelligence.hash.engine.onpremise.interop.PropertyIterable;
 import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.ComponentMetaDataSwig;
 import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.PropertyMetaDataCollectionSwig;
@@ -43,7 +43,7 @@ public class ComponentMetaDataHash implements ComponentMetaData {
 
     private final ComponentMetaDataSwig source;
 
-    private final IPIntelligenceHashEngine engine;
+    private final IPIntelligenceOnPremiseEngine engine;
 
     private final List<FiftyOneAspectPropertyMetaData> properties = new ArrayList<>();
 
@@ -53,7 +53,7 @@ public class ComponentMetaDataHash implements ComponentMetaData {
      * @param source the source metadata from the native engine
      */
     public ComponentMetaDataHash(
-        IPIntelligenceHashEngine engine,
+        IPIntelligenceOnPremiseEngine engine,
         ComponentMetaDataSwig source) {
         this.engine = engine;
         this.source = source;

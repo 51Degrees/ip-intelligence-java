@@ -14,10 +14,10 @@ Write-Debug "Invoking SWIG executable..."
 
 & $swigExec `
     -c++ -java `
-    -package fiftyone.ipintelligence.hash.engine.onpremise.interop.swig `
+    -package fiftyone.ipintelligence.engine.onpremise.interop.swig `
     -outdir ../java/fiftyone/ipintelligence/engine/onpremise/interop/swig `
     -o Java_Ipi_Engine.cpp `
-    hash_java.i
+    ipi_java.i
 
 Write-Debug "LASTEXITCODE = $LASTEXITCODE"
 

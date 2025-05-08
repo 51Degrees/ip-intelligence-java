@@ -23,7 +23,7 @@
 package fiftyone.ipintelligence.hash.engine.onpremise.interop;
 
 import fiftyone.ipintelligence.hash.engine.onpremise.data.ComponentMetaDataHash;
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngine;
+import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
 import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.ComponentMetaDataCollectionSwig;
 import fiftyone.pipeline.engines.fiftyone.data.CollectionIterableBase;
 import fiftyone.pipeline.engines.fiftyone.data.ComponentMetaData;
@@ -37,7 +37,7 @@ public class ComponentIterable
 
     private final ComponentMetaDataCollectionSwig collection;
 
-    private final IPIntelligenceHashEngine engine;
+    private final IPIntelligenceOnPremiseEngine engine;
 
     /**
      * Create a new instance.
@@ -45,7 +45,7 @@ public class ComponentIterable
      * @param collection the native collection of components
      */
     public ComponentIterable(
-        IPIntelligenceHashEngine engine,
+        IPIntelligenceOnPremiseEngine engine,
         ComponentMetaDataCollectionSwig collection) {
         super(collection.getSize());
         this.engine = engine;

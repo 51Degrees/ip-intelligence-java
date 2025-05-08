@@ -23,7 +23,7 @@
 package fiftyone.ipintelligence.hash.engine.onpremise.interop;
 
 import fiftyone.ipintelligence.hash.engine.onpremise.data.PropertyMetaDataHash;
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngine;
+import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
 import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.PropertyMetaDataCollectionSwig;
 import fiftyone.pipeline.engines.fiftyone.data.CollectionIterableCachedBase;
 import fiftyone.pipeline.engines.fiftyone.data.FiftyOneAspectPropertyMetaData;
@@ -39,7 +39,7 @@ public class PropertyIterable
 
     private final PropertyMetaDataCollectionSwig collection;
 
-    private final IPIntelligenceHashEngine engine;
+    private final IPIntelligenceOnPremiseEngine engine;
 
     /**
      * Create a new instance.
@@ -47,7 +47,7 @@ public class PropertyIterable
      * @param collection the native collection of properties
      */
     public PropertyIterable(
-        IPIntelligenceHashEngine engine,
+        IPIntelligenceOnPremiseEngine engine,
         List<FiftyOneAspectPropertyMetaData> list,
         PropertyMetaDataCollectionSwig collection) {
         super(list, collection.getSize());

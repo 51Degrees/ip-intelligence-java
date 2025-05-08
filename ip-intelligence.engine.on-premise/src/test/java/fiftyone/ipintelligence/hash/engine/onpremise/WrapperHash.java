@@ -22,8 +22,8 @@
 
 package fiftyone.ipintelligence.hash.engine.onpremise;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngine;
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngineBuilder;
+import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
+import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngineBuilder;
 import fiftyone.ipintelligence.shared.testhelpers.Wrapper;
 import fiftyone.pipeline.core.flowelements.Pipeline;
 import fiftyone.pipeline.core.flowelements.PipelineBuilder;
@@ -41,10 +41,10 @@ public class WrapperHash implements Wrapper {
 
     protected static final ILoggerFactory loggerFactory = LoggerFactory.getILoggerFactory();
     private Pipeline pipeline;
-    private IPIntelligenceHashEngine engine;
+    private IPIntelligenceOnPremiseEngine engine;
 
     public WrapperHash(File dataFile, Constants.PerformanceProfiles profile) throws Exception {
-        engine = new IPIntelligenceHashEngineBuilder(loggerFactory, null)
+        engine = new IPIntelligenceOnPremiseEngineBuilder(loggerFactory, null)
                 .setPerformanceProfile(profile)
                 .setUpdateMatchedUserAgent(true)
                 .setAutoUpdate(false)
@@ -60,7 +60,7 @@ public class WrapperHash implements Wrapper {
     }
 
     @Override
-    public IPIntelligenceHashEngine getEngine() {
+    public IPIntelligenceOnPremiseEngine getEngine() {
         return engine;
     }
 

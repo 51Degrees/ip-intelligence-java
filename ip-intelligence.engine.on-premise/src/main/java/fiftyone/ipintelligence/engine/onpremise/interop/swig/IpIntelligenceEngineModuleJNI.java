@@ -6,9 +6,9 @@
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.interop.swig;
+package fiftyone.ipintelligence.engine.onpremise.interop.swig;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngine;
+import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
 import fiftyone.ipintelligence.hash.engine.onpremise.interop.Constants;
 import fiftyone.pipeline.engines.fiftyone.flowelements.interop.LibLoader;
 import java.nio.ByteBuffer;
@@ -161,7 +161,6 @@ public class IpIntelligenceEngineModuleJNI {
   public final static native long EngineBaseSwig_processBase(long jarg1, EngineBaseSwig jarg1_, long jarg2, EvidenceBaseSwig jarg2_);
   public final static native void EngineBaseSwig_refreshData__SWIG_0(long jarg1, EngineBaseSwig jarg1_);
   public final static native void EngineBaseSwig_refreshData__SWIG_1(long jarg1, EngineBaseSwig jarg1_, String jarg2);
-  public final static native void EngineBaseSwig_refreshData__SWIG_2(long jarg1, EngineBaseSwig jarg1_, byte[] jarg2);
   public final static native String EngineBaseSwig_getDataUpdateUrl(long jarg1, EngineBaseSwig jarg1_);
   public final static native long EngineBaseSwig_getPublishedTime(long jarg1, EngineBaseSwig jarg1_);
   public final static native long EngineBaseSwig_getUpdateAvailableTime(long jarg1, EngineBaseSwig jarg1_);
@@ -219,9 +218,8 @@ public class IpIntelligenceEngineModuleJNI {
   public final static native int FIFTYONE_DEGREES_IP_TYPE_INVALID_get();
   public final static native int FIFTYONE_DEGREES_IP_TYPE_IPV4_get();
   public final static native int FIFTYONE_DEGREES_IP_TYPE_IPV6_get();
-  public final static native long new_IpAddressSwig__SWIG_0(long jarg1, int jarg2);
-  public final static native long new_IpAddressSwig__SWIG_1(String jarg1);
-  public final static native void IpAddressSwig_getCopyOfIpAddress(long jarg1, IpAddressSwig jarg1_, long jarg2, long jarg3);
+  public final static native long new_IpAddressSwig(String jarg1);
+  public final static native void IpAddressSwig_getCopyOfIpAddress(long jarg1, IpAddressSwig jarg1_, byte[] jarg2, long jarg3);
   public final static native int IpAddressSwig_getType(long jarg1, IpAddressSwig jarg1_);
   public final static native void delete_IpAddressSwig(long jarg1);
   public final static native long new_WeightedStringListSwig__SWIG_0();
@@ -396,7 +394,7 @@ public class IpIntelligenceEngineModuleJNI {
   public final static native void EngineIpiSwig_refreshData__SWIG_1(long jarg1, EngineIpiSwig jarg1_, String jarg2);
   public final static native long EngineIpiSwig_process__SWIG_0(long jarg1, EngineIpiSwig jarg1_, long jarg2, EvidenceIpiSwig jarg2_);
   public final static native long EngineIpiSwig_process__SWIG_1(long jarg1, EngineIpiSwig jarg1_, String jarg2);
-  public final static native long EngineIpiSwig_process__SWIG_2(long jarg1, EngineIpiSwig jarg1_, long jarg2, int jarg3, int jarg4);
+  public final static native long EngineIpiSwig_process__SWIG_2(long jarg1, EngineIpiSwig jarg1_, byte[] jarg2, int jarg3, int jarg4);
   public final static native long EngineIpiSwig_processBase(long jarg1, EngineIpiSwig jarg1_, long jarg2, EvidenceBaseSwig jarg2_);
   public final static native void delete_EngineIpiSwig(long jarg1);
   public final static native void Evidence_AddFromBytes(long jarg1, EvidenceBaseSwig jarg1_, byte[] jarg2, byte[] jarg4);
@@ -409,7 +407,7 @@ public class IpIntelligenceEngineModuleJNI {
 
   static {
     try {
-      LibLoader.load(IPIntelligenceHashEngine.class);
+      LibLoader.load(IPIntelligenceOnPremiseEngine.class);
     } catch (UnsatisfiedLinkError e) {
       if (e.getMessage().contains("libatomic")) {
         throw new UnsatisfiedLinkError(
