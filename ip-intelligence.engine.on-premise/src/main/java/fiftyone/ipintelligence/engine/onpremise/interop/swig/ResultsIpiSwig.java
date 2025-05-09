@@ -12,7 +12,7 @@ public class ResultsIpiSwig extends ResultsBaseSwig {
   private transient long swigCPtr;
 
   protected ResultsIpiSwig(long cPtr, boolean cMemoryOwn) {
-    super(IpIntelligenceEngineModuleJNI.ResultsIpiSwig_SWIGUpcast(cPtr), cMemoryOwn);
+    super(IpIntelligenceOnPremiseEngineModuleJNI.ResultsIpiSwig_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -41,7 +41,7 @@ public class ResultsIpiSwig extends ResultsBaseSwig {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_ResultsIpiSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_ResultsIpiSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -49,59 +49,59 @@ public class ResultsIpiSwig extends ResultsBaseSwig {
   }
 
   public WeightedStringListValueSwig getValuesAsWeightedStringList(String propertyName) {
-    return new WeightedStringListValueSwig(IpIntelligenceEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedStringList__SWIG_0(swigCPtr, this, propertyName), true);
+    return new WeightedStringListValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedStringList__SWIG_0(swigCPtr, this, propertyName), true);
   }
 
   public WeightedStringListValueSwig getValuesAsWeightedStringList(int requiredPropertyIndex) {
-    return new WeightedStringListValueSwig(IpIntelligenceEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedStringList__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
+    return new WeightedStringListValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedStringList__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
   }
 
   public WeightedUTF8StringListValueSwig getValuesAsWeightedUTF8StringList(String propertyName) {
-    return new WeightedUTF8StringListValueSwig(IpIntelligenceEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedUTF8StringList__SWIG_0(swigCPtr, this, propertyName), true);
+    return new WeightedUTF8StringListValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedUTF8StringList__SWIG_0(swigCPtr, this, propertyName), true);
   }
 
   public WeightedUTF8StringListValueSwig getValuesAsWeightedUTF8StringList(int requiredPropertyIndex) {
-    return new WeightedUTF8StringListValueSwig(IpIntelligenceEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedUTF8StringList__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
+    return new WeightedUTF8StringListValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedUTF8StringList__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
   }
 
   public WeightedStringListValueSwig getValuesAsWeightedWKTStringList(String propertyName, short decimalPlaces) {
-    return new WeightedStringListValueSwig(IpIntelligenceEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedWKTStringList__SWIG_0(swigCPtr, this, propertyName, decimalPlaces), true);
+    return new WeightedStringListValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedWKTStringList__SWIG_0(swigCPtr, this, propertyName, decimalPlaces), true);
   }
 
   public WeightedStringListValueSwig getValuesAsWeightedWKTStringList(int requiredPropertyIndex, short decimalPlaces) {
-    return new WeightedStringListValueSwig(IpIntelligenceEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedWKTStringList__SWIG_1(swigCPtr, this, requiredPropertyIndex, decimalPlaces), true);
+    return new WeightedStringListValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedWKTStringList__SWIG_1(swigCPtr, this, requiredPropertyIndex, decimalPlaces), true);
   }
 
   public WeightedBoolListValueSwig getValuesAsWeightedBoolList(String propertyName) {
-    return new WeightedBoolListValueSwig(IpIntelligenceEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedBoolList__SWIG_0(swigCPtr, this, propertyName), true);
+    return new WeightedBoolListValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedBoolList__SWIG_0(swigCPtr, this, propertyName), true);
   }
 
   public WeightedBoolListValueSwig getValuesAsWeightedBoolList(int requiredPropertyIndex) {
-    return new WeightedBoolListValueSwig(IpIntelligenceEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedBoolList__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
+    return new WeightedBoolListValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedBoolList__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
   }
 
   public WeightedIntListValueSwig getValuesAsWeightedIntegerList(String propertyName) {
-    return new WeightedIntListValueSwig(IpIntelligenceEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedIntegerList__SWIG_0(swigCPtr, this, propertyName), true);
+    return new WeightedIntListValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedIntegerList__SWIG_0(swigCPtr, this, propertyName), true);
   }
 
   public WeightedIntListValueSwig getValuesAsWeightedIntegerList(int requiredPropertyIndex) {
-    return new WeightedIntListValueSwig(IpIntelligenceEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedIntegerList__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
+    return new WeightedIntListValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedIntegerList__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
   }
 
   public WeightedDoubleListValueSwig getValuesAsWeightedDoubleList(String propertyName) {
-    return new WeightedDoubleListValueSwig(IpIntelligenceEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedDoubleList__SWIG_0(swigCPtr, this, propertyName), true);
+    return new WeightedDoubleListValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedDoubleList__SWIG_0(swigCPtr, this, propertyName), true);
   }
 
   public WeightedDoubleListValueSwig getValuesAsWeightedDoubleList(int requiredPropertyIndex) {
-    return new WeightedDoubleListValueSwig(IpIntelligenceEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedDoubleList__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
+    return new WeightedDoubleListValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsIpiSwig_getValuesAsWeightedDoubleList__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
   }
 
   public IpAddressValueSwig getValueAsIpAddress(String propertyName) {
-    return new IpAddressValueSwig(IpIntelligenceEngineModuleJNI.ResultsIpiSwig_getValueAsIpAddress__SWIG_0(swigCPtr, this, propertyName), true);
+    return new IpAddressValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsIpiSwig_getValueAsIpAddress__SWIG_0(swigCPtr, this, propertyName), true);
   }
 
   public IpAddressValueSwig getValueAsIpAddress(int requiredPropertyIndex) {
-    return new IpAddressValueSwig(IpIntelligenceEngineModuleJNI.ResultsIpiSwig_getValueAsIpAddress__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
+    return new IpAddressValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsIpiSwig_getValueAsIpAddress__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
   }
 
 }

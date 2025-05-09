@@ -42,26 +42,26 @@ public class IpAddressSwig {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_IpAddressSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_IpAddressSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public IpAddressSwig(byte[] ipAddress, IpTypeSwig type) {
-    this(IpIntelligenceEngineModuleJNI.new_IpAddressSwig__SWIG_0(ipAddress, type.swigValue()), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_IpAddressSwig__SWIG_0(ipAddress, type.swigValue()), true);
   }
 
   public IpAddressSwig(String ipAddressString) {
-    this(IpIntelligenceEngineModuleJNI.new_IpAddressSwig__SWIG_1(ipAddressString), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_IpAddressSwig__SWIG_1(ipAddressString), true);
   }
 
   public void getCopyOfIpAddress(byte[] copy) {
-    IpIntelligenceEngineModuleJNI.IpAddressSwig_getCopyOfIpAddress(swigCPtr, this, copy);
+    IpIntelligenceOnPremiseEngineModuleJNI.IpAddressSwig_getCopyOfIpAddress(swigCPtr, this, copy);
   }
 
   public IpTypeSwig getType() {
-    return IpTypeSwig.swigToEnum(IpIntelligenceEngineModuleJNI.IpAddressSwig_getType(swigCPtr, this));
+    return IpTypeSwig.swigToEnum(IpIntelligenceOnPremiseEngineModuleJNI.IpAddressSwig_getType(swigCPtr, this));
   }
 
 }

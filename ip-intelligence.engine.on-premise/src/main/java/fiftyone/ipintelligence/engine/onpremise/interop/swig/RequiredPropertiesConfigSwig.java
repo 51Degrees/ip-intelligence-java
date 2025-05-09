@@ -42,26 +42,26 @@ public class RequiredPropertiesConfigSwig {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_RequiredPropertiesConfigSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_RequiredPropertiesConfigSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public RequiredPropertiesConfigSwig() {
-    this(IpIntelligenceEngineModuleJNI.new_RequiredPropertiesConfigSwig__SWIG_0(), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_RequiredPropertiesConfigSwig__SWIG_0(), true);
   }
 
   public RequiredPropertiesConfigSwig(VectorStringSwig properties) {
-    this(IpIntelligenceEngineModuleJNI.new_RequiredPropertiesConfigSwig__SWIG_1(VectorStringSwig.getCPtr(properties), properties), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_RequiredPropertiesConfigSwig__SWIG_1(VectorStringSwig.getCPtr(properties), properties), true);
   }
 
   public RequiredPropertiesConfigSwig(String properties) {
-    this(IpIntelligenceEngineModuleJNI.new_RequiredPropertiesConfigSwig__SWIG_2(properties), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_RequiredPropertiesConfigSwig__SWIG_2(properties), true);
   }
 
   public VectorStringSwig getProperties() {
-    return new VectorStringSwig(IpIntelligenceEngineModuleJNI.RequiredPropertiesConfigSwig_getProperties(swigCPtr, this), true);
+    return new VectorStringSwig(IpIntelligenceOnPremiseEngineModuleJNI.RequiredPropertiesConfigSwig_getProperties(swigCPtr, this), true);
   }
 
 }

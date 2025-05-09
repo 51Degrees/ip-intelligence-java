@@ -42,22 +42,22 @@ public class ValueMetaDataSwig {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_ValueMetaDataSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_ValueMetaDataSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public String getName() {
-    return IpIntelligenceEngineModuleJNI.ValueMetaDataSwig_getName(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.ValueMetaDataSwig_getName(swigCPtr, this);
   }
 
   public String getDescription() {
-    return IpIntelligenceEngineModuleJNI.ValueMetaDataSwig_getDescription(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.ValueMetaDataSwig_getDescription(swigCPtr, this);
   }
 
   public String getUrl() {
-    return IpIntelligenceEngineModuleJNI.ValueMetaDataSwig_getUrl(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.ValueMetaDataSwig_getUrl(swigCPtr, this);
   }
 
 }

@@ -42,69 +42,69 @@ public class MetaDataSwig {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_MetaDataSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_MetaDataSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public ComponentMetaDataCollectionSwig getComponents() {
-    long cPtr = IpIntelligenceEngineModuleJNI.MetaDataSwig_getComponents(swigCPtr, this);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.MetaDataSwig_getComponents(swigCPtr, this);
     return (cPtr == 0) ? null : new ComponentMetaDataCollectionSwig(cPtr, true);
   }
 
   public PropertyMetaDataCollectionSwig getProperties() {
-    long cPtr = IpIntelligenceEngineModuleJNI.MetaDataSwig_getProperties(swigCPtr, this);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.MetaDataSwig_getProperties(swigCPtr, this);
     return (cPtr == 0) ? null : new PropertyMetaDataCollectionSwig(cPtr, true);
   }
 
   public ProfileMetaDataCollectionSwig getProfiles() {
-    long cPtr = IpIntelligenceEngineModuleJNI.MetaDataSwig_getProfiles(swigCPtr, this);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.MetaDataSwig_getProfiles(swigCPtr, this);
     return (cPtr == 0) ? null : new ProfileMetaDataCollectionSwig(cPtr, true);
   }
 
   public ValueMetaDataCollectionSwig getValues() {
-    long cPtr = IpIntelligenceEngineModuleJNI.MetaDataSwig_getValues(swigCPtr, this);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.MetaDataSwig_getValues(swigCPtr, this);
     return (cPtr == 0) ? null : new ValueMetaDataCollectionSwig(cPtr, true);
   }
 
   public ValueMetaDataCollectionSwig getValuesForProperty(PropertyMetaDataSwig property) {
-    long cPtr = IpIntelligenceEngineModuleJNI.MetaDataSwig_getValuesForProperty(swigCPtr, this, PropertyMetaDataSwig.getCPtr(property), property);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.MetaDataSwig_getValuesForProperty(swigCPtr, this, PropertyMetaDataSwig.getCPtr(property), property);
     return (cPtr == 0) ? null : new ValueMetaDataCollectionSwig(cPtr, true);
   }
 
   public ValueMetaDataCollectionSwig getValuesForProfile(ProfileMetaDataSwig profile) {
-    long cPtr = IpIntelligenceEngineModuleJNI.MetaDataSwig_getValuesForProfile(swigCPtr, this, ProfileMetaDataSwig.getCPtr(profile), profile);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.MetaDataSwig_getValuesForProfile(swigCPtr, this, ProfileMetaDataSwig.getCPtr(profile), profile);
     return (cPtr == 0) ? null : new ValueMetaDataCollectionSwig(cPtr, true);
   }
 
   public ComponentMetaDataSwig getComponentForProfile(ProfileMetaDataSwig profile) {
-    long cPtr = IpIntelligenceEngineModuleJNI.MetaDataSwig_getComponentForProfile(swigCPtr, this, ProfileMetaDataSwig.getCPtr(profile), profile);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.MetaDataSwig_getComponentForProfile(swigCPtr, this, ProfileMetaDataSwig.getCPtr(profile), profile);
     return (cPtr == 0) ? null : new ComponentMetaDataSwig(cPtr, true);
   }
 
   public ComponentMetaDataSwig getComponentForProperty(PropertyMetaDataSwig property) {
-    long cPtr = IpIntelligenceEngineModuleJNI.MetaDataSwig_getComponentForProperty(swigCPtr, this, PropertyMetaDataSwig.getCPtr(property), property);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.MetaDataSwig_getComponentForProperty(swigCPtr, this, PropertyMetaDataSwig.getCPtr(property), property);
     return (cPtr == 0) ? null : new ComponentMetaDataSwig(cPtr, true);
   }
 
   public ProfileMetaDataSwig getDefaultProfileForComponent(ComponentMetaDataSwig component) {
-    long cPtr = IpIntelligenceEngineModuleJNI.MetaDataSwig_getDefaultProfileForComponent(swigCPtr, this, ComponentMetaDataSwig.getCPtr(component), component);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.MetaDataSwig_getDefaultProfileForComponent(swigCPtr, this, ComponentMetaDataSwig.getCPtr(component), component);
     return (cPtr == 0) ? null : new ProfileMetaDataSwig(cPtr, true);
   }
 
   public ValueMetaDataSwig getDefaultValueForProperty(PropertyMetaDataSwig property) {
-    long cPtr = IpIntelligenceEngineModuleJNI.MetaDataSwig_getDefaultValueForProperty(swigCPtr, this, PropertyMetaDataSwig.getCPtr(property), property);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.MetaDataSwig_getDefaultValueForProperty(swigCPtr, this, PropertyMetaDataSwig.getCPtr(property), property);
     return (cPtr == 0) ? null : new ValueMetaDataSwig(cPtr, true);
   }
 
   public PropertyMetaDataCollectionSwig getPropertiesForComponent(ComponentMetaDataSwig component) {
-    long cPtr = IpIntelligenceEngineModuleJNI.MetaDataSwig_getPropertiesForComponent(swigCPtr, this, ComponentMetaDataSwig.getCPtr(component), component);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.MetaDataSwig_getPropertiesForComponent(swigCPtr, this, ComponentMetaDataSwig.getCPtr(component), component);
     return (cPtr == 0) ? null : new PropertyMetaDataCollectionSwig(cPtr, true);
   }
 
   public PropertyMetaDataSwig getPropertyForValue(ValueMetaDataSwig value) {
-    long cPtr = IpIntelligenceEngineModuleJNI.MetaDataSwig_getPropertyForValue(swigCPtr, this, ValueMetaDataSwig.getCPtr(value), value);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.MetaDataSwig_getPropertyForValue(swigCPtr, this, ValueMetaDataSwig.getCPtr(value), value);
     return (cPtr == 0) ? null : new PropertyMetaDataSwig(cPtr, true);
   }
 

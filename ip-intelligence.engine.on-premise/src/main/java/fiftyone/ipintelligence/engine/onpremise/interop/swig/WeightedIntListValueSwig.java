@@ -37,7 +37,7 @@ public class WeightedIntListValueSwig implements AutoCloseable {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_WeightedIntListValueSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_WeightedIntListValueSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -49,19 +49,19 @@ public class WeightedIntListValueSwig implements AutoCloseable {
   }
 
   public WeightedIntListValueSwig() {
-    this(IpIntelligenceEngineModuleJNI.new_WeightedIntListValueSwig(), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_WeightedIntListValueSwig(), true);
   }
 
   public boolean hasValue() {
-    return IpIntelligenceEngineModuleJNI.WeightedIntListValueSwig_hasValue(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.WeightedIntListValueSwig_hasValue(swigCPtr, this);
   }
 
   public String getNoValueMessage() {
-    return IpIntelligenceEngineModuleJNI.WeightedIntListValueSwig_getNoValueMessage(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.WeightedIntListValueSwig_getNoValueMessage(swigCPtr, this);
   }
 
   public WeightedIntListSwig getValue() {
-    return new WeightedIntListSwig(IpIntelligenceEngineModuleJNI.WeightedIntListValueSwig_getValue(swigCPtr, this), true);
+    return new WeightedIntListSwig(IpIntelligenceOnPremiseEngineModuleJNI.WeightedIntListValueSwig_getValue(swigCPtr, this), true);
   }
 
 }

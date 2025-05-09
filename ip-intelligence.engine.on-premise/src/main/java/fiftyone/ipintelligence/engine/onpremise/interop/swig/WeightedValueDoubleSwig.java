@@ -42,30 +42,30 @@ public class WeightedValueDoubleSwig {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_WeightedValueDoubleSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_WeightedValueDoubleSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public double getValue() {
-    return IpIntelligenceEngineModuleJNI.WeightedValueDoubleSwig_getValue(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.WeightedValueDoubleSwig_getValue(swigCPtr, this);
   }
 
   public void setValue(double v) {
-    IpIntelligenceEngineModuleJNI.WeightedValueDoubleSwig_setValue(swigCPtr, this, v);
+    IpIntelligenceOnPremiseEngineModuleJNI.WeightedValueDoubleSwig_setValue(swigCPtr, this, v);
   }
 
   public float getWeight() {
-    return IpIntelligenceEngineModuleJNI.WeightedValueDoubleSwig_getWeight(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.WeightedValueDoubleSwig_getWeight(swigCPtr, this);
   }
 
   public int getRawWeight() {
-    return IpIntelligenceEngineModuleJNI.WeightedValueDoubleSwig_getRawWeight(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.WeightedValueDoubleSwig_getRawWeight(swigCPtr, this);
   }
 
   public void setRawWeight(int w) {
-    IpIntelligenceEngineModuleJNI.WeightedValueDoubleSwig_setRawWeight(swigCPtr, this, w);
+    IpIntelligenceOnPremiseEngineModuleJNI.WeightedValueDoubleSwig_setRawWeight(swigCPtr, this, w);
   }
 
 }

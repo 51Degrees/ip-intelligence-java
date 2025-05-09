@@ -37,7 +37,7 @@ public class VectorStringValuesSwig implements AutoCloseable {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_VectorStringValuesSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_VectorStringValuesSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -49,19 +49,19 @@ public class VectorStringValuesSwig implements AutoCloseable {
   }
 
   public VectorStringValuesSwig() {
-    this(IpIntelligenceEngineModuleJNI.new_VectorStringValuesSwig(), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_VectorStringValuesSwig(), true);
   }
 
   public boolean hasValue() {
-    return IpIntelligenceEngineModuleJNI.VectorStringValuesSwig_hasValue(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.VectorStringValuesSwig_hasValue(swigCPtr, this);
   }
 
   public String getNoValueMessage() {
-    return IpIntelligenceEngineModuleJNI.VectorStringValuesSwig_getNoValueMessage(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.VectorStringValuesSwig_getNoValueMessage(swigCPtr, this);
   }
 
   public VectorStringSwig getValue() {
-    return new VectorStringSwig(IpIntelligenceEngineModuleJNI.VectorStringValuesSwig_getValue(swigCPtr, this), true);
+    return new VectorStringSwig(IpIntelligenceOnPremiseEngineModuleJNI.VectorStringValuesSwig_getValue(swigCPtr, this), true);
   }
 
 }

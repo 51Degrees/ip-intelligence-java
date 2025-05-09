@@ -9,9 +9,9 @@
 package fiftyone.ipintelligence.engine.onpremise.interop.swig;
 
 public final class IpTypeSwig {
-  public final static IpTypeSwig FIFTYONE_DEGREES_IP_TYPE_INVALID = new IpTypeSwig("FIFTYONE_DEGREES_IP_TYPE_INVALID", IpIntelligenceEngineModuleJNI.FIFTYONE_DEGREES_IP_TYPE_INVALID_get());
-  public final static IpTypeSwig FIFTYONE_DEGREES_IP_TYPE_IPV4 = new IpTypeSwig("FIFTYONE_DEGREES_IP_TYPE_IPV4", IpIntelligenceEngineModuleJNI.FIFTYONE_DEGREES_IP_TYPE_IPV4_get());
-  public final static IpTypeSwig FIFTYONE_DEGREES_IP_TYPE_IPV6 = new IpTypeSwig("FIFTYONE_DEGREES_IP_TYPE_IPV6", IpIntelligenceEngineModuleJNI.FIFTYONE_DEGREES_IP_TYPE_IPV6_get());
+  public final static IpTypeSwig FIFTYONE_DEGREES_IP_TYPE_INVALID = new IpTypeSwig("FIFTYONE_DEGREES_IP_TYPE_INVALID", IpIntelligenceOnPremiseEngineModuleJNI.FIFTYONE_DEGREES_IP_TYPE_INVALID_get());
+  public final static IpTypeSwig FIFTYONE_DEGREES_IP_TYPE_IPV4 = new IpTypeSwig("FIFTYONE_DEGREES_IP_TYPE_IPV4", IpIntelligenceOnPremiseEngineModuleJNI.FIFTYONE_DEGREES_IP_TYPE_IPV4_get());
+  public final static IpTypeSwig FIFTYONE_DEGREES_IP_TYPE_IPV6 = new IpTypeSwig("FIFTYONE_DEGREES_IP_TYPE_IPV6", IpIntelligenceOnPremiseEngineModuleJNI.FIFTYONE_DEGREES_IP_TYPE_IPV6_get());
 
   public final int swigValue() {
     return swigValue;

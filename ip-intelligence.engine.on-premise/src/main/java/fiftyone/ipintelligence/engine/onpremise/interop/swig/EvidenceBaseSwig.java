@@ -12,7 +12,7 @@ public class EvidenceBaseSwig extends MapStringStringSwig implements AutoCloseab
   private transient long swigCPtr;
 
   protected EvidenceBaseSwig(long cPtr, boolean cMemoryOwn) {
-    super(IpIntelligenceEngineModuleJNI.EvidenceBaseSwig_SWIGUpcast(cPtr), cMemoryOwn);
+    super(IpIntelligenceOnPremiseEngineModuleJNI.EvidenceBaseSwig_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -36,7 +36,7 @@ public class EvidenceBaseSwig extends MapStringStringSwig implements AutoCloseab
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_EvidenceBaseSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_EvidenceBaseSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -49,11 +49,7 @@ public class EvidenceBaseSwig extends MapStringStringSwig implements AutoCloseab
   }
 
   public EvidenceBaseSwig() {
-    this(IpIntelligenceEngineModuleJNI.new_EvidenceBaseSwig(), true);
-  }
-
-  public void addFromBytes(byte[] key, byte[] value) {
-    IPIntelligenceOnPremiseEngineModule.Evidence_AddFromBytes(this, key, value);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_EvidenceBaseSwig(), true);
   }
 
 }

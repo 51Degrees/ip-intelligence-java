@@ -42,14 +42,14 @@ public class ProfileMetaDataSwig {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_ProfileMetaDataSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_ProfileMetaDataSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public long getProfileId() {
-    return IpIntelligenceEngineModuleJNI.ProfileMetaDataSwig_getProfileId(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.ProfileMetaDataSwig_getProfileId(swigCPtr, this);
   }
 
 }

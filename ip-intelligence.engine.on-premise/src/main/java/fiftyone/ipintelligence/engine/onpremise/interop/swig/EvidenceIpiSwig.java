@@ -12,7 +12,7 @@ public class EvidenceIpiSwig extends EvidenceBaseSwig {
   private transient long swigCPtr;
 
   protected EvidenceIpiSwig(long cPtr, boolean cMemoryOwn) {
-    super(IpIntelligenceEngineModuleJNI.EvidenceIpiSwig_SWIGUpcast(cPtr), cMemoryOwn);
+    super(IpIntelligenceOnPremiseEngineModuleJNI.EvidenceIpiSwig_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -41,7 +41,7 @@ public class EvidenceIpiSwig extends EvidenceBaseSwig {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_EvidenceIpiSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_EvidenceIpiSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -49,7 +49,7 @@ public class EvidenceIpiSwig extends EvidenceBaseSwig {
   }
 
   public EvidenceIpiSwig() {
-    this(IpIntelligenceEngineModuleJNI.new_EvidenceIpiSwig(), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_EvidenceIpiSwig(), true);
   }
 
 }

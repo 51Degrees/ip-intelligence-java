@@ -37,7 +37,7 @@ public class WeightedStringListSwig extends java.util.AbstractList<WeightedValue
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_WeightedStringListSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_WeightedStringListSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -106,59 +106,59 @@ public class WeightedStringListSwig extends java.util.AbstractList<WeightedValue
   }
 
   public WeightedStringListSwig() {
-    this(IpIntelligenceEngineModuleJNI.new_WeightedStringListSwig__SWIG_0(), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_WeightedStringListSwig__SWIG_0(), true);
   }
 
   public WeightedStringListSwig(WeightedStringListSwig other) {
-    this(IpIntelligenceEngineModuleJNI.new_WeightedStringListSwig__SWIG_1(WeightedStringListSwig.getCPtr(other), other), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_WeightedStringListSwig__SWIG_1(WeightedStringListSwig.getCPtr(other), other), true);
   }
 
   public boolean isEmpty() {
-    return IpIntelligenceEngineModuleJNI.WeightedStringListSwig_isEmpty(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.WeightedStringListSwig_isEmpty(swigCPtr, this);
   }
 
   public void clear() {
-    IpIntelligenceEngineModuleJNI.WeightedStringListSwig_clear(swigCPtr, this);
+    IpIntelligenceOnPremiseEngineModuleJNI.WeightedStringListSwig_clear(swigCPtr, this);
   }
 
   public WeightedStringListSwig(int count, WeightedValueStringSwig value) {
-    this(IpIntelligenceEngineModuleJNI.new_WeightedStringListSwig__SWIG_2(count, WeightedValueStringSwig.getCPtr(value), value), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_WeightedStringListSwig__SWIG_2(count, WeightedValueStringSwig.getCPtr(value), value), true);
   }
 
   private int doCapacity() {
-    return IpIntelligenceEngineModuleJNI.WeightedStringListSwig_doCapacity(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.WeightedStringListSwig_doCapacity(swigCPtr, this);
   }
 
   private void doReserve(int n) {
-    IpIntelligenceEngineModuleJNI.WeightedStringListSwig_doReserve(swigCPtr, this, n);
+    IpIntelligenceOnPremiseEngineModuleJNI.WeightedStringListSwig_doReserve(swigCPtr, this, n);
   }
 
   private int doSize() {
-    return IpIntelligenceEngineModuleJNI.WeightedStringListSwig_doSize(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.WeightedStringListSwig_doSize(swigCPtr, this);
   }
 
   private void doAdd(WeightedValueStringSwig x) {
-    IpIntelligenceEngineModuleJNI.WeightedStringListSwig_doAdd__SWIG_0(swigCPtr, this, WeightedValueStringSwig.getCPtr(x), x);
+    IpIntelligenceOnPremiseEngineModuleJNI.WeightedStringListSwig_doAdd__SWIG_0(swigCPtr, this, WeightedValueStringSwig.getCPtr(x), x);
   }
 
   private void doAdd(int index, WeightedValueStringSwig x) {
-    IpIntelligenceEngineModuleJNI.WeightedStringListSwig_doAdd__SWIG_1(swigCPtr, this, index, WeightedValueStringSwig.getCPtr(x), x);
+    IpIntelligenceOnPremiseEngineModuleJNI.WeightedStringListSwig_doAdd__SWIG_1(swigCPtr, this, index, WeightedValueStringSwig.getCPtr(x), x);
   }
 
   private WeightedValueStringSwig doRemove(int index) {
-    return new WeightedValueStringSwig(IpIntelligenceEngineModuleJNI.WeightedStringListSwig_doRemove(swigCPtr, this, index), true);
+    return new WeightedValueStringSwig(IpIntelligenceOnPremiseEngineModuleJNI.WeightedStringListSwig_doRemove(swigCPtr, this, index), true);
   }
 
   private WeightedValueStringSwig doGet(int index) {
-    return new WeightedValueStringSwig(IpIntelligenceEngineModuleJNI.WeightedStringListSwig_doGet(swigCPtr, this, index), false);
+    return new WeightedValueStringSwig(IpIntelligenceOnPremiseEngineModuleJNI.WeightedStringListSwig_doGet(swigCPtr, this, index), false);
   }
 
   private WeightedValueStringSwig doSet(int index, WeightedValueStringSwig val) {
-    return new WeightedValueStringSwig(IpIntelligenceEngineModuleJNI.WeightedStringListSwig_doSet(swigCPtr, this, index, WeightedValueStringSwig.getCPtr(val), val), true);
+    return new WeightedValueStringSwig(IpIntelligenceOnPremiseEngineModuleJNI.WeightedStringListSwig_doSet(swigCPtr, this, index, WeightedValueStringSwig.getCPtr(val), val), true);
   }
 
   private void doRemoveRange(int fromIndex, int toIndex) {
-    IpIntelligenceEngineModuleJNI.WeightedStringListSwig_doRemoveRange(swigCPtr, this, fromIndex, toIndex);
+    IpIntelligenceOnPremiseEngineModuleJNI.WeightedStringListSwig_doRemoveRange(swigCPtr, this, fromIndex, toIndex);
   }
 
 }

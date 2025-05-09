@@ -42,24 +42,24 @@ public class ProfileMetaDataCollectionSwig {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_ProfileMetaDataCollectionSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_ProfileMetaDataCollectionSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public ProfileMetaDataSwig getByKey(long key) {
-    long cPtr = IpIntelligenceEngineModuleJNI.ProfileMetaDataCollectionSwig_getByKey(swigCPtr, this, key);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.ProfileMetaDataCollectionSwig_getByKey(swigCPtr, this, key);
     return (cPtr == 0) ? null : new ProfileMetaDataSwig(cPtr, true);
   }
 
   public ProfileMetaDataSwig getByIndex(long index) {
-    long cPtr = IpIntelligenceEngineModuleJNI.ProfileMetaDataCollectionSwig_getByIndex(swigCPtr, this, index);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.ProfileMetaDataCollectionSwig_getByIndex(swigCPtr, this, index);
     return (cPtr == 0) ? null : new ProfileMetaDataSwig(cPtr, true);
   }
 
   public long getSize() {
-    return IpIntelligenceEngineModuleJNI.ProfileMetaDataCollectionSwig_getSize(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.ProfileMetaDataCollectionSwig_getSize(swigCPtr, this);
   }
 
 }

@@ -42,24 +42,24 @@ public class PropertyMetaDataCollectionSwig {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_PropertyMetaDataCollectionSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_PropertyMetaDataCollectionSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public PropertyMetaDataSwig getByKey(String key) {
-    long cPtr = IpIntelligenceEngineModuleJNI.PropertyMetaDataCollectionSwig_getByKey(swigCPtr, this, key);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.PropertyMetaDataCollectionSwig_getByKey(swigCPtr, this, key);
     return (cPtr == 0) ? null : new PropertyMetaDataSwig(cPtr, true);
   }
 
   public PropertyMetaDataSwig getByIndex(long index) {
-    long cPtr = IpIntelligenceEngineModuleJNI.PropertyMetaDataCollectionSwig_getByIndex(swigCPtr, this, index);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.PropertyMetaDataCollectionSwig_getByIndex(swigCPtr, this, index);
     return (cPtr == 0) ? null : new PropertyMetaDataSwig(cPtr, true);
   }
 
   public long getSize() {
-    return IpIntelligenceEngineModuleJNI.PropertyMetaDataCollectionSwig_getSize(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.PropertyMetaDataCollectionSwig_getSize(swigCPtr, this);
   }
 
 }

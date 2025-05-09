@@ -42,22 +42,22 @@ public class Date {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_Date(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_Date(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public int getYear() {
-    return IpIntelligenceEngineModuleJNI.Date_getYear(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.Date_getYear(swigCPtr, this);
   }
 
   public int getMonth() {
-    return IpIntelligenceEngineModuleJNI.Date_getMonth(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.Date_getMonth(swigCPtr, this);
   }
 
   public int getDay() {
-    return IpIntelligenceEngineModuleJNI.Date_getDay(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.Date_getDay(swigCPtr, this);
   }
 
 }

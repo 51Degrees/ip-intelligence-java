@@ -37,7 +37,7 @@ public class ResultsBaseSwig implements AutoCloseable {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_ResultsBaseSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_ResultsBaseSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -49,78 +49,59 @@ public class ResultsBaseSwig implements AutoCloseable {
   }
 
   public int getAvailableProperties() {
-    return IpIntelligenceEngineModuleJNI.ResultsBaseSwig_getAvailableProperties(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.ResultsBaseSwig_getAvailableProperties(swigCPtr, this);
   }
 
   public boolean containsProperty(String propertyName) {
-    return IpIntelligenceEngineModuleJNI.ResultsBaseSwig_containsProperty(swigCPtr, this, propertyName);
+    return IpIntelligenceOnPremiseEngineModuleJNI.ResultsBaseSwig_containsProperty(swigCPtr, this, propertyName);
   }
 
   public VectorStringSwig getProperties() {
-    return new VectorStringSwig(IpIntelligenceEngineModuleJNI.ResultsBaseSwig_getProperties(swigCPtr, this), true);
+    return new VectorStringSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsBaseSwig_getProperties(swigCPtr, this), true);
   }
 
   public String getPropertyName(int requiredPropertyIndex) {
-    return IpIntelligenceEngineModuleJNI.ResultsBaseSwig_getPropertyName(swigCPtr, this, requiredPropertyIndex);
+    return IpIntelligenceOnPremiseEngineModuleJNI.ResultsBaseSwig_getPropertyName(swigCPtr, this, requiredPropertyIndex);
   }
 
   public VectorStringValuesSwig getValues(String propertyName) {
-    return new VectorStringValuesSwig(IpIntelligenceEngineModuleJNI.ResultsBaseSwig_getValues__SWIG_0(swigCPtr, this, propertyName), true);
+    return new VectorStringValuesSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsBaseSwig_getValues__SWIG_0(swigCPtr, this, propertyName), true);
   }
 
   public VectorStringValuesSwig getValues(int requiredPropertyIndex) {
-    return new VectorStringValuesSwig(IpIntelligenceEngineModuleJNI.ResultsBaseSwig_getValues__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
+    return new VectorStringValuesSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsBaseSwig_getValues__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
   }
 
   public StringValueSwig getValueAsString(String propertyName) {
-    return new StringValueSwig(IpIntelligenceEngineModuleJNI.ResultsBaseSwig_getValueAsString__SWIG_0(swigCPtr, this, propertyName), true);
+    return new StringValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsBaseSwig_getValueAsString__SWIG_0(swigCPtr, this, propertyName), true);
   }
 
   public StringValueSwig getValueAsString(int requiredPropertyIndex) {
-    return new StringValueSwig(IpIntelligenceEngineModuleJNI.ResultsBaseSwig_getValueAsString__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
+    return new StringValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsBaseSwig_getValueAsString__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
   }
 
   public BoolValueSwig getValueAsBool(String propertyName) {
-    return new BoolValueSwig(IpIntelligenceEngineModuleJNI.ResultsBaseSwig_getValueAsBool__SWIG_0(swigCPtr, this, propertyName), true);
+    return new BoolValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsBaseSwig_getValueAsBool__SWIG_0(swigCPtr, this, propertyName), true);
   }
 
   public BoolValueSwig getValueAsBool(int requiredPropertyIndex) {
-    return new BoolValueSwig(IpIntelligenceEngineModuleJNI.ResultsBaseSwig_getValueAsBool__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
+    return new BoolValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsBaseSwig_getValueAsBool__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
   }
 
   public IntegerValueSwig getValueAsInteger(String propertyName) {
-    return new IntegerValueSwig(IpIntelligenceEngineModuleJNI.ResultsBaseSwig_getValueAsInteger__SWIG_0(swigCPtr, this, propertyName), true);
+    return new IntegerValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsBaseSwig_getValueAsInteger__SWIG_0(swigCPtr, this, propertyName), true);
   }
 
   public IntegerValueSwig getValueAsInteger(int requiredPropertyIndex) {
-    return new IntegerValueSwig(IpIntelligenceEngineModuleJNI.ResultsBaseSwig_getValueAsInteger__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
+    return new IntegerValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsBaseSwig_getValueAsInteger__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
   }
 
   public DoubleValueSwig getValueAsDouble(String propertyName) {
-    return new DoubleValueSwig(IpIntelligenceEngineModuleJNI.ResultsBaseSwig_getValueAsDouble__SWIG_0(swigCPtr, this, propertyName), true);
+    return new DoubleValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsBaseSwig_getValueAsDouble__SWIG_0(swigCPtr, this, propertyName), true);
   }
 
   public DoubleValueSwig getValueAsDouble(int requiredPropertyIndex) {
-    return new DoubleValueSwig(IpIntelligenceEngineModuleJNI.ResultsBaseSwig_getValueAsDouble__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
-  }
-
-  public StringValueSwig getValueAsString(byte[] bytes) {
-    return IPIntelligenceOnPremiseEngineModule.Results_GetValueAsString(this, bytes);
-  }
-  public VectorStringValuesSwig getValues(byte[] bytes) {
-    return IPIntelligenceOnPremiseEngineModule.Results_GetValues(this, bytes);
-  }
-  public BoolValueSwig getValueAsBool(byte[] bytes) {
-    return IPIntelligenceOnPremiseEngineModule.Results_GetValueAsBool(this, bytes);
-  }
-  public IntegerValueSwig getValueAsInteger(byte[] bytes) {
-    return IPIntelligenceOnPremiseEngineModule.Results_GetValueAsInteger(this, bytes);
-  }
-  public DoubleValueSwig getValueAsDouble(byte[] bytes) {
-    return IPIntelligenceOnPremiseEngineModule.Results_GetValueAsDouble(this, bytes);
-  }
-  public boolean containsProperty(byte[] bytes) {
-    return IPIntelligenceOnPremiseEngineModule.Results_ContainsProperty(this, bytes);
+    return new DoubleValueSwig(IpIntelligenceOnPremiseEngineModuleJNI.ResultsBaseSwig_getValueAsDouble__SWIG_1(swigCPtr, this, requiredPropertyIndex), true);
   }
 
 }

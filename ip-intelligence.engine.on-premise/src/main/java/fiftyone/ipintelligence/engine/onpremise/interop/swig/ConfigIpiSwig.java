@@ -12,7 +12,7 @@ public class ConfigIpiSwig extends ConfigBaseSwig {
   private transient long swigCPtr;
 
   protected ConfigIpiSwig(long cPtr, boolean cMemoryOwn) {
-    super(IpIntelligenceEngineModuleJNI.ConfigIpiSwig_SWIGUpcast(cPtr), cMemoryOwn);
+    super(IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -41,7 +41,7 @@ public class ConfigIpiSwig extends ConfigBaseSwig {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_ConfigIpiSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_ConfigIpiSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -49,79 +49,79 @@ public class ConfigIpiSwig extends ConfigBaseSwig {
   }
 
   public ConfigIpiSwig() {
-    this(IpIntelligenceEngineModuleJNI.new_ConfigIpiSwig(), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_ConfigIpiSwig(), true);
   }
 
   public void setHighPerformance() {
-    IpIntelligenceEngineModuleJNI.ConfigIpiSwig_setHighPerformance(swigCPtr, this);
+    IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_setHighPerformance(swigCPtr, this);
   }
 
   public void setBalanced() {
-    IpIntelligenceEngineModuleJNI.ConfigIpiSwig_setBalanced(swigCPtr, this);
+    IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_setBalanced(swigCPtr, this);
   }
 
   public void setBalancedTemp() {
-    IpIntelligenceEngineModuleJNI.ConfigIpiSwig_setBalancedTemp(swigCPtr, this);
+    IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_setBalancedTemp(swigCPtr, this);
   }
 
   public void setLowMemory() {
-    IpIntelligenceEngineModuleJNI.ConfigIpiSwig_setLowMemory(swigCPtr, this);
+    IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_setLowMemory(swigCPtr, this);
   }
 
   public void setMaxPerformance() {
-    IpIntelligenceEngineModuleJNI.ConfigIpiSwig_setMaxPerformance(swigCPtr, this);
+    IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_setMaxPerformance(swigCPtr, this);
   }
 
   public void setConcurrency(int concurrency) {
-    IpIntelligenceEngineModuleJNI.ConfigIpiSwig_setConcurrency(swigCPtr, this, concurrency);
+    IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_setConcurrency(swigCPtr, this, concurrency);
   }
 
   public CollectionConfigSwig getStrings() {
-    return new CollectionConfigSwig(IpIntelligenceEngineModuleJNI.ConfigIpiSwig_getStrings(swigCPtr, this), false);
+    return new CollectionConfigSwig(IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_getStrings(swigCPtr, this), false);
   }
 
   public CollectionConfigSwig getComponents() {
-    return new CollectionConfigSwig(IpIntelligenceEngineModuleJNI.ConfigIpiSwig_getComponents(swigCPtr, this), true);
+    return new CollectionConfigSwig(IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_getComponents(swigCPtr, this), true);
   }
 
   public CollectionConfigSwig getMaps() {
-    return new CollectionConfigSwig(IpIntelligenceEngineModuleJNI.ConfigIpiSwig_getMaps(swigCPtr, this), false);
+    return new CollectionConfigSwig(IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_getMaps(swigCPtr, this), false);
   }
 
   public CollectionConfigSwig getProperties() {
-    return new CollectionConfigSwig(IpIntelligenceEngineModuleJNI.ConfigIpiSwig_getProperties(swigCPtr, this), true);
+    return new CollectionConfigSwig(IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_getProperties(swigCPtr, this), true);
   }
 
   public CollectionConfigSwig getValues() {
-    return new CollectionConfigSwig(IpIntelligenceEngineModuleJNI.ConfigIpiSwig_getValues(swigCPtr, this), true);
+    return new CollectionConfigSwig(IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_getValues(swigCPtr, this), true);
   }
 
   public CollectionConfigSwig getProfiles() {
-    return new CollectionConfigSwig(IpIntelligenceEngineModuleJNI.ConfigIpiSwig_getProfiles(swigCPtr, this), true);
+    return new CollectionConfigSwig(IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_getProfiles(swigCPtr, this), true);
   }
 
   public CollectionConfigSwig getGraphs() {
-    return new CollectionConfigSwig(IpIntelligenceEngineModuleJNI.ConfigIpiSwig_getGraphs(swigCPtr, this), false);
+    return new CollectionConfigSwig(IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_getGraphs(swigCPtr, this), false);
   }
 
   public CollectionConfigSwig getProfileGroups() {
-    return new CollectionConfigSwig(IpIntelligenceEngineModuleJNI.ConfigIpiSwig_getProfileGroups(swigCPtr, this), false);
+    return new CollectionConfigSwig(IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_getProfileGroups(swigCPtr, this), false);
   }
 
   public CollectionConfigSwig getProfileOffsets() {
-    return new CollectionConfigSwig(IpIntelligenceEngineModuleJNI.ConfigIpiSwig_getProfileOffsets(swigCPtr, this), false);
+    return new CollectionConfigSwig(IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_getProfileOffsets(swigCPtr, this), false);
   }
 
   public CollectionConfigSwig getPropertyTypes() {
-    return new CollectionConfigSwig(IpIntelligenceEngineModuleJNI.ConfigIpiSwig_getPropertyTypes(swigCPtr, this), false);
+    return new CollectionConfigSwig(IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_getPropertyTypes(swigCPtr, this), false);
   }
 
   public CollectionConfigSwig getGraph() {
-    return new CollectionConfigSwig(IpIntelligenceEngineModuleJNI.ConfigIpiSwig_getGraph(swigCPtr, this), false);
+    return new CollectionConfigSwig(IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_getGraph(swigCPtr, this), false);
   }
 
   public int getConcurrency() {
-    return IpIntelligenceEngineModuleJNI.ConfigIpiSwig_getConcurrency(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.ConfigIpiSwig_getConcurrency(swigCPtr, this);
   }
 
 }

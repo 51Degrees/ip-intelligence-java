@@ -42,62 +42,62 @@ public class PropertyMetaDataSwig {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_PropertyMetaDataSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_PropertyMetaDataSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public String getName() {
-    return IpIntelligenceEngineModuleJNI.PropertyMetaDataSwig_getName(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.PropertyMetaDataSwig_getName(swigCPtr, this);
   }
 
   public VectorStringSwig getDataFilesWherePresent() {
-    return new VectorStringSwig(IpIntelligenceEngineModuleJNI.PropertyMetaDataSwig_getDataFilesWherePresent(swigCPtr, this), true);
+    return new VectorStringSwig(IpIntelligenceOnPremiseEngineModuleJNI.PropertyMetaDataSwig_getDataFilesWherePresent(swigCPtr, this), true);
   }
 
   public String getType() {
-    return IpIntelligenceEngineModuleJNI.PropertyMetaDataSwig_getType(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.PropertyMetaDataSwig_getType(swigCPtr, this);
   }
 
   public String getCategory() {
-    return IpIntelligenceEngineModuleJNI.PropertyMetaDataSwig_getCategory(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.PropertyMetaDataSwig_getCategory(swigCPtr, this);
   }
 
   public String getUrl() {
-    return IpIntelligenceEngineModuleJNI.PropertyMetaDataSwig_getUrl(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.PropertyMetaDataSwig_getUrl(swigCPtr, this);
   }
 
   public boolean getAvailable() {
-    return IpIntelligenceEngineModuleJNI.PropertyMetaDataSwig_getAvailable(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.PropertyMetaDataSwig_getAvailable(swigCPtr, this);
   }
 
   public int getDisplayOrder() {
-    return IpIntelligenceEngineModuleJNI.PropertyMetaDataSwig_getDisplayOrder(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.PropertyMetaDataSwig_getDisplayOrder(swigCPtr, this);
   }
 
   public boolean getIsMandatory() {
-    return IpIntelligenceEngineModuleJNI.PropertyMetaDataSwig_getIsMandatory(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.PropertyMetaDataSwig_getIsMandatory(swigCPtr, this);
   }
 
   public boolean getIsList() {
-    return IpIntelligenceEngineModuleJNI.PropertyMetaDataSwig_getIsList(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.PropertyMetaDataSwig_getIsList(swigCPtr, this);
   }
 
   public boolean getIsObsolete() {
-    return IpIntelligenceEngineModuleJNI.PropertyMetaDataSwig_getIsObsolete(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.PropertyMetaDataSwig_getIsObsolete(swigCPtr, this);
   }
 
   public boolean getShow() {
-    return IpIntelligenceEngineModuleJNI.PropertyMetaDataSwig_getShow(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.PropertyMetaDataSwig_getShow(swigCPtr, this);
   }
 
   public boolean getShowValues() {
-    return IpIntelligenceEngineModuleJNI.PropertyMetaDataSwig_getShowValues(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.PropertyMetaDataSwig_getShowValues(swigCPtr, this);
   }
 
   public String getDescription() {
-    return IpIntelligenceEngineModuleJNI.PropertyMetaDataSwig_getDescription(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.PropertyMetaDataSwig_getDescription(swigCPtr, this);
   }
 
 }

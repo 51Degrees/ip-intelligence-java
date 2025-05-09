@@ -42,22 +42,22 @@ public class ComponentMetaDataSwig {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_ComponentMetaDataSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_ComponentMetaDataSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public int getComponentIdAsInt() {
-    return IpIntelligenceEngineModuleJNI.ComponentMetaDataSwig_getComponentIdAsInt(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.ComponentMetaDataSwig_getComponentIdAsInt(swigCPtr, this);
   }
 
   public byte getComponentId() {
-    return (byte)IpIntelligenceEngineModuleJNI.ComponentMetaDataSwig_getComponentId(swigCPtr, this);
+    return (byte)IpIntelligenceOnPremiseEngineModuleJNI.ComponentMetaDataSwig_getComponentId(swigCPtr, this);
   }
 
   public String getName() {
-    return IpIntelligenceEngineModuleJNI.ComponentMetaDataSwig_getName(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.ComponentMetaDataSwig_getName(swigCPtr, this);
   }
 
 }

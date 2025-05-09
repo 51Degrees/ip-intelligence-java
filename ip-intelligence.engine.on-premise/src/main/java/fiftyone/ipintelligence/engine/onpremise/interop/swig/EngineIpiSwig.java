@@ -12,7 +12,7 @@ public class EngineIpiSwig extends EngineBaseSwig {
   private transient long swigCPtr;
 
   protected EngineIpiSwig(long cPtr, boolean cMemoryOwn) {
-    super(IpIntelligenceEngineModuleJNI.EngineIpiSwig_SWIGUpcast(cPtr), cMemoryOwn);
+    super(IpIntelligenceOnPremiseEngineModuleJNI.EngineIpiSwig_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -41,7 +41,7 @@ public class EngineIpiSwig extends EngineBaseSwig {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_EngineIpiSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_EngineIpiSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -49,58 +49,58 @@ public class EngineIpiSwig extends EngineBaseSwig {
   }
 
   public EngineIpiSwig(String fileName, ConfigIpiSwig config, RequiredPropertiesConfigSwig properties) {
-    this(IpIntelligenceEngineModuleJNI.new_EngineIpiSwig__SWIG_0(fileName, ConfigIpiSwig.getCPtr(config), config, RequiredPropertiesConfigSwig.getCPtr(properties), properties), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_EngineIpiSwig__SWIG_0(fileName, ConfigIpiSwig.getCPtr(config), config, RequiredPropertiesConfigSwig.getCPtr(properties), properties), true);
   }
 
   public EngineIpiSwig(byte[] data, ConfigIpiSwig config, RequiredPropertiesConfigSwig properties) {
-    this(IpIntelligenceEngineModuleJNI.new_EngineIpiSwig__SWIG_1(data, ConfigIpiSwig.getCPtr(config), config, RequiredPropertiesConfigSwig.getCPtr(properties), properties), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_EngineIpiSwig__SWIG_1(data, ConfigIpiSwig.getCPtr(config), config, RequiredPropertiesConfigSwig.getCPtr(properties), properties), true);
   }
 
   public Date getPublishedTime() {
-    return new Date(IpIntelligenceEngineModuleJNI.EngineIpiSwig_getPublishedTime(swigCPtr, this), true);
+    return new Date(IpIntelligenceOnPremiseEngineModuleJNI.EngineIpiSwig_getPublishedTime(swigCPtr, this), true);
   }
 
   public Date getUpdateAvailableTime() {
-    return new Date(IpIntelligenceEngineModuleJNI.EngineIpiSwig_getUpdateAvailableTime(swigCPtr, this), true);
+    return new Date(IpIntelligenceOnPremiseEngineModuleJNI.EngineIpiSwig_getUpdateAvailableTime(swigCPtr, this), true);
   }
 
   public String getDataFilePath() {
-    return IpIntelligenceEngineModuleJNI.EngineIpiSwig_getDataFilePath(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.EngineIpiSwig_getDataFilePath(swigCPtr, this);
   }
 
   public String getDataFileTempPath() {
-    return IpIntelligenceEngineModuleJNI.EngineIpiSwig_getDataFileTempPath(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.EngineIpiSwig_getDataFileTempPath(swigCPtr, this);
   }
 
   public void refreshData() {
-    IpIntelligenceEngineModuleJNI.EngineIpiSwig_refreshData__SWIG_0(swigCPtr, this);
+    IpIntelligenceOnPremiseEngineModuleJNI.EngineIpiSwig_refreshData__SWIG_0(swigCPtr, this);
   }
 
   public void refreshData(String fileName) {
-    IpIntelligenceEngineModuleJNI.EngineIpiSwig_refreshData__SWIG_1(swigCPtr, this, fileName);
+    IpIntelligenceOnPremiseEngineModuleJNI.EngineIpiSwig_refreshData__SWIG_1(swigCPtr, this, fileName);
   }
 
   public void refreshData(byte[] data) {
-    IpIntelligenceEngineModuleJNI.EngineIpiSwig_refreshData__SWIG_2(swigCPtr, this, data);
+    IpIntelligenceOnPremiseEngineModuleJNI.EngineIpiSwig_refreshData__SWIG_2(swigCPtr, this, data);
   }
 
   public ResultsIpiSwig process(EvidenceIpiSwig evidence) {
-    long cPtr = IpIntelligenceEngineModuleJNI.EngineIpiSwig_process__SWIG_0(swigCPtr, this, EvidenceIpiSwig.getCPtr(evidence), evidence);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.EngineIpiSwig_process__SWIG_0(swigCPtr, this, EvidenceIpiSwig.getCPtr(evidence), evidence);
     return (cPtr == 0) ? null : new ResultsIpiSwig(cPtr, true);
   }
 
   public ResultsIpiSwig process(String ipAddress) {
-    long cPtr = IpIntelligenceEngineModuleJNI.EngineIpiSwig_process__SWIG_1(swigCPtr, this, ipAddress);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.EngineIpiSwig_process__SWIG_1(swigCPtr, this, ipAddress);
     return (cPtr == 0) ? null : new ResultsIpiSwig(cPtr, true);
   }
 
   public ResultsIpiSwig process(byte[] ipAddress, IpTypeSwig type) {
-    long cPtr = IpIntelligenceEngineModuleJNI.EngineIpiSwig_process__SWIG_2(swigCPtr, this, ipAddress, type.swigValue());
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.EngineIpiSwig_process__SWIG_2(swigCPtr, this, ipAddress, type.swigValue());
     return (cPtr == 0) ? null : new ResultsIpiSwig(cPtr, true);
   }
 
   public ResultsBaseSwig processBase(EvidenceBaseSwig evidence) {
-    long cPtr = IpIntelligenceEngineModuleJNI.EngineIpiSwig_processBase(swigCPtr, this, EvidenceBaseSwig.getCPtr(evidence), evidence);
+    long cPtr = IpIntelligenceOnPremiseEngineModuleJNI.EngineIpiSwig_processBase(swigCPtr, this, EvidenceBaseSwig.getCPtr(evidence), evidence);
     return (cPtr == 0) ? null : new ResultsBaseSwig(cPtr, true);
   }
 

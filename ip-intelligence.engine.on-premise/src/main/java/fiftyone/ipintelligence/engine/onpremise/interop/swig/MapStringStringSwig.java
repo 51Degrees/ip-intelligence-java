@@ -37,7 +37,7 @@ public class MapStringStringSwig extends java.util.AbstractMap<String, String> i
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_MapStringStringSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_MapStringStringSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -137,11 +137,11 @@ public class MapStringStringSwig extends java.util.AbstractMap<String, String> i
   }
 
   public MapStringStringSwig() {
-    this(IpIntelligenceEngineModuleJNI.new_MapStringStringSwig__SWIG_0(), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_MapStringStringSwig__SWIG_0(), true);
   }
 
   public MapStringStringSwig(MapStringStringSwig other) {
-    this(IpIntelligenceEngineModuleJNI.new_MapStringStringSwig__SWIG_1(MapStringStringSwig.getCPtr(other), other), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_MapStringStringSwig__SWIG_1(MapStringStringSwig.getCPtr(other), other), true);
   }
 
   static public class Iterator {
@@ -178,68 +178,68 @@ public class MapStringStringSwig extends java.util.AbstractMap<String, String> i
       if (swigCPtr != 0) {
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          IpIntelligenceEngineModuleJNI.delete_MapStringStringSwig_Iterator(swigCPtr);
+          IpIntelligenceOnPremiseEngineModuleJNI.delete_MapStringStringSwig_Iterator(swigCPtr);
         }
         swigCPtr = 0;
       }
     }
   
     private MapStringStringSwig.Iterator getNextUnchecked() {
-      return new MapStringStringSwig.Iterator(IpIntelligenceEngineModuleJNI.MapStringStringSwig_Iterator_getNextUnchecked(swigCPtr, this), true);
+      return new MapStringStringSwig.Iterator(IpIntelligenceOnPremiseEngineModuleJNI.MapStringStringSwig_Iterator_getNextUnchecked(swigCPtr, this), true);
     }
   
     private boolean isNot(MapStringStringSwig.Iterator other) {
-      return IpIntelligenceEngineModuleJNI.MapStringStringSwig_Iterator_isNot(swigCPtr, this, MapStringStringSwig.Iterator.getCPtr(other), other);
+      return IpIntelligenceOnPremiseEngineModuleJNI.MapStringStringSwig_Iterator_isNot(swigCPtr, this, MapStringStringSwig.Iterator.getCPtr(other), other);
     }
   
     private String getKey() {
-      return IpIntelligenceEngineModuleJNI.MapStringStringSwig_Iterator_getKey(swigCPtr, this);
+      return IpIntelligenceOnPremiseEngineModuleJNI.MapStringStringSwig_Iterator_getKey(swigCPtr, this);
     }
   
     private String getValue() {
-      return IpIntelligenceEngineModuleJNI.MapStringStringSwig_Iterator_getValue(swigCPtr, this);
+      return IpIntelligenceOnPremiseEngineModuleJNI.MapStringStringSwig_Iterator_getValue(swigCPtr, this);
     }
   
     private void setValue(String newValue) {
-      IpIntelligenceEngineModuleJNI.MapStringStringSwig_Iterator_setValue(swigCPtr, this, newValue);
+      IpIntelligenceOnPremiseEngineModuleJNI.MapStringStringSwig_Iterator_setValue(swigCPtr, this, newValue);
     }
   
   }
 
   public boolean isEmpty() {
-    return IpIntelligenceEngineModuleJNI.MapStringStringSwig_isEmpty(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.MapStringStringSwig_isEmpty(swigCPtr, this);
   }
 
   public void clear() {
-    IpIntelligenceEngineModuleJNI.MapStringStringSwig_clear(swigCPtr, this);
+    IpIntelligenceOnPremiseEngineModuleJNI.MapStringStringSwig_clear(swigCPtr, this);
   }
 
   private MapStringStringSwig.Iterator find(String key) {
-    return new MapStringStringSwig.Iterator(IpIntelligenceEngineModuleJNI.MapStringStringSwig_find(swigCPtr, this, key), true);
+    return new MapStringStringSwig.Iterator(IpIntelligenceOnPremiseEngineModuleJNI.MapStringStringSwig_find(swigCPtr, this, key), true);
   }
 
   private MapStringStringSwig.Iterator begin() {
-    return new MapStringStringSwig.Iterator(IpIntelligenceEngineModuleJNI.MapStringStringSwig_begin(swigCPtr, this), true);
+    return new MapStringStringSwig.Iterator(IpIntelligenceOnPremiseEngineModuleJNI.MapStringStringSwig_begin(swigCPtr, this), true);
   }
 
   private MapStringStringSwig.Iterator end() {
-    return new MapStringStringSwig.Iterator(IpIntelligenceEngineModuleJNI.MapStringStringSwig_end(swigCPtr, this), true);
+    return new MapStringStringSwig.Iterator(IpIntelligenceOnPremiseEngineModuleJNI.MapStringStringSwig_end(swigCPtr, this), true);
   }
 
   private int sizeImpl() {
-    return IpIntelligenceEngineModuleJNI.MapStringStringSwig_sizeImpl(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.MapStringStringSwig_sizeImpl(swigCPtr, this);
   }
 
   private boolean containsImpl(String key) {
-    return IpIntelligenceEngineModuleJNI.MapStringStringSwig_containsImpl(swigCPtr, this, key);
+    return IpIntelligenceOnPremiseEngineModuleJNI.MapStringStringSwig_containsImpl(swigCPtr, this, key);
   }
 
   private void putUnchecked(String key, String value) {
-    IpIntelligenceEngineModuleJNI.MapStringStringSwig_putUnchecked(swigCPtr, this, key, value);
+    IpIntelligenceOnPremiseEngineModuleJNI.MapStringStringSwig_putUnchecked(swigCPtr, this, key, value);
   }
 
   private void removeUnchecked(MapStringStringSwig.Iterator itr) {
-    IpIntelligenceEngineModuleJNI.MapStringStringSwig_removeUnchecked(swigCPtr, this, MapStringStringSwig.Iterator.getCPtr(itr), itr);
+    IpIntelligenceOnPremiseEngineModuleJNI.MapStringStringSwig_removeUnchecked(swigCPtr, this, MapStringStringSwig.Iterator.getCPtr(itr), itr);
   }
 
 }

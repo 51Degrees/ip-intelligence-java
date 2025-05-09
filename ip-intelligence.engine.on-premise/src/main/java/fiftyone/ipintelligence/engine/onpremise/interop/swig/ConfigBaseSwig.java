@@ -42,46 +42,46 @@ public class ConfigBaseSwig {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_ConfigBaseSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_ConfigBaseSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public void setUseUpperPrefixHeaders(boolean use) {
-    IpIntelligenceEngineModuleJNI.ConfigBaseSwig_setUseUpperPrefixHeaders(swigCPtr, this, use);
+    IpIntelligenceOnPremiseEngineModuleJNI.ConfigBaseSwig_setUseUpperPrefixHeaders(swigCPtr, this, use);
   }
 
   public void setUseTempFile(boolean use) {
-    IpIntelligenceEngineModuleJNI.ConfigBaseSwig_setUseTempFile(swigCPtr, this, use);
+    IpIntelligenceOnPremiseEngineModuleJNI.ConfigBaseSwig_setUseTempFile(swigCPtr, this, use);
   }
 
   public void setReuseTempFile(boolean reuse) {
-    IpIntelligenceEngineModuleJNI.ConfigBaseSwig_setReuseTempFile(swigCPtr, this, reuse);
+    IpIntelligenceOnPremiseEngineModuleJNI.ConfigBaseSwig_setReuseTempFile(swigCPtr, this, reuse);
   }
 
   public void setTempDirectories(VectorStringSwig tempDirs) {
-    IpIntelligenceEngineModuleJNI.ConfigBaseSwig_setTempDirectories(swigCPtr, this, VectorStringSwig.getCPtr(tempDirs), tempDirs);
+    IpIntelligenceOnPremiseEngineModuleJNI.ConfigBaseSwig_setTempDirectories(swigCPtr, this, VectorStringSwig.getCPtr(tempDirs), tempDirs);
   }
 
   public boolean getUseUpperPrefixHeaders() {
-    return IpIntelligenceEngineModuleJNI.ConfigBaseSwig_getUseUpperPrefixHeaders(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.ConfigBaseSwig_getUseUpperPrefixHeaders(swigCPtr, this);
   }
 
   public boolean getUseTempFile() {
-    return IpIntelligenceEngineModuleJNI.ConfigBaseSwig_getUseTempFile(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.ConfigBaseSwig_getUseTempFile(swigCPtr, this);
   }
 
   public boolean getReuseTempFile() {
-    return IpIntelligenceEngineModuleJNI.ConfigBaseSwig_getReuseTempFile(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.ConfigBaseSwig_getReuseTempFile(swigCPtr, this);
   }
 
   public VectorStringSwig getTempDirectories() {
-    return new VectorStringSwig(IpIntelligenceEngineModuleJNI.ConfigBaseSwig_getTempDirectories(swigCPtr, this), true);
+    return new VectorStringSwig(IpIntelligenceOnPremiseEngineModuleJNI.ConfigBaseSwig_getTempDirectories(swigCPtr, this), true);
   }
 
   public int getConcurrency() {
-    return IpIntelligenceEngineModuleJNI.ConfigBaseSwig_getConcurrency(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.ConfigBaseSwig_getConcurrency(swigCPtr, this);
   }
 
 }

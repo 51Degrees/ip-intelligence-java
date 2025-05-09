@@ -42,38 +42,38 @@ public class CollectionConfigSwig {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_CollectionConfigSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_CollectionConfigSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public CollectionConfigSwig() {
-    this(IpIntelligenceEngineModuleJNI.new_CollectionConfigSwig(), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_CollectionConfigSwig(), true);
   }
 
   public void setCapacity(long capacity) {
-    IpIntelligenceEngineModuleJNI.CollectionConfigSwig_setCapacity(swigCPtr, this, capacity);
+    IpIntelligenceOnPremiseEngineModuleJNI.CollectionConfigSwig_setCapacity(swigCPtr, this, capacity);
   }
 
   public void setConcurrency(int concurrency) {
-    IpIntelligenceEngineModuleJNI.CollectionConfigSwig_setConcurrency(swigCPtr, this, concurrency);
+    IpIntelligenceOnPremiseEngineModuleJNI.CollectionConfigSwig_setConcurrency(swigCPtr, this, concurrency);
   }
 
   public void setLoaded(long loaded) {
-    IpIntelligenceEngineModuleJNI.CollectionConfigSwig_setLoaded(swigCPtr, this, loaded);
+    IpIntelligenceOnPremiseEngineModuleJNI.CollectionConfigSwig_setLoaded(swigCPtr, this, loaded);
   }
 
   public long getCapacity() {
-    return IpIntelligenceEngineModuleJNI.CollectionConfigSwig_getCapacity(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.CollectionConfigSwig_getCapacity(swigCPtr, this);
   }
 
   public int getConcurrency() {
-    return IpIntelligenceEngineModuleJNI.CollectionConfigSwig_getConcurrency(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.CollectionConfigSwig_getConcurrency(swigCPtr, this);
   }
 
   public long getLoaded() {
-    return IpIntelligenceEngineModuleJNI.CollectionConfigSwig_getLoaded(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.CollectionConfigSwig_getLoaded(swigCPtr, this);
   }
 
 }

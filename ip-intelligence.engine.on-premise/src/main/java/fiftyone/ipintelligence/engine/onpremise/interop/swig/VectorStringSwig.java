@@ -37,7 +37,7 @@ public class VectorStringSwig extends java.util.AbstractList<String> implements 
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_VectorStringSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_VectorStringSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -106,59 +106,59 @@ public class VectorStringSwig extends java.util.AbstractList<String> implements 
   }
 
   public VectorStringSwig() {
-    this(IpIntelligenceEngineModuleJNI.new_VectorStringSwig__SWIG_0(), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_VectorStringSwig__SWIG_0(), true);
   }
 
   public VectorStringSwig(VectorStringSwig other) {
-    this(IpIntelligenceEngineModuleJNI.new_VectorStringSwig__SWIG_1(VectorStringSwig.getCPtr(other), other), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_VectorStringSwig__SWIG_1(VectorStringSwig.getCPtr(other), other), true);
   }
 
   public boolean isEmpty() {
-    return IpIntelligenceEngineModuleJNI.VectorStringSwig_isEmpty(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.VectorStringSwig_isEmpty(swigCPtr, this);
   }
 
   public void clear() {
-    IpIntelligenceEngineModuleJNI.VectorStringSwig_clear(swigCPtr, this);
+    IpIntelligenceOnPremiseEngineModuleJNI.VectorStringSwig_clear(swigCPtr, this);
   }
 
   public VectorStringSwig(int count, String value) {
-    this(IpIntelligenceEngineModuleJNI.new_VectorStringSwig__SWIG_2(count, value), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_VectorStringSwig__SWIG_2(count, value), true);
   }
 
   private int doCapacity() {
-    return IpIntelligenceEngineModuleJNI.VectorStringSwig_doCapacity(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.VectorStringSwig_doCapacity(swigCPtr, this);
   }
 
   private void doReserve(int n) {
-    IpIntelligenceEngineModuleJNI.VectorStringSwig_doReserve(swigCPtr, this, n);
+    IpIntelligenceOnPremiseEngineModuleJNI.VectorStringSwig_doReserve(swigCPtr, this, n);
   }
 
   private int doSize() {
-    return IpIntelligenceEngineModuleJNI.VectorStringSwig_doSize(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.VectorStringSwig_doSize(swigCPtr, this);
   }
 
   private void doAdd(String x) {
-    IpIntelligenceEngineModuleJNI.VectorStringSwig_doAdd__SWIG_0(swigCPtr, this, x);
+    IpIntelligenceOnPremiseEngineModuleJNI.VectorStringSwig_doAdd__SWIG_0(swigCPtr, this, x);
   }
 
   private void doAdd(int index, String x) {
-    IpIntelligenceEngineModuleJNI.VectorStringSwig_doAdd__SWIG_1(swigCPtr, this, index, x);
+    IpIntelligenceOnPremiseEngineModuleJNI.VectorStringSwig_doAdd__SWIG_1(swigCPtr, this, index, x);
   }
 
   private String doRemove(int index) {
-    return IpIntelligenceEngineModuleJNI.VectorStringSwig_doRemove(swigCPtr, this, index);
+    return IpIntelligenceOnPremiseEngineModuleJNI.VectorStringSwig_doRemove(swigCPtr, this, index);
   }
 
   private String doGet(int index) {
-    return IpIntelligenceEngineModuleJNI.VectorStringSwig_doGet(swigCPtr, this, index);
+    return IpIntelligenceOnPremiseEngineModuleJNI.VectorStringSwig_doGet(swigCPtr, this, index);
   }
 
   private String doSet(int index, String val) {
-    return IpIntelligenceEngineModuleJNI.VectorStringSwig_doSet(swigCPtr, this, index, val);
+    return IpIntelligenceOnPremiseEngineModuleJNI.VectorStringSwig_doSet(swigCPtr, this, index, val);
   }
 
   private void doRemoveRange(int fromIndex, int toIndex) {
-    IpIntelligenceEngineModuleJNI.VectorStringSwig_doRemoveRange(swigCPtr, this, fromIndex, toIndex);
+    IpIntelligenceOnPremiseEngineModuleJNI.VectorStringSwig_doRemoveRange(swigCPtr, this, fromIndex, toIndex);
   }
 
 }

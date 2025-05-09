@@ -37,7 +37,7 @@ public class IntegerValueSwig implements AutoCloseable {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_IntegerValueSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_IntegerValueSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -49,19 +49,19 @@ public class IntegerValueSwig implements AutoCloseable {
   }
 
   public IntegerValueSwig() {
-    this(IpIntelligenceEngineModuleJNI.new_IntegerValueSwig(), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_IntegerValueSwig(), true);
   }
 
   public boolean hasValue() {
-    return IpIntelligenceEngineModuleJNI.IntegerValueSwig_hasValue(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.IntegerValueSwig_hasValue(swigCPtr, this);
   }
 
   public String getNoValueMessage() {
-    return IpIntelligenceEngineModuleJNI.IntegerValueSwig_getNoValueMessage(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.IntegerValueSwig_getNoValueMessage(swigCPtr, this);
   }
 
   public int getValue() {
-    return IpIntelligenceEngineModuleJNI.IntegerValueSwig_getValue(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.IntegerValueSwig_getValue(swigCPtr, this);
   }
 
 }

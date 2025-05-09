@@ -37,7 +37,7 @@ public class UTF8StringSwig extends java.util.AbstractList<Short> implements Aut
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_UTF8StringSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_UTF8StringSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -106,59 +106,59 @@ public class UTF8StringSwig extends java.util.AbstractList<Short> implements Aut
   }
 
   public UTF8StringSwig() {
-    this(IpIntelligenceEngineModuleJNI.new_UTF8StringSwig__SWIG_0(), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_UTF8StringSwig__SWIG_0(), true);
   }
 
   public UTF8StringSwig(UTF8StringSwig other) {
-    this(IpIntelligenceEngineModuleJNI.new_UTF8StringSwig__SWIG_1(UTF8StringSwig.getCPtr(other), other), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_UTF8StringSwig__SWIG_1(UTF8StringSwig.getCPtr(other), other), true);
   }
 
   public boolean isEmpty() {
-    return IpIntelligenceEngineModuleJNI.UTF8StringSwig_isEmpty(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.UTF8StringSwig_isEmpty(swigCPtr, this);
   }
 
   public void clear() {
-    IpIntelligenceEngineModuleJNI.UTF8StringSwig_clear(swigCPtr, this);
+    IpIntelligenceOnPremiseEngineModuleJNI.UTF8StringSwig_clear(swigCPtr, this);
   }
 
   public UTF8StringSwig(int count, short value) {
-    this(IpIntelligenceEngineModuleJNI.new_UTF8StringSwig__SWIG_2(count, value), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_UTF8StringSwig__SWIG_2(count, value), true);
   }
 
   private int doCapacity() {
-    return IpIntelligenceEngineModuleJNI.UTF8StringSwig_doCapacity(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.UTF8StringSwig_doCapacity(swigCPtr, this);
   }
 
   private void doReserve(int n) {
-    IpIntelligenceEngineModuleJNI.UTF8StringSwig_doReserve(swigCPtr, this, n);
+    IpIntelligenceOnPremiseEngineModuleJNI.UTF8StringSwig_doReserve(swigCPtr, this, n);
   }
 
   private int doSize() {
-    return IpIntelligenceEngineModuleJNI.UTF8StringSwig_doSize(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.UTF8StringSwig_doSize(swigCPtr, this);
   }
 
   private void doAdd(short x) {
-    IpIntelligenceEngineModuleJNI.UTF8StringSwig_doAdd__SWIG_0(swigCPtr, this, x);
+    IpIntelligenceOnPremiseEngineModuleJNI.UTF8StringSwig_doAdd__SWIG_0(swigCPtr, this, x);
   }
 
   private void doAdd(int index, short x) {
-    IpIntelligenceEngineModuleJNI.UTF8StringSwig_doAdd__SWIG_1(swigCPtr, this, index, x);
+    IpIntelligenceOnPremiseEngineModuleJNI.UTF8StringSwig_doAdd__SWIG_1(swigCPtr, this, index, x);
   }
 
   private short doRemove(int index) {
-    return IpIntelligenceEngineModuleJNI.UTF8StringSwig_doRemove(swigCPtr, this, index);
+    return IpIntelligenceOnPremiseEngineModuleJNI.UTF8StringSwig_doRemove(swigCPtr, this, index);
   }
 
   private short doGet(int index) {
-    return IpIntelligenceEngineModuleJNI.UTF8StringSwig_doGet(swigCPtr, this, index);
+    return IpIntelligenceOnPremiseEngineModuleJNI.UTF8StringSwig_doGet(swigCPtr, this, index);
   }
 
   private short doSet(int index, short val) {
-    return IpIntelligenceEngineModuleJNI.UTF8StringSwig_doSet(swigCPtr, this, index, val);
+    return IpIntelligenceOnPremiseEngineModuleJNI.UTF8StringSwig_doSet(swigCPtr, this, index, val);
   }
 
   private void doRemoveRange(int fromIndex, int toIndex) {
-    IpIntelligenceEngineModuleJNI.UTF8StringSwig_doRemoveRange(swigCPtr, this, fromIndex, toIndex);
+    IpIntelligenceOnPremiseEngineModuleJNI.UTF8StringSwig_doRemoveRange(swigCPtr, this, fromIndex, toIndex);
   }
 
 }

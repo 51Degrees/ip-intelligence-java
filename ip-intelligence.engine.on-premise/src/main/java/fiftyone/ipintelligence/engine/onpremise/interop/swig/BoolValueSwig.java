@@ -37,7 +37,7 @@ public class BoolValueSwig implements AutoCloseable {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_BoolValueSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_BoolValueSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -49,19 +49,19 @@ public class BoolValueSwig implements AutoCloseable {
   }
 
   public BoolValueSwig() {
-    this(IpIntelligenceEngineModuleJNI.new_BoolValueSwig(), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_BoolValueSwig(), true);
   }
 
   public boolean hasValue() {
-    return IpIntelligenceEngineModuleJNI.BoolValueSwig_hasValue(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.BoolValueSwig_hasValue(swigCPtr, this);
   }
 
   public String getNoValueMessage() {
-    return IpIntelligenceEngineModuleJNI.BoolValueSwig_getNoValueMessage(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.BoolValueSwig_getNoValueMessage(swigCPtr, this);
   }
 
   public boolean getValue() {
-    return IpIntelligenceEngineModuleJNI.BoolValueSwig_getValue(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.BoolValueSwig_getValue(swigCPtr, this);
   }
 
 }

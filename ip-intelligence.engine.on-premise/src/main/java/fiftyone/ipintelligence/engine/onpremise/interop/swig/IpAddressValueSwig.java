@@ -37,7 +37,7 @@ public class IpAddressValueSwig implements AutoCloseable {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceEngineModuleJNI.delete_IpAddressValueSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_IpAddressValueSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -49,19 +49,19 @@ public class IpAddressValueSwig implements AutoCloseable {
   }
 
   public IpAddressValueSwig() {
-    this(IpIntelligenceEngineModuleJNI.new_IpAddressValueSwig(), true);
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_IpAddressValueSwig(), true);
   }
 
   public boolean hasValue() {
-    return IpIntelligenceEngineModuleJNI.IpAddressValueSwig_hasValue(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.IpAddressValueSwig_hasValue(swigCPtr, this);
   }
 
   public String getNoValueMessage() {
-    return IpIntelligenceEngineModuleJNI.IpAddressValueSwig_getNoValueMessage(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.IpAddressValueSwig_getNoValueMessage(swigCPtr, this);
   }
 
   public IpAddressSwig getValue() {
-    return new IpAddressSwig(IpIntelligenceEngineModuleJNI.IpAddressValueSwig_getValue(swigCPtr, this), true);
+    return new IpAddressSwig(IpIntelligenceOnPremiseEngineModuleJNI.IpAddressValueSwig_getValue(swigCPtr, this), true);
   }
 
 }
