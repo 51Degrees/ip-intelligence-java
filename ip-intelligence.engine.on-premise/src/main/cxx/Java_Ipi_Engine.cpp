@@ -8999,13 +8999,14 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
   (void)jarg1_;
   arg1 = *(EngineBase **)&jarg1; 
   {
+    /*@SWIG:.\ip-intelligence-cxx\src\common-cxx\JavaTypes.i,28,JAVA_UBYTE_ARR_TYPEMAP_BODY@*/    long arrSize = 0;
     if (jarg2 != NULL) {
       // Get the number of bytes in the byte array.
-      arg3 = jenv->GetArrayLength(jarg2);
+      arrSize = jenv->GetArrayLength(jarg2);
       // Allocate memory for the destination byte array used internally by
       // the data set. This memory is required for the lifetime of the data
       // set.
-      arg2 = (unsigned char*)malloc(arg3);
+      arg2 = (unsigned char*)malloc(arrSize);
       if (arg2 == NULL) {
         SWIG_JavaThrowException(
           jenv,
@@ -9024,14 +9025,15 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
       }
       // Copy the input byte array to the destination and release the
       // reference to source pointer.
-      memcpy(arg2, data, arg3);
+      memcpy(arg2, data, arrSize);
       jenv->ReleaseByteArrayElements(jarg2, data, JNI_ABORT);
     }
     else {
       // Let the underlying C implementation throw the null pointer exception.
       arg2 = (unsigned char*)NULL;
-      arg3 = 0;
     }
+    /*@SWIG@*/
+    arg3 = arrSize;
   }
   {
     try {
@@ -12748,7 +12750,7 @@ SWIGEXPORT jint JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1IpAddressSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_new_1IpAddressSwig_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jbyteArray jarg1, jint jarg2) {
   jlong jresult = 0 ;
   unsigned char *arg1 = (unsigned char *) (unsigned char *)0 ;
   fiftyoneDegreesIpType arg2 ;
@@ -12756,7 +12758,42 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
   
   (void)jenv;
   (void)jcls;
-  arg1 = *(unsigned char **)&jarg1; 
+  {
+    /*@SWIG:.\ip-intelligence-cxx\src\common-cxx\JavaTypes.i,28,JAVA_UBYTE_ARR_TYPEMAP_BODY@*/    long arrSize = 0;
+    if (jarg1 != NULL) {
+      // Get the number of bytes in the byte array.
+      arrSize = jenv->GetArrayLength(jarg1);
+      // Allocate memory for the destination byte array used internally by
+      // the data set. This memory is required for the lifetime of the data
+      // set.
+      arg1 = (unsigned char*)malloc(arrSize);
+      if (arg1 == NULL) {
+        SWIG_JavaThrowException(
+          jenv,
+          SWIG_JavaRuntimeException,
+          "Failed to allocate memory to copy the input byte array.");
+        return 0;
+      }
+      // Attempt to get a pointer to the data within the jbyteArray.
+      jbyte* data = jenv->GetByteArrayElements(jarg1, NULL);
+      if (data == NULL) {
+        SWIG_JavaThrowException(
+          jenv,
+          SWIG_JavaRuntimeException,
+          "Failed to obtain pointer to the input byte array.");
+        return 0;
+      }
+      // Copy the input byte array to the destination and release the
+      // reference to source pointer.
+      memcpy(arg1, data, arrSize);
+      jenv->ReleaseByteArrayElements(jarg1, data, JNI_ABORT);
+    }
+    else {
+      // Let the underlying C implementation throw the null pointer exception.
+      arg1 = (unsigned char*)NULL;
+    }
+    /*@SWIG@*/
+  }
   arg2 = (fiftyoneDegreesIpType)jarg2; 
   {
     try {
@@ -12882,7 +12919,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IpAddressSwig_1getCopyOfIpAddress(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_IpAddressSwig_1getCopyOfIpAddress(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2) {
   IpAddress *arg1 = (IpAddress *) 0 ;
   unsigned char *arg2 = (unsigned char *) (unsigned char *)0 ;
   uint32_t arg3 ;
@@ -12891,8 +12928,43 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
   (void)jcls;
   (void)jarg1_;
   arg1 = *(IpAddress **)&jarg1; 
-  arg2 = *(unsigned char **)&jarg2; 
-  arg3 = (uint32_t)jarg3; 
+  {
+    /*@SWIG:.\ip-intelligence-cxx\src\common-cxx\JavaTypes.i,28,JAVA_UBYTE_ARR_TYPEMAP_BODY@*/    long arrSize = 0;
+    if (jarg2 != NULL) {
+      // Get the number of bytes in the byte array.
+      arrSize = jenv->GetArrayLength(jarg2);
+      // Allocate memory for the destination byte array used internally by
+      // the data set. This memory is required for the lifetime of the data
+      // set.
+      arg2 = (unsigned char*)malloc(arrSize);
+      if (arg2 == NULL) {
+        SWIG_JavaThrowException(
+          jenv,
+          SWIG_JavaRuntimeException,
+          "Failed to allocate memory to copy the input byte array.");
+        return ;
+      }
+      // Attempt to get a pointer to the data within the jbyteArray.
+      jbyte* data = jenv->GetByteArrayElements(jarg2, NULL);
+      if (data == NULL) {
+        SWIG_JavaThrowException(
+          jenv,
+          SWIG_JavaRuntimeException,
+          "Failed to obtain pointer to the input byte array.");
+        return ;
+      }
+      // Copy the input byte array to the destination and release the
+      // reference to source pointer.
+      memcpy(arg2, data, arrSize);
+      jenv->ReleaseByteArrayElements(jarg2, data, JNI_ABORT);
+    }
+    else {
+      // Let the underlying C implementation throw the null pointer exception.
+      arg2 = (unsigned char*)NULL;
+    }
+    /*@SWIG@*/
+    arg3 = arrSize;
+  }
   {
     try {
       (arg1)->getCopyOfIpAddress(arg2,arg3);;
@@ -23822,13 +23894,14 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
   (void)jarg3_;
   (void)jarg4_;
   {
+    /*@SWIG:.\ip-intelligence-cxx\src\common-cxx\JavaTypes.i,28,JAVA_UBYTE_ARR_TYPEMAP_BODY@*/    long arrSize = 0;
     if (jarg1 != NULL) {
       // Get the number of bytes in the byte array.
-      arg2 = jenv->GetArrayLength(jarg1);
+      arrSize = jenv->GetArrayLength(jarg1);
       // Allocate memory for the destination byte array used internally by
       // the data set. This memory is required for the lifetime of the data
       // set.
-      arg1 = (unsigned char*)malloc(arg2);
+      arg1 = (unsigned char*)malloc(arrSize);
       if (arg1 == NULL) {
         SWIG_JavaThrowException(
           jenv,
@@ -23847,14 +23920,15 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
       }
       // Copy the input byte array to the destination and release the
       // reference to source pointer.
-      memcpy(arg1, data, arg2);
+      memcpy(arg1, data, arrSize);
       jenv->ReleaseByteArrayElements(jarg1, data, JNI_ABORT);
     }
     else {
       // Let the underlying C implementation throw the null pointer exception.
       arg1 = (unsigned char*)NULL;
-      arg2 = 0;
     }
+    /*@SWIG@*/
+    arg2 = arrSize;
   }
   arg3 = *(ConfigIpi **)&jarg3; 
   arg4 = *(RequiredPropertiesConfig **)&jarg4; 
@@ -24297,6 +24371,106 @@ SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inter
 }
 
 
+SWIGEXPORT void JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1refreshData_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2) {
+  EngineIpi *arg1 = (EngineIpi *) 0 ;
+  unsigned char *arg2 = (unsigned char *) (unsigned char *)0 ;
+  long arg3 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(EngineIpi **)&jarg1; 
+  {
+    /*@SWIG:.\ip-intelligence-cxx\src\common-cxx\JavaTypes.i,28,JAVA_UBYTE_ARR_TYPEMAP_BODY@*/    long arrSize = 0;
+    if (jarg2 != NULL) {
+      // Get the number of bytes in the byte array.
+      arrSize = jenv->GetArrayLength(jarg2);
+      // Allocate memory for the destination byte array used internally by
+      // the data set. This memory is required for the lifetime of the data
+      // set.
+      arg2 = (unsigned char*)malloc(arrSize);
+      if (arg2 == NULL) {
+        SWIG_JavaThrowException(
+          jenv,
+          SWIG_JavaRuntimeException,
+          "Failed to allocate memory to copy the input byte array.");
+        return ;
+      }
+      // Attempt to get a pointer to the data within the jbyteArray.
+      jbyte* data = jenv->GetByteArrayElements(jarg2, NULL);
+      if (data == NULL) {
+        SWIG_JavaThrowException(
+          jenv,
+          SWIG_JavaRuntimeException,
+          "Failed to obtain pointer to the input byte array.");
+        return ;
+      }
+      // Copy the input byte array to the destination and release the
+      // reference to source pointer.
+      memcpy(arg2, data, arrSize);
+      jenv->ReleaseByteArrayElements(jarg2, data, JNI_ABORT);
+    }
+    else {
+      // Let the underlying C implementation throw the null pointer exception.
+      arg2 = (unsigned char*)NULL;
+    }
+    /*@SWIG@*/
+    arg3 = arrSize;
+  }
+  {
+    try {
+      (arg1)->refreshData(arg2,arg3);;
+    }
+    catch(FatalException& e) {
+      {
+        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NotImplementedException& e) {
+      {
+        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(InvalidPropertyException& e) {
+      {
+        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(EvidenceException& e) {
+      {
+        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(TooManyValuesException& e) {
+      {
+        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(NoValuesAvailableException& e) {
+      {
+        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return ; 
+      };
+    }	
+    catch(StatusCodeException& e) {
+      {
+        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(runtime_error& e) {
+      {
+        SWIG_JavaException(jenv, SWIG_RuntimeError, e.what()); return ; 
+      };
+    }
+    catch(invalid_argument& e) {
+      {
+        SWIG_JavaException(jenv, SWIG_ValueError, e.what()); return ; 
+      };
+    }
+  }
+  
+}
+
+
 SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1process_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jobject jarg2_) {
   jlong jresult = 0 ;
   EngineIpi *arg1 = (EngineIpi *) 0 ;
@@ -24435,7 +24609,7 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
 }
 
 
-SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1process_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jint jarg3, jint jarg4) {
+SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_interop_swig_IpIntelligenceEngineModuleJNI_EngineIpiSwig_1process_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jbyteArray jarg2, jint jarg4) {
   jlong jresult = 0 ;
   EngineIpi *arg1 = (EngineIpi *) 0 ;
   unsigned char *arg2 = (unsigned char *) (unsigned char *)0 ;
@@ -24447,8 +24621,43 @@ SWIGEXPORT jlong JNICALL Java_fiftyone_ipintelligence_hash_engine_onpremise_inte
   (void)jcls;
   (void)jarg1_;
   arg1 = *(EngineIpi **)&jarg1; 
-  arg2 = *(unsigned char **)&jarg2; 
-  arg3 = (long)jarg3; 
+  {
+    /*@SWIG:.\ip-intelligence-cxx\src\common-cxx\JavaTypes.i,28,JAVA_UBYTE_ARR_TYPEMAP_BODY@*/    long arrSize = 0;
+    if (jarg2 != NULL) {
+      // Get the number of bytes in the byte array.
+      arrSize = jenv->GetArrayLength(jarg2);
+      // Allocate memory for the destination byte array used internally by
+      // the data set. This memory is required for the lifetime of the data
+      // set.
+      arg2 = (unsigned char*)malloc(arrSize);
+      if (arg2 == NULL) {
+        SWIG_JavaThrowException(
+          jenv,
+          SWIG_JavaRuntimeException,
+          "Failed to allocate memory to copy the input byte array.");
+        return 0;
+      }
+      // Attempt to get a pointer to the data within the jbyteArray.
+      jbyte* data = jenv->GetByteArrayElements(jarg2, NULL);
+      if (data == NULL) {
+        SWIG_JavaThrowException(
+          jenv,
+          SWIG_JavaRuntimeException,
+          "Failed to obtain pointer to the input byte array.");
+        return 0;
+      }
+      // Copy the input byte array to the destination and release the
+      // reference to source pointer.
+      memcpy(arg2, data, arrSize);
+      jenv->ReleaseByteArrayElements(jarg2, data, JNI_ABORT);
+    }
+    else {
+      // Let the underlying C implementation throw the null pointer exception.
+      arg2 = (unsigned char*)NULL;
+    }
+    /*@SWIG@*/
+    arg3 = arrSize;
+  }
   arg4 = (fiftyoneDegreesIpType)jarg4; 
   {
     try {

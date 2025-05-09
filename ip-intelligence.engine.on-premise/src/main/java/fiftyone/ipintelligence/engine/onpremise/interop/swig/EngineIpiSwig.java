@@ -80,6 +80,10 @@ public class EngineIpiSwig extends EngineBaseSwig {
     IpIntelligenceEngineModuleJNI.EngineIpiSwig_refreshData__SWIG_1(swigCPtr, this, fileName);
   }
 
+  public void refreshData(byte[] data) {
+    IpIntelligenceEngineModuleJNI.EngineIpiSwig_refreshData__SWIG_2(swigCPtr, this, data);
+  }
+
   public ResultsIpiSwig process(EvidenceIpiSwig evidence) {
     long cPtr = IpIntelligenceEngineModuleJNI.EngineIpiSwig_process__SWIG_0(swigCPtr, this, EvidenceIpiSwig.getCPtr(evidence), evidence);
     return (cPtr == 0) ? null : new ResultsIpiSwig(cPtr, true);
@@ -90,8 +94,8 @@ public class EngineIpiSwig extends EngineBaseSwig {
     return (cPtr == 0) ? null : new ResultsIpiSwig(cPtr, true);
   }
 
-  public ResultsIpiSwig process(SWIGTYPE_p_unsigned_char ipAddress, int length, IpTypeSwig type) {
-    long cPtr = IpIntelligenceEngineModuleJNI.EngineIpiSwig_process__SWIG_2(swigCPtr, this, SWIGTYPE_p_unsigned_char.getCPtr(ipAddress), length, type.swigValue());
+  public ResultsIpiSwig process(byte[] ipAddress, IpTypeSwig type) {
+    long cPtr = IpIntelligenceEngineModuleJNI.EngineIpiSwig_process__SWIG_2(swigCPtr, this, ipAddress, type.swigValue());
     return (cPtr == 0) ? null : new ResultsIpiSwig(cPtr, true);
   }
 
