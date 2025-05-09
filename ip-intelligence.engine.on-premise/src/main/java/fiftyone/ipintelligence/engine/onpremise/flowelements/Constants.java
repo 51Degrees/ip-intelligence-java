@@ -20,7 +20,7 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.flowelements;
+package fiftyone.ipintelligence.engine.onpremise.flowelements;
 
 public class Constants {
 	public static class MatchMetrics {

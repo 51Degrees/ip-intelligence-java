@@ -20,7 +20,7 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.flowelements;
+package fiftyone.ipintelligence.engine.onpremise.flowelements;
 
 import fiftyone.pipeline.engines.configuration.CacheConfiguration;
 import org.junit.Before;
@@ -31,11 +31,11 @@ import org.slf4j.LoggerFactory;
 public class BuilderTests {
     protected static final ILoggerFactory loggerFactory = LoggerFactory.getILoggerFactory();
 
-    private IPIntelligenceHashEngineBuilder builder;
+    private IPIntelligenceOnPremiseEngineBuilder builder;
 
     @Before
     public void init() {
-        builder = new IPIntelligenceHashEngineBuilder(loggerFactory);
+        builder = new IPIntelligenceOnPremiseEngineBuilder(loggerFactory);
     }
 
     /**

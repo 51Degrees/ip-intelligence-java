@@ -22,8 +22,8 @@
 
 package fiftyone.ipintelligence;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngine;
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngineBuilder;
+import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
+import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngineBuilder;
 import fiftyone.pipeline.core.exceptions.PipelineConfigurationException;
 import fiftyone.pipeline.core.flowelements.Pipeline;
 import fiftyone.pipeline.engines.Constants;
@@ -427,8 +427,8 @@ public class IPIntelligenceOnPremisePipelineBuilder
     public Pipeline build() throws Exception {
         AspectEngine<? extends AspectData, ? extends AspectPropertyMetaData> IPIntelligenceEngine;
 
-        IPIntelligenceHashEngineBuilder hashBuilder =
-                new IPIntelligenceHashEngineBuilder(loggerFactory, dataUpdateService);
+        IPIntelligenceOnPremiseEngineBuilder hashBuilder =
+                new IPIntelligenceOnPremiseEngineBuilder(loggerFactory, dataUpdateService);
         IPIntelligenceEngine = configureAndBuild(hashBuilder);
 
         if (IPIntelligenceEngine != null) {
@@ -456,8 +456,8 @@ public class IPIntelligenceOnPremisePipelineBuilder
      * @return A new IP Intelligence engine instance.
      * @throws Exception 
      */
-    private IPIntelligenceHashEngine configureAndBuild(
-        IPIntelligenceHashEngineBuilder builder) throws Exception {
+    private IPIntelligenceOnPremiseEngine configureAndBuild(
+        IPIntelligenceOnPremiseEngineBuilder builder) throws Exception {
         // Configure auto update.
         if(autoUpdateEnabled != null) {
             builder.setAutoUpdate(autoUpdateEnabled);
@@ -529,7 +529,7 @@ public class IPIntelligenceOnPremisePipelineBuilder
         }
 
         // Build the engine
-        IPIntelligenceHashEngine engine;
+        IPIntelligenceOnPremiseEngine engine;
         if (filename != null && filename.isEmpty() == false) {
             engine = builder.build(filename, createTempDataCopy);
         } else if (engineData != null) {

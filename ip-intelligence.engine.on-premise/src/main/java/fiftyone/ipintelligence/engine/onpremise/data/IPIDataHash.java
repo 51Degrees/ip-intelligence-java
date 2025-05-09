@@ -20,7 +20,7 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.data;
+package fiftyone.ipintelligence.engine.onpremise.data;
 
 import fiftyone.ipintelligence.shared.IPIData;
 import fiftyone.pipeline.engines.data.AspectPropertyValue;

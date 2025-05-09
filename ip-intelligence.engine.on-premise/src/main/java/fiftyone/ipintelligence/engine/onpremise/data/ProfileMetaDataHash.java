@@ -20,11 +20,11 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.data;
+package fiftyone.ipintelligence.engine.onpremise.data;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngine;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.ValueIterable;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.*;
+import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
+import fiftyone.ipintelligence.engine.onpremise.interop.ValueIterable;
+import fiftyone.ipintelligence.engine.onpremise.interop.swig.*;
 import fiftyone.pipeline.engines.fiftyone.data.*;
 
 import java.io.IOException;
@@ -43,7 +43,7 @@ public class ProfileMetaDataHash implements ProfileMetaData {
 
     private final ProfileMetaDataSwig source;
 
-    private final IPIntelligenceHashEngine engine;
+    private final IPIntelligenceOnPremiseEngine engine;
 
     /**
      * Construct a new instance.
@@ -51,7 +51,7 @@ public class ProfileMetaDataHash implements ProfileMetaData {
      * @param source the source metadata from the native engine
      */
     public ProfileMetaDataHash(
-        IPIntelligenceHashEngine engine,
+        IPIntelligenceOnPremiseEngine engine,
         ProfileMetaDataSwig source) {
         this.engine = engine;
         this.source = source;

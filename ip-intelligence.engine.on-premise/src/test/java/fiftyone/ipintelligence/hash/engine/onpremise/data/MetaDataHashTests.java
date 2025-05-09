@@ -20,9 +20,9 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.data;
+package fiftyone.ipintelligence.engine.onpremise.data;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.TestsBase;
+import fiftyone.ipintelligence.engine.onpremise.TestsBase;
 import fiftyone.pipeline.engines.Constants;
 import org.junit.After;
 import org.junit.Before;

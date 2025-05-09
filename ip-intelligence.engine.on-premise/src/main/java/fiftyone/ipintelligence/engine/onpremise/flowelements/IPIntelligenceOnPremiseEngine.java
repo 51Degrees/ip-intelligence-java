@@ -20,15 +20,15 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.flowelements;
+package fiftyone.ipintelligence.engine.onpremise.flowelements;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.data.IPIDataHash;
-import fiftyone.ipintelligence.hash.engine.onpremise.data.ProfileMetaDataHash;
-import fiftyone.ipintelligence.hash.engine.onpremise.data.PropertyMetaDataHash;
-import fiftyone.ipintelligence.hash.engine.onpremise.data.ValueMetaDataHash;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.*;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.*;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.Date;
+import fiftyone.ipintelligence.engine.onpremise.data.IPIDataHash;
+import fiftyone.ipintelligence.engine.onpremise.data.ProfileMetaDataHash;
+import fiftyone.ipintelligence.engine.onpremise.data.PropertyMetaDataHash;
+import fiftyone.ipintelligence.engine.onpremise.data.ValueMetaDataHash;
+import fiftyone.ipintelligence.engine.onpremise.interop.*;
+import fiftyone.ipintelligence.engine.onpremise.interop.swig.*;
+import fiftyone.ipintelligence.engine.onpremise.interop.swig.Date;
 import fiftyone.pipeline.core.data.EvidenceKeyFilter;
 import fiftyone.pipeline.core.data.EvidenceKeyFilterWhitelist;
 import fiftyone.pipeline.core.data.FlowData;
@@ -50,12 +50,12 @@ import static org.apache.commons.lang3.BooleanUtils.isFalse;
  * them e.g. DeviceType or ReleaseDate.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-on-premise.md">Specification</a>
  */
-public class IPIntelligenceHashEngine
+public class IPIntelligenceOnPremiseEngine
     extends FiftyOneOnPremiseAspectEngineBase<IPIDataHash,
     FiftyOneAspectPropertyMetaData> {
-    private EngineHashSwig engine = null;
+    private EngineIpiSwig engine = null;
     private final List<FiftyOneAspectPropertyMetaData> properties = new ArrayList<>();
-    private final ConfigHashSwig config;
+    private final ConfigIpiSwig config;
     private final RequiredPropertiesConfigSwig propertiesConfigSwig;
     private List<String> evidenceKeys;
     private EvidenceKeyFilter evidenceKeyFilter;
@@ -63,7 +63,7 @@ public class IPIntelligenceHashEngine
     private final Random rand = new Random();
 
     /**
-     * Construct a new instance of the {@link IPIntelligenceHashEngine}.
+     * Construct a new instance of the {@link IPIntelligenceOnPremiseEngine}.
      * @param logger logger instance to use for logging
      * @param dataFile data file to read the data set from
      * @param config native configuration which was configured by the builder
@@ -75,10 +75,10 @@ public class IPIntelligenceHashEngine
      * @param tempDataFileDir the file where a temporary data file copy
      *                        will be stored if one is created
      */
-    IPIntelligenceHashEngine(
+    IPIntelligenceOnPremiseEngine(
         Logger logger,
         AspectEngineDataFile dataFile,
-        ConfigHashSwig config,
+        ConfigIpiSwig config,
         RequiredPropertiesConfigSwig properties,
         ElementDataFactory<IPIDataHash> IPIDataFactory,
         String tempDataFileDir) {
@@ -93,7 +93,7 @@ public class IPIntelligenceHashEngine
      * @param engine to get the keys from
      * @return evidence keys list
      */
-    private static List<String> getKeysFromEngine(EngineIPIntelligenceSwig engine) {
+    private static List<String> getKeysFromEngine(EngineIpiSwig engine) {
         // In this case, the vector does not need to be closed.
         // The vector is a pointer to memory owned by the native engine, so the
         // delete method actually doesn't call down to the native layer.
@@ -272,7 +272,7 @@ public class IPIntelligenceHashEngine
             String lastMessage = "";
             while (tries < 10) {
                 try {
-                engine = new EngineHashSwig(dataFile.getDataFilePath(), config, propertiesConfigSwig);
+                engine = new EngineIpiSwig(dataFile.getDataFilePath(), config, propertiesConfigSwig);
                 } catch (Throwable t) {
                     lastMessage = t.getMessage();
                     logger.warn("Creation of Swig Engine failed: " + lastMessage);
@@ -295,7 +295,7 @@ public class IPIntelligenceHashEngine
     @Override
     public void refreshData(String dataFileIdentifier, byte[] data) {
         if (engine == null) {
-            engine = new EngineHashSwig(data, config, propertiesConfigSwig);
+            engine = new EngineIpiSwig(data, config, propertiesConfigSwig);
         } else {
             engine.refreshData(data);
         }
@@ -304,8 +304,8 @@ public class IPIntelligenceHashEngine
 
     @Override
     protected void processEngine(FlowData flowData, IPIDataHash IPIData) {
-        try (EvidenceIPIntelligenceSwig relevantEvidence =
-            new EvidenceIPIntelligenceSwig()) {
+        try (EvidenceIpiSwig relevantEvidence =
+            new EvidenceIpiSwig()) {
             List<String> keys = evidenceKeys;
             for (Map.Entry<String, Object> evidenceItem :
                 flowData.getEvidence().asKeyMap().entrySet()) {
@@ -514,7 +514,7 @@ public class IPIntelligenceHashEngine
     public void addDataFile(AspectEngineDataFile dataFile) {
         if (getDataFiles().size() >  0) {
             throw new IllegalArgumentException(
-                "IPIntelligenceHashEngine already has a configured data " +
+                "IPIntelligenceOnPremiseEngine already has a configured data " +
                 "source.");
         }
         super.addDataFile(dataFile);

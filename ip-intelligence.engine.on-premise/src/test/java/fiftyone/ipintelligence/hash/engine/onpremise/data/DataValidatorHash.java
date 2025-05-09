@@ -20,9 +20,9 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.data;
+package fiftyone.ipintelligence.engine.onpremise.data;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngine;
+import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
 import fiftyone.ipintelligence.shared.IPIData;
 import fiftyone.ipintelligence.shared.testhelpers.data.DataValidator;
 import fiftyone.pipeline.core.data.FlowData;
@@ -39,9 +39,9 @@ import static org.junit.Assert.*;
 
 public class DataValidatorHash implements DataValidator {
 
-    private IPIntelligenceHashEngine engine;
+    private IPIntelligenceOnPremiseEngine engine;
 
-    public DataValidatorHash(IPIntelligenceHashEngine engine) {
+    public DataValidatorHash(IPIntelligenceOnPremiseEngine engine) {
         this.engine = engine;
     }
 

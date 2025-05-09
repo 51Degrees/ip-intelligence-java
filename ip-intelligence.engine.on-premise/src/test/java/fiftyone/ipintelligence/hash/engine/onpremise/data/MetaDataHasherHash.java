@@ -20,9 +20,9 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.data;
+package fiftyone.ipintelligence.engine.onpremise.data;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.Constants;
+import fiftyone.ipintelligence.engine.onpremise.flowelements.Constants;
 import fiftyone.ipintelligence.shared.testhelpers.Wrapper;
 import fiftyone.ipintelligence.shared.testhelpers.data.MetaDataHasher;
 import fiftyone.pipeline.engines.fiftyone.data.ComponentMetaData;

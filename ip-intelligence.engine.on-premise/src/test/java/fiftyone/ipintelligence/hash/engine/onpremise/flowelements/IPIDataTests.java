@@ -20,10 +20,10 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.flowelements;
+package fiftyone.ipintelligence.engine.onpremise.flowelements;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.TestsBase;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.*;
+import fiftyone.ipintelligence.engine.onpremise.TestsBase;
+import fiftyone.ipintelligence.engine.onpremise.interop.swig.*;
 import fiftyone.ipintelligence.shared.IPIDataBase;
 import fiftyone.ipintelligence.shared.IPIDataBaseOnPremise;
 import fiftyone.pipeline.core.data.FlowData;
@@ -77,7 +77,7 @@ public class IPIDataTests extends TestsBase {
 	            getWrapper().getEngine(),
 	            missingPropertyService);
 	
-	        ResultsHashSwig results = mock(ResultsHashSwig.class);
+	        ResultsIpiSwig results = mock(ResultsIpiSwig.class);
 	        data.setResults(results);
 	        flowData.getOrAdd(
 	            getWrapper().getEngine().getTypedDataKey(),
@@ -88,7 +88,7 @@ public class IPIDataTests extends TestsBase {
     }
 
     /**
-     * Verify that the {@link ResultsHashSwig#containsProperty(String)} method
+     * Verify that the {@link ResultsIpiSwig#containsProperty(String)} method
      * is called the expected number of times when the target method is called
      * on the {@link IPIDataHashDefault} instance.
      * @param data instance to call method on
@@ -100,7 +100,7 @@ public class IPIDataTests extends TestsBase {
      */
     private void verifyCallsToContainsProperty(
         IPIDataHashDefault data,
-        ResultsHashSwig results,
+        ResultsIpiSwig results,
         Method getMethod,
         int expectedCount)
         throws InvocationTargetException, IllegalAccessException {
@@ -115,7 +115,7 @@ public class IPIDataTests extends TestsBase {
      * types.
      * @param results to set up
      */
-    private void configureNativeGettersNoValue(ResultsHashSwig results) {
+    private void configureNativeGettersNoValue(ResultsIpiSwig results) {
         StringValueSwig stringValue = mock(StringValueSwig.class);
         BoolValueSwig boolValue = mock(BoolValueSwig.class);
         IntegerValueSwig intValue = mock(IntegerValueSwig.class);
@@ -137,7 +137,7 @@ public class IPIDataTests extends TestsBase {
 
     /**
      * Check that when there is only one native result, the
-     * {@link ResultsHashSwig#containsProperty(String)} method is not called
+     * {@link ResultsIpiSwig#containsProperty(String)} method is not called
      * when calling the protected get methods.
      */
     @Test
@@ -150,7 +150,7 @@ public class IPIDataTests extends TestsBase {
 	            getWrapper().getEngine(),
 	            missingPropertyService);
 	
-	        ResultsHashSwig results = mock(ResultsHashSwig.class);
+	        ResultsIpiSwig results = mock(ResultsIpiSwig.class);
 	        configureNativeGettersNoValue(results);
 	        when(results.containsProperty(any(byte[].class))).thenReturn(false);
 	        data.setResults(results);
@@ -171,7 +171,7 @@ public class IPIDataTests extends TestsBase {
 
     /**
      * Check that when there are multiple native results, the
-     * {@link ResultsHashSwig#containsProperty(String)} method is called once
+     * {@link ResultsIpiSwig#containsProperty(String)} method is called once
      * when calling the protected get methods.
      */
     @Test
@@ -184,10 +184,10 @@ public class IPIDataTests extends TestsBase {
 	            getWrapper().getEngine(),
 	            missingPropertyService);
 	
-	        ResultsHashSwig results1 = mock(ResultsHashSwig.class);
+	        ResultsIpiSwig results1 = mock(ResultsIpiSwig.class);
 	        configureNativeGettersNoValue(results1);
 	        when(results1.containsProperty(any(byte[].class))).thenReturn(false);
-	        ResultsHashSwig results2 = mock(ResultsHashSwig.class);
+	        ResultsIpiSwig results2 = mock(ResultsIpiSwig.class);
 	        configureNativeGettersNoValue(results2);
 	        when(results2.containsProperty(any(byte[].class))).thenReturn(false);
 	
@@ -215,7 +215,7 @@ public class IPIDataTests extends TestsBase {
 
     /**
      * Check that when there is only one native results, the
-     * {@link ResultsHashSwig#containsProperty(String)} method is called once
+     * {@link ResultsIpiSwig#containsProperty(String)} method is called once
      * when calling the public get method, and a {@link PropertyMissingException}
      * is thrown when it does not the property.
      */
@@ -228,7 +228,7 @@ public class IPIDataTests extends TestsBase {
 	            getWrapper().getEngine(),
 	            missingPropertyService);
 	
-	        ResultsHashSwig results = mock(ResultsHashSwig.class);
+	        ResultsIpiSwig results = mock(ResultsIpiSwig.class);
 	        when(results.containsProperty(any(byte[].class))).thenReturn(false);
 	        data.setResults(results);
 	
@@ -247,7 +247,7 @@ public class IPIDataTests extends TestsBase {
 
     /**
      * Check that when there are multiple native results, the
-     * {@link ResultsHashSwig#containsProperty(String)} method is called once
+     * {@link ResultsIpiSwig#containsProperty(String)} method is called once
      * when calling the public get method, and a {@link PropertyMissingException}
      * is thrown when none contain the property.
      */
@@ -260,9 +260,9 @@ public class IPIDataTests extends TestsBase {
 	            getWrapper().getEngine(),
 	            missingPropertyService);
 	
-	        ResultsHashSwig results1 = mock(ResultsHashSwig.class);
+	        ResultsIpiSwig results1 = mock(ResultsIpiSwig.class);
 	        when(results1.containsProperty(any(byte[].class))).thenReturn(false);
-	        ResultsHashSwig results2 = mock(ResultsHashSwig.class);
+	        ResultsIpiSwig results2 = mock(ResultsIpiSwig.class);
 	        when(results2.containsProperty(any(byte[].class))).thenReturn(false);
 	
 	        data.setResults(results1);
@@ -330,7 +330,7 @@ public class IPIDataTests extends TestsBase {
 	            getWrapper().getEngine(),
 	            missingPropertyService);
 	
-	        ResultsHashSwig results = mock(ResultsHashSwig.class);
+	        ResultsIpiSwig results = mock(ResultsIpiSwig.class);
 	        data.setResults(results);       
 	        
             data.close();

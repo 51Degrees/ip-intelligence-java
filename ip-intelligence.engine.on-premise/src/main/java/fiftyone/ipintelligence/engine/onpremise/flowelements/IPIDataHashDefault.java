@@ -20,12 +20,12 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.flowelements;
+package fiftyone.ipintelligence.engine.onpremise.flowelements;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.Enums;
-import fiftyone.ipintelligence.hash.engine.onpremise.data.IPIDataHash;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.Swig;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.*;
+import fiftyone.ipintelligence.engine.onpremise.Enums;
+import fiftyone.ipintelligence.engine.onpremise.data.IPIDataHash;
+import fiftyone.ipintelligence.engine.onpremise.interop.Swig;
+import fiftyone.ipintelligence.engine.onpremise.interop.swig.*;
 import fiftyone.ipintelligence.shared.IPIDataBaseOnPremise;
 import fiftyone.pipeline.core.data.FlowData;
 import fiftyone.pipeline.core.data.TryGetResult;
@@ -43,7 +43,7 @@ import static fiftyone.pipeline.util.StringManipulation.stringJoin;
 
 /**
  * Internal implementation of the {@link IPIDataHash} interface. This can
- * only be constructed by the {@link IPIntelligenceHashEngine}.
+ * only be constructed by the {@link IPIntelligenceOnPremiseEngine}.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-on-premise.md#element-data">Specification</a>
  */
 public class IPIDataHashDefault
@@ -66,7 +66,7 @@ public class IPIDataHashDefault
      * List of native results which make up this result instance. Usually, this
      * will only be one.
      */
-    private final List<ResultsHashSwig> resultsList = new ArrayList<>();
+    private final List<ResultsIpiSwig> resultsList = new ArrayList<>();
 
     /**
      * Constructs a new instance.
@@ -80,7 +80,7 @@ public class IPIDataHashDefault
     IPIDataHashDefault(
         Logger logger,
         FlowData flowData,
-        IPIntelligenceHashEngine engine,
+        IPIntelligenceOnPremiseEngine engine,
         MissingPropertyService missingPropertyService) {
         super(logger, flowData, engine, missingPropertyService);
     }
@@ -89,7 +89,7 @@ public class IPIDataHashDefault
      * Add the native results to the list of results contained in this instance.
      * @param results the results to add
      */
-    void setResults(ResultsHashSwig results) {
+    void setResults(ResultsIpiSwig results) {
         checkState();
         resultsList.add(results);
     }
@@ -101,7 +101,7 @@ public class IPIDataHashDefault
      * @param propertyName used to select results from list
      * @return single native results instance
      */
-    private ResultsHashSwig getSingleResults(String propertyName) {
+    private ResultsIpiSwig getSingleResults(String propertyName) {
         return resultsList.size() == 1 ?
             resultsList.get(0) : getResultsContainingProperty(propertyName);
     }
@@ -112,8 +112,8 @@ public class IPIDataHashDefault
      * @param propertyName name of the requested property
      * @return native results containing values, or null if none were found
      */
-    private ResultsHashSwig getResultsContainingProperty(String propertyName) {
-        for (ResultsHashSwig results : resultsList) {
+    private ResultsIpiSwig getResultsContainingProperty(String propertyName) {
+        for (ResultsIpiSwig results : resultsList) {
             if (results.containsProperty(Swig.asBytes(propertyName))) {
                 return results;
             }
@@ -136,7 +136,7 @@ public class IPIDataHashDefault
             // id from the results.
             List<String> result = new ArrayList<>();
             List<String[]> deviceIds = new ArrayList<>();
-            for (ResultsHashSwig results : resultsList) {
+            for (ResultsIpiSwig results : resultsList) {
                 deviceIds.add(results.getDeviceId().split("-"));
             }
             int max = 0;
@@ -165,7 +165,7 @@ public class IPIDataHashDefault
      */
     private AspectPropertyValue<Integer> getDifferenceInternal() {
         int total = 0;
-        for (ResultsHashSwig results : resultsList) {
+        for (ResultsIpiSwig results : resultsList) {
             total += results.getDifference();
         }
         return new AspectPropertyValueDefault<>(total);
@@ -177,7 +177,7 @@ public class IPIDataHashDefault
      */
     private AspectPropertyValue<Integer> getDriftInternal() {
         int result = Integer.MAX_VALUE;
-        for (ResultsHashSwig results : resultsList) {
+        for (ResultsIpiSwig results : resultsList) {
             if (results.getDrift() < result) {
                 result = results.getDrift();
             }
@@ -191,7 +191,7 @@ public class IPIDataHashDefault
      */
     private AspectPropertyValue<Integer> getIterationsInternal() {
         int result = 0;
-        for (ResultsHashSwig results : resultsList) {
+        for (ResultsIpiSwig results : resultsList) {
             result += results.getIterations();
         }
         return new AspectPropertyValueDefault<>(result);
@@ -203,7 +203,7 @@ public class IPIDataHashDefault
      */
     private AspectPropertyValue<Integer> getMatchedNodesInternal() {
         int result = 0;
-        for (ResultsHashSwig results : resultsList) {
+        for (ResultsIpiSwig results : resultsList) {
             result += results.getMatchedNodes();
         }
         return new AspectPropertyValueDefault<>(result);
@@ -215,7 +215,7 @@ public class IPIDataHashDefault
      */
     private AspectPropertyValue<String> getMethodInternal() {
         int result = 0;
-        for (ResultsHashSwig results : resultsList) {
+        for (ResultsIpiSwig results : resultsList) {
             if (results.getMethod() > result) {
                 result = results.getMethod();
             }
@@ -229,7 +229,7 @@ public class IPIDataHashDefault
      */
     private AspectPropertyValue<List<String>> getUserAgentsInternal() {
         List<String> result = new ArrayList<>();
-        for (ResultsHashSwig results : resultsList) {
+        for (ResultsIpiSwig results : resultsList) {
             for (int i = 0; i < results.getUserAgents(); i++) {
                 String userAgent = results.getUserAgent(i);
                 if (result.contains(userAgent) == false) {
@@ -243,7 +243,7 @@ public class IPIDataHashDefault
     @Override
     protected boolean propertyIsAvailable(String propertyName) {
         checkState();
-        for (ResultsHashSwig results : resultsList) {
+        for (ResultsIpiSwig results : resultsList) {
             if (results.containsProperty(Swig.asBytes(propertyName))) {
                 return true;
             }
@@ -256,7 +256,7 @@ public class IPIDataHashDefault
         checkState();
         AspectPropertyValue<List<String>> result =
             new AspectPropertyValueDefault<>();
-        ResultsHashSwig results = getSingleResults(propertyName);
+        ResultsIpiSwig results = getSingleResults(propertyName);
         if (results != null) {
             try (VectorStringValuesSwig value = results.getValues(
                 Swig.asBytes(propertyName))) {
@@ -277,7 +277,7 @@ public class IPIDataHashDefault
     @Override
     protected AspectPropertyValue<String> getValueAsString(String propertyName) {
         AspectPropertyValue<String> result = new AspectPropertyValueDefault<>();
-        ResultsHashSwig results = getSingleResults(propertyName);
+        ResultsIpiSwig results = getSingleResults(propertyName);
         if (results != null) {
 
             try (StringValueSwig value = results.getValueAsString(
@@ -298,7 +298,7 @@ public class IPIDataHashDefault
         String propertyName) {
         AspectPropertyValue<JavaScript> result =
             new AspectPropertyValueDefault<>();
-        ResultsHashSwig results = getSingleResults(propertyName);
+        ResultsIpiSwig results = getSingleResults(propertyName);
         if (results != null) {
             try (StringValueSwig value = results.getValueAsString(
                 Swig.asBytes(propertyName))) {
@@ -317,7 +317,7 @@ public class IPIDataHashDefault
     protected AspectPropertyValue<Integer> getValueAsInteger(
         String propertyName) {
         AspectPropertyValue<Integer> result = new AspectPropertyValueDefault<>();
-        ResultsHashSwig results = getSingleResults(propertyName);
+        ResultsIpiSwig results = getSingleResults(propertyName);
         if (results != null) {
             try (IntegerValueSwig value = results.getValueAsInteger(
                 Swig.asBytes(propertyName))) {
@@ -335,7 +335,7 @@ public class IPIDataHashDefault
     @Override
     protected AspectPropertyValue<Boolean> getValueAsBool(String propertyName) {
         AspectPropertyValue<Boolean> result = new AspectPropertyValueDefault<>();
-        ResultsHashSwig results = getSingleResults(propertyName);
+        ResultsIpiSwig results = getSingleResults(propertyName);
         if (results != null) {
             try (BoolValueSwig value = results.getValueAsBool(
                 Swig.asBytes(propertyName))) {
@@ -353,7 +353,7 @@ public class IPIDataHashDefault
     @Override
     protected AspectPropertyValue<Double> getValueAsDouble(String propertyName) {
         AspectPropertyValue<Double> result = new AspectPropertyValueDefault<>();
-        ResultsHashSwig results = getSingleResults(propertyName);
+        ResultsIpiSwig results = getSingleResults(propertyName);
         if (results != null) {
             try (DoubleValueSwig value = results.getValueAsDouble(
                 Swig.asBytes(propertyName))) {
@@ -436,7 +436,7 @@ public class IPIDataHashDefault
     @Override
     public void close() {
         closed = true;
-        for (ResultsHashSwig result : resultsList) {
+        for (ResultsIpiSwig result : resultsList) {
             try {
                 result.close();
             } catch (Exception e) {

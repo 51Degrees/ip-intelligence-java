@@ -20,12 +20,12 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.flowelements;
+package fiftyone.ipintelligence.engine.onpremise.flowelements;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.data.IPIDataHash;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.ConfigHashSwig;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.RequiredPropertiesConfigSwig;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.VectorStringSwig;
+import fiftyone.ipintelligence.engine.onpremise.data.IPIDataHash;
+import fiftyone.ipintelligence.engine.onpremise.interop.swig.ConfigIpiSwig;
+import fiftyone.ipintelligence.engine.onpremise.interop.swig.RequiredPropertiesConfigSwig;
+import fiftyone.ipintelligence.engine.onpremise.interop.swig.VectorStringSwig;
 import fiftyone.ipintelligence.shared.flowelements.OnPremiseIPIntelligenceEngineBuilderBase;
 import fiftyone.pipeline.annotations.DefaultValue;
 import fiftyone.pipeline.annotations.ElementBuilder;
@@ -48,29 +48,29 @@ import java.util.List;
 import static fiftyone.pipeline.util.StringManipulation.stringJoin;
 
 /**
- * Builder for the {@link IPIntelligenceHashEngine}. All options for the engine
+ * Builder for the {@link IPIntelligenceOnPremiseEngine}. All options for the engine
  * should be set here.
  * <p>
  * Default values are taken from ip-intelligence-cxx/src/hash/hash.c
  */
 @ElementBuilder(alternateName = "HashIPIntelligence")
-public class IPIntelligenceHashEngineBuilder
+public class IPIntelligenceOnPremiseEngineBuilder
     extends OnPremiseIPIntelligenceEngineBuilderBase<
-    IPIntelligenceHashEngineBuilder,
-    IPIntelligenceHashEngine> {
+    IPIntelligenceOnPremiseEngineBuilder,
+    IPIntelligenceOnPremiseEngine> {
 
     private final String dataDownloadType = "HashV41";
    
     /**
      * Native configuration instance for this engine.
      */
-    private final ConfigHashSwig config = new ConfigHashSwig();
+    private final ConfigIpiSwig config = new ConfigIpiSwig();
 
     /**
      * Default constructor which uses the {@link ILoggerFactory} implementation
      * returned by {@link LoggerFactory#getILoggerFactory()}.
      */
-    public IPIntelligenceHashEngineBuilder() {
+    public IPIntelligenceOnPremiseEngineBuilder() {
         this(LoggerFactory.getILoggerFactory());
     }
 
@@ -78,7 +78,7 @@ public class IPIntelligenceHashEngineBuilder
      * Construct a new instance using the {@link ILoggerFactory} supplied.
      * @param loggerFactory the logger factory to use
      */
-    public IPIntelligenceHashEngineBuilder(ILoggerFactory loggerFactory) {
+    public IPIntelligenceOnPremiseEngineBuilder(ILoggerFactory loggerFactory) {
         this(loggerFactory, null);
     }
 
@@ -89,7 +89,7 @@ public class IPIntelligenceHashEngineBuilder
      * @param dataUpdateService the {@link DataUpdateService} to use when
      *                          automatic updates happen on the data file
      */
-    public IPIntelligenceHashEngineBuilder(
+    public IPIntelligenceOnPremiseEngineBuilder(
         ILoggerFactory loggerFactory,
         DataUpdateService dataUpdateService) {
         super(loggerFactory, dataUpdateService);
@@ -105,7 +105,7 @@ public class IPIntelligenceHashEngineBuilder
      * @return this builder
      */
     @DefaultValue("false")
-    public IPIntelligenceHashEngineBuilder setReuseTempFile(boolean reuse) {
+    public IPIntelligenceOnPremiseEngineBuilder setReuseTempFile(boolean reuse) {
         config.setReuseTempFile(reuse);
         return this;
     }
@@ -119,7 +119,7 @@ public class IPIntelligenceHashEngineBuilder
      * @return this builder
      */
     @DefaultValue("true")
-    public IPIntelligenceHashEngineBuilder setUpdateMatchedUserAgent(
+    public IPIntelligenceOnPremiseEngineBuilder setUpdateMatchedUserAgent(
         boolean update) {
         config.setUpdateMatchedUserAgent(update);
         return this;
@@ -133,7 +133,7 @@ public class IPIntelligenceHashEngineBuilder
      * @return this builder
      */
     @DefaultValue("Balanced")
-    public IPIntelligenceHashEngineBuilder setPerformanceProfile(
+    public IPIntelligenceOnPremiseEngineBuilder setPerformanceProfile(
         String profileName) {
         PerformanceProfiles profile;
         try {
@@ -157,7 +157,7 @@ public class IPIntelligenceHashEngineBuilder
     }
 
     @Override
-    public IPIntelligenceHashEngineBuilder setPerformanceProfile(
+    public IPIntelligenceOnPremiseEngineBuilder setPerformanceProfile(
         PerformanceProfiles profile) {
         switch (profile) {
             case LowMemory:
@@ -178,7 +178,7 @@ public class IPIntelligenceHashEngineBuilder
             default:
                 throw new IllegalArgumentException(
                     "The performance profile '" + profile.name() +
-                        "' is not valid for a IPIntelligenceHashEngine.");
+                        "' is not valid for a IPIntelligenceOnPremiseEngine.");
         }
         return this;
     }
@@ -193,7 +193,7 @@ public class IPIntelligenceHashEngineBuilder
      */
     @DefaultValue("The result of Runtime#getRuntime().getAvailableProcessors()")
     @Override
-    public IPIntelligenceHashEngineBuilder setConcurrency(int concurrency) {
+    public IPIntelligenceOnPremiseEngineBuilder setConcurrency(int concurrency) {
         config.setConcurrency(concurrency);
         return this;
     }
@@ -209,7 +209,7 @@ public class IPIntelligenceHashEngineBuilder
      */
     @DefaultValue("false")
     @Override
-    public IPIntelligenceHashEngineBuilder setAllowUnmatched(boolean allow) {
+    public IPIntelligenceOnPremiseEngineBuilder setAllowUnmatched(boolean allow) {
         config.setAllowUnmatched(allow);
         return this;
     }
@@ -225,7 +225,7 @@ public class IPIntelligenceHashEngineBuilder
      */
     @DefaultValue(intValue = 0)
     @Override
-    public IPIntelligenceHashEngineBuilder setDifference(int difference) {
+    public IPIntelligenceOnPremiseEngineBuilder setDifference(int difference) {
         config.setDifference(difference);
         return this;
     }
@@ -241,7 +241,7 @@ public class IPIntelligenceHashEngineBuilder
      * @return this builder
      */
     @DefaultValue(intValue = 0)
-    public IPIntelligenceHashEngineBuilder setDrift(int drift) {
+    public IPIntelligenceOnPremiseEngineBuilder setDrift(int drift) {
         config.setDrift(drift);
         return this;
     }
@@ -261,7 +261,7 @@ public class IPIntelligenceHashEngineBuilder
      * @return this builder
      */
     @DefaultValue("false")
-    public IPIntelligenceHashEngineBuilder setUsePerformanceGraph(boolean use) {
+    public IPIntelligenceOnPremiseEngineBuilder setUsePerformanceGraph(boolean use) {
         config.setUsePerformanceGraph(use);
         return this;
     }
@@ -280,13 +280,13 @@ public class IPIntelligenceHashEngineBuilder
      * @return this builder
      */
     @DefaultValue("true")
-    public IPIntelligenceHashEngineBuilder setUsePredictiveGraph(boolean use) {
+    public IPIntelligenceOnPremiseEngineBuilder setUsePredictiveGraph(boolean use) {
         config.setUsePredictiveGraph(use);
         return this;
     }
     
     @Override
-    public IPIntelligenceHashEngineBuilder setCache(
+    public IPIntelligenceOnPremiseEngineBuilder setCache(
         CacheConfiguration cacheConfiguration) {
         throw new UnsupportedOperationException(
             "A results cache cannot be configured in the on-premise Hash " +
@@ -306,7 +306,7 @@ public class IPIntelligenceHashEngineBuilder
     }
 
     @Override
-    protected IPIntelligenceHashEngine newEngine(List<String> properties) {
+    protected IPIntelligenceOnPremiseEngine newEngine(List<String> properties) {
         if (dataFiles.size() != 1) {
             throw new PipelineConfigurationException(
                 "This builder requires one and only one configured file " +
@@ -336,8 +336,8 @@ public class IPIntelligenceHashEngineBuilder
             propertiesSwig.addAll(properties);
             requiredProperties = new RequiredPropertiesConfigSwig(propertiesSwig);
         }
-        return new IPIntelligenceHashEngine(
-            loggerFactory.getLogger(IPIntelligenceHashEngine.class.getName()),
+        return new IPIntelligenceOnPremiseEngine(
+            loggerFactory.getLogger(IPIntelligenceOnPremiseEngine.class.getName()),
             dataFile,
             config,
             requiredProperties,
@@ -361,7 +361,7 @@ public class IPIntelligenceHashEngineBuilder
             return new IPIDataHashDefault(
                 loggerFactory.getLogger(IPIDataHash.class.getName()),
                 flowData,
-                (IPIntelligenceHashEngine) engine,
+                (IPIntelligenceOnPremiseEngine) engine,
                 MissingPropertyServiceDefault.getInstance());
         }
     }

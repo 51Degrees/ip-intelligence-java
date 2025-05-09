@@ -20,10 +20,10 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise;
+package fiftyone.ipintelligence.engine.onpremise;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.data.IPIDataHash;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.*;
+import fiftyone.ipintelligence.engine.onpremise.data.IPIDataHash;
+import fiftyone.ipintelligence.engine.onpremise.interop.swig.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -44,14 +44,14 @@ public class AutoCloseable {
     public static Collection<Object[]> data() {
         Object[][] data = new Object[][]{
             // Classes which should be AutoCloseable.
-            {ResultsHashSwig.class, true},
+            {ResultsIpiSwig.class, true},
             {BoolValueSwig.class, true},
             {StringValueSwig.class, true},
             {IntegerValueSwig.class, true},
             {DoubleValueSwig.class, true},
             {VectorStringValuesSwig.class, true},
-            {EngineHashSwig.class, true},
-            {EvidenceIPIntelligenceSwig.class, true},
+            {EngineIpiSwig.class, true},
+            {EvidenceIpiSwig.class, true},
             {MapStringStringSwig.class, true},
             {VectorStringSwig.class, true},
             // Classes which should not be AutoCloseable.

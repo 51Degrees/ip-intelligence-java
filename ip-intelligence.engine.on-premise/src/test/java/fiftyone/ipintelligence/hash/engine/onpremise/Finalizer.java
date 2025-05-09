@@ -20,10 +20,10 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise;
+package fiftyone.ipintelligence.engine.onpremise;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.data.IPIDataHash;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.*;
+import fiftyone.ipintelligence.engine.onpremise.data.IPIDataHash;
+import fiftyone.ipintelligence.engine.onpremise.interop.swig.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -43,7 +43,7 @@ public class Finalizer {
     public static Collection<Object[]> data() {
         Object[][] data = new Object[][]{
             // Classes which should have a finalizer.
-            {EngineHashSwig.class, true},
+            {EngineIpiSwig.class, true},
             {CollectionConfigSwig.class, true},
             {RequiredPropertiesConfigSwig.class, true},
             {ComponentMetaDataSwig.class, true},
@@ -57,13 +57,13 @@ public class Finalizer {
             {ValueMetaDataCollectionSwig.class, true},
             {MetaDataSwig.class, true},
             // Classes which should not have a finalizer.
-            {ResultsHashSwig.class, false},
+            {ResultsIpiSwig.class, false},
             {BoolValueSwig.class, false},
             {StringValueSwig.class, false},
             {IntegerValueSwig.class, false},
             {DoubleValueSwig.class, false},
             {VectorStringValuesSwig.class, false},
-            {EvidenceIPIntelligenceSwig.class, false},
+            {EvidenceIpiSwig.class, false},
             {EvidenceBaseSwig.class, false},
             {MapStringStringSwig.class, false},
             {VectorStringSwig.class, false},

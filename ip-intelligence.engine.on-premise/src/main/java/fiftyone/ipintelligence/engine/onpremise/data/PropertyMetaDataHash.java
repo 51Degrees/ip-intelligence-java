@@ -20,12 +20,12 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.data;
+package fiftyone.ipintelligence.engine.onpremise.data;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngine;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.Swig;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.ValueIterable;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.*;
+import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
+import fiftyone.ipintelligence.engine.onpremise.interop.Swig;
+import fiftyone.ipintelligence.engine.onpremise.interop.ValueIterable;
+import fiftyone.ipintelligence.engine.onpremise.interop.swig.*;
 import fiftyone.pipeline.core.data.ElementData;
 import fiftyone.pipeline.core.data.ElementPropertyMetaData;
 import fiftyone.pipeline.core.data.types.JavaScript;
@@ -46,7 +46,7 @@ public class PropertyMetaDataHash implements FiftyOneAspectPropertyMetaData {
 
     private final PropertyMetaDataSwig source;
 
-    private final IPIntelligenceHashEngine engine;
+    private final IPIntelligenceOnPremiseEngine engine;
 
     private final String url;
     private final byte displayOrder;
@@ -68,7 +68,7 @@ public class PropertyMetaDataHash implements FiftyOneAspectPropertyMetaData {
      * @param source the source metadata from the native engine
      */
     public PropertyMetaDataHash(
-        IPIntelligenceHashEngine engine,
+        IPIntelligenceOnPremiseEngine engine,
         PropertyMetaDataSwig source) {
         this.source = source;
         this.engine = engine;

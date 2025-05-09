@@ -6,7 +6,7 @@
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.interop.swig;
+package fiftyone.ipintelligence.engine.onpremise.interop.swig;
 
 public class MapStringStringSwig extends java.util.AbstractMap<String, String> implements AutoCloseable {
   private transient long swigCPtr;

@@ -20,10 +20,10 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.data;
+package fiftyone.ipintelligence.engine.onpremise.data;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngine;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.*;
+import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
+import fiftyone.ipintelligence.engine.onpremise.interop.swig.*;
 import fiftyone.pipeline.engines.fiftyone.data.FiftyOneAspectPropertyMetaData;
 import fiftyone.pipeline.engines.fiftyone.data.ValueMetaData;
 
@@ -37,7 +37,7 @@ public class ValueMetaDataHash implements ValueMetaData {
 
     private final ValueMetaDataSwig source;
 
-    private final IPIntelligenceHashEngine engine;
+    private final IPIntelligenceOnPremiseEngine engine;
 
     /**
      * Construct a new instance.
@@ -45,7 +45,7 @@ public class ValueMetaDataHash implements ValueMetaData {
      * @param source the source metadata from the native engine
      */
     public ValueMetaDataHash(
-        IPIntelligenceHashEngine engine,
+        IPIntelligenceOnPremiseEngine engine,
         ValueMetaDataSwig source) {
         this.engine = engine;
         this.source = source;

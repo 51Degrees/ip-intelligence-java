@@ -20,7 +20,7 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.interop;
+package fiftyone.ipintelligence.engine.onpremise.interop;
 
 public class Constants {
     private static final String USE_PACKAGE_MANAGER =

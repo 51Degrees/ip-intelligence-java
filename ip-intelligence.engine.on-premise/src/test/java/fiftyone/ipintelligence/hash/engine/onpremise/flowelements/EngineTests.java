@@ -20,7 +20,7 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.flowelements;
+package fiftyone.ipintelligence.engine.onpremise.flowelements;
 
 import static org.junit.Assert.*;
 import static org.junit.Assume.assumeTrue;
@@ -40,8 +40,8 @@ import static fiftyone.pipeline.util.FileFinder.getFilePath;
 public class EngineTests {
 	protected static final ILoggerFactory loggerFactory = LoggerFactory.getILoggerFactory();
 
-	private IPIntelligenceHashEngine createEngine(File dataFile) throws Exception {
-		return new IPIntelligenceHashEngineBuilder(loggerFactory, null)
+	private IPIntelligenceOnPremiseEngine createEngine(File dataFile) throws Exception {
+		return new IPIntelligenceOnPremiseEngineBuilder(loggerFactory, null)
                 .setPerformanceProfile(Constants.PerformanceProfiles.HighPerformance)
                 .setUpdateMatchedUserAgent(true)
                 .setAutoUpdate(false)
@@ -62,7 +62,7 @@ public class EngineTests {
 			assumeTrue(e.getMessage(), false);
 		}
 		
-		IPIntelligenceHashEngine engine = createEngine(dataFile);
+		IPIntelligenceOnPremiseEngine engine = createEngine(dataFile);
 		String tier = engine.getDataSourceTier();
 		engine.close();
 		

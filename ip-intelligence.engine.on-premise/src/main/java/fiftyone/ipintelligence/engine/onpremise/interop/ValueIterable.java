@@ -20,11 +20,11 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.interop;
+package fiftyone.ipintelligence.engine.onpremise.interop;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.data.ValueMetaDataHash;
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngine;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.ValueMetaDataCollectionSwig;
+import fiftyone.ipintelligence.engine.onpremise.data.ValueMetaDataHash;
+import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
+import fiftyone.ipintelligence.engine.onpremise.interop.swig.ValueMetaDataCollectionSwig;
 import fiftyone.pipeline.engines.fiftyone.data.CollectionIterableBase;
 import fiftyone.pipeline.engines.fiftyone.data.ValueMetaData;
 
@@ -35,7 +35,7 @@ import fiftyone.pipeline.engines.fiftyone.data.ValueMetaData;
 public class ValueIterable
         extends CollectionIterableBase<ValueMetaData> {
 
-    private final IPIntelligenceHashEngine engine;
+    private final IPIntelligenceOnPremiseEngine engine;
 
     private final ValueMetaDataCollectionSwig collection;
 
@@ -45,7 +45,7 @@ public class ValueIterable
      * @param collection the native collection of values
      */
     public ValueIterable(
-            IPIntelligenceHashEngine engine,
+            IPIntelligenceOnPremiseEngine engine,
             ValueMetaDataCollectionSwig collection) {
         super(collection.getSize());
         this.engine = engine;

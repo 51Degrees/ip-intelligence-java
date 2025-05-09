@@ -6,7 +6,7 @@
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.interop.swig;
+package fiftyone.ipintelligence.engine.onpremise.interop.swig;
 
 public class WeightedStringListSwig extends java.util.AbstractList<WeightedValueStringSwig> implements AutoCloseable, java.util.RandomAccess {
   private transient long swigCPtr;

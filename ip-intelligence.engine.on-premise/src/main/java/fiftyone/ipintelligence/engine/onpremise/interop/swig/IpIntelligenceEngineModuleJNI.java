@@ -6,10 +6,10 @@
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.interop.swig;
+package fiftyone.ipintelligence.engine.onpremise.interop.swig;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngine;
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.Constants;
+import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
+import fiftyone.ipintelligence.engine.onpremise.interop.Constants;
 import fiftyone.pipeline.engines.fiftyone.flowelements.interop.LibLoader;
 import java.nio.ByteBuffer;
 
@@ -410,7 +410,7 @@ public class IpIntelligenceEngineModuleJNI {
 
   static {
     try {
-      LibLoader.load(IPIntelligenceHashEngine.class);
+      LibLoader.load(IPIntelligenceOnPremiseEngine.class);
     } catch (UnsatisfiedLinkError e) {
       if (e.getMessage().contains("libatomic")) {
         throw new UnsatisfiedLinkError(

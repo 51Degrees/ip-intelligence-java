@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.flowelements.IPIntelligenceHashEngine;
+import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
 import fiftyone.ipintelligence.shared.IPIData;
 import fiftyone.ipintelligence.shared.testhelpers.UserAgentGenerator;
 import fiftyone.ipintelligence.shared.testhelpers.FileUtils;
@@ -244,8 +244,8 @@ public class IPIntelligenceTests {
                             .setAutoUpdate(false);
             try (Pipeline pipeline = builder.build()) {
                 assertEquals(1, pipeline.getServices().size());
-                IPIntelligenceHashEngine ddhe =
-                        pipeline.getElement(IPIntelligenceHashEngine.class);
+                IPIntelligenceOnPremiseEngine ddhe =
+                        pipeline.getElement(IPIntelligenceOnPremiseEngine.class);
                 String tempDir = ddhe.getTempDataDirPath();
                 Path tempPath = Paths.get(tempDir);
             }

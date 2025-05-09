@@ -20,7 +20,7 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise;
+package fiftyone.ipintelligence.engine.onpremise;
 
 import fiftyone.ipintelligence.shared.testhelpers.UserAgentGenerator;
 import fiftyone.ipintelligence.shared.testhelpers.FileUtils;

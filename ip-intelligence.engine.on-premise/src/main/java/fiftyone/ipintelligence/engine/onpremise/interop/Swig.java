@@ -20,9 +20,9 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence.hash.engine.onpremise.interop;
+package fiftyone.ipintelligence.engine.onpremise.interop;
 
-import fiftyone.ipintelligence.hash.engine.onpremise.interop.swig.VectorStringSwig;
+import fiftyone.ipintelligence.engine.onpremise.interop.swig.VectorStringSwig;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
