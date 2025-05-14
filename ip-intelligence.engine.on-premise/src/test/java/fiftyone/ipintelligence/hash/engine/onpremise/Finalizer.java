@@ -22,7 +22,6 @@
 
 package fiftyone.ipintelligence.engine.onpremise;
 
-import fiftyone.ipintelligence.engine.onpremise.data.IPIDataHash;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;

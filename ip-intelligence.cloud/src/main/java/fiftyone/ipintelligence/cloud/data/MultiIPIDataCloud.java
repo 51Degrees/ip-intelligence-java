@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.cloud.data;
 
-import fiftyone.ipintelligence.shared.IPIData;
+import fiftyone.ipintelligence.shared.IPIntelligenceData;
 import fiftyone.pipeline.core.data.FlowData;
 import fiftyone.pipeline.engines.data.AspectData;
 import fiftyone.pipeline.engines.data.AspectDataBase;
@@ -37,12 +37,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Encapsulates a list of {@link IPIData} instances which can be returned
+ * Encapsulates a list of {@link IPIntelligenceData} instances which can be returned
  * by the 51Degrees cloud service when certain evidence is provided (e.g. TAC)
  */
 public class MultiIPIDataCloud
     extends AspectDataBase
-    implements MultiProfileData<IPIData> {
+    implements MultiProfileData<IPIntelligenceData> {
     private static final String DEVICE_LIST_KEY = "profiles";
 
     /**
@@ -58,7 +58,7 @@ public class MultiIPIDataCloud
         FlowData flowData,
         AspectEngine<? extends AspectData, ? extends AspectPropertyMetaData> engine) {
         super(logger, flowData, engine);
-        this.put(DEVICE_LIST_KEY, new ArrayList<IPIData>());
+        this.put(DEVICE_LIST_KEY, new ArrayList<IPIntelligenceData>());
     }
 
     /**
@@ -77,16 +77,16 @@ public class MultiIPIDataCloud
         AspectEngine<? extends AspectData, ? extends AspectPropertyMetaData> engine,
         MissingPropertyService missingPropertyService) {
         super(logger, flowData, engine, missingPropertyService);
-        this.put(DEVICE_LIST_KEY, new ArrayList<IPIData>());
+        this.put(DEVICE_LIST_KEY, new ArrayList<IPIntelligenceData>());
     }
 
     @Override
-    public List<IPIData> getProfiles() {
+    public List<IPIntelligenceData> getProfiles() {
         return getDeviceList();
     }
 
     @Override
-    public void addProfile(IPIData profile) {
+    public void addProfile(IPIntelligenceData profile) {
         getDeviceList().add(profile);
     }
 
@@ -95,7 +95,7 @@ public class MultiIPIDataCloud
      * @return
      */
     @SuppressWarnings("unchecked")
-    private List<IPIData> getDeviceList() {
-        return (List<IPIData>)this.get(DEVICE_LIST_KEY);
+    private List<IPIntelligenceData> getDeviceList() {
+        return (List<IPIntelligenceData>)this.get(DEVICE_LIST_KEY);
     }
 }

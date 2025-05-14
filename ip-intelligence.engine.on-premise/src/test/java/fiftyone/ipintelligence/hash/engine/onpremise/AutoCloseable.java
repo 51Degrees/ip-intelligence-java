@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.engine.onpremise;
 
-import fiftyone.ipintelligence.engine.onpremise.data.IPIDataHash;
+import fiftyone.ipintelligence.engine.onpremise.data.IPIntelligenceDataHash;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,7 +56,7 @@ public class AutoCloseable {
             {VectorStringSwig.class, true},
             // Classes which should not be AutoCloseable.
             {Date.class, false},
-            {IPIDataHash.class, false},
+            {IPIntelligenceDataHash.class, false},
             {MetaDataSwig.class, false},
             {CollectionConfigSwig.class, false},
             {RequiredPropertiesConfigSwig.class, false},

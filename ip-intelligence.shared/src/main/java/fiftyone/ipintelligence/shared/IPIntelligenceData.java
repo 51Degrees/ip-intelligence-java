@@ -31,7 +31,7 @@ import java.util.List;
  * Interface exposing typed accessors for properties related to a device
  * returned by a IP Intelligence engine.
  */
-public interface IPIData extends AspectData
+public interface IPIntelligenceData extends AspectData
 {
 	/**
 	 * Indicates what ajax request format should be used.
