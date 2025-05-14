@@ -22,16 +22,16 @@
 
 package fiftyone.ipintelligence.engine.onpremise.data;
 
-import fiftyone.ipintelligence.shared.IPIData;
+import fiftyone.ipintelligence.shared.IPIntelligenceData;
 import fiftyone.pipeline.engines.data.AspectPropertyValue;
 
 import java.util.List;
 
 /**
- * Hash specific interface for {@link IPIData}.
+ * Hash specific interface for {@link IPIntelligenceData}.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-on-premise.md#element-data">Specification</a>
  */
-public interface IPIDataHash extends IPIData {
+public interface IPIntelligenceDataHash extends IPIntelligenceData {
 
     /**
      * Get the values for the specified property as a List&lt;>. For

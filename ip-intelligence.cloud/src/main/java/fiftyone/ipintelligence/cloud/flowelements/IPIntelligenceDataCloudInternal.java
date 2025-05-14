@@ -22,26 +22,22 @@
 
 package fiftyone.ipintelligence.cloud.flowelements;
 
-import fiftyone.ipintelligence.cloud.data.IPIDataCloud;
-import fiftyone.ipintelligence.shared.IPIDataBase;
+import fiftyone.ipintelligence.cloud.data.IPIntelligenceDataCloud;
+import fiftyone.ipintelligence.shared.IPIntelligenceDataBase;
 import fiftyone.pipeline.core.data.FlowData;
 import fiftyone.pipeline.engines.data.AspectData;
 import fiftyone.pipeline.engines.data.AspectPropertyMetaData;
-import fiftyone.pipeline.engines.data.AspectPropertyValue;
-import fiftyone.pipeline.engines.data.AspectPropertyValueDefault;
 import fiftyone.pipeline.engines.flowelements.AspectEngine;
 import fiftyone.pipeline.engines.services.MissingPropertyService;
 import org.slf4j.Logger;
 
-import java.util.List;
-
 /**
- * Internal implementation of the {@link IPIDataCloud} interface. This can
+ * Internal implementation of the {@link IPIntelligenceDataCloud} interface. This can
  * only be constructed by the {@link IPIntelligenceCloudEngine}.
  */
-public class IPIDataCloudInternal
-    extends IPIDataBase
-    implements IPIDataCloud {
+public class IPIntelligenceDataCloudInternal
+    extends IPIntelligenceDataBase
+    implements IPIntelligenceDataCloud {
     /**
      * Constructs a new instance.
      * @param logger used for logging
@@ -51,7 +47,7 @@ public class IPIDataCloudInternal
      * @param missingPropertyService service used to determine the reason for
      *                               a property value being missing
      */
-    IPIDataCloudInternal (
+    IPIntelligenceDataCloudInternal(
         Logger logger,
         FlowData flowData,
         AspectEngine<? extends AspectData, ? extends AspectPropertyMetaData> engine,

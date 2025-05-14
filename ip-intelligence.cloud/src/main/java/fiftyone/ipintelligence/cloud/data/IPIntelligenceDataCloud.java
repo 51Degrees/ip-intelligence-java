@@ -22,11 +22,11 @@
 
 package fiftyone.ipintelligence.cloud.data;
 
-import fiftyone.ipintelligence.shared.IPIData;
+import fiftyone.ipintelligence.shared.IPIntelligenceData;
 
 /**
- * Cloud specific interface for {@link IPIData}.
+ * Cloud specific interface for {@link IPIntelligenceData}.
  */
-public interface IPIDataCloud extends IPIData {
+public interface IPIntelligenceDataCloud extends IPIntelligenceData {
 
 }

@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.engine.onpremise.flowelements;
 
-import fiftyone.ipintelligence.engine.onpremise.data.IPIDataHash;
+import fiftyone.ipintelligence.engine.onpremise.data.IPIntelligenceDataHash;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.ConfigIpiSwig;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.RequiredPropertiesConfigSwig;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.VectorStringSwig;
@@ -346,7 +346,7 @@ public class IPIntelligenceOnPremiseEngineBuilder
     }
 
     private static class HashDataFactory implements
-        ElementDataFactory<IPIDataHash> {
+        ElementDataFactory<IPIntelligenceDataHash> {
 
         private final ILoggerFactory loggerFactory;
 
@@ -355,11 +355,11 @@ public class IPIntelligenceOnPremiseEngineBuilder
         }
 
         @Override
-        public IPIDataHash create(
+        public IPIntelligenceDataHash create(
             FlowData flowData,
-            FlowElement<IPIDataHash, ?> engine) {
-            return new IPIDataHashDefault(
-                loggerFactory.getLogger(IPIDataHash.class.getName()),
+            FlowElement<IPIntelligenceDataHash, ?> engine) {
+            return new IPIntelligenceDataHashDefault(
+                loggerFactory.getLogger(IPIntelligenceDataHash.class.getName()),
                 flowData,
                 (IPIntelligenceOnPremiseEngine) engine,
                 MissingPropertyServiceDefault.getInstance());

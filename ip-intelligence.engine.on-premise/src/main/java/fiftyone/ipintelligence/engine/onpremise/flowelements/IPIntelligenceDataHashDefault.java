@@ -23,10 +23,10 @@
 package fiftyone.ipintelligence.engine.onpremise.flowelements;
 
 import fiftyone.ipintelligence.engine.onpremise.Enums;
-import fiftyone.ipintelligence.engine.onpremise.data.IPIDataHash;
+import fiftyone.ipintelligence.engine.onpremise.data.IPIntelligenceDataHash;
 import fiftyone.ipintelligence.engine.onpremise.interop.Swig;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.*;
-import fiftyone.ipintelligence.shared.IPIDataBaseOnPremise;
+import fiftyone.ipintelligence.shared.IPIntelligenceDataBaseOnPremise;
 import fiftyone.pipeline.core.data.FlowData;
 import fiftyone.pipeline.core.data.TryGetResult;
 import fiftyone.pipeline.core.data.types.JavaScript;
@@ -42,13 +42,13 @@ import java.util.List;
 import static fiftyone.pipeline.util.StringManipulation.stringJoin;
 
 /**
- * Internal implementation of the {@link IPIDataHash} interface. This can
+ * Internal implementation of the {@link IPIntelligenceDataHash} interface. This can
  * only be constructed by the {@link IPIntelligenceOnPremiseEngine}.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-on-premise.md#element-data">Specification</a>
  */
-public class IPIDataHashDefault
-    extends IPIDataBaseOnPremise
-    implements IPIDataHash, AutoCloseable {
+public class IPIntelligenceDataHashDefault
+    extends IPIntelligenceDataBaseOnPremise
+    implements IPIntelligenceDataHash, AutoCloseable {
 
     /**
      * True if the {@link #close()} method has been called.
@@ -77,7 +77,7 @@ public class IPIDataHashDefault
      * @param missingPropertyService service used to determine the reason for
      *                               a property value being missing
      */
-    IPIDataHashDefault(
+    IPIntelligenceDataHashDefault(
         Logger logger,
         FlowData flowData,
         IPIntelligenceOnPremiseEngine engine,
@@ -426,7 +426,7 @@ public class IPIDataHashDefault
 
     private void checkState() {
         if (closed == true) {
-            throw new IllegalStateException("The IPIDataHash instance has " +
+            throw new IllegalStateException("The IPIntelligenceDataHash instance has " +
                 "been closed, and cannot be used. Any result processing should " +
                 "be carried out within a 'try-with-resource' block which " +
                 "closes the FlowData and any AutoCloseable elements.");
@@ -441,7 +441,7 @@ public class IPIDataHashDefault
                 result.close();
             } catch (Exception e) {
                 logger.error("Failed to close native results instance. " +
-                    "A IPIDataHash instance contains native unmanaged " +
+                    "A IPIntelligenceDataHash instance contains native unmanaged " +
                     "memory which needs to be closed. Failing to close " +
                     "could lead to memory leaks.", e);
             }

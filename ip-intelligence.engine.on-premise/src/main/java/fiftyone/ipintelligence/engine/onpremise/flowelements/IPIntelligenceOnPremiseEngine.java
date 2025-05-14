@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.engine.onpremise.flowelements;
 
-import fiftyone.ipintelligence.engine.onpremise.data.IPIDataHash;
+import fiftyone.ipintelligence.engine.onpremise.data.IPIntelligenceDataHash;
 import fiftyone.ipintelligence.engine.onpremise.data.ProfileMetaDataHash;
 import fiftyone.ipintelligence.engine.onpremise.data.PropertyMetaDataHash;
 import fiftyone.ipintelligence.engine.onpremise.data.ValueMetaDataHash;
@@ -51,7 +51,7 @@ import static org.apache.commons.lang3.BooleanUtils.isFalse;
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-on-premise.md">Specification</a>
  */
 public class IPIntelligenceOnPremiseEngine
-    extends FiftyOneOnPremiseAspectEngineBase<IPIDataHash,
+    extends FiftyOneOnPremiseAspectEngineBase<IPIntelligenceDataHash,
     FiftyOneAspectPropertyMetaData> {
     private EngineIpiSwig engine = null;
     private final List<FiftyOneAspectPropertyMetaData> properties = new ArrayList<>();
@@ -71,7 +71,7 @@ public class IPIntelligenceOnPremiseEngine
      *                   the properties which the engine should be initialised
      *                   with
      * @param IPIDataFactory the factory to use when creating a
-     *                          {@link IPIDataHash} instance
+     *                          {@link IPIntelligenceDataHash} instance
      * @param tempDataFileDir the file where a temporary data file copy
      *                        will be stored if one is created
      */
@@ -80,7 +80,7 @@ public class IPIntelligenceOnPremiseEngine
         AspectEngineDataFile dataFile,
         ConfigIpiSwig config,
         RequiredPropertiesConfigSwig properties,
-        ElementDataFactory<IPIDataHash> IPIDataFactory,
+        ElementDataFactory<IPIntelligenceDataHash> IPIDataFactory,
         String tempDataFileDir) {
         super(logger, IPIDataFactory, tempDataFileDir);
         this.config = config;
@@ -303,7 +303,7 @@ public class IPIntelligenceOnPremiseEngine
     }
 
     @Override
-    protected void processEngine(FlowData flowData, IPIDataHash IPIData) {
+    protected void processEngine(FlowData flowData, IPIntelligenceDataHash IPIData) {
         try (EvidenceIpiSwig relevantEvidence =
             new EvidenceIpiSwig()) {
             List<String> keys = evidenceKeys;
@@ -323,7 +323,7 @@ public class IPIntelligenceOnPremiseEngine
                         Swig.asBytes(evidenceItem.getValue().toString()));
                 }
             }
-            ((IPIDataHashDefault) IPIData).setResults(
+            ((IPIntelligenceDataHashDefault) IPIData).setResults(
                 engine.process(relevantEvidence));
         }
     }

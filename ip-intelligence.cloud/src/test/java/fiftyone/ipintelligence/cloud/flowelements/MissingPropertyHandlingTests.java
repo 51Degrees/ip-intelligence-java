@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.cloud.flowelements;
 
-import fiftyone.ipintelligence.cloud.data.IPIDataCloud;
+import fiftyone.ipintelligence.cloud.data.IPIntelligenceDataCloud;
 import fiftyone.pipeline.cloudrequestengine.data.CloudRequestData;
 import fiftyone.pipeline.cloudrequestengine.flowelements.CloudRequestEngine;
 import fiftyone.pipeline.core.data.FlowData;
@@ -65,8 +65,8 @@ public class MissingPropertyHandlingTests {
             FlowData flowData = mock(FlowData.class);
             addResponse(flowData, nullValueJson);
 
-            IPIDataCloud device = new IPIDataCloudInternal(
-                    loggerFactory.getLogger(IPIDataCloud.class.getSimpleName()),
+            IPIntelligenceDataCloud device = new IPIntelligenceDataCloudInternal(
+                    loggerFactory.getLogger(IPIntelligenceDataCloud.class.getSimpleName()),
                     flowData,
                     engine,
                     mock(MissingPropertyService.class));
@@ -108,8 +108,8 @@ public class MissingPropertyHandlingTests {
                             MissingPropertyReason.Unknown,
                             expectedMissingPropertyReason));
 
-            IPIDataCloud device = new IPIDataCloudInternal(
-                    loggerFactory.getLogger(IPIDataCloud.class.getSimpleName()),
+            IPIntelligenceDataCloud device = new IPIntelligenceDataCloudInternal(
+                    loggerFactory.getLogger(IPIntelligenceDataCloud.class.getSimpleName()),
                     flowData,
                     engine,
                     missingPropertyService);

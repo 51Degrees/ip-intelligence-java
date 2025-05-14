@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.data;
 
-import fiftyone.ipintelligence.shared.IPIDataBaseOnPremise;
+import fiftyone.ipintelligence.shared.IPIntelligenceDataBaseOnPremise;
 import fiftyone.pipeline.core.data.ElementPropertyMetaData;
 import fiftyone.pipeline.core.data.ElementPropertyMetaDataDefault;
 import fiftyone.pipeline.core.data.FlowData;
@@ -50,7 +50,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class IPIDataOnPremiseTests {
+public class IPIntelligenceDataOnPremiseTests {
 
     private static String testPropertyName = "testproperty";
     private Logger logger;
@@ -220,7 +220,7 @@ public class IPIDataOnPremiseTests {
         assertEquals(expected, ((AspectPropertyValue<?>)mapValue).getValue());
     }
 
-    private class TestResults<T> extends IPIDataBaseOnPremise {
+    private class TestResults<T> extends IPIntelligenceDataBaseOnPremise {
         private Object value;
 
         TestResults(

@@ -42,7 +42,7 @@ import static fiftyone.pipeline.util.Types.getPrimitiveTypeMap;
 /**
  * Base class used for all 51Degrees on-premise IP Intelligence results classes.
  */
-public abstract class IPIDataBaseOnPremise extends IPIDataBase {
+public abstract class IPIntelligenceDataBaseOnPremise extends IPIntelligenceDataBase {
 
     protected final Map<Class<?>, Class<?>> primitiveTypes;
     private final Object dataLock = new Object();
@@ -58,7 +58,7 @@ public abstract class IPIDataBaseOnPremise extends IPIDataBase {
      * @param missingPropertyService service used to determine the reason for
      *                               a property value being missing
      */
-    protected IPIDataBaseOnPremise(
+    protected IPIntelligenceDataBaseOnPremise(
         Logger logger,
         FlowData flowData,
         AspectEngine<? extends AspectData, ? extends AspectPropertyMetaData> engine,

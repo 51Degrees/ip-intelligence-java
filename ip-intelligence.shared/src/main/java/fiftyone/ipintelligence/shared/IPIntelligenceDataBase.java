@@ -31,7 +31,7 @@ import fiftyone.pipeline.engines.data.AspectPropertyValue;
 import fiftyone.pipeline.engines.services.MissingPropertyService;
 import org.slf4j.Logger;
 import java.util.List;
-public abstract class IPIDataBase extends AspectDataBase implements IPIData
+public abstract class IPIntelligenceDataBase extends AspectDataBase implements IPIntelligenceData
 {
 /**
  * Constructor.
@@ -42,7 +42,7 @@ public abstract class IPIDataBase extends AspectDataBase implements IPIData
  * @param missingPropertyService service used to determine the reason for
  *                               a property value being missing
  */
-	protected IPIDataBase(
+	protected IPIntelligenceDataBase(
 		Logger logger,
 		FlowData flowData,
 		AspectEngine<? extends AspectData, ? extends AspectPropertyMetaData> engine,

@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.cloud.flowelements;
 
-import fiftyone.ipintelligence.cloud.data.IPIDataCloud;
+import fiftyone.ipintelligence.cloud.data.IPIntelligenceDataCloud;
 import fiftyone.pipeline.annotations.ElementBuilder;
 import fiftyone.pipeline.core.data.FlowData;
 import fiftyone.pipeline.core.data.factories.ElementDataFactory;
@@ -67,7 +67,7 @@ public class IPIntelligenceCloudEngineBuilder
     }
 
     private static class IPIDataCloudFactory
-        implements ElementDataFactory<IPIDataCloud> {
+        implements ElementDataFactory<IPIntelligenceDataCloud> {
 
         private final ILoggerFactory loggerFactory;
 
@@ -76,11 +76,11 @@ public class IPIntelligenceCloudEngineBuilder
         }
 
         @Override
-        public IPIDataCloud create(
+        public IPIntelligenceDataCloud create(
             FlowData flowData,
-            FlowElement<IPIDataCloud, ?> engine) {
-            return new IPIDataCloudInternal(
-                loggerFactory.getLogger(IPIDataCloud.class.getName()),
+            FlowElement<IPIntelligenceDataCloud, ?> engine) {
+            return new IPIntelligenceDataCloudInternal(
+                loggerFactory.getLogger(IPIntelligenceDataCloud.class.getName()),
                 flowData,
                 (IPIntelligenceCloudEngine) engine,
                 MissingPropertyServiceDefault.getInstance());

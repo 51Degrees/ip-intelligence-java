@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.cloud.flowelements;
 
-import fiftyone.ipintelligence.cloud.data.IPIDataCloud;
+import fiftyone.ipintelligence.cloud.data.IPIntelligenceDataCloud;
 import fiftyone.pipeline.cloudrequestengine.data.CloudRequestData;
 import fiftyone.pipeline.cloudrequestengine.flowelements.CloudAspectEngineBase;
 import fiftyone.pipeline.cloudrequestengine.flowelements.CloudRequestEngine;
@@ -50,11 +50,11 @@ import org.json.JSONArray;
 
 /**
  * Engine that takes the JSON response from the {@link CloudRequestEngine} and
- * uses it populate a {@link IPIDataCloud} instance for easier consumption.
+ * uses it populate a {@link IPIntelligenceDataCloud} instance for easier consumption.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-cloud.md">Specification</a>
  */
 public class IPIntelligenceCloudEngine
-    extends CloudAspectEngineBase<IPIDataCloud> {
+    extends CloudAspectEngineBase<IPIntelligenceDataCloud> {
     List<AspectPropertyMetaData> aspectProperties;
     private String dataSourceTier;
     CloudRequestEngine cloudRequestEngine;
@@ -63,11 +63,11 @@ public class IPIntelligenceCloudEngine
      * Construct a new instance of the {@link IPIntelligenceCloudEngine}.
      * @param logger logger instance to use for logging
      * @param IPIDataFactory the factory to use when creating a
-     *                          {@link IPIDataCloud} instance
+     *                          {@link IPIntelligenceDataCloud} instance
      */
     public IPIntelligenceCloudEngine(
         Logger logger,
-        ElementDataFactory<IPIDataCloud> IPIDataFactory) {
+        ElementDataFactory<IPIntelligenceDataCloud> IPIDataFactory) {
         super(logger, IPIDataFactory);
         this.cloudRequestEngine = null;
     }
@@ -95,7 +95,7 @@ public class IPIntelligenceCloudEngine
     }
 
     @Override
-    protected void processEngine(FlowData data, IPIDataCloud aspectData) {
+    protected void processEngine(FlowData data, IPIntelligenceDataCloud aspectData) {
         if (cloudRequestEngine == null) {
             throw new PipelineConfigurationException(
                 "The '" + getClass().getName() + "' requires a " +

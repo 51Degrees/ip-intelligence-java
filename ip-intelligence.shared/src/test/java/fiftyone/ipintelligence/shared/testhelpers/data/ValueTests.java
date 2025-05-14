@@ -22,11 +22,10 @@
 
 package fiftyone.ipintelligence.shared.testhelpers.data;
 
-import fiftyone.ipintelligence.shared.IPIData;
+import fiftyone.ipintelligence.shared.IPIntelligenceData;
 import fiftyone.ipintelligence.shared.testhelpers.Constants;
 import fiftyone.ipintelligence.shared.testhelpers.Wrapper;
 import fiftyone.pipeline.core.data.ElementData;
-import fiftyone.pipeline.core.data.ElementPropertyMetaData;
 import fiftyone.pipeline.core.data.FlowData;
 import fiftyone.pipeline.engines.data.AspectPropertyValue;
 import fiftyone.pipeline.engines.exceptions.PropertyMissingException;
@@ -45,7 +44,7 @@ public class ValueTests {
             data.addEvidence("header.user-agent", Constants.MobileUserAgent)
                 .process();
             ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
-            IPIData device = (IPIData) elementData;
+            IPIntelligenceData device = (IPIntelligenceData) elementData;
             assertNotNull("The device id should not be null.",
                 device.getDeviceId().getValue());
             assertTrue("The device id should not be empty.",
@@ -58,7 +57,7 @@ public class ValueTests {
             data.addEvidence("header.user-agent", Constants.MobileUserAgent)
                 .process();
             ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
-            IPIData device = (IPIData) elementData;
+            IPIntelligenceData device = (IPIntelligenceData) elementData;
             assertEquals(1, device.getUserAgents().getValue().size());
             for (String matchedUa : device.getUserAgents().getValue()) {
                 for (String substring : matchedUa.split("_|\\{|\\}")) {
@@ -187,7 +186,7 @@ public class ValueTests {
             if (missingGetters.size() > 0) {
                 if (missingGetters.size() == 1) {
                     fail("The property '" + missingGetters.get(0) + "' " +
-                        "is missing a getter in the IPIData class. This is not " +
+                        "is missing a getter in the IPIntelligenceData class. This is not " +
                         "a serious issue, and the property can still be used " +
                         "through the asMap method, but it is an indication " +
                         "that the API should be updated in order to enable the " +
@@ -195,7 +194,7 @@ public class ValueTests {
                 } else {
                     fail("The properties " +
                         stringJoin(missingGetters, ", ") +
-                        "are missing getters in the IPIData class. This is not " +
+                        "are missing getters in the IPIntelligenceData class. This is not " +
                         "a serious issue, and the properties can still be used " +
                         "through the asMap method, but it is an indication " +
                         "that the API should be updated in order to enable the " +

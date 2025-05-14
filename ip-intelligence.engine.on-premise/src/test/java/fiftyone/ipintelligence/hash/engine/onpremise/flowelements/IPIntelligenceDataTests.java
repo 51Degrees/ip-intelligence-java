@@ -24,8 +24,8 @@ package fiftyone.ipintelligence.engine.onpremise.flowelements;
 
 import fiftyone.ipintelligence.engine.onpremise.TestsBase;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.*;
-import fiftyone.ipintelligence.shared.IPIDataBase;
-import fiftyone.ipintelligence.shared.IPIDataBaseOnPremise;
+import fiftyone.ipintelligence.shared.IPIntelligenceDataBase;
+import fiftyone.ipintelligence.shared.IPIntelligenceDataBaseOnPremise;
 import fiftyone.pipeline.core.data.FlowData;
 import fiftyone.pipeline.engines.Constants;
 import fiftyone.pipeline.engines.exceptions.PropertyMissingException;
@@ -42,7 +42,7 @@ import java.lang.reflect.Method;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.*;
 
-public class IPIDataTests extends TestsBase {
+public class IPIntelligenceDataTests extends TestsBase {
 
     private static final Logger logger = mock(Logger.class);
 
@@ -64,14 +64,14 @@ public class IPIDataTests extends TestsBase {
     }
 
     /**
-     * Check that a IPIData is closed by the FlowData which contains it, and
+     * Check that a IPIntelligenceData is closed by the FlowData which contains it, and
      * that it in turn closes the native results.
      * @throws Exception
      */
     @Test
     public void IPIData_ResultsClose() throws Exception {
         try (FlowData flowData = getWrapper().getPipeline().createFlowData()) {
-	        IPIDataHashDefault data = new IPIDataHashDefault(
+	        IPIntelligenceDataHashDefault data = new IPIntelligenceDataHashDefault(
 	            logger,
 	            flowData,
 	            getWrapper().getEngine(),
@@ -90,7 +90,7 @@ public class IPIDataTests extends TestsBase {
     /**
      * Verify that the {@link ResultsIpiSwig#containsProperty(String)} method
      * is called the expected number of times when the target method is called
-     * on the {@link IPIDataHashDefault} instance.
+     * on the {@link IPIntelligenceDataHashDefault} instance.
      * @param data instance to call method on
      * @param results to be checked
      * @param getMethod to call on the data
@@ -99,7 +99,7 @@ public class IPIDataTests extends TestsBase {
      * @throws IllegalAccessException
      */
     private void verifyCallsToContainsProperty(
-        IPIDataHashDefault data,
+        IPIntelligenceDataHashDefault data,
         ResultsIpiSwig results,
         Method getMethod,
         int expectedCount)
@@ -144,7 +144,7 @@ public class IPIDataTests extends TestsBase {
     public void IPIData_ContainsProperty_SingleResult()
         throws Exception {
         try (FlowData flowData = getWrapper().getPipeline().createFlowData()) {
-	        IPIDataHashDefault data = new IPIDataHashDefault(
+	        IPIntelligenceDataHashDefault data = new IPIntelligenceDataHashDefault(
 	            logger,
 	            flowData,
 	            getWrapper().getEngine(),
@@ -178,7 +178,7 @@ public class IPIDataTests extends TestsBase {
     public void IPIData_ContainsProperty_MultipleResults()
         throws Exception {
         try (FlowData flowData = getWrapper().getPipeline().createFlowData()) {
-	        IPIDataHashDefault data = new IPIDataHashDefault(
+	        IPIntelligenceDataHashDefault data = new IPIntelligenceDataHashDefault(
 	            logger,
 	            flowData,
 	            getWrapper().getEngine(),
@@ -222,7 +222,7 @@ public class IPIDataTests extends TestsBase {
     @Test
     public void IPIData_MissingProperty_SingleResult() throws Exception {
         try (FlowData flowData = getWrapper().getPipeline().createFlowData()) {
-	        IPIDataHashDefault data = new IPIDataHashDefault(
+	        IPIntelligenceDataHashDefault data = new IPIntelligenceDataHashDefault(
 	            logger,
 	            flowData,
 	            getWrapper().getEngine(),
@@ -254,7 +254,7 @@ public class IPIDataTests extends TestsBase {
     @Test
     public void IPIData_MissingProperty_MultipleResults() throws Exception {
         try (FlowData flowData = getWrapper().getPipeline().createFlowData()) {
-	        IPIDataHashDefault data = new IPIDataHashDefault(
+	        IPIntelligenceDataHashDefault data = new IPIntelligenceDataHashDefault(
 	            logger,
 	            flowData,
 	            getWrapper().getEngine(),
@@ -286,10 +286,10 @@ public class IPIDataTests extends TestsBase {
 
     /**
      * Interface used for lambda in
-     * {@link #checkThrowsIllegalState(IPIDataHashDefault, IPIDataHashCall)}.
+     * {@link #checkThrowsIllegalState(IPIntelligenceDataHashDefault, IPIDataHashCall)}.
      */
     private interface IPIDataHashCall {
-        void call(IPIDataHashDefault instance);
+        void call(IPIntelligenceDataHashDefault instance);
     }
 
     /**
@@ -299,7 +299,7 @@ public class IPIDataTests extends TestsBase {
      * @throws Exception
      */
     private void checkThrowsIllegalState(
-        IPIDataHashDefault instance,
+        IPIntelligenceDataHashDefault instance,
         IPIDataHashCall methodCall) throws Exception {
         try {
             methodCall.call(instance);
@@ -317,14 +317,14 @@ public class IPIDataTests extends TestsBase {
     }
 
     /**
-     * Check that once a {@link IPIDataHashDefault} instance has been closed,
+     * Check that once a {@link IPIntelligenceDataHashDefault} instance has been closed,
      * an {@link IllegalStateException} is throw when calling get methods.
      * @throws Exception
      */
     @Test
     public void IPIData_Closed() throws Exception {
         try (FlowData flowData = getWrapper().getPipeline().createFlowData()) {
-	        IPIDataHashDefault data = new IPIDataHashDefault(
+	        IPIntelligenceDataHashDefault data = new IPIntelligenceDataHashDefault(
 	            logger,
 	            flowData,
 	            getWrapper().getEngine(),
@@ -340,10 +340,10 @@ public class IPIDataTests extends TestsBase {
 	            (d) -> d.get("ismobile"));
 	        checkThrowsIllegalState(
 	            data,
-	            IPIDataBase::getIsMobile);
+	            IPIntelligenceDataBase::getIsMobile);
 	        checkThrowsIllegalState(
 	            data,
-	            IPIDataBaseOnPremise::asKeyMap);
+	            IPIntelligenceDataBaseOnPremise::asKeyMap);
         }
     }
 }

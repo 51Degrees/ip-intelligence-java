@@ -23,7 +23,7 @@
 package fiftyone.ipintelligence.engine.onpremise.data;
 
 import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
-import fiftyone.ipintelligence.shared.IPIData;
+import fiftyone.ipintelligence.shared.IPIntelligenceData;
 import fiftyone.ipintelligence.shared.testhelpers.data.DataValidator;
 import fiftyone.pipeline.core.data.FlowData;
 import fiftyone.pipeline.engines.data.AspectPropertyValue;
@@ -33,7 +33,6 @@ import fiftyone.pipeline.engines.fiftyone.data.FiftyOneAspectPropertyMetaData;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import static org.junit.Assert.*;
 
@@ -47,7 +46,7 @@ public class DataValidatorHash implements DataValidator {
 
     @Override
     public void validateData(FlowData data, boolean validEvidence) throws NoValueException {
-        IPIData elementData = data.getFromElement(engine);
+        IPIntelligenceData elementData = data.getFromElement(engine);
         Map<String, Object> map = elementData.asKeyMap();
         for (FiftyOneAspectPropertyMetaData property :
                 engine.getProperties()) {
@@ -84,7 +83,7 @@ public class DataValidatorHash implements DataValidator {
 
     @Override
     public void validateProfileIds(FlowData data, List<String> profileIds) throws NoValueException {
-        IPIData elementData = data.getFromElement(engine);
+        IPIntelligenceData elementData = data.getFromElement(engine);
         List<String> matchedProfiles = Arrays.asList(elementData.getDeviceId().getValue().split("-"));
         assertTrue("One or more profiles were not set in the result",
                 matchedProfiles.containsAll(profileIds));

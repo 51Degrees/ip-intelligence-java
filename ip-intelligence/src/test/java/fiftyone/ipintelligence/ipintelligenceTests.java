@@ -23,7 +23,7 @@
 package fiftyone.ipintelligence;
 
 import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
-import fiftyone.ipintelligence.shared.IPIData;
+import fiftyone.ipintelligence.shared.IPIntelligenceData;
 import fiftyone.ipintelligence.shared.testhelpers.UserAgentGenerator;
 import fiftyone.ipintelligence.shared.testhelpers.FileUtils;
 import fiftyone.pipeline.core.data.FlowData;
@@ -187,8 +187,8 @@ public class IPIntelligenceTests {
                                         0,
                                         flowData.getErrors().size());
                                 }
-                                IPIData IPIData = flowData.get(IPIData.class);
-                                IPIData.getIsMobile();
+                                IPIntelligenceData IPIntelligenceData = flowData.get(IPIntelligenceData.class);
+                                IPIntelligenceData.getIsMobile();
                             }
                         }
                         return null;

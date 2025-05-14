@@ -23,7 +23,7 @@
 package fiftyone.ipintelligence.cloud.flowelements;
 
 import fiftyone.ipintelligence.cloud.data.MultiIPIDataCloud;
-import fiftyone.ipintelligence.shared.IPIData;
+import fiftyone.ipintelligence.shared.IPIntelligenceData;
 import fiftyone.pipeline.cloudrequestengine.flowelements.PropertyKeyedCloudEngineBase;
 import fiftyone.pipeline.core.data.FlowData;
 import fiftyone.pipeline.core.data.factories.ElementDataFactory;
@@ -37,7 +37,7 @@ import org.slf4j.Logger;
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/hardware-profile-lookup-cloud.md">Specification</a>
  */
 public class HardwareProfileCloudEngine
-    extends PropertyKeyedCloudEngineBase<MultiIPIDataCloud, IPIData> {
+    extends PropertyKeyedCloudEngineBase<MultiIPIDataCloud, IPIntelligenceData> {
 
     public HardwareProfileCloudEngine(
         Logger logger,
@@ -46,8 +46,8 @@ public class HardwareProfileCloudEngine
     }
 
     @Override
-    protected IPIData createProfileData(FlowData flowData) {
-        return new IPIDataCloudInternal(
+    protected IPIntelligenceData createProfileData(FlowData flowData) {
+        return new IPIntelligenceDataCloudInternal(
             logger,
             flowData ,
             this,
