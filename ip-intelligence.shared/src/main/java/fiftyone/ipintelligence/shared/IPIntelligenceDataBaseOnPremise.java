@@ -76,14 +76,14 @@ public abstract class IPIntelligenceDataBaseOnPremise extends IPIntelligenceData
     protected abstract boolean propertyIsAvailable(String propertyName);
 
     /**
-     * Get the values for the specified property as a {@link List}. For
-     * on-premise engines, this is the raw form they are stored in the data file
-     * as.
+     * Get the values for the specified property as a {@link List}.
      * @param propertyName name of the property to get values for
+     * @param parametrizedTypes types parametrizing {@link AspectPropertyValue} starting with {@link List}
      * @return values as a list
      */
-    public abstract AspectPropertyValue<List<String>> getValues(
-        String propertyName);
+    public abstract AspectPropertyValue<List<?>> getValues(
+        String propertyName,
+        Class<?>[] parametrizedTypes);
 
     /**
      * Get the value for the specified property as a {@link String}.
@@ -218,7 +218,7 @@ public abstract class IPIntelligenceDataBaseOnPremise extends IPIntelligenceData
                             } else if (innerType.equals(Double.class)) {
                                 obj = getValueAsDouble(key);
                             } else if (innerType.equals(List.class)) {
-                                obj = getValues(key);
+                                obj = getValues(key, parameterisedTypes);
                             } else if (innerType.equals(JavaScript.class)) {
                                 obj = getValueAsJavaScript(key);
                             } else {

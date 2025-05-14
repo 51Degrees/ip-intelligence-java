@@ -34,11 +34,12 @@ import java.util.List;
 public interface IPIntelligenceDataHash extends IPIntelligenceData {
 
     /**
-     * Get the values for the specified property as a List&lt;>. For
-     * on-premise engines, this is the raw form they are stored in the data file
-     * as.
+     * Get the values for the specified property as a List&lt;&gt;.
      * @param propertyName name of the property to get values for
+     * @param parametrizedTypes types parametrizing {@link AspectPropertyValue} starting with {@link List}
      * @return values as a list
      */
-    AspectPropertyValue<List<String>> getValues(String propertyName);
+    AspectPropertyValue<List<?>> getValues(
+            String propertyName,
+            Class<?>[] parametrizedTypes);
 }

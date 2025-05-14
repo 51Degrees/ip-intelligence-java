@@ -24,22 +24,30 @@ package fiftyone.ipintelligence.engine.onpremise.flowelements;
 
 import fiftyone.ipintelligence.engine.onpremise.Enums;
 import fiftyone.ipintelligence.engine.onpremise.data.IPIntelligenceDataHash;
-import fiftyone.ipintelligence.engine.onpremise.interop.Swig;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.*;
 import fiftyone.ipintelligence.shared.IPIntelligenceDataBaseOnPremise;
 import fiftyone.pipeline.core.data.FlowData;
+import fiftyone.pipeline.core.data.IWeightedValue;
 import fiftyone.pipeline.core.data.TryGetResult;
+import fiftyone.pipeline.core.data.WeightedValue;
 import fiftyone.pipeline.core.data.types.JavaScript;
 import fiftyone.pipeline.engines.data.AspectPropertyValue;
 import fiftyone.pipeline.engines.data.AspectPropertyValueDefault;
 import fiftyone.pipeline.engines.services.MissingPropertyService;
 import org.slf4j.Logger;
 
+import java.net.Inet4Address;
+import java.net.Inet6Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static fiftyone.pipeline.util.StringManipulation.stringJoin;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * Internal implementation of the {@link IPIntelligenceDataHash} interface. This can
@@ -114,162 +122,150 @@ public class IPIntelligenceDataHashDefault
      */
     private ResultsIpiSwig getResultsContainingProperty(String propertyName) {
         for (ResultsIpiSwig results : resultsList) {
-            if (results.containsProperty(Swig.asBytes(propertyName))) {
+            if (results.containsProperty(propertyName)) {
                 return results;
             }
         }
         return null;
     }
 
-    /**
-     * Get the device id from the native results.
-     * @return device id
-     */
-    private AspectPropertyValue<String> getDeviceIdInternal() {
-        if (resultsList.size() == 1) {
-            // Only one Engine has added results, so return the device
-            // id from those results.
-            return new AspectPropertyValueDefault<>(
-                    resultsList.get(0).getDeviceId());
-        } else {
-            // Multiple Engines have added results, so construct a device
-            // id from the results.
-            List<String> result = new ArrayList<>();
-            List<String[]> deviceIds = new ArrayList<>();
-            for (ResultsIpiSwig results : resultsList) {
-                deviceIds.add(results.getDeviceId().split("-"));
-            }
-            int max = 0;
-            for (String[] deviceId : deviceIds) {
-                if (deviceId.length > max) {
-                    max = deviceId.length;
-                }
-            }
-            for (int i = 0; i < max; i++) {
-                String profileId = "0";
-                for (String[] deviceId : deviceIds) {
-                    if (deviceId.length > i && deviceId[i].equals("0") == false) {
-                        profileId = deviceId[i];
-                    }
-                }
-                result.add(profileId);
-            }
-            return new AspectPropertyValueDefault<>(
-                    stringJoin(result, "-"));
-        }
-    }
-
-    /**
-     * Get the difference from the native results.
-     * @return difference
-     */
-    private AspectPropertyValue<Integer> getDifferenceInternal() {
-        int total = 0;
-        for (ResultsIpiSwig results : resultsList) {
-            total += results.getDifference();
-        }
-        return new AspectPropertyValueDefault<>(total);
-    }
-
-    /**
-     * Get the drift from the native results.
-     * @return drift
-     */
-    private AspectPropertyValue<Integer> getDriftInternal() {
-        int result = Integer.MAX_VALUE;
-        for (ResultsIpiSwig results : resultsList) {
-            if (results.getDrift() < result) {
-                result = results.getDrift();
-            }
-        }
-        return new AspectPropertyValueDefault<>(result);
-    }
-
-    /**
-     * Get the number of iterations from the native results.
-     * @return iterations
-     */
-    private AspectPropertyValue<Integer> getIterationsInternal() {
-        int result = 0;
-        for (ResultsIpiSwig results : resultsList) {
-            result += results.getIterations();
-        }
-        return new AspectPropertyValueDefault<>(result);
-    }
-
-    /**
-     * Get the number of matched nodes from the native results.
-     * @return matched nodes
-     */
-    private AspectPropertyValue<Integer> getMatchedNodesInternal() {
-        int result = 0;
-        for (ResultsIpiSwig results : resultsList) {
-            result += results.getMatchedNodes();
-        }
-        return new AspectPropertyValueDefault<>(result);
-    }
-
-    /**
-     * Get the match method from the native results.
-     * @return match method
-     */
-    private AspectPropertyValue<String> getMethodInternal() {
-        int result = 0;
-        for (ResultsIpiSwig results : resultsList) {
-            if (results.getMethod() > result) {
-                result = results.getMethod();
-            }
-        }
-        return new AspectPropertyValueDefault<>(matchMethods[result].name());
-    }
-
-    /**
-     * Get the matched User-Agent strings from the native results.
-     * @return matched User-Agents
-     */
-    private AspectPropertyValue<List<String>> getUserAgentsInternal() {
-        List<String> result = new ArrayList<>();
-        for (ResultsIpiSwig results : resultsList) {
-            for (int i = 0; i < results.getUserAgents(); i++) {
-                String userAgent = results.getUserAgent(i);
-                if (result.contains(userAgent) == false) {
-                    result.add(userAgent);
-                }
-            }
-        }
-        return new AspectPropertyValueDefault<>(result);
-    }
-
     @Override
     protected boolean propertyIsAvailable(String propertyName) {
         checkState();
         for (ResultsIpiSwig results : resultsList) {
-            if (results.containsProperty(Swig.asBytes(propertyName))) {
+            if (results.containsProperty(propertyName)) {
                 return true;
             }
         }
         return false;
     }
 
-    @Override
-    public AspectPropertyValue<List<String>> getValues(String propertyName) {
-        checkState();
-        AspectPropertyValue<List<String>> result =
-            new AspectPropertyValueDefault<>();
-        ResultsIpiSwig results = getSingleResults(propertyName);
-        if (results != null) {
-            try (VectorStringValuesSwig value = results.getValues(
-                Swig.asBytes(propertyName))) {
-                if (value.hasValue()) {
-                    try (VectorStringSwig vector = value.getValue()) {
-                        result.setValue(Collections.unmodifiableList(
-                            Swig.asList(vector)));
-                    }
-                }
-                else {
-                    result.setNoValueMessage(value.getNoValueMessage());
+    private static <
+            TListValueSwig extends AutoCloseable,
+            TListSwig extends AutoCloseable & List<TWeightedValueSwig>,
+            TWeightedValueSwig,
+            TElement>
+    void populateWeightedValues(
+            AspectPropertyValue<List<?>> result,
+            Supplier<TListValueSwig> listValueSwigSupplier,
+            Predicate<TListValueSwig> listValueSwigHasValue,
+            Function<TListValueSwig, String> listValueSwigGetNoValueMessage,
+            Function<TListValueSwig, TListSwig> listSwigExtractor,
+            Function<TWeightedValueSwig, TElement> elementConverter) {
+        try (TListValueSwig listValueSwig = listValueSwigSupplier.get())
+        {
+            if (listValueSwigHasValue.test(listValueSwig)) {
+                try (TListSwig listSwig = listSwigExtractor.apply(listValueSwig)) {
+                    List<?> convertedWeightedElements = listSwig.stream()
+                            .map(elementConverter)
+                            .collect(Collectors.toList());
+                    result.setValue(Collections.unmodifiableList(convertedWeightedElements));
                 }
             }
+            else {
+                result.setNoValueMessage(listValueSwigGetNoValueMessage.apply(listValueSwig));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public AspectPropertyValue<List<?>> getValues(String propertyName,
+                                                  Class<?>[] parametrizedTypes) {
+        checkState();
+        AspectPropertyValue<List<?>> result =
+            new AspectPropertyValueDefault<>();
+        ResultsIpiSwig results = getSingleResults(propertyName);
+        if (results == null) {
+            return result;
+        }
+        if (parametrizedTypes.length < 2) {
+            return null;
+        }
+        Class<?> listedType = parametrizedTypes[1];
+        boolean isWeighted = listedType.equals(IWeightedValue.class) || listedType.equals(WeightedValue.class);
+        if (!isWeighted) {
+            return null;
+        }
+        if (parametrizedTypes.length < 3) {
+            return null;
+        }
+        Class<?> valueType = parametrizedTypes[2];
+        if (valueType.equals(Boolean.class)) {
+            populateWeightedValues(
+                    result,
+                    () -> results.getValuesAsWeightedBoolList(propertyName),
+                    WeightedBoolListValueSwig::hasValue,
+                    WeightedBoolListValueSwig::getNoValueMessage,
+                    WeightedBoolListValueSwig::getValue,
+                    x -> new WeightedValue<>(x.getRawWeight(), x.getValue())
+            );
+        } else if (valueType.equals(Double.class)) {
+            populateWeightedValues(
+                    result,
+                    () -> results.getValuesAsWeightedDoubleList(propertyName),
+                    WeightedDoubleListValueSwig::hasValue,
+                    WeightedDoubleListValueSwig::getNoValueMessage,
+                    WeightedDoubleListValueSwig::getValue,
+                    x -> new WeightedValue<>(x.getRawWeight(), x.getValue())
+            );
+        } else if (valueType.equals(Float.class)) {
+            populateWeightedValues(
+                    result,
+                    () -> results.getValuesAsWeightedDoubleList(propertyName),
+                    WeightedDoubleListValueSwig::hasValue,
+                    WeightedDoubleListValueSwig::getNoValueMessage,
+                    WeightedDoubleListValueSwig::getValue,
+                    x -> new WeightedValue<>(x.getRawWeight(), (float)x.getValue())
+            );
+        } else if (valueType.equals(Integer.class)) {
+            populateWeightedValues(
+                    result,
+                    () -> results.getValuesAsWeightedIntegerList(propertyName),
+                    WeightedIntListValueSwig::hasValue,
+                    WeightedIntListValueSwig::getNoValueMessage,
+                    WeightedIntListValueSwig::getValue,
+                    x -> new WeightedValue<>(x.getRawWeight(), x.getValue())
+            );
+        } else if (valueType.equals(InetAddress.class)
+                || valueType.equals(Inet4Address.class)
+                || valueType.equals(Inet6Address.class)) {
+            populateWeightedValues(
+                    result,
+                    () -> results.getValuesAsWeightedStringList(propertyName),
+                    WeightedStringListValueSwig::hasValue,
+                    WeightedStringListValueSwig::getNoValueMessage,
+                    WeightedStringListValueSwig::getValue,
+                    x -> {
+                        try {
+                            return new WeightedValue<>(x.getRawWeight(), InetAddress.getByName(x.getValue()));
+                        } catch (UnknownHostException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+            );
+        } else if (valueType.equals(String.class)) {
+            populateWeightedValues(
+                    result,
+                    () -> results.getValuesAsWeightedUTF8StringList(propertyName),
+                    WeightedUTF8StringListValueSwig::hasValue,
+                    WeightedUTF8StringListValueSwig::getNoValueMessage,
+                    WeightedUTF8StringListValueSwig::getValue,
+                    x -> {
+                        String theString;
+                        try (UTF8StringSwig stringSwig = x.getValue()) {
+                            byte[] bytes = new byte[stringSwig.size()];
+                            for (int i = 0; i < stringSwig.size(); i++) {
+                                bytes[i] = (byte)(short)stringSwig.get(i);
+                            }
+                            theString = new String(bytes, StandardCharsets.UTF_8);
+                        }
+                        return new WeightedValue<>(x.getRawWeight(), theString);
+                    }
+            );
+        } else {
+            throw new IllegalArgumentException("Unsupported value type: " + valueType.getName());
         }
         return result;
     }
@@ -281,7 +277,7 @@ public class IPIntelligenceDataHashDefault
         if (results != null) {
 
             try (StringValueSwig value = results.getValueAsString(
-                Swig.asBytes(propertyName))) {
+                propertyName)) {
                 if (value.hasValue()) {
                     result.setValue(value.getValue());
                 }
@@ -301,7 +297,7 @@ public class IPIntelligenceDataHashDefault
         ResultsIpiSwig results = getSingleResults(propertyName);
         if (results != null) {
             try (StringValueSwig value = results.getValueAsString(
-                Swig.asBytes(propertyName))) {
+                propertyName)) {
                 if (value.hasValue()) {
                     result.setValue(new JavaScript(value.getValue()));
                 }
@@ -320,7 +316,7 @@ public class IPIntelligenceDataHashDefault
         ResultsIpiSwig results = getSingleResults(propertyName);
         if (results != null) {
             try (IntegerValueSwig value = results.getValueAsInteger(
-                Swig.asBytes(propertyName))) {
+                propertyName)) {
                 if (value.hasValue()) {
                     result.setValue(value.getValue());
                 }
@@ -338,7 +334,7 @@ public class IPIntelligenceDataHashDefault
         ResultsIpiSwig results = getSingleResults(propertyName);
         if (results != null) {
             try (BoolValueSwig value = results.getValueAsBool(
-                Swig.asBytes(propertyName))) {
+                propertyName)) {
                 if (value.hasValue()) {
                     result.setValue(value.getValue());
                 }
@@ -356,7 +352,7 @@ public class IPIntelligenceDataHashDefault
         ResultsIpiSwig results = getSingleResults(propertyName);
         if (results != null) {
             try (DoubleValueSwig value = results.getValueAsDouble(
-                Swig.asBytes(propertyName))) {
+                propertyName)) {
                 if (value.hasValue()) {
                     result.setValue(value.getValue());
                 }
@@ -368,64 +364,17 @@ public class IPIntelligenceDataHashDefault
         return result;
     }
 
-    @SuppressWarnings("unchecked")
-	@Override
+    @Override
     protected <T> TryGetResult<T> tryGetValue(
         String key,
         Class<T> type,
         Class<?>... parameterisedTypes) {
         checkState();
-        TryGetResult<T> result = super.tryGetValue(key, type, parameterisedTypes);
-
-        if (result.hasValue() == false) {
-            boolean objSet = false;
-            Object obj = null;
-            if (key.equalsIgnoreCase("DeviceId")) {
-                obj = getDeviceIdInternal();
-                objSet = true;
-            } else if (key.equalsIgnoreCase("Difference")) {
-                obj = getDifferenceInternal();
-                objSet = true;
-            } else if (key.equalsIgnoreCase("UserAgents")) {
-                obj = getUserAgentsInternal();
-                objSet = true;
-            } else if (key.equalsIgnoreCase("Drift")) {
-                obj = getDriftInternal();
-                objSet = true;
-            } else if (key.equalsIgnoreCase("Iterations")) {
-                obj = getIterationsInternal();
-                objSet = true;
-            }
-            else if (key.equalsIgnoreCase("MatchedNodes")) {
-                obj = getMatchedNodesInternal();
-                objSet = true;
-            }
-            else if (key.equalsIgnoreCase("Method")){
-                obj = getMethodInternal();
-                objSet = true;
-            }
-            if (objSet == true) {
-                try {
-                    T value;
-                    if (type.isPrimitive()) {
-                        value = (T) primitiveTypes.get(type).cast(obj);
-                    } else {
-                        value = type.cast(obj);
-                    }
-                    result.setValue(value);
-                } catch (ClassCastException e) {
-                    throw new ClassCastException(
-                        "Expected property '" + key + "' to be of " +
-                            "type '" + type.getSimpleName() + "' but it is " +
-                            "'" + obj.getClass().getSimpleName() + "'");
-                }
-            }
-        }
-        return result;
+        return super.tryGetValue(key, type, parameterisedTypes);
     }
 
     private void checkState() {
-        if (closed == true) {
+        if (closed) {
             throw new IllegalStateException("The IPIntelligenceDataHash instance has " +
                 "been closed, and cannot be used. Any result processing should " +
                 "be carried out within a 'try-with-resource' block which " +
