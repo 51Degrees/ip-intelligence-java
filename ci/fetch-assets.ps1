@@ -6,7 +6,7 @@ param (
     [string]$DeviceDetectionUrl
 )
 
-$CxxCiDir = Join-Path $RepoName "ip-intelligence.engine.on-premise" "src" "main" "cxx" "ip-intelligence-cxx" "ip-intelligence-data"
+$CxxCiDir = Join-Path $RepoName "ip-intelligence.engine.on-premise" "src" "main" "cxx" "ip-intelligence-cxx"
 $CxxCiScript = Join-Path $pwd $CxxCiDir "ci" "fetch-assets.ps1"
 
 & $CxxCiScript `
