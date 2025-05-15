@@ -20,7 +20,7 @@ jobs:
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
       data-key: ${{ secrets.DEVICE_DETECTION_KEY }}
-      data-url: ${{ secrets.DEVICE_DETECTION_URL }}
+      data-url: ${{ secrets.IPI_DATA_FILE_URL }}
 
   PackageUpdate:
     name: Nightly Package Update
@@ -66,7 +66,7 @@ jobs:
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
       DeviceDetection: ${{ secrets.DEVICE_DETECTION_KEY }}
-      DeviceDetectionUrl: ${{ secrets.DEVICE_DETECTION_URL }}
+      DeviceDetectionUrl: ${{ secrets.IPI_DATA_FILE_URL }}
       TestResourceKey: ${{ secrets.SUPER_RESOURCE_KEY}}
 
   Publish:
@@ -82,7 +82,7 @@ jobs:
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
       DeviceDetection: ${{ secrets.DEVICE_DETECTION_KEY }}
-      DeviceDetectionUrl: ${{ secrets.DEVICE_DETECTION_URL }}
+      DeviceDetectionUrl: ${{ secrets.IPI_DATA_FILE_URL }}
       TestResourceKey: ${{ secrets.SUPER_RESOURCE_KEY}}
       MavenSettings: ${{ secrets.JAVA_STAGING_SETTINGS_BASE64 }}
       JavaGpgKeyPassphrase: ${{ secrets.JAVA_GPG_KEY_PASSPHRASE }}

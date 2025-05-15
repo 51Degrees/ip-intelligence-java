@@ -17,4 +17,4 @@ jobs:
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
       ip-intelligence-key: ${{ secrets.DEVICE_DETECTION_KEY }}
-      ip-intelligence-url: ${{ secrets.DEVICE_DETECTION_URL }}
+      ip-intelligence-url: ${{ secrets.IPI_DATA_FILE_URL }}
