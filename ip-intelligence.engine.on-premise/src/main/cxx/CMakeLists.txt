@@ -3,7 +3,7 @@ set (CMAKE_C_STANDARD 11)
 set (CMAKE_CXX_STANDARD 11)
 
 # Include the C API
-project(IPIntelligenceHashEngine VERSION 4.3.0 LANGUAGES CXX C)
+project(IPIntelligenceOnPremiseEngine VERSION 4.3.0 LANGUAGES CXX C)
 
 if (MSVC)
     add_compile_options(/wd5105 /wd4100)
@@ -20,29 +20,19 @@ if (MSVC)
         set (GEN_PLATFORM ${CMAKE_VS_PLATFORM_NAME_DEFAULT})
     endif()
 
-    if (${GEN_PLATFORM} MATCHES .*64.*)
-        set(ARCH x64)
-    else()
-        set(ARCH x86)
-    endif()
+    set(ARCH x64)
 
 else()
     if (DEFINED ARCH)
         # Use the defined ARCH
-    elseif (${CMAKE_SYSTEM_PROCESSOR} MATCHES ^armhf)
-        set(ARCH armhf)
     elseif (${CMAKE_SYSTEM_PROCESSOR} MATCHES ^aarch64)
         set(ARCH aarch64)
     elseif (${CMAKE_SYSTEM_PROCESSOR} MATCHES ^arm64)
         set(ARCH aarch64)
     elseif (${CMAKE_SYSTEM_PROCESSOR} MATCHES .*64.*)
-        if (32bit)
-            set (ARCH x86)
-        else()
             set (ARCH x64)
-        endif()
     else()
-        set (ARCH x86)
+        set (ARCH x64)
     endif()
 endif()
 message(STATUS "Arch name: ${ARCH}")
@@ -94,7 +84,7 @@ set_target_properties(fiftyone-ip-intelligence-java
     LIBRARY_OUTPUT_DIRECTORY "${RES}"
     RUNTIME_OUTPUT_DIRECTORY_RELEASE "${RES}"
     PREFIX ""
-    OUTPUT_NAME "IPIntelligenceHashEngine-${OS}-${ARCH}"
+    OUTPUT_NAME "IPIntelligenceOnPremiseEngine-${OS}-${ARCH}"
 )
 target_link_libraries(fiftyone-ip-intelligence-java fiftyone-ip-intelligence-cxx)
 if (NOT MSVC)

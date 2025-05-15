@@ -54,14 +54,8 @@ if %additionalFlags neq "" (
 )
 
 rem Remove build folders
-if exist target\build32 rmdir /S /Q target\build32
 if exist target\build64 rmdir /S /Q target\build64
 
-mkdir target\build32
-cd target\build32
-cmake ..\..\src\main\cxx -A Win32 %additionalFlags%
-cmake --build . --target fiftyone-ip-intelligence-java --config Release
-cd ..\..
 mkdir target\build64
 cd target\build64
 cmake ..\..\src\main\cxx -A x64 %additionalFlags%
