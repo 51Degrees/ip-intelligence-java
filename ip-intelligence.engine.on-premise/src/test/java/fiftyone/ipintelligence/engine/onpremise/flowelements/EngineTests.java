@@ -33,8 +33,8 @@ import org.slf4j.LoggerFactory;
 
 import fiftyone.ipintelligence.shared.testhelpers.FileUtils;
 import fiftyone.pipeline.engines.Constants;
-import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.LITE_HASH_DATA_FILE_NAME;
-import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.TAC_HASH_DATA_FILE_NAME;
+import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.LITE_IPI_DATA_FILE_NAME;
+import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.TAC_IPI_DATA_FILE_NAME;
 import static fiftyone.pipeline.util.FileFinder.getFilePath;
 
 public class EngineTests {
@@ -65,7 +65,7 @@ public class EngineTests {
 		String tier = engine.getDataSourceTier();
 		engine.close();
 		
-		if (fileName.equals(LITE_HASH_DATA_FILE_NAME)) {
+		if (fileName.equals(LITE_IPI_DATA_FILE_NAME)) {
 			assertEquals("Lite", tier);
 		}
 		else {
@@ -80,7 +80,7 @@ public class EngineTests {
 	 */
 	@Test
 	public void Engine_Hash_GetDataSourceTier_Lite() throws Exception {
-		testDataSourceTier(LITE_HASH_DATA_FILE_NAME);
+		testDataSourceTier(LITE_IPI_DATA_FILE_NAME);
 	}
 	
 	/**
@@ -90,7 +90,7 @@ public class EngineTests {
 	 */
 	@Test
 	public void Engine_Hash_GetDataSourceTier_Enterprise() throws Exception {
-		testDataSourceTier(TAC_HASH_DATA_FILE_NAME);
+		testDataSourceTier(TAC_IPI_DATA_FILE_NAME);
 	}
 
 }

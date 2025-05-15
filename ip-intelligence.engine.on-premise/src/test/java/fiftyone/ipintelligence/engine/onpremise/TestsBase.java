@@ -26,7 +26,7 @@ import fiftyone.ipintelligence.shared.testhelpers.UserAgentGenerator;
 import fiftyone.ipintelligence.shared.testhelpers.FileUtils;
 import fiftyone.pipeline.engines.Constants;
 
-import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.UA_FILE_NAME;
+import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.IP_ADDRESSES_FILE_NAME;
 import static fiftyone.pipeline.util.FileFinder.getFilePath;
 
 public class TestsBase {
@@ -47,7 +47,7 @@ public class TestsBase {
             FileUtils.getHashFile(),
             profile);
         userAgents = new UserAgentGenerator(
-            getFilePath(UA_FILE_NAME));
+            getFilePath(IP_ADDRESSES_FILE_NAME));
     }
 
     public void testCleanup() {

@@ -38,14 +38,14 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class FileUtils {
-    public static final String ENTERPRISE_HASH_DATA_FILE_NAME = "Enterprise-HashV41.hash";
+    public static final String ENTERPRISE_IPI_DATA_FILE_NAME = "Enterprise-IpIntelligenceV41.ipi";
 
-    public static final String TAC_HASH_DATA_FILE_NAME = "TAC-HashV41.hash";
-    public static final String LITE_HASH_DATA_FILE_NAME = "51Degrees-LiteV4.1.hash";
-    private static  Optional<File> HASH_DATA_FILE;
-    public static final String UA_FILE_NAME = "20000 User Agents.csv";
+    public static final String TAC_IPI_DATA_FILE_NAME = "TAC-IpIntelligenceV41.ipi";
+    public static final String LITE_IPI_DATA_FILE_NAME = "51Degrees-LiteV41.ipi";
+    private static  Optional<File> IPI_DATA_FILE;
+    public static final String IP_ADDRESSES_FILE_NAME = "evidence.csv";
     private static File UA_FILE;
-    public static final String EVIDENCE_FILE_NAME = "20000 Evidence Records.yml";
+    public static final String EVIDENCE_FILE_NAME = "evidence.yml";
     private static Optional<File> EVIDENCE_FILE;
 
     /**
@@ -64,24 +64,24 @@ public class FileUtils {
      */
     public static File getHashFile() {
         try {
-            if (Objects.nonNull(HASH_DATA_FILE)){
-                return HASH_DATA_FILE.orElse(null);
+            if (Objects.nonNull(IPI_DATA_FILE)){
+                return IPI_DATA_FILE.orElse(null);
             }
             // following throws exception if not found
-            HASH_DATA_FILE = Optional.of(getFilePath(TAC_HASH_DATA_FILE_NAME));
-            return HASH_DATA_FILE.get();
+            IPI_DATA_FILE = Optional.of(getFilePath(TAC_IPI_DATA_FILE_NAME));
+            return IPI_DATA_FILE.get();
         } catch (Exception e) {
             try {
                 // following throws exception if not found
-                HASH_DATA_FILE = Optional.of(getFilePath(ENTERPRISE_HASH_DATA_FILE_NAME));
-                return HASH_DATA_FILE.get();
+                IPI_DATA_FILE = Optional.of(getFilePath(ENTERPRISE_IPI_DATA_FILE_NAME));
+                return IPI_DATA_FILE.get();
             } catch (Exception ex) {
                 try {
                     // following throws exception if not found
-                    HASH_DATA_FILE = Optional.of(getFilePath(LITE_HASH_DATA_FILE_NAME));
-                    return HASH_DATA_FILE.get();
+                    IPI_DATA_FILE = Optional.of(getFilePath(LITE_IPI_DATA_FILE_NAME));
+                    return IPI_DATA_FILE.get();
                 } catch (Exception exc) {
-                    HASH_DATA_FILE = Optional.empty();
+                    IPI_DATA_FILE = Optional.empty();
                     return null;
                 }
             }

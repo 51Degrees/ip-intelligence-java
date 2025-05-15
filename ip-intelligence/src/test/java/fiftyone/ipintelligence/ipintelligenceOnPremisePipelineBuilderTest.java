@@ -51,9 +51,9 @@ import static org.mockito.Mockito.*;
 @SuppressWarnings({"rawtypes", "deprecation"})
 public class IPIntelligenceOnPremisePipelineBuilderTest {
 
-    private static final String HASH_DATA_FILE_NAME = FileUtils.getHashFileName();
+    private static final String IPI_DATA_FILE_NAME = FileUtils.getHashFileName();
     private IPIntelligenceOnPremisePipelineBuilder builder;
-    private File datafile = FileFinder.getFilePath(HASH_DATA_FILE_NAME);
+    private File datafile = FileFinder.getFilePath(IPI_DATA_FILE_NAME);
     private ILoggerFactory loggerFactory;
     private Logger logger;
 
@@ -88,17 +88,17 @@ public class IPIntelligenceOnPremisePipelineBuilderTest {
     @Test
     public void setFilename_PropertyPropagatedToDataFileConfiguration() throws Exception {
         Pipeline pipeline = builder
-                .setFilename(HASH_DATA_FILE_NAME, true)
+                .setFilename(IPI_DATA_FILE_NAME, true)
                 .build();
         DataFileConfiguration dataFileConfiguration = getDataFileConfiguration(pipeline);
-        assertEquals(HASH_DATA_FILE_NAME, dataFileConfiguration.getDataFilePath());
+        assertEquals(IPI_DATA_FILE_NAME, dataFileConfiguration.getDataFilePath());
         assertTrue(dataFileConfiguration.getCreateTempDataCopy());
     }
 
     @Test
     public void setFilename_DatExtension_ExceptionThrown() {
         try {
-            builder.setFilename(HASH_DATA_FILE_NAME.replace(".hash", ".dat"), true);
+            builder.setFilename(IPI_DATA_FILE_NAME.replace(".hash", ".dat"), true);
             fail();
         } catch (Exception e) {
             assertTrue(e.getMessage().contains("The Pattern data format data"));
@@ -108,7 +108,7 @@ public class IPIntelligenceOnPremisePipelineBuilderTest {
     @Test
     public void setFilename_OtherExtension_ExceptionThrown() {
         try {
-            builder.setFilename(HASH_DATA_FILE_NAME.replace(".hash", ".any"), true);
+            builder.setFilename(IPI_DATA_FILE_NAME.replace(".hash", ".any"), true);
             fail();
         } catch (Exception e) {
             assertTrue(e.getMessage().contains("Unrecognised filename."));

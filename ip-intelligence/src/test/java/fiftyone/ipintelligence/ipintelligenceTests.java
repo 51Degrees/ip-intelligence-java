@@ -52,7 +52,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.UA_FILE_NAME;
+import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.IP_ADDRESSES_FILE_NAME;
 import static fiftyone.pipeline.core.Constants.EVIDENCE_HTTPHEADER_PREFIX;
 import static fiftyone.pipeline.core.Constants.EVIDENCE_SEPERATOR;
 import static fiftyone.pipeline.engines.Constants.PerformanceProfiles.*;
@@ -68,38 +68,38 @@ public class IPIntelligenceTests {
 
     private static final Logger logger = LoggerFactory.getLogger(IPIntelligenceTests.class);
 
-    private static final String HASH_DATA_FILE_NAME = FileUtils.getHashFileName();
+    private static final String IPI_DATA_FILE_NAME = FileUtils.getHashFileName();
 
     private static UserAgentGenerator userAgents;
     TestConfig[] hashConfigs = {
         // ******** Hash with a single thread *********
-        new TestConfig(HASH_DATA_FILE_NAME, HighPerformance, false, false, "Hash-HighPerformance-NoCache-SingleThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, LowMemory, false, false, "Hash-LowMemory-NoCache-SingleThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, Balanced, false, false, "Hash-Balanced-NoCache-SingleThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, BalancedTemp, false, false, "Hash-HighPerformance-NoCache-SingleThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, HighPerformance, true, false, "Hash-HighPerformance-Cache-SingleThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, LowMemory, true, false, "Hash-LowMemory-Cache-SingleThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, Balanced, true, false, "Hash-Balanced-Cache-SingleThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, BalancedTemp, true, false, "Hash-BalancedTemp-Cache-SingleThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, BalancedTemp, true, false, "Hash-BalancedTemp-Cache-SingleThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, BalancedTemp, true, false, "Hash-BalancedTemp-Cache-SingleThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, HighPerformance, false, false, "Hash-HighPerformance-NoCache-SingleThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, LowMemory, false, false, "Hash-LowMemory-NoCache-SingleThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, Balanced, false, false, "Hash-Balanced-NoCache-SingleThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, false, false, "Hash-HighPerformance-NoCache-SingleThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, HighPerformance, true, false, "Hash-HighPerformance-Cache-SingleThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, LowMemory, true, false, "Hash-LowMemory-Cache-SingleThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, Balanced, true, false, "Hash-Balanced-Cache-SingleThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, false, "Hash-BalancedTemp-Cache-SingleThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, false, "Hash-BalancedTemp-Cache-SingleThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, false, "Hash-BalancedTemp-Cache-SingleThread"),
         // ******** Hash with multiple threads *********
-        new TestConfig(HASH_DATA_FILE_NAME, HighPerformance, false, true, "Hash-HighPerformance-NoCache-MultiThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, LowMemory, false, true, "Hash-LowMemory-NoCache-MultiThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, Balanced, false, true, "Hash-Balanced-NoCache-MultiThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, BalancedTemp, false, true, "Hash-HighPerformance-NoCache-MultiThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, HighPerformance, true, true, "Hash-HighPerformance-Cache-MultiThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, LowMemory, true, true, "Hash-LowMemory-Cache-MultiThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, Balanced, true, true, "Hash-Balanced-Cache-MultiThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, BalancedTemp, true, true, "Hash-BalancedTemp-Cache-MultiThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, BalancedTemp, true, true, "Hash-BalancedTemp-Cache-MultiThread"),
-        new TestConfig(HASH_DATA_FILE_NAME, BalancedTemp, true, true, "Hash-BalancedTemp-Cache-MultiThread")
+        new TestConfig(IPI_DATA_FILE_NAME, HighPerformance, false, true, "Hash-HighPerformance-NoCache-MultiThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, LowMemory, false, true, "Hash-LowMemory-NoCache-MultiThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, Balanced, false, true, "Hash-Balanced-NoCache-MultiThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, false, true, "Hash-HighPerformance-NoCache-MultiThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, HighPerformance, true, true, "Hash-HighPerformance-Cache-MultiThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, LowMemory, true, true, "Hash-LowMemory-Cache-MultiThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, Balanced, true, true, "Hash-Balanced-Cache-MultiThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, true, "Hash-BalancedTemp-Cache-MultiThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, true, "Hash-BalancedTemp-Cache-MultiThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, true, "Hash-BalancedTemp-Cache-MultiThread")
     };
 
     @BeforeClass
     public static void initClass() throws IOException {
         userAgents = new UserAgentGenerator(
-            FileFinder.getFilePath(UA_FILE_NAME));
+            FileFinder.getFilePath(IP_ADDRESSES_FILE_NAME));
     }
 
     private static String reportErrors(Collection<FlowError> errors) {
@@ -220,7 +220,7 @@ public class IPIntelligenceTests {
     	IPIntelligenceOnPremisePipelineBuilder builder =
                 new IPIntelligencePipelineBuilder(loggerFactory,
                 		new HttpClientDefault())
-                    .useOnPremise(HASH_DATA_FILE_NAME, false)
+                    .useOnPremise(IPI_DATA_FILE_NAME, false)
                     .setPerformanceProfile(MaxPerformance)
                     .setShareUsage(false)
                     .setAutoUpdate(false);
@@ -238,7 +238,7 @@ public class IPIntelligenceTests {
         for (i=0; i < 10; i++) {
             IPIntelligenceOnPremisePipelineBuilder builder =
                     new IPIntelligencePipelineBuilder()
-                            .useOnPremise(HASH_DATA_FILE_NAME, true)
+                            .useOnPremise(IPI_DATA_FILE_NAME, true)
                             .setPerformanceProfile(MaxPerformance)
                             .setShareUsage(false)
                             .setAutoUpdate(false);
@@ -268,7 +268,7 @@ public class IPIntelligenceTests {
     	IPIntelligenceOnPremisePipelineBuilder builder =
                 new IPIntelligencePipelineBuilder(loggerFactory,
                 		new HttpClientDefault(), updateService)
-                    .useOnPremise(HASH_DATA_FILE_NAME, false)
+                    .useOnPremise(IPI_DATA_FILE_NAME, false)
                     .setPerformanceProfile(MaxPerformance)
                     .setShareUsage(false)
                     .setAutoUpdate(false);
