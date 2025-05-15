@@ -53,11 +53,6 @@ public class IPIntelligenceOnPremisePipelineBuilder
     private boolean createTempDataCopy;
     private byte[] engineData;
     private int concurrency = -1;
-    private Integer difference = null;
-    private Boolean allowUnmatched = null;
-    private Integer drift = null;
-    private Boolean usePerformanceGraph = null;
-    private Boolean usePredictiveGraph = null;
     private final List<String> properties = new ArrayList<String>();
     private Boolean autoUpdateEnabled = null;
     private Boolean dataFileSystemWatcher = null;
@@ -72,24 +67,19 @@ public class IPIntelligenceOnPremisePipelineBuilder
         Constants.PerformanceProfiles.Balanced;
 
     private DataUpdateService dataUpdateService;
-    private final HttpClient httpClient;
 
     IPIntelligenceOnPremisePipelineBuilder(
-        DataUpdateService dataUpdateService,
-        HttpClient httpClient) {
+        DataUpdateService dataUpdateService) {
         this(
             LoggerFactory.getILoggerFactory(),
-            dataUpdateService,
-            httpClient);
+            dataUpdateService);
     }
 
     IPIntelligenceOnPremisePipelineBuilder(
         ILoggerFactory loggerFactory,
-        DataUpdateService dataUpdateService,
-        HttpClient httpClient) {
+        DataUpdateService dataUpdateServicet) {
         super(loggerFactory);
         this.dataUpdateService = dataUpdateService;
-        this.httpClient = httpClient;
         // Make sure to add dataUpdateService to the list of managed services
         this.addService(dataUpdateService);
     }
@@ -290,81 +280,6 @@ public class IPIntelligenceOnPremisePipelineBuilder
     }
 
     /**
-     * Set the maximum difference to allow when processing HTTP headers.
-     * The meaning of difference depends on the IP Intelligence API being
-     * used. The difference is the difference in hash value between the
-     * hash that was found, and the hash that is being searched for.
-     * By default this is 0.
-     * @param difference to allow
-     * @return this builder
-     */
-    public IPIntelligenceOnPremisePipelineBuilder setDifference(int difference) {
-        this.difference = difference;
-        return this;
-    }
-
-    /**
-     * If set to false, a non-matching User-Agent will result in
-     * properties without set values. If set to true, a non-matching
-     * User-Agent will cause the 'default profiles' to be returned. This
-     * means that properties will always have values (i.e. no need to
-     * check .hasValue) but some may be inaccurate. By default, this is
-     * false.
-     * @param allow true if results with no matched hash nodes should be
-     *              considered valid
-     * @return this builder
-     */
-    public IPIntelligenceOnPremisePipelineBuilder setAllowUnmatched(boolean allow) {
-        this.allowUnmatched = allow;
-        return this;
-    }
-
-    /**
-     * Set the maximum drift to allow when matching hashes. If the
-     * drift is exceeded, the result is considered invalid and
-     * values will not be returned. By default this is 0.
-     * @param drift to set
-     * @return this builder
-     */
-    public IPIntelligenceOnPremisePipelineBuilder setDrift(int drift) {
-        this.drift = drift;
-        return this;
-    }
-
-    /**
-     * Set whether or not the performance optimized graph is used
-     * for processing. When processing evidence, the performance
-     * graph is optimised to find an answer as quick as possible.
-     * However, this can be at the expense of finding the best
-     * match for evidence which was not in the training data. If
-     * the predictive graph is also enabled, it will be used
-     * next if there was no match in the performance graph.
-     * @see <a href="https://51degrees.com/documentation/_device_detection__hash.html#IPIntelligence_Hash_DataSetProduction_Performance">Hash Algorithm</a>
-     * @param use true if the performance graph should be used
-     * @return this builder
-     */
-    public IPIntelligenceOnPremisePipelineBuilder setUsePerformanceGraph(boolean use) {
-        this.usePerformanceGraph = use;
-        return this;
-    }
-
-    /**
-     * Set whether or not the predictive optimized graph is used
-     * for processing. When processing evidence, the predictive
-     * graph is optimised to find the best answer for evidence
-     * which was not in the training data. However, this is at the
-     * expense of processing time, as more possibilities are taken into
-     * consideration.
-     * @see <a href="https://51degrees.com/documentation/_device_detection__hash.html#IPIntelligence_Hash_DataSetProduction_Predictive">Hash Algorithm</a>
-     * @param use true if the predictive graph should be used
-     * @return this builder
-     */
-    public IPIntelligenceOnPremisePipelineBuilder setUsePredictiveGraph(boolean use) {
-        this.usePredictiveGraph = use;
-        return this;
-    }
-
-    /**
      * Add a property to the list of properties that the engine will populate in
      * the response. By default all properties will be populated.
      * @param property the property that we want the engine to populate
@@ -494,26 +409,6 @@ public class IPIntelligenceOnPremisePipelineBuilder
         // Configure the concurrency
         if (concurrency > 1) {
             builder.setConcurrency(concurrency);
-        }
-        // Configure difference
-        if (difference != null) {
-            builder.setDifference(difference);
-        }
-        // Configure unmatched
-        if (allowUnmatched != null) {
-            builder.setAllowUnmatched(allowUnmatched);
-        }
-        // Configure drift
-        if (drift != null) {
-            builder.setDrift(drift);
-        }
-        // Configure performance graph
-        if (usePerformanceGraph != null) {
-            builder.setUsePerformanceGraph(usePerformanceGraph);
-        }
-        // Configure predictive graph
-        if (usePredictiveGraph != null) {
-            builder.setUsePredictiveGraph(usePredictiveGraph);
         }
         // Configure update url
         if (dataUpdateUrl != null) {

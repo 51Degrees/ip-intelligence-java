@@ -102,43 +102,8 @@ public class IPIntelligencePipelineBuilder {
         IPIntelligenceOnPremisePipelineBuilder builder =
             new IPIntelligenceOnPremisePipelineBuilder(
                 loggerFactory,
-                dataUpdateService,
-                httpClient);
+                dataUpdateService);
         builder.setFilename(datafile, createTempDataCopy);
-        return builder;
-    }
-
-    /**
-     * Use a 51Degrees on-premise IP Intelligence engine to
-     * perform IP Intelligence.
-     * @param data The IP Intelligence data file as a byte array.
-     * @param algorithm The detection algorithm that the supplied data supports.
-     * @return A builder that can be used to configure and build a pipeline
-     * that will use the on-premise detection engine.
-     * @deprecated there is no choice of algorithm, use the (byte[]) method
-     */
-    @Deprecated
-    public IPIntelligenceOnPremisePipelineBuilder useOnPremise(
-            byte[] data,
-            Enums.IPIntelligenceAlgorithm algorithm) {
-        return useOnPremise(data);
-    }
-    /**
-     *
-     * Use a 51Degrees on-premise IP Intelligence engine to
-     * perform IP Intelligence.
-     * @param data The IP Intelligence data file as a byte array.
-     * @return A builder that can be used to configure and build a pipeline
-     * that will use the on-premise detection engine.
-     */
-    public IPIntelligenceOnPremisePipelineBuilder useOnPremise(
-            byte[] data) {
-        IPIntelligenceOnPremisePipelineBuilder builder =
-                new IPIntelligenceOnPremisePipelineBuilder(
-                        loggerFactory,
-                        dataUpdateService,
-                        httpClient);
-        builder.setEngineData(data);
         return builder;
     }
 

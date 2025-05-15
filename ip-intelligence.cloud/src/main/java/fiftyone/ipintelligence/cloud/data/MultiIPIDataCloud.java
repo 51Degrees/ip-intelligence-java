@@ -91,8 +91,8 @@ public class MultiIPIDataCloud
     }
 
     /**
-     * Internal methof to get the list of devices form the underlying data.
-     * @return
+     * Internal method to get the list of devices form the underlying data.
+     * @return the list of devices form the underlying data.
      */
     @SuppressWarnings("unchecked")
     private List<IPIntelligenceData> getDeviceList() {

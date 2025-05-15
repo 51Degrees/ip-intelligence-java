@@ -111,21 +111,6 @@ public class IPIntelligenceOnPremiseEngineBuilder
     }
 
     /**
-     * Set whether the matched characters of the User-Agent should
-     * be stored to be returned in the results.
-     * <p>
-     * Default is true
-     * @param update true if the matched User-Agent should be stored
-     * @return this builder
-     */
-    @DefaultValue("true")
-    public IPIntelligenceOnPremiseEngineBuilder setUpdateMatchedUserAgent(
-        boolean update) {
-        config.setUpdateMatchedUserAgent(update);
-        return this;
-    }
-
-    /**
      * Set the performance profile to use when constructing the data set.
      * <p>
      * Default value is Balanced.
@@ -195,93 +180,6 @@ public class IPIntelligenceOnPremiseEngineBuilder
     @Override
     public IPIntelligenceOnPremiseEngineBuilder setConcurrency(int concurrency) {
         config.setConcurrency(concurrency);
-        return this;
-    }
-
-    /**
-     * Whether to return a default profile if no match
-     * <p>
-     * Default false
-     * @see <a href="https://51degrees.com/documentation/_device_detection__features__false_positive_control.html">No Match Found</a>
-     * @param allow true if results with no matched hash nodes should be
-     *              considered valid
-     * @return this builder
-     */
-    @DefaultValue("false")
-    @Override
-    public IPIntelligenceOnPremiseEngineBuilder setAllowUnmatched(boolean allow) {
-        config.setAllowUnmatched(allow);
-        return this;
-    }
-
-    /**
-     * The difference tolerance allows for User-Agents where some characters differ
-     * slightly from what is expected.
-     * <p>
-     * Default is 0.
-     * @see <a href="https://51degrees.com/documentation/_device_detection__hash.html#IPIntelligence_Hash_DataSetProduction_Predictive">Hash Algorithm</a>
-     * @param difference to allow
-     * @return this builder
-     */
-    @DefaultValue(intValue = 0)
-    @Override
-    public IPIntelligenceOnPremiseEngineBuilder setDifference(int difference) {
-        config.setDifference(difference);
-        return this;
-    }
-
-    /**
-     * Set the maximum drift to allow when matching hashes. If the drift is
-     * exceeded, the result is considered invalid and values will not be
-     * returned.
-     * <p>
-     * Default is 0.
-     * @see <a href="https://51degrees.com/documentation/_device_detection__hash.html#IPIntelligence_Hash_DataSetProduction_Predictive">Hash Algorithm</a>
-     * @param drift to set
-     * @return this builder
-     */
-    @DefaultValue(intValue = 0)
-    public IPIntelligenceOnPremiseEngineBuilder setDrift(int drift) {
-        config.setDrift(drift);
-        return this;
-    }
-
-    /**
-     * Set whether the performance optimized graph is used
-     * for processing. When processing evidence, the performance
-     * graph is optimized to find an answer as quickly as possible.
-     * However, this can be at the expense of finding the best
-     * match for evidence which was not in the training data. If
-     * the predictive graph is also enabled, it will be used
-     * next if there was no match in the performance graph.
-     * <p>
-     * Default is false
-     * @see <a href="https://51degrees.com/documentation/_device_detection__hash.html#IPIntelligence_Hash_DataSetProduction_Predictive">Hash Algorithm</a>
-     * @param use true if the performance graph should be used
-     * @return this builder
-     */
-    @DefaultValue("false")
-    public IPIntelligenceOnPremiseEngineBuilder setUsePerformanceGraph(boolean use) {
-        config.setUsePerformanceGraph(use);
-        return this;
-    }
-
-    /**
-     * Set whether the predictive optimized graph is used
-     * for processing. When processing evidence, the predictive
-     * graph is optimised to find the best answer for evidence
-     * which was not in the training data. However, this is at the
-     * expense of processing time, as more possibilities are taken into
-     * consideration.
-     * <p>
-     * Default is true
-     * @see <a href="https://51degrees.com/documentation/_device_detection__hash.html#IPIntelligence_Hash_DataSetProduction_Predictive">Hash Algorithm</a>
-     * @param use true if the predictive graph should be used
-     * @return this builder
-     */
-    @DefaultValue("true")
-    public IPIntelligenceOnPremiseEngineBuilder setUsePredictiveGraph(boolean use) {
-        config.setUsePredictiveGraph(use);
         return this;
     }
     

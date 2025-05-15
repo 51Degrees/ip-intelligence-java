@@ -71,28 +71,4 @@ public abstract class OnPremiseIPIntelligenceEngineBuilderBase<
         DataUpdateService dataUpdateService) {
         super(loggerFactory, dataUpdateService);
     }
-
-    /**
-     * Set the maximum difference to allow when processing HTTP headers.
-     * The meaning of difference depends on the IP Intelligence API being
-     * used. The difference is the difference in hash value between the
-     * hash that was found, and the hash that is being searched for. By
-     * default this is 0.
-     * @param difference to allow
-     * @return this builder
-     */
-    public abstract TBuilder setDifference(int difference);
-
-    /**
-     * If set to false, a non-matching User-Agent will result in
-     * properties without set values. If set to true, a non-matching
-     * User-Agent will cause the 'default profiles' to be returned. This
-     * means that properties will always have values (i.e. no need to
-     * check {@link AspectPropertyValue#hasValue()}) but some may be inaccurate.
-     * By default, this is false.
-     * @param allow true if results with no matched hash nodes should be
-     *              considered valid
-     * @return this builder
-     */
-    public abstract TBuilder setAllowUnmatched(boolean allow);
 }

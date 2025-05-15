@@ -318,9 +318,9 @@ public class IPIntelligenceOnPremiseEngine
                 }
                 if (containsKey) {
                     relevantEvidence
-                        .addFromBytes(
-                        Swig.asBytes(evidenceItem.getKey()),
-                        Swig.asBytes(evidenceItem.getValue().toString()));
+                        .put(
+                                evidenceItem.getKey(),
+                                evidenceItem.getValue().toString());
                 }
             }
             ((IPIntelligenceDataHashDefault) IPIData).setResults(
