@@ -25,11 +25,7 @@ package fiftyone.ipintelligence.shared.testhelpers.data;
 import fiftyone.pipeline.core.data.FlowData;
 import fiftyone.pipeline.engines.exceptions.NoValueException;
 
-import java.util.List;
-
 public interface DataValidator {
 
     void validateData(FlowData data, boolean validEvidence) throws NoValueException;
-
-    void validateProfileIds(FlowData data, List<String> profileIds) throws NoValueException;
 }

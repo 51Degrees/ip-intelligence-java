@@ -26,6 +26,7 @@ import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPre
 import fiftyone.ipintelligence.shared.IPIntelligenceData;
 import fiftyone.ipintelligence.shared.testhelpers.data.DataValidator;
 import fiftyone.pipeline.core.data.FlowData;
+import fiftyone.pipeline.core.data.IWeightedValue;
 import fiftyone.pipeline.engines.data.AspectPropertyValue;
 import fiftyone.pipeline.engines.exceptions.NoValueException;
 import fiftyone.pipeline.engines.fiftyone.data.FiftyOneAspectPropertyMetaData;
@@ -57,7 +58,7 @@ public class DataValidatorHash implements DataValidator {
                     assertTrue(value.hasValue());
                 }
                 else {
-                    if (property.getCategory().equals("Device Metrics")) {
+                    if (property.getCategory().equals("Metrics")) {
                         assertTrue(value.hasValue());
                     }
                     else {
@@ -67,25 +68,13 @@ public class DataValidatorHash implements DataValidator {
 
             }
         }
-        assertNotNull(elementData.getDeviceId());
-        assertFalse(elementData.getDeviceId().getValue().isEmpty());
-        if (validEvidence == false) {
-            assertEquals("0-0-0-0", elementData.getDeviceId().getValue());
+        assertNotNull(elementData.getRegisteredName());
+        assertFalse(elementData.getRegisteredName().getValue().isEmpty());
+        if (!validEvidence) {
+            List<IWeightedValue<String>> listValue = elementData.getRegisteredName().getValue();
+            assertEquals(1, listValue.size());
+            assertEquals(1, listValue.get(0).getWeighting(), 1e-6f);
+            assertEquals("", listValue.get(0).getValue());
         }
-        int validKeys = 0;
-        for (String key : data.getEvidence().asKeyMap().keySet()) {
-            if (engine.getEvidenceKeyFilter().include(key)) {
-                validKeys++;
-            }
-        }
-        assertEquals(validKeys, elementData.getUserAgents().getValue().size());
-    }
-
-    @Override
-    public void validateProfileIds(FlowData data, List<String> profileIds) throws NoValueException {
-        IPIntelligenceData elementData = data.getFromElement(engine);
-        List<String> matchedProfiles = Arrays.asList(elementData.getDeviceId().getValue().split("-"));
-        assertTrue("One or more profiles were not set in the result",
-                matchedProfiles.containsAll(profileIds));
     }
 }

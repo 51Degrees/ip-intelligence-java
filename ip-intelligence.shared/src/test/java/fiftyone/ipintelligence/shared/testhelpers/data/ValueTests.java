@@ -41,51 +41,21 @@ public class ValueTests {
 
     public static void deviceId(Wrapper wrapper) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
-            data.addEvidence("header.user-agent", Constants.MobileUserAgent)
+            data.addEvidence("header.client-ip", Constants.MobileUserAgent)
                 .process();
             ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
-            IPIntelligenceData device = (IPIntelligenceData) elementData;
-            assertNotNull("The device id should not be null.",
-                device.getDeviceId().getValue());
-            assertTrue("The device id should not be empty.",
-                device.getDeviceId().getValue().isEmpty() == false);
-        }
-    }
-
-    public static void matchedUserAgents(Wrapper wrapper) throws Exception {
-        try (FlowData data = wrapper.getPipeline().createFlowData()) {
-            data.addEvidence("header.user-agent", Constants.MobileUserAgent)
-                .process();
-            ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
-            IPIntelligenceData device = (IPIntelligenceData) elementData;
-            assertEquals(1, device.getUserAgents().getValue().size());
-            for (String matchedUa : device.getUserAgents().getValue()) {
-                for (String substring : matchedUa.split("_|\\{|\\}")) {
-                    if (substring.isEmpty() == false) {
-                        assertTrue(
-                            "The matched substring '" + substring + "' does not " +
-                                "exist in the original User-Agent.",
-                            Constants.MobileUserAgent.contains(substring));
-                        int index = matchedUa.indexOf(substring);
-                        String original = Constants.MobileUserAgent
-                            .substring(index, index + substring.length());
-                        assertEquals(
-                            "Expected to find substring '" + original +
-                                "' at character position " + index +
-                                " but the substring found was '" + substring + "'.",
-                            substring,
-                            original);
-                    }
-                }
-            }
-            
+            IPIntelligenceData ipiData = (IPIntelligenceData) elementData;
+            assertNotNull("The registered name should not be null.",
+                ipiData.getRegisteredName().getValue());
+            assertFalse("The ipiData id should not be empty.",
+                    ipiData.getRegisteredName().getValue().isEmpty());
         }
     }
 
     @SuppressWarnings("unchecked")
     public static void valueTypes(Wrapper wrapper) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
-            data.addEvidence("header.user-agent",
+            data.addEvidence("header.client-ip",
                             Constants.ChromeUserAgent)
                 .process();
             ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
@@ -112,7 +82,7 @@ public class ValueTests {
     @SuppressWarnings("unchecked")
     public static void availableProperties(Wrapper wrapper) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
-            data.addEvidence("header.user-agent", Constants.MobileUserAgent)
+            data.addEvidence("header.client-ip", Constants.MobileUserAgent)
                 .process();
             ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
             for (FiftyOneAspectPropertyMetaData property :
@@ -130,15 +100,15 @@ public class ValueTests {
     @SuppressWarnings("unchecked")
     public static void typedGetters(Wrapper wrapper) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
-            data.addEvidence("header.user-agent", Constants.MobileUserAgent)
+            data.addEvidence("header.client-ip", Constants.MobileUserAgent)
                 .process();
             ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
             List<String> missingGetters = new ArrayList<>();
             for (FiftyOneAspectPropertyMetaData property :
                 (List<FiftyOneAspectPropertyMetaData>) wrapper.getEngine().getProperties()) {
 
-                if (Arrays.asList(Constants.ExcludedProperties)
-                    .contains(property.getName()) == false) {
+                if (!Arrays.asList(Constants.ExcludedProperties)
+                        .contains(property.getName())) {
                     String cleanPropertyName = property.getName()
                         .replace("/", "")
                         .replace("-", "");
@@ -146,7 +116,7 @@ public class ValueTests {
                         Method classProperty = elementData.getClass()
                             .getMethod("get" + cleanPropertyName);
                         if (classProperty != null) {
-                            if (property.isAvailable() == true) {
+                            if (property.isAvailable()) {
                                 Object value = null;
                                 try {
                                     value = classProperty.invoke(elementData);
@@ -183,7 +153,7 @@ public class ValueTests {
                     }
                 }
             }
-            if (missingGetters.size() > 0) {
+            if (!missingGetters.isEmpty()) {
                 if (missingGetters.size() == 1) {
                     fail("The property '" + missingGetters.get(0) + "' " +
                         "is missing a getter in the IPIntelligenceData class. This is not " +

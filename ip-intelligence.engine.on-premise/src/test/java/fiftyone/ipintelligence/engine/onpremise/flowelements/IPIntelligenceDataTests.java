@@ -66,7 +66,7 @@ public class IPIntelligenceDataTests extends TestsBase {
     /**
      * Check that a IPIntelligenceData is closed by the FlowData which contains it, and
      * that it in turn closes the native results.
-     * @throws Exception
+     * @throws Exception exception
      */
     @Test
     public void IPIData_ResultsClose() throws Exception {
@@ -95,8 +95,8 @@ public class IPIntelligenceDataTests extends TestsBase {
      * @param results to be checked
      * @param getMethod to call on the data
      * @param expectedCount number of calls to results
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
+     * @throws InvocationTargetException exception
+     * @throws IllegalAccessException exception
      */
     private void verifyCallsToContainsProperty(
         IPIntelligenceDataHashDefault data,
@@ -107,7 +107,7 @@ public class IPIntelligenceDataTests extends TestsBase {
         clearInvocations(results);
         getMethod.invoke(data, "InvalidProperty");
         verify(results, times(expectedCount))
-            .containsProperty(any(byte[].class));
+            .containsProperty(any(String.class));
     }
 
     /**
@@ -128,11 +128,11 @@ public class IPIntelligenceDataTests extends TestsBase {
         when(doubleValue.hasValue()).thenReturn(false);
         when(vectorValue.hasValue()).thenReturn(false);
 
-        when(results.getValueAsString(any(byte[].class))).thenReturn(stringValue);
-        when(results.getValueAsBool(any(byte[].class))).thenReturn(boolValue);
-        when(results.getValueAsInteger(any(byte[].class))).thenReturn(intValue);
-        when(results.getValueAsDouble(any(byte[].class))).thenReturn(doubleValue);
-        when(results.getValues(any(byte[].class))).thenReturn(vectorValue);
+        when(results.getValueAsString(any(String.class))).thenReturn(stringValue);
+        when(results.getValueAsBool(any(String.class))).thenReturn(boolValue);
+        when(results.getValueAsInteger(any(String.class))).thenReturn(intValue);
+        when(results.getValueAsDouble(any(String.class))).thenReturn(doubleValue);
+        when(results.getValues(any(String.class))).thenReturn(vectorValue);
     }
 
     /**
@@ -152,7 +152,7 @@ public class IPIntelligenceDataTests extends TestsBase {
 	
 	        ResultsIpiSwig results = mock(ResultsIpiSwig.class);
 	        configureNativeGettersNoValue(results);
-	        when(results.containsProperty(any(byte[].class))).thenReturn(false);
+	        when(results.containsProperty(any(String.class))).thenReturn(false);
 	        data.setResults(results);
 	
 	        for (Method method : data.getClass().getMethods()) {
@@ -186,10 +186,10 @@ public class IPIntelligenceDataTests extends TestsBase {
 	
 	        ResultsIpiSwig results1 = mock(ResultsIpiSwig.class);
 	        configureNativeGettersNoValue(results1);
-	        when(results1.containsProperty(any(byte[].class))).thenReturn(false);
+	        when(results1.containsProperty(any(String.class))).thenReturn(false);
 	        ResultsIpiSwig results2 = mock(ResultsIpiSwig.class);
 	        configureNativeGettersNoValue(results2);
-	        when(results2.containsProperty(any(byte[].class))).thenReturn(false);
+	        when(results2.containsProperty(any(String.class))).thenReturn(false);
 	
 	        data.setResults(results1);
 	        data.setResults(results2);
@@ -229,19 +229,19 @@ public class IPIntelligenceDataTests extends TestsBase {
 	            missingPropertyService);
 	
 	        ResultsIpiSwig results = mock(ResultsIpiSwig.class);
-	        when(results.containsProperty(any(byte[].class))).thenReturn(false);
+	        when(results.containsProperty(any(String.class))).thenReturn(false);
 	        data.setResults(results);
 	
 	        try {
 	            data.get("Invalid");
 	            fail("A missing property exception should have been thrown");
 	        }
-	        catch (PropertyMissingException e) {
+	        catch (PropertyMissingException ignored) {
 	
 	        }
 	        verify(
 	            results, times(1))
-	            .containsProperty(any(byte[].class));
+	            .containsProperty(any(String.class));
         }
     }
 
@@ -261,9 +261,9 @@ public class IPIntelligenceDataTests extends TestsBase {
 	            missingPropertyService);
 	
 	        ResultsIpiSwig results1 = mock(ResultsIpiSwig.class);
-	        when(results1.containsProperty(any(byte[].class))).thenReturn(false);
+	        when(results1.containsProperty(any(String.class))).thenReturn(false);
 	        ResultsIpiSwig results2 = mock(ResultsIpiSwig.class);
-	        when(results2.containsProperty(any(byte[].class))).thenReturn(false);
+	        when(results2.containsProperty(any(String.class))).thenReturn(false);
 	
 	        data.setResults(results1);
 	        data.setResults(results2);
@@ -272,15 +272,15 @@ public class IPIntelligenceDataTests extends TestsBase {
 	            data.get("Invalid");
 	            fail("A missing property exception should have been thrown");
 	        }
-	        catch (PropertyMissingException e) {
+	        catch (PropertyMissingException ignored) {
 	
 	        }
 	        verify(
 	            results1, times(1))
-	            .containsProperty(any(byte[].class));
+	            .containsProperty(any(String.class));
 	        verify(
 	            results2, times(1))
-	            .containsProperty(any(byte[].class));
+	            .containsProperty(any(String.class));
         }
     }
 
@@ -296,7 +296,7 @@ public class IPIntelligenceDataTests extends TestsBase {
      * Call a method and check that an {@link IllegalStateException} is thrown.
      * @param instance to call method on
      * @param methodCall lambda to call on instance
-     * @throws Exception
+     * @throws Exception exception
      */
     private void checkThrowsIllegalState(
         IPIntelligenceDataHashDefault instance,
@@ -306,20 +306,19 @@ public class IPIntelligenceDataTests extends TestsBase {
             fail("An exception was not thrown by even though the instance " +
                 "was closed.");
         } catch (Exception e) {
-            if (e instanceof IllegalStateException ||
-                (e.getCause() != null && e.getCause() instanceof IllegalStateException)) {
-                // This is the exception we want.
-            }
-            else {
-                throw e;
-            }
+            if (!(e instanceof IllegalStateException) &&
+                    (e.getCause() == null
+							|| !(e.getCause() instanceof IllegalStateException)))
+			{
+				throw e;
+			}
         }
     }
 
     /**
      * Check that once a {@link IPIntelligenceDataHashDefault} instance has been closed,
      * an {@link IllegalStateException} is throw when calling get methods.
-     * @throws Exception
+     * @throws Exception exception
      */
     @Test
     public void IPIData_Closed() throws Exception {
@@ -337,10 +336,10 @@ public class IPIntelligenceDataTests extends TestsBase {
             
 	        checkThrowsIllegalState(
 	            data,
-	            (d) -> d.get("ismobile"));
+	            (d) -> d.get("RegisteredName"));
 	        checkThrowsIllegalState(
 	            data,
-	            IPIntelligenceDataBase::getIsMobile);
+	            IPIntelligenceDataBase::getRegisteredName);
 	        checkThrowsIllegalState(
 	            data,
 	            IPIntelligenceDataBaseOnPremise::asKeyMap);

@@ -46,7 +46,6 @@ public class WrapperHash implements Wrapper {
     public WrapperHash(File dataFile, Constants.PerformanceProfiles profile) throws Exception {
         engine = new IPIntelligenceOnPremiseEngineBuilder(loggerFactory, null)
                 .setPerformanceProfile(profile)
-                .setUpdateMatchedUserAgent(true)
                 .setAutoUpdate(false)
                 .build(dataFile.toString(), false);
         pipeline = new PipelineBuilder(loggerFactory)

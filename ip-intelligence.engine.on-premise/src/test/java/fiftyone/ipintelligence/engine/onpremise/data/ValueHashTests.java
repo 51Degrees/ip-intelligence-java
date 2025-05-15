@@ -153,9 +153,4 @@ public class ValueHashTests extends TestsBase {
     public void Values_Hash_DeviceId() throws Exception {
         ValueTests.deviceId(getWrapper());
     }
-
-    @Test
-    public void Values_Hash_MatchedUserAgents() throws Exception {
-        ValueTests.matchedUserAgents(getWrapper());
-    }
 }

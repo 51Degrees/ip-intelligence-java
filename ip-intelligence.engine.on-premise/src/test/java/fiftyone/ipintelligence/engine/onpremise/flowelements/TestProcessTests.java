@@ -66,19 +66,4 @@ public class TestProcessTests extends TestsBase {
     public void Process_Hash_CaseInsensitiveKeys() throws Exception {
         ProcessTests.caseInsensitiveEvidenceKeys(getWrapper(), new DataValidatorHash(getWrapper().getEngine()));
     }
-
-    @Test
-    public void Process_Hash_ProfileOverride() throws Exception {
-        ProcessTests.profileOverride(getWrapper(), new DataValidatorHash(getWrapper().getEngine()));
-    }
-
-    @Test
-    public void Process_Hash_ProfileOverrideNoHeaders() throws Exception {
-        ProcessTests.profileOverrideNoHeaders(getWrapper(), new DataValidatorHash(getWrapper().getEngine()));
-    }
-
-    @Test
-    public void Process_Hash_DeviceId() throws Exception {
-        ProcessTests.deviceId(getWrapper(), new DataValidatorHash(getWrapper().getEngine()));
-    }
 }

@@ -48,7 +48,7 @@ public class ProcessTests {
         DataValidator validator) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
             data
-                .addEvidence("header.user-agent", "")
+                .addEvidence("header.client-ip", "")
                 .process();
             validator.validateData(data, false);
         }
@@ -84,43 +84,6 @@ public class ProcessTests {
                 .addEvidence("header.USER-AGENT", Constants.ChromeUserAgent)
                 .process();
             validator.validateData(data, true);            
-        }
-    }
-
-    public static void profileOverride(
-        Wrapper wrapper,
-        DataValidator validator) throws Exception {
-        List<String> profileIds = Arrays.asList("12280", "17779", "17470", "18092");
-        try (FlowData data = wrapper.getPipeline().createFlowData()) {
-            data
-                .addEvidence("header.user-agent", "some user agent")
-                .addEvidence("query.51D_ProfileIds", stringJoin(profileIds, "|"))
-                .process();
-            validator.validateProfileIds(data, profileIds);           
-        }
-    }
-
-    public static void profileOverrideNoHeaders(
-        Wrapper wrapper,
-        DataValidator validator) throws Exception {
-        List<String> profileIds = Arrays.asList("12280", "17779", "17470", "18092");
-        try (FlowData data = wrapper.getPipeline().createFlowData()) {
-            data
-                .addEvidence("query.51D_ProfileIds", stringJoin(profileIds, "|"))
-                .process();
-            validator.validateProfileIds(data, profileIds);            
-        }
-    }
-
-    public static void deviceId(
-        Wrapper wrapper,
-        DataValidator validator) throws Exception {
-        List<String> profileIds = Arrays.asList("12280", "17779", "17470", "18092");
-        try (FlowData data = wrapper.getPipeline().createFlowData();) {
-            data
-                .addEvidence("query.51D_ProfileIds", stringJoin(profileIds, "-"))
-                .process();
-            validator.validateProfileIds(data, profileIds);           
         }
     }
 }

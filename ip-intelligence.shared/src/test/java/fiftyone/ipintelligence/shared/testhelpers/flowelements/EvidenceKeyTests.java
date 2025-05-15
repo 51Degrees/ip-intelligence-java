@@ -29,7 +29,7 @@ import static org.junit.Assert.assertTrue;
 public class EvidenceKeyTests {
 
     public static void containsUserAgent(Wrapper wrapper) {
-        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("header.user-agent"));
+        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("header.client-ip"));
     }
 
     public static void containsHeaderNames(Wrapper wrapper) {
@@ -37,13 +37,13 @@ public class EvidenceKeyTests {
     }
 
     public static void containsQueryParams(Wrapper wrapper) {
-        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("query.user-agent"));
+        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("query.client-ip"));
         assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("query.device-stock-ua"));
     }
 
     public static void caseInsensitiveKeys(Wrapper wrapper) {
         assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("header.User-Agent"));
-        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("header.user-agent"));
+        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("header.client-ip"));
         assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("header.USER-AGENT"));
         assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("HEADER.USER-AGENT"));
     }
