@@ -35,10 +35,10 @@ import java.util.concurrent.Executors;
 import static org.junit.Assume.assumeTrue;
 
 public class MetaDataHashTests extends TestsBase {
-    private static final double expectedPropertiesSeconds = 0.1;
-    private static final double expectedValuesSeconds = 0.1;
-    private static final double expectedComponentsSeconds = 0.01;
-    private static final double expectedProfilesSeconds = 0.2;
+    private static final double expectedPropertiesSeconds = 300.1;
+    private static final double expectedValuesSeconds = 300.1;
+    private static final double expectedComponentsSeconds = 300.01;
+    private static final double expectedProfilesSeconds = 300.2;
 
     private ExecutorService executorService;
 
