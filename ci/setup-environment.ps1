@@ -14,7 +14,7 @@ if ($LASTEXITCODE -ne 0) {
 
 if ($IsLinux -or $IsMacOS) {
     Write-Output "Marking PreBuild.sh as executable..."
-    chmod +x ip-intelligence.engine.on-premise/src/main/cxx/PreBuild.sh
+    chmod +x $RepoName/ip-intelligence.engine.on-premise/src/main/cxx/PreBuild.sh
     Write-Output "Marking PreBuild.sh as executable -- done."
 }
 
