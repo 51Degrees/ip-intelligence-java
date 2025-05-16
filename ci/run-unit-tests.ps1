@@ -6,6 +6,10 @@ param(
     [string]$RepoName
 )
 
-./java/run-unit-tests.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -Name $Name -ExtraArgs @("-X", "-DTestResourceKey=$($Keys.TestResourceKey)")
+./java/run-unit-tests.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -Name $Name -ExtraArgs @(
+    "-X",
+    "-Djunit.jupiter.extensions.autodetection.enabled=true",
+    "-DTestResourceKey=$($Keys.TestResourceKey)"
+)
 
 exit $LASTEXITCODE
