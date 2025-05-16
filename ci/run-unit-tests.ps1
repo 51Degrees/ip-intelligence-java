@@ -8,6 +8,7 @@ param(
 
 ./java/run-unit-tests.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -Name $Name -ExtraArgs @(
     "-X",
+    "-e",
     "-Djunit.jupiter.extensions.autodetection.enabled=true",
     "-DTestResourceKey=$($Keys.TestResourceKey)"
 )
