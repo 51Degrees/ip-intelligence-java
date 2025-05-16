@@ -187,8 +187,8 @@ public class IPIntelligenceTests {
                                         0,
                                         flowData.getErrors().size());
                                 }
-                                IPIntelligenceData IPIntelligenceData = flowData.get(IPIntelligenceData.class);
-                                IPIntelligenceData.getIsMobile();
+                                IPIntelligenceData ipiData = flowData.get(IPIntelligenceData.class);
+                                ipiData.getRegisteredName();
                             }
                         }
                         return null;

@@ -233,16 +233,6 @@ public class IPIntelligenceDataOnPremiseTests {
             this.value = value;
         }
 
-        @Override
-        public AspectPropertyValue<List<String>> getUserAgents() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public AspectPropertyValue<String> getDeviceId() {
-            throw new UnsupportedOperationException();
-        }
-
 
         @Override
         protected AspectPropertyValue<Boolean> getValueAsBool(String propertyName) {
@@ -291,9 +281,10 @@ public class IPIntelligenceDataOnPremiseTests {
 
         @SuppressWarnings("unchecked")
         @Override
-        public AspectPropertyValue<List<String>> getValues(String propertyName) {
+        public AspectPropertyValue<List<?>> getValues(String propertyName,
+                                                      Class<?>[] parametrizedTypes) {
             if (propertyName.equals(testPropertyName)) {
-                return new AspectPropertyValueDefault<>((List<String>)value);
+                return new AspectPropertyValueDefault<>((List<?>)value);
             } else {
                 throw new PropertyMissingException();
             }

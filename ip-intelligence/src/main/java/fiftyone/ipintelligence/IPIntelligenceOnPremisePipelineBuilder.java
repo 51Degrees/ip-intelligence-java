@@ -51,7 +51,6 @@ public class IPIntelligenceOnPremisePipelineBuilder
     protected boolean shareUsageEnabled = true;
     private String filename;
     private boolean createTempDataCopy;
-    private byte[] engineData;
     private int concurrency = -1;
     private final List<String> properties = new ArrayList<String>();
     private Boolean autoUpdateEnabled = null;
@@ -106,17 +105,6 @@ public class IPIntelligenceOnPremisePipelineBuilder
             throw new Exception("Unrecognised filename. " +
                 "Expected a '*.hash' hash data file.");
         }
-        return this;
-    }
-
-    /**
-     * Set the byte array to use as a data source when 
-     * creating the engine.
-     * @param data The entire IP Intelligence data file as a byte array.
-      * @return This builder instance.
-     */
-    IPIntelligenceOnPremisePipelineBuilder setEngineData(byte[] data) {
-        this.engineData = data;
         return this;
     }
 
@@ -427,12 +415,10 @@ public class IPIntelligenceOnPremisePipelineBuilder
         IPIntelligenceOnPremiseEngine engine;
         if (filename != null && filename.isEmpty() == false) {
             engine = builder.build(filename, createTempDataCopy);
-        } else if (engineData != null) {
-            engine = builder.build(engineData);
         } else {
             throw new PipelineConfigurationException(
                 "No source for engine data. " +
-                    "Use setFilename or setEngineData to configure this.");
+                    "Use setFilename to configure this.");
         }
 
         return engine;

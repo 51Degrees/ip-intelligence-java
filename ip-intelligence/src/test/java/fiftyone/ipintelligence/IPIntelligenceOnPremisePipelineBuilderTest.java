@@ -116,28 +116,6 @@ public class IPIntelligenceOnPremisePipelineBuilderTest {
     }
 
     @Test
-    public void setEngineData_PropertyPropagatedToDataFileConfiguration() throws Exception {
-        byte[] data = Files.readAllBytes(datafile.toPath());
-        Pipeline pipeline = new IPIntelligencePipelineBuilder(loggerFactory)
-                .useOnPremise(new byte[]{}, Enums.IPIntelligenceAlgorithm.Hash)
-                .setEngineData(data)
-                .setShareUsage(false)
-                .build();
-        DataFileConfiguration dataFileConfiguration = getDataFileConfiguration(pipeline);
-        assertEquals(data, dataFileConfiguration.getData());
-    }
-
-    @Test
-    public void setEngineData_FilenameIsSet_PropertyNotPropagated() throws Exception {
-        byte[] data = Files.readAllBytes(datafile.toPath());
-        Pipeline pipeline = builder
-                .setEngineData(data)
-                .build();
-        DataFileConfiguration dataFileConfiguration = getDataFileConfiguration(pipeline);
-        assertNull(dataFileConfiguration.getData());
-    }
-
-    @Test
     public void setShareUsage_False_SharedFlowElementNotAdded() throws Exception {
         Pipeline pipeline = new IPIntelligencePipelineBuilder(loggerFactory)
                 .useOnPremise(datafile.getAbsolutePath(), false)
@@ -249,51 +227,6 @@ public class IPIntelligenceOnPremisePipelineBuilderTest {
                 .build();
         ConfigIpiSwig swig = getConfigIpiSwig(pipeline);
         assertEquals(4, swig.getConcurrency());
-    }
-
-    @Test
-    public void setDifference_PropertyPropagatedSwigConfiguration() throws Exception {
-        Pipeline pipeline = builder
-                .setDifference(123)
-                .build();
-        ConfigIpiSwig swig = getConfigIpiSwig(pipeline);
-        assertEquals(123, swig.getDifference());
-    }
-
-    @Test
-    public void setAllowUnmatched_PropertyPropagatedSwigConfiguration() throws Exception {
-        Pipeline pipeline = builder
-                .setAllowUnmatched(true)
-                .build();
-        ConfigIpiSwig swig = getConfigIpiSwig(pipeline);
-        assertTrue(swig.getAllowUnmatched());
-    }
-
-    @Test
-    public void setDrift_PropertyPropagatedSwigConfiguration() throws Exception {
-        Pipeline pipeline = builder
-                .setDrift(123)
-                .build();
-        ConfigIpiSwig swig = getConfigIpiSwig(pipeline);
-        assertEquals(123, swig.getDrift());
-    }
-
-    @Test
-    public void setUsePerformanceGraph_PropertyPropagatedSwigConfiguration() throws Exception {
-        Pipeline pipeline = builder
-                .setUsePerformanceGraph(true)
-                .build();
-        ConfigIpiSwig swig = getConfigIpiSwig(pipeline);
-        assertTrue(swig.getUsePerformanceGraph());
-    }
-
-    @Test
-    public void setUsePredictiveGraph_PropertyPropagatedSwigConfiguration() throws Exception {
-        Pipeline pipeline = builder
-                .setUsePredictiveGraph(true)
-                .build();
-        ConfigIpiSwig swig = getConfigIpiSwig(pipeline);
-        assertTrue(swig.getUsePredictiveGraph());
     }
 
     @Test
