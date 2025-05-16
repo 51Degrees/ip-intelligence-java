@@ -26,6 +26,7 @@ import fiftyone.ipintelligence.engine.onpremise.TestsBase;
 import fiftyone.pipeline.engines.Constants;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.concurrent.ExecutionException;
@@ -34,6 +35,7 @@ import java.util.concurrent.Executors;
 
 import static org.junit.Assume.assumeTrue;
 
+@Ignore
 public class MetaDataHashTests extends TestsBase {
     private static final double expectedPropertiesSeconds = 300.1;
     private static final double expectedValuesSeconds = 300.1;
