@@ -63,10 +63,5 @@ public class ValueCloudTests extends TestsBase {
         public void ValueTests_Cloud_DeviceId() throws Exception {
             ValueTests.deviceId(getWrapper());
         }
-
-        @Test
-        public void ValueTests_Cloud_MatchedUserAgents() throws Exception {
-            ValueTests.matchedUserAgents(getWrapper());
-        }
     }
 

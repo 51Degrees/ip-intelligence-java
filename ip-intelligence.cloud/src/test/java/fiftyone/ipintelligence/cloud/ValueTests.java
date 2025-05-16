@@ -54,36 +54,6 @@ public class ValueTests {
         }
     }
 
-    public static void matchedUserAgents(WrapperCloud wrapper) throws Exception {
-        try (FlowData data = wrapper.getPipeline().createFlowData()) {
-            data.addEvidence("header.client-ip", Constants.MobileUserAgent)
-                .process();
-            ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
-            IPIntelligenceData device = (IPIntelligenceData) elementData;
-            assertEquals(1, device.getUserAgents().getValue().size());
-            for (String matchedUa : device.getUserAgents().getValue()) {
-                for (String substring : matchedUa.split("_|\\{|\\}")) {
-                    if (substring.isEmpty() == false) {
-                        assertTrue(
-                            "The matched substring '" + substring + "' does not " +
-                                "exist in the original User-Agent.",
-                            Constants.MobileUserAgent.contains(substring));
-                        int index = matchedUa.indexOf(substring);
-                        String original = Constants.MobileUserAgent
-                            .substring(index, index + substring.length());
-                        assertEquals(
-                            "Expected to find substring '" + original +
-                                "' at character position " + index +
-                                " but the substring found was '" + substring + "'.",
-                            substring,
-                            original);
-                    }
-                }
-            }
-            
-        }
-    }
-
     @SuppressWarnings("unchecked")
     public static void valueTypes(WrapperCloud wrapper) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {

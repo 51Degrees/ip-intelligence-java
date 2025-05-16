@@ -26,6 +26,7 @@ import fiftyone.ipintelligence.cloud.data.IPIntelligenceDataCloud;
 import fiftyone.pipeline.cloudrequestengine.data.CloudRequestData;
 import fiftyone.pipeline.cloudrequestengine.flowelements.CloudRequestEngine;
 import fiftyone.pipeline.core.data.FlowData;
+import fiftyone.pipeline.core.data.IWeightedValue;
 import fiftyone.pipeline.engines.data.AspectPropertyMetaData;
 import fiftyone.pipeline.engines.data.AspectPropertyMetaDataDefault;
 import fiftyone.pipeline.engines.data.AspectPropertyValue;
@@ -65,7 +66,7 @@ public class MissingPropertyHandlingTests {
             FlowData flowData = mock(FlowData.class);
             addResponse(flowData, nullValueJson);
 
-            IPIntelligenceDataCloud device = new IPIntelligenceDataCloudInternal(
+            IPIntelligenceDataCloud ipiData = new IPIntelligenceDataCloudInternal(
                     loggerFactory.getLogger(IPIntelligenceDataCloud.class.getSimpleName()),
                     flowData,
                     engine,
@@ -73,14 +74,15 @@ public class MissingPropertyHandlingTests {
 
             engine.cloudRequestEngine = mock(CloudRequestEngine.class);
             engine.aspectProperties = properties;
-            engine.processEngine(flowData, device);
+            engine.processEngine(flowData, ipiData);
 
-            AspectPropertyValue<String> priceBand = device.getPriceBand();
-            assertTrue(priceBand != null);
-            assertFalse(priceBand.hasValue());
+            // TODO: Select fitting property. Was `getPriceBand`
+            AspectPropertyValue<List<IWeightedValue<Float>>> latitude = ipiData.getLatitude();
+            assertNotNull(latitude);
+            assertFalse(latitude.hasValue());
             assertEquals(
                     expectedNullReason,
-                    priceBand.getNoValueMessage());
+                    latitude.getNoValueMessage());
         }
     }
 
@@ -108,7 +110,7 @@ public class MissingPropertyHandlingTests {
                             MissingPropertyReason.Unknown,
                             expectedMissingPropertyReason));
 
-            IPIntelligenceDataCloud device = new IPIntelligenceDataCloudInternal(
+            IPIntelligenceDataCloud ipiData = new IPIntelligenceDataCloudInternal(
                     loggerFactory.getLogger(IPIntelligenceDataCloud.class.getSimpleName()),
                     flowData,
                     engine,
@@ -116,10 +118,11 @@ public class MissingPropertyHandlingTests {
 
             engine.cloudRequestEngine = mock(CloudRequestEngine.class);
             engine.aspectProperties = properties;
-            engine.processEngine(flowData, device);
+            engine.processEngine(flowData, ipiData);
 
             try {
-                AspectPropertyValue<String> deviceType = device.getDeviceType();
+                // TODO: Select fitting property. Was `getDeviceType`
+                AspectPropertyValue<List<IWeightedValue<Float>>> deviceType = ipiData.getLongitude();
                 fail("A PropertyMissingException should have been thrown");
             } catch (PropertyMissingException e) {
                 assertEquals(

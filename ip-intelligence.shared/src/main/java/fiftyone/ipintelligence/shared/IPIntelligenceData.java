@@ -65,11 +65,11 @@ public interface IPIntelligenceData extends AspectData
 	/**
 	 * Average latitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
 	 */
-	AspectPropertyValue<List<IWeightedValue<String>>> getLatitude();
+	AspectPropertyValue<List<IWeightedValue<Float>>> getLatitude();
 	/**
 	 * Average longitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
 	 */
-	AspectPropertyValue<List<IWeightedValue<String>>> getLongitude();
+	AspectPropertyValue<List<IWeightedValue<Float>>> getLongitude();
 	/**
 	 * The mobile country code of the network the device is connected to.
 	 */

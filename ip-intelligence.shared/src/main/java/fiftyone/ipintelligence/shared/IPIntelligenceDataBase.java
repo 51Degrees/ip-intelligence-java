@@ -115,13 +115,13 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public AspectPropertyValue<List<IWeightedValue<String>>> getLatitude() { return getAs("latitude", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
+	public AspectPropertyValue<List<IWeightedValue<Float>>> getLatitude() { return getAs("latitude", AspectPropertyValue.class, List.class, IWeightedValue.class, Float.class); }
 	/**
 	 * Average longitude of the IP. For privacy, this is randomized within around 1 mile of the result. Randomized result will change only once per day.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public AspectPropertyValue<List<IWeightedValue<String>>> getLongitude() { return getAs("longitude", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
+	public AspectPropertyValue<List<IWeightedValue<Float>>> getLongitude() { return getAs("longitude", AspectPropertyValue.class, List.class, IWeightedValue.class, Float.class); }
 	/**
 	 * The name of the geographical region that the supplied location is in.
 	 */
