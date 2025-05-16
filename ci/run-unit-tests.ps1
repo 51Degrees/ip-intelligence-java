@@ -6,12 +6,13 @@ param(
     [string]$RepoName
 )
 
-./java/run-unit-tests.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -Name $Name -ExtraArgs @(
+& ./java/run-unit-tests.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -Name $Name -ExtraArgs @(
     "-X",
     "-e",
     "-Dorg.slf4j.simpleLogger.defaultLogLevel=trace",
     "-Djunit.jupiter.extensions.autodetection.enabled=true",
     "-DTestResourceKey=$($Keys.TestResourceKey)"
 )
+Write-Output "[ip-intelligence-java/ci/run-unit-tests.ps1] LASTEXITCODE = $LASTEXITCODE"
 
 exit $LASTEXITCODE
