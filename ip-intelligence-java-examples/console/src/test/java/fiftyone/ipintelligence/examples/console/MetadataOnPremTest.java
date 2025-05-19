@@ -29,7 +29,7 @@ public class MetadataOnPremTest {
     @Test
     public void gettingMetaDataOnPremTest() throws Exception {
         MetadataOnPrem.run(FileUtils.getHashFileName() == null
-                ? FileUtils.LITE_HASH_DATA_FILE_NAME
+                ? FileUtils.LITE_IPI_DATA_FILE_NAME
                 : FileUtils.getHashFileName(), System.out);
     }
 }

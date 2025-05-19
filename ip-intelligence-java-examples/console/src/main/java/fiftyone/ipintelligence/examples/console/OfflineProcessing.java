@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.examples.console;
 
-import fiftyone.ipintelligence.DeviceDetectionPipelineBuilder;
+import fiftyone.ipintelligence.IPIntelligencePipelineBuilder;
 import fiftyone.ipintelligence.examples.shared.DataFileHelper;
 import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
 import fiftyone.ipintelligence.shared.IPIntelligenceData;
@@ -127,7 +127,7 @@ public class OfflineProcessing {
                 "engine from file " + dataFile);
         // Build a new on-premise Hash engine in a try/resources so
         // that the pipeline is disposed when done
-        try (Pipeline pipeline = new DeviceDetectionPipelineBuilder()
+        try (Pipeline pipeline = new IPIntelligencePipelineBuilder()
                 .useOnPremise(detectionFile, false)
                 // inhibit sharing usage for this test, usually
                 // this should be set "true"
@@ -195,9 +195,9 @@ public class OfflineProcessing {
                          */
 
                         Map<String, ? super Object> resultMap = new HashMap<>();
-                        resultMap.put("device.ismobile", asString(device.getIsMobile()));
-                        resultMap.put("device.platformname", asString(device.getPlatformName()));
-                        resultMap.put("device.platformversion", asString(device.getPlatformVersion()));
+                        resultMap.put("device.RegisteredName", asString(device.getRegisteredName()));
+                        resultMap.put("device.RegisteredOwner", asString(device.getRegisteredOwner()));
+                        resultMap.put("device.RegisteredCountry", asString(device.getRegisteredCountry()));
 
                         // to look at all IP Intelligence properties use the following:
                         // resultMap.putAll(getPopulatedProperties(device, "device."));

@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.examples.console;
 
-import fiftyone.ipintelligence.DeviceDetectionPipelineBuilder;
+import fiftyone.ipintelligence.IPIntelligencePipelineBuilder;
 import fiftyone.ipintelligence.examples.shared.DataFileHelper;
 import fiftyone.ipintelligence.examples.shared.EvidenceHelper;
 import fiftyone.ipintelligence.engine.onpremise.data.IPIntelligenceDataHash;
@@ -86,7 +86,7 @@ public class MatchMetrics {
 
         // Build a new Pipeline to use an on-premise Hash engine with the
         // low memory performance profile.
-        try (Pipeline pipeline = new DeviceDetectionPipelineBuilder()
+        try (Pipeline pipeline = new IPIntelligencePipelineBuilder()
                 .useOnPremise(dataFile, true)
                 .setAutoUpdate(false)
                 // Prefer low memory profile where all data streamed from disk
@@ -115,8 +115,6 @@ public class MatchMetrics {
                 // For a more detailed description of the differences between
                 // performance and predictive, see
                 // https://51degrees.com/documentation/_device_detection__hash.html#DeviceDetection_Hash_DataSetProduction_Performance
-                .setUsePredictiveGraph(true)
-                .setUsePerformanceGraph(false)
                 .build()) {
 
             DataFileHelper.logDataFileInfo(pipeline.getElement(IPIntelligenceOnPremiseEngine.class));
@@ -140,12 +138,6 @@ public class MatchMetrics {
                 evidenceList.get(2).entrySet().stream()
                         .sorted(Comparator.comparingInt(e -> e.getValue().length()))
                         .forEach(e -> writer.format("    %-34s: %s%n", e.getKey(), e.getValue()));
-                // Obtain the matched User-Agents: the matched substrings in the
-                // User-Agents are separated with underscores - output in forward length order.
-                writer.println("Matches");
-                device.getUserAgents().getValue().stream()
-                        .sorted(Comparator.comparingInt(String::length).reversed())
-                        .forEach(v -> writer.format("    %-34s: %s%n", "Matched User-Agent", v));
 
                 writer.println();
 

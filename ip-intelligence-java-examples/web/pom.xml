@@ -10,7 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>getting-started.cloud</module>
         <module>shared</module>
         <module>getting-started.onprem</module>
     </modules>

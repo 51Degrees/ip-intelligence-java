@@ -23,13 +23,14 @@
 package fiftyone.ipintelligence.examples.console;
 
 import fiftyone.common.testhelpers.LogbackHelper;
-import fiftyone.ipintelligence.DeviceDetectionOnPremisePipelineBuilder;
-import fiftyone.ipintelligence.DeviceDetectionPipelineBuilder;
+import fiftyone.ipintelligence.IPIntelligenceOnPremisePipelineBuilder;
+import fiftyone.ipintelligence.IPIntelligencePipelineBuilder;
 import fiftyone.ipintelligence.examples.shared.DataFileHelper;
 import fiftyone.ipintelligence.examples.shared.EvidenceHelper;
 import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
 import fiftyone.ipintelligence.shared.IPIntelligenceData;
 import fiftyone.pipeline.core.data.FlowData;
+import fiftyone.pipeline.core.data.IWeightedValue;
 import fiftyone.pipeline.core.flowelements.Pipeline;
 import fiftyone.pipeline.engines.Constants;
 import fiftyone.pipeline.util.FileFinder;
@@ -123,14 +124,11 @@ public class PerformanceBenchmark {
         // run "from memory" benchmarks - the only profiles that really make sense
         // are maxPerformance
         for (PerformanceConfiguration config: performanceConfigurations){
-            if (config.profile.equals(MaxPerformance)) {
-                executeBenchmark(false, config);
+            if (!config.profile.equals(MaxPerformance)) {
+                // TODO: Remove this check
+                continue;
             }
-        }
-
-        // run the selected benchmarks from disk
-        for (PerformanceConfiguration config: performanceConfigurations){
-            executeBenchmark(true, config);
+            executeBenchmark(config);
         }
 
         logger.info("Finished Performance example");
@@ -138,12 +136,10 @@ public class PerformanceBenchmark {
 
     /**
      * Set up and execute a benchmark test
-     * @param configureFromDisk configure the pipeline from disk or from buffer
      * @param config the configuration to use for this benchmark
      * @throws Exception to satisfy undelying calls
      */
-    private void executeBenchmark(boolean configureFromDisk,
-                                  PerformanceConfiguration config) throws Exception {
+    private void executeBenchmark(PerformanceConfiguration config) throws Exception {
         logger.info(MarkerFactory.getMarker(config.profile.name() + " " +
                         config.allProperties + " " +
                         config.performanceGraph + " " +
@@ -157,29 +153,15 @@ public class PerformanceBenchmark {
 
         Pipeline pipeline = null;
         try {
-            if (configureFromDisk) {
-                logger.info("Load from disk");
-                DeviceDetectionOnPremisePipelineBuilder builder = new DeviceDetectionPipelineBuilder()
-                        // load from disk
-                        .useOnPremise(dataFileLocation, false);
+            logger.info("Load from disk");
+            IPIntelligenceOnPremisePipelineBuilder builder = new IPIntelligencePipelineBuilder()
+                    // load from disk
+                    .useOnPremise(dataFileLocation, false);
 
-                setPipelinePerformanceProperties(builder, config);
-                pipeline = builder.build();
+            setPipelinePerformanceProperties(builder, config);
+            pipeline = builder.build();
 
-                DataFileHelper.logDataFileInfo(pipeline.getElement(IPIntelligenceOnPremiseEngine.class));
-            } else {
-                logger.info("Load memory from {}", dataFileLocation);
-                byte[] fileContent = Files.readAllBytes(new File(dataFileLocation).toPath());
-                logger.info("Memory loaded");
-
-                // create a pipeline builder
-                DeviceDetectionOnPremisePipelineBuilder builder = new DeviceDetectionPipelineBuilder()
-                        // load from buffer
-                        .useOnPremise(fileContent);
-
-                setPipelinePerformanceProperties(builder, config);
-                pipeline = builder.build();
-            }
+            DataFileHelper.logDataFileInfo(pipeline.getElement(IPIntelligenceOnPremiseEngine.class));
 
             // run the benchmarks twice, once to warm up the JVM
             logger.info("Warming up");
@@ -209,7 +191,7 @@ public class PerformanceBenchmark {
      * @param config benchmark configuration
      */
     private void setPipelinePerformanceProperties(
-            DeviceDetectionOnPremisePipelineBuilder builder,
+            IPIntelligenceOnPremisePipelineBuilder builder,
             PerformanceConfiguration config) {
         // the different profiles provide for trading off memory usage
         builder.setPerformanceProfile(config.profile)
@@ -227,10 +209,6 @@ public class PerformanceBenchmark {
         if (BooleanUtils.isFalse(config.allProperties)) {
             builder.setProperty("isMobile");
         }
-        // choose performanceGraph or predictiveGraph, choosing both runs uses
-        // performance first then predictive, if the result was not found in performance
-        builder.setUsePerformanceGraph(config.performanceGraph);
-        builder.setUsePredictiveGraph(config.predictiveGraph);
     }
 
     /**
@@ -331,10 +309,12 @@ public class PerformanceBenchmark {
                     // the same data.
                     IPIntelligenceData device = flowData.get(IPIntelligenceData.class);
                     if (device != null) {
-                        if (device.getIsMobile().hasValue()) {
-                            Object value = device.getIsMobile().getValue();
+                        if (device.getRegisteredName().hasValue()) {
+                            List<IWeightedValue<String>> value = device.getRegisteredName().getValue();
                             if (value != null) {
-                                result.checkSum += value.hashCode();
+                                for (IWeightedValue<?> weightedValue : value) {
+                                    result.checkSum += weightedValue.getValue().hashCode();
+                                }
                             }
                         }
                     }

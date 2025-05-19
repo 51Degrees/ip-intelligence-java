@@ -29,7 +29,9 @@ import fiftyone.ipintelligence.shared.IPIntelligenceData;
 import fiftyone.pipeline.core.configuration.PipelineOptions;
 import fiftyone.pipeline.core.configuration.PipelineOptionsFactory;
 import fiftyone.pipeline.core.data.FlowData;
+import fiftyone.pipeline.core.data.IWeightedValue;
 import fiftyone.pipeline.core.flowelements.Pipeline;
+import fiftyone.pipeline.engines.data.AspectPropertyValue;
 import fiftyone.pipeline.engines.fiftyone.flowelements.FiftyOnePipelineBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -96,7 +98,7 @@ public class GettingStartedOnPrem {
             throw e;
         }
 
-        /* In this example, we use the DeviceDetectionPipelineBuilder and configure it from
+        /* In this example, we use the IPIntelligencePipelineBuilder and configure it from
         options contained in the file "gettingStartedOnPrem.xml".
 
         For more information about pipelines in general see the documentation at
@@ -170,11 +172,24 @@ public class GettingStartedOnPrem {
             /* Display the results of the detection, which are called device properties. See the
             property dictionary at https://51degrees.com/developers/property-dictionary for
             details of all available properties. */
-            writer.println("\tMobile Device: " + asString(device.getIsMobile()));
-            writer.println("\tPlatform Name: " + asString(device.getPlatformName()));
-            writer.println("\tPlatform Version: " + asString(device.getPlatformVersion()));
-            writer.println("\tBrowser Name: " + asString(device.getBrowserName()));
-            writer.println("\tBrowser Version: " + asString(device.getBrowserVersion()));
+            AspectPropertyValue<List<IWeightedValue<String>>> value = device.getRegisteredName();
+            if (value != null && value.hasValue()) {
+                for (IWeightedValue<?> weightedValue : value.getValue()) {
+                    System.out.println("RegisteredName: " + weightedValue.getValue());
+                }
+            }
+            value = device.getRegisteredCountry();
+            if (value != null && value.hasValue()) {
+                for (IWeightedValue<?> weightedValue : value.getValue()) {
+                    System.out.println("RegisteredCountry: " + weightedValue.getValue());
+                }
+            }
+            value = device.getRegisteredCountry();
+            if (value != null && value.hasValue()) {
+                for (IWeightedValue<?> weightedValue : value.getValue()) {
+                    System.out.println("RegisteredCountry: " + weightedValue.getValue());
+                }
+            }
         }
         writer.println();
         writer.flush();

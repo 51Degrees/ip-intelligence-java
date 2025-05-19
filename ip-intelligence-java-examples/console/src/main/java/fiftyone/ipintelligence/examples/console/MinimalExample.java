@@ -22,10 +22,14 @@
 
 package fiftyone.ipintelligence.examples.console;
 
-import fiftyone.ipintelligence.DeviceDetectionPipelineBuilder;
+import fiftyone.ipintelligence.IPIntelligencePipelineBuilder;
 import fiftyone.ipintelligence.shared.IPIntelligenceData;
 import fiftyone.pipeline.core.data.FlowData;
+import fiftyone.pipeline.core.data.IWeightedValue;
 import fiftyone.pipeline.core.flowelements.Pipeline;
+import fiftyone.pipeline.engines.data.AspectPropertyValue;
+
+import java.util.List;
 
 /**
  * This is the code for the minimal example displayed in the configurator. Please see
@@ -54,7 +58,7 @@ public class MinimalExample {
         // create a minimal pipeline to access the cloud engine
         // you only need one pipeline for multiple requests
         // use try-with-resources to free the pipeline when done
-        try (Pipeline pipeline = new DeviceDetectionPipelineBuilder()
+        try (Pipeline pipeline = new IPIntelligencePipelineBuilder()
                 .useCloud(resource)
                 .build()) {
 
@@ -77,7 +81,13 @@ public class MinimalExample {
                 // get the results
                 IPIntelligenceData device = data.get(IPIntelligenceData.class);
 
-                System.out.println("device.IsMobile: " + device.getIsMobile().getValue());
+
+                AspectPropertyValue<List<IWeightedValue<String>>> value = device.getRegisteredName();
+                if (value != null && value.hasValue()) {
+                    for (IWeightedValue<?> weightedValue : value.getValue()) {
+                        System.out.println("RegisteredName: " + weightedValue.getValue());
+                    }
+                }
             }
         }
     }

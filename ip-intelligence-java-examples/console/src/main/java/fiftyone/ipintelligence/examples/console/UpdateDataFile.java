@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.examples.console;
 
-import fiftyone.ipintelligence.DeviceDetectionPipelineBuilder;
+import fiftyone.ipintelligence.IPIntelligencePipelineBuilder;
 import fiftyone.ipintelligence.examples.shared.DataFileHelper;
 import fiftyone.ipintelligence.shared.testhelpers.KeyUtils;
 import fiftyone.pipeline.core.flowelements.Pipeline;
@@ -41,7 +41,7 @@ import java.util.Scanner;
 
 import static fiftyone.common.testhelpers.LogbackHelper.configureLogback;
 import static fiftyone.ipintelligence.examples.shared.DataFileHelper.getDatafileMetaData;
-import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.ENTERPRISE_HASH_DATA_FILE_NAME;
+import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.ENTERPRISE_IPI_DATA_FILE_NAME;
 import static fiftyone.pipeline.util.FileFinder.getFilePath;
 
 /*!
@@ -188,7 +188,7 @@ public class UpdateDataFile {
 
     public static final String UPDATE_EXAMPLE_LICENSE_KEY_NAME = "LicenseKey";
     public static final String DEFAULT_DATA_FILENAME =
-            System.getProperty("user.dir") + File.separator +  ENTERPRISE_HASH_DATA_FILE_NAME;
+            System.getProperty("user.dir") + File.separator +  ENTERPRISE_IPI_DATA_FILE_NAME;
 
     private static final Logger logger = LoggerFactory.getLogger(UpdateDataFile.class);
 
@@ -293,7 +293,7 @@ public class UpdateDataFile {
 
             // Build the IP Intelligence pipeline  and pass in the desired settings to configure
             // automatic updates.
-            try (Pipeline pipeline = new DeviceDetectionPipelineBuilder()
+            try (Pipeline pipeline = new IPIntelligencePipelineBuilder()
                     // specify the filename for the data file. When using update on start-up
                     // the file need not exist, but the directory it is in must exist.
                     // Any file that is present is overwritten. Because the file will be
