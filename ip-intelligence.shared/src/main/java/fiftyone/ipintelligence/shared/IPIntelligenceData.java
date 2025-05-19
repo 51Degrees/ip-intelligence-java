@@ -30,7 +30,7 @@ import java.util.List;
 // life easier for consumers.
 /**
  * Interface exposing typed accessors for properties related to a device
- * returned by a device detection engine.
+ * returned by a IP Intelligence engine.
  */
 public interface IPIntelligenceData extends AspectData
 {
