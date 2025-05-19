@@ -5,10 +5,10 @@
             <BuildParameters>
                 <AutoUpdate>false</AutoUpdate>
                 <CreateTempDataCopy>false</CreateTempDataCopy>
-                <DataFile>${TestDataFile:-ip-intelligence-data/51Degrees-LiteV4.1.hash}</DataFile>
+                <DataFile>${TestDataFile:-ip-intelligence-data/51Degrees-LiteV41.ipi}</DataFile>
                 <PerformanceProfile>LowMemory</PerformanceProfile>
             </BuildParameters>
-            <BuilderName>DeviceDetectionHashEngine</BuilderName>
+            <BuilderName>IPIntelligenceOnPremiseEngine</BuilderName>
         </Element>
  <!--   <Element>
             <BuilderName>JavaScriptBuilderElement</BuilderName>
