@@ -50,7 +50,7 @@ public class MetadataOnPrem {
 
     Note that the Lite data file is only used for illustration, and has limited accuracy and
     capabilities. Find out about the Enterprise data file here: https://51degrees.com/pricing */
-    public static String LITE_V_4_1_HASH = "51Degrees-LiteV4.1.hash";
+    public static String LITE_V_4_1_HASH = "51Degrees-LiteV41.ipi";
 
     public static void main(String[] args) throws Exception {
         configureLogback(getFilePath("logback.xml"));

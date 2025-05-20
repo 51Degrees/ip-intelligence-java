@@ -96,14 +96,9 @@ public class IPIntelligenceOnPremisePipelineBuilder
         boolean createTempDataCopy) throws Exception {
         this.filename = filename;
         this.createTempDataCopy = createTempDataCopy;
-        if (filename.endsWith(".dat")) {
-            throw new Exception("The Pattern data format data " +
-                "files can not be used in version 4. Please use a " +
-                "Hash V4.1 data file.");
-        }
-        if (filename.endsWith(".hash") == false) {
+        if (!filename.endsWith(".ipi")) {
             throw new Exception("Unrecognised filename. " +
-                "Expected a '*.hash' hash data file.");
+                "Expected a '*.ipi' IP Intelligence data file.");
         }
         return this;
     }

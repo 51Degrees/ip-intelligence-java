@@ -25,9 +25,9 @@ try {
 
     Write-Output "Moving evidence files for examples"
     $UAFile = [IO.Path]::Combine($RepoPath, "20000 User Agents.csv") 
-    $EvidenceFile = [IO.Path]::Combine($RepoPath, "20000 Evidence Records.yml")
+    $EvidenceFile = [IO.Path]::Combine($RepoPath, "evidence.yml")
     Copy-Item $UAFile "ip-intelligence-java-examples/ip-intelligence-data/20000 User Agents.csv"
-    Copy-Item $EvidenceFile "ip-intelligence-java-examples/ip-intelligence-data/20000 Evidence Records.yml"
+    Copy-Item $EvidenceFile "ip-intelligence-java-examples/ip-intelligence-data/evidence.yml"
     
     Write-Output "Entering ip-intelligence-java directory"
     Push-Location $RepoPath
