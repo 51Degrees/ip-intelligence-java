@@ -175,19 +175,19 @@ public class GettingStartedOnPrem {
             AspectPropertyValue<List<IWeightedValue<String>>> value = device.getRegisteredName();
             if (value != null && value.hasValue()) {
                 for (IWeightedValue<?> weightedValue : value.getValue()) {
-                    System.out.println("RegisteredName: " + weightedValue.getValue());
+                    writer.println("\tRegisteredName: " + weightedValue.getValue());
                 }
             }
             value = device.getRegisteredCountry();
             if (value != null && value.hasValue()) {
                 for (IWeightedValue<?> weightedValue : value.getValue()) {
-                    System.out.println("RegisteredCountry: " + weightedValue.getValue());
+                    writer.println("\tRegisteredCountry: " + weightedValue.getValue());
                 }
             }
             value = device.getRegisteredCountry();
             if (value != null && value.hasValue()) {
                 for (IWeightedValue<?> weightedValue : value.getValue()) {
-                    System.out.println("RegisteredCountry: " + weightedValue.getValue());
+                    writer.println("\tRegisteredCountry: " + weightedValue.getValue());
                 }
             }
         }
