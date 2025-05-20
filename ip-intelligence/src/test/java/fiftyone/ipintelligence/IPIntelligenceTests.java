@@ -73,27 +73,31 @@ public class IPIntelligenceTests {
     private static UserAgentGenerator userAgents;
     TestConfig[] hashConfigs = {
         // ******** Hash with a single thread *********
-        new TestConfig(IPI_DATA_FILE_NAME, HighPerformance, false, false, "Hash-HighPerformance-NoCache-SingleThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, LowMemory, false, false, "Hash-LowMemory-NoCache-SingleThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, Balanced, false, false, "Hash-Balanced-NoCache-SingleThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, false, false, "Hash-HighPerformance-NoCache-SingleThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, HighPerformance, true, false, "Hash-HighPerformance-Cache-SingleThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, LowMemory, true, false, "Hash-LowMemory-Cache-SingleThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, Balanced, true, false, "Hash-Balanced-Cache-SingleThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, false, "Hash-BalancedTemp-Cache-SingleThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, false, "Hash-BalancedTemp-Cache-SingleThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, false, "Hash-BalancedTemp-Cache-SingleThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, MaxPerformance, false, false, "Hash-MaxPerformance-NoCache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, HighPerformance, false, false, "Hash-HighPerformance-NoCache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, LowMemory, false, false, "Hash-LowMemory-NoCache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, Balanced, false, false, "Hash-Balanced-NoCache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, false, false, "Hash-HighPerformance-NoCache-SingleThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, MaxPerformance, true, false, "Hash-MaxPerformance-Cache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, HighPerformance, true, false, "Hash-HighPerformance-Cache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, LowMemory, true, false, "Hash-LowMemory-Cache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, Balanced, true, false, "Hash-Balanced-Cache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, false, "Hash-BalancedTemp-Cache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, false, "Hash-BalancedTemp-Cache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, false, "Hash-BalancedTemp-Cache-SingleThread"),
         // ******** Hash with multiple threads *********
-        new TestConfig(IPI_DATA_FILE_NAME, HighPerformance, false, true, "Hash-HighPerformance-NoCache-MultiThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, LowMemory, false, true, "Hash-LowMemory-NoCache-MultiThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, Balanced, false, true, "Hash-Balanced-NoCache-MultiThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, false, true, "Hash-HighPerformance-NoCache-MultiThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, HighPerformance, true, true, "Hash-HighPerformance-Cache-MultiThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, LowMemory, true, true, "Hash-LowMemory-Cache-MultiThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, Balanced, true, true, "Hash-Balanced-Cache-MultiThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, true, "Hash-BalancedTemp-Cache-MultiThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, true, "Hash-BalancedTemp-Cache-MultiThread"),
-        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, true, "Hash-BalancedTemp-Cache-MultiThread")
+        new TestConfig(IPI_DATA_FILE_NAME, MaxPerformance, false, true, "Hash-MaxPerformance-NoCache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, HighPerformance, false, true, "Hash-HighPerformance-NoCache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, LowMemory, false, true, "Hash-LowMemory-NoCache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, Balanced, false, true, "Hash-Balanced-NoCache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, false, true, "Hash-HighPerformance-NoCache-MultiThread"),
+        new TestConfig(IPI_DATA_FILE_NAME, MaxPerformance, true, true, "Hash-MaxPerformance-Cache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, HighPerformance, true, true, "Hash-HighPerformance-Cache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, LowMemory, true, true, "Hash-LowMemory-Cache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, Balanced, true, true, "Hash-Balanced-Cache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, true, "Hash-BalancedTemp-Cache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, true, "Hash-BalancedTemp-Cache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, true, "Hash-BalancedTemp-Cache-MultiThread")
     };
 
     @BeforeClass

@@ -142,7 +142,7 @@ public class OfflineProcessing {
                 // Low memory profile has detection data streamed from disk on
                 // demand and is conservative in its use of memory, but
                 // slower because of disk access
-                .setPerformanceProfile(Constants.PerformanceProfiles.LowMemory)
+                .setPerformanceProfile(Constants.PerformanceProfiles.MaxPerformance)
                 //.setPerformanceProfile(Constants.PerformanceProfiles.Balanced)
                 // -- Setting the Graph
                 // see https://51degrees.com/documentation/_device_detection__hash.html#DeviceDetection_Hash_DataSetProduction

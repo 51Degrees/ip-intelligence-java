@@ -91,7 +91,7 @@ public class MatchMetrics {
                 .setAutoUpdate(false)
                 // Prefer low memory profile where all data streamed from disk
                 // on-demand. Experiment with other profiles.
-                .setPerformanceProfile(Constants.PerformanceProfiles.LowMemory)
+                .setPerformanceProfile(Constants.PerformanceProfiles.MaxPerformance)
                 //.setPerformanceProfile(Constants.PerformanceProfiles.HighPerformance)
                 //.setPerformanceProfile(Constants.PerformanceProfiles.Balanced)
                 // Disable share usage for this example.

@@ -80,7 +80,7 @@ public class MetadataOnPrem {
                 // configuration options:
                 // https://51degrees.com/documentation/_device_detection__features__performance_options.html
                 // https://51degrees.com/documentation/_features__automatic_datafile_updates.html
-                .setPerformanceProfile(Constants.PerformanceProfiles.LowMemory)
+                .setPerformanceProfile(Constants.PerformanceProfiles.MaxPerformance)
                 // inhibit auto-update of the data file for this test
                 .setAutoUpdate(false)
                 .setDataFileSystemWatcher(false)
