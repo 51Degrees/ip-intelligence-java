@@ -33,7 +33,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-import static fiftyone.ipintelligence.examples.web.GettingStartedWebOnPrem.resourceBase;
+import static fiftyone.ipintelligence.examples.web.GettingStartedWebOnPrem.getResourceBase;
 import static fiftyone.pipeline.util.FileFinder.getFilePath;
 import static org.junit.Assert.assertEquals;
 
@@ -45,7 +45,7 @@ public class GettingStartedWebOnPremTest {
         System.setProperty("TestDataFile", FileUtils.getHashFile() == null
                 ? FileUtils.LITE_IPI_DATA_FILE_NAME
                 : FileUtils.getHashFile().getAbsolutePath());
-        SERVER = EmbedJetty.startWebApp(getFilePath(resourceBase).getAbsolutePath(), 8081);
+        SERVER = EmbedJetty.startWebApp(getFilePath(getResourceBase()).getAbsolutePath(), 8081);
     }
 
     @Test

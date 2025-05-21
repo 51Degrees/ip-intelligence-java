@@ -27,10 +27,10 @@
             <BuildParameters>
                 <AutoUpdate>false</AutoUpdate>
                 <CreateTempDataCopy>false</CreateTempDataCopy>
-                <DataFile>${TestDataFile:-ip-intelligence-data/51Degrees-LiteV41.ipi}</DataFile>
+                <DataFile>${TestDataFile:-ip-intelligence.engine.on-premise/src/main/cxx/ip-intelligence-cxx/ip-intelligence-data/51Degrees-LiteV41.ipi}</DataFile>
                 <PerformanceProfile>MaxPerformance</PerformanceProfile>
             </BuildParameters>
-            <BuilderName>DeviceDetectionHashEngine</BuilderName>
+            <BuilderName>IPIntelligenceOnPremiseEngine</BuilderName>
         </Element>
         <Element>
             <!--

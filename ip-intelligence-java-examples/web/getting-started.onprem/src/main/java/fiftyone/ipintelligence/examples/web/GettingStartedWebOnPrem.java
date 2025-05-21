@@ -35,6 +35,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static fiftyone.common.testhelpers.LogbackHelper.configureLogback;
 import static fiftyone.ipintelligence.examples.web.HtmlContentHelper.*;
@@ -48,7 +51,6 @@ import static fiftyone.pipeline.util.FileFinder.getFilePath;
  */
 public class GettingStartedWebOnPrem extends HttpServlet {
     private static final long serialVersionUID = 1734154705981153540L;
-    public static String resourceBase = "web/getting-started.onprem/src/main/webapp";
     public static Logger logger = LoggerFactory.getLogger(GettingStartedWebOnPrem.class);
 
     public static void main(String[] args) throws Exception {
@@ -56,7 +58,24 @@ public class GettingStartedWebOnPrem extends HttpServlet {
         logger.info("Running Example {}", GettingStartedWebOnPrem.class);
 
         // start Jetty with this WebApp
-        EmbedJetty.runWebApp(resourceBase, 8081);
+        EmbedJetty.runWebApp(getResourceBase(), 8081);
+    }
+
+    public static String getResourceBase() {
+        final String basePath = "web/getting-started.onprem/src/main/webapp";
+        {
+            final Path path = Paths.get(basePath);
+            if (Files.exists(path) && Files.isDirectory(path)) {
+                return path.toString();
+            }
+        }
+        {
+            final Path path2 = Paths.get("ip-intelligence-java-examples", basePath);
+            if (Files.exists(path2) && Files.isDirectory(path2)) {
+                return path2.toString();
+            }
+        }
+        return basePath;
     }
 
      FlowDataProviderCore flowDataProvider = new FlowDataProviderCore.Default();
@@ -83,6 +102,8 @@ public class GettingStartedWebOnPrem extends HttpServlet {
             // served by inclusion of the PipelineFilter which intercepts the request
             // and serves dynamically generated JavaScript
             out.println("<script src=\"" + Constants.CORE_JS_NAME+ "\"></script>");
+
+            String resourceBase = getResourceBase();
 
              // include description of example
             doStaticText(out, resourceBase + "/WEB-INF/html/example-description.html");

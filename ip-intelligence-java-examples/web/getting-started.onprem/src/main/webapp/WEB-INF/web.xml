@@ -40,7 +40,7 @@
     </filter-mapping>
     <servlet>
         <servlet-name>GettingStartedWebOnPrem</servlet-name>
-        <servlet-class>fiftyone.devicedetection.examples.web.GettingStartedWebOnPrem</servlet-class>
+        <servlet-class>fiftyone.ipintelligence.examples.web.GettingStartedWebOnPrem</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>GettingStartedWebOnPrem</servlet-name>
