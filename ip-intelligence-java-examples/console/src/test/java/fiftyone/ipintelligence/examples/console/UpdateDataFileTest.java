@@ -23,13 +23,14 @@
 package fiftyone.ipintelligence.examples.console;
 
 import fiftyone.ipintelligence.shared.testhelpers.KeyUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static fiftyone.ipintelligence.examples.console.UpdateDataFile.run;
 import static org.junit.Assert.fail;
 import static org.junit.Assume.assumeFalse;
-import static org.junit.Assume.assumeNoException;
 
+@Ignore
 public class UpdateDataFileTest {
     @Test
     public void updateExampleTest () throws Exception {

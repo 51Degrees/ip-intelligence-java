@@ -207,7 +207,7 @@ public class PerformanceBenchmark {
         // If you don't specify any properties to detect, then all properties are detected,
         // here we choose "all properties" by specifying none, or just "isMobile"
         if (BooleanUtils.isFalse(config.allProperties)) {
-            builder.setProperty("isMobile");
+            builder.setProperty("RegisteredName");
         }
     }
 

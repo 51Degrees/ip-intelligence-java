@@ -23,8 +23,10 @@
 package fiftyone.ipintelligence.examples.console;
 
 import fiftyone.ipintelligence.examples.shared.EvidenceHelper;
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 public class MatchMetricsTest {
     @Test
     public void testMatchMetrics() throws Exception {

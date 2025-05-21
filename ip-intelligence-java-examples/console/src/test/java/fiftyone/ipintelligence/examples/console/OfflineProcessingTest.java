@@ -27,15 +27,23 @@ import org.junit.Test;
 
 import java.io.FileInputStream;
 import java.util.Objects;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class OfflineProcessingTest {
+    private static final Logger logger = LoggerFactory.getLogger(OfflineProcessingTest.class);
+
     @Test
     public void offlineProcessingTest() throws Exception {
-        OfflineProcessing.run(FileUtils.getHashFileName() == null
-                        ? FileUtils.LITE_IPI_DATA_FILE_NAME
-                        : FileUtils.getHashFileName(),
-                new FileInputStream(Objects.requireNonNull(FileUtils.getEvidenceFile())),
-                System.out);
+        try (LoggerOutputStream outStream = new LoggerOutputStream(logger)) {
+
+            OfflineProcessing.run(FileUtils.getHashFileName() == null
+                            ? FileUtils.LITE_IPI_DATA_FILE_NAME
+                            : FileUtils.getHashFileName(),
+                    new FileInputStream(Objects.requireNonNull(FileUtils.getEvidenceFile())),
+                    outStream);
+        }
     }
 
 }
