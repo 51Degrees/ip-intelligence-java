@@ -144,9 +144,11 @@ public abstract class IPIntelligenceDataBaseOnPremise extends IPIntelligenceData
                 if (mapPopulated == false) {
                     Map<String, Object> map = new TreeMap<>(
                         String.CASE_INSENSITIVE_ORDER);
-                    for (ElementPropertyMetaData property : getPipeline()
-                        .getElementAvailableProperties()
-                        .get(getEngines().get(0).getElementDataKey()).values()) {
+                    final Map<String, Map<String, ElementPropertyMetaData>> allProps = getPipeline().getElementAvailableProperties();
+                    final String key = getEngines().get(0).getElementDataKey();
+                    final Map<String, ElementPropertyMetaData> keyedProps = allProps.get(key);
+                    final java.util.Collection<ElementPropertyMetaData> relevantProps = keyedProps.values();
+                    for (ElementPropertyMetaData property : relevantProps) {
                         map.put(property.getName().toLowerCase(),
                             getAs(property.getName(),
                                 AspectPropertyValue.class,

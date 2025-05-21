@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.engine.onpremise.interop;
 
-import fiftyone.ipintelligence.engine.onpremise.data.ValueMetaDataHash;
+import fiftyone.ipintelligence.engine.onpremise.data.ValueMetaDataIPI;
 import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.ValueMetaDataCollectionSwig;
 import fiftyone.pipeline.engines.fiftyone.data.CollectionIterableBase;
@@ -54,7 +54,7 @@ public class ValueIterable
 
     @Override
     protected ValueMetaData get(long index) {
-        return new ValueMetaDataHash(engine, collection.getByIndex(index));
+        return new ValueMetaDataIPI(engine, collection.getByIndex(index));
     }
 
     @Override

@@ -33,7 +33,7 @@ import java.io.IOException;
  * Hash on-premise implementation of the {@link ValueMetaData} interface.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/data-model-specification/README.md#value">Specification</a>
  */
-public class ValueMetaDataHash implements ValueMetaData {
+public class ValueMetaDataIPI implements ValueMetaData {
 
     private final ValueMetaDataSwig source;
 
@@ -44,7 +44,7 @@ public class ValueMetaDataHash implements ValueMetaData {
      * @param engine the engine creating the instance
      * @param source the source metadata from the native engine
      */
-    public ValueMetaDataHash(
+    public ValueMetaDataIPI(
         IPIntelligenceOnPremiseEngine engine,
         ValueMetaDataSwig source) {
         this.engine = engine;
@@ -53,7 +53,7 @@ public class ValueMetaDataHash implements ValueMetaData {
 
     @Override
     public FiftyOneAspectPropertyMetaData getProperty() {
-        return new PropertyMetaDataHash(
+        return new PropertyMetaDataIPI(
             engine,
             engine.getMetaData().getPropertyForValue(source));
     }

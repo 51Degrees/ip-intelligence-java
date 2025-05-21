@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.engine.onpremise.interop;
 
-import fiftyone.ipintelligence.engine.onpremise.data.ComponentMetaDataHash;
+import fiftyone.ipintelligence.engine.onpremise.data.ComponentMetaDataIPI;
 import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.ComponentMetaDataCollectionSwig;
 import fiftyone.pipeline.engines.fiftyone.data.CollectionIterableBase;
@@ -54,7 +54,7 @@ public class ComponentIterable
 
     @Override
     protected ComponentMetaData get(long index) {
-        return new ComponentMetaDataHash(engine, collection.getByIndex(index));
+        return new ComponentMetaDataIPI(engine, collection.getByIndex(index));
     }
 
     @Override

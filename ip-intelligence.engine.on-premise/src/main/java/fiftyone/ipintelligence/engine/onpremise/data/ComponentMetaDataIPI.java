@@ -39,7 +39,7 @@ import java.util.List;
  * Hash on-premise implementation of the {@link ComponentMetaData} interface.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/data-model-specification/README.md#component">Specification</a>
  */
-public class ComponentMetaDataHash implements ComponentMetaData {
+public class ComponentMetaDataIPI implements ComponentMetaData {
 
     private final ComponentMetaDataSwig source;
 
@@ -52,7 +52,7 @@ public class ComponentMetaDataHash implements ComponentMetaData {
      * @param engine the engine creating the instance
      * @param source the source metadata from the native engine
      */
-    public ComponentMetaDataHash(
+    public ComponentMetaDataIPI(
         IPIntelligenceOnPremiseEngine engine,
         ComponentMetaDataSwig source) {
         this.engine = engine;
@@ -71,7 +71,7 @@ public class ComponentMetaDataHash implements ComponentMetaData {
 
     @Override
     public ProfileMetaData getDefaultProfile() {
-        return new ProfileMetaDataHash(
+        return new ProfileMetaDataIPI(
             engine,
             engine.getMetaData().getDefaultProfileForComponent(source));
     }
@@ -91,7 +91,7 @@ public class ComponentMetaDataHash implements ComponentMetaData {
             engine.getMetaData().getPropertiesForComponent(source);
         PropertyMetaDataSwig value = components.getByKey(propertyName);
         if (value != null) {
-            result = new PropertyMetaDataHash(engine, value);
+            result = new PropertyMetaDataIPI(engine, value);
         }
         components.delete();
         return result;

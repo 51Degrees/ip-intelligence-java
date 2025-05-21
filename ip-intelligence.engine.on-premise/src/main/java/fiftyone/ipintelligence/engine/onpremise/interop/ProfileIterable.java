@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.engine.onpremise.interop;
 
-import fiftyone.ipintelligence.engine.onpremise.data.ProfileMetaDataHash;
+import fiftyone.ipintelligence.engine.onpremise.data.ProfileMetaDataIPI;
 import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.ProfileMetaDataCollectionSwig;
 import fiftyone.pipeline.engines.fiftyone.data.CollectionIterableBase;
@@ -54,7 +54,7 @@ public class ProfileIterable
 
     @Override
     protected ProfileMetaData get(long index) {
-        return new ProfileMetaDataHash(engine, collection.getByIndex(index));
+        return new ProfileMetaDataIPI(engine, collection.getByIndex(index));
     }
 
     @Override

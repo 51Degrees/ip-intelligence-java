@@ -39,7 +39,7 @@ import static fiftyone.pipeline.util.StringManipulation.stringJoin;
  * Hash on-premise implementation of the {@link ProfileMetaData} interface.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/data-model-specification/README.md#profile">Specification</a>
  */
-public class ProfileMetaDataHash implements ProfileMetaData {
+public class ProfileMetaDataIPI implements ProfileMetaData {
 
     private final ProfileMetaDataSwig source;
 
@@ -50,7 +50,7 @@ public class ProfileMetaDataHash implements ProfileMetaData {
      * @param engine the engine creating the instance
      * @param source the source metadata from the native engine
      */
-    public ProfileMetaDataHash(
+    public ProfileMetaDataIPI(
         IPIntelligenceOnPremiseEngine engine,
         ProfileMetaDataSwig source) {
         this.engine = engine;
@@ -80,7 +80,7 @@ public class ProfileMetaDataHash implements ProfileMetaData {
             PropertyMetaDataSwig valueProperty = engine.getMetaData()
                 .getPropertyForValue(value);
             if (propertyName.equalsIgnoreCase(valueProperty.getName())) {
-                result.add(new ValueMetaDataHash(engine, value));
+                result.add(new ValueMetaDataIPI(engine, value));
             } else {
                 value.delete();
             }
@@ -98,7 +98,7 @@ public class ProfileMetaDataHash implements ProfileMetaData {
         ValueMetaDataSwig value = values.getByKey(
             new ValueMetaDataKeySwig(propertyName, valueName));
         if (value != null) {
-            result = new ValueMetaDataHash(engine, value);
+            result = new ValueMetaDataIPI(engine, value);
         }
         values.delete();
         return result;
@@ -106,7 +106,7 @@ public class ProfileMetaDataHash implements ProfileMetaData {
 
     @Override
     public ComponentMetaData getComponent() {
-        return new ComponentMetaDataHash(
+        return new ComponentMetaDataIPI(
             engine,
             engine.getMetaData().getComponentForProfile(source));
     }

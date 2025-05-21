@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.engine.onpremise.interop;
 
-import fiftyone.ipintelligence.engine.onpremise.data.PropertyMetaDataHash;
+import fiftyone.ipintelligence.engine.onpremise.data.PropertyMetaDataIPI;
 import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.PropertyMetaDataCollectionSwig;
 import fiftyone.pipeline.engines.fiftyone.data.CollectionIterableCachedBase;
@@ -57,7 +57,7 @@ public class PropertyIterable
 
     @Override
     protected FiftyOneAspectPropertyMetaData get(long index) {
-        return new PropertyMetaDataHash(engine, collection.getByIndex(index));
+        return new PropertyMetaDataIPI(engine, collection.getByIndex(index));
     }
 
     @Override

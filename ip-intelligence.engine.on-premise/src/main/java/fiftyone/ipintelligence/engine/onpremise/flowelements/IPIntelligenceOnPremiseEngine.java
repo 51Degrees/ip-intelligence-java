@@ -23,9 +23,9 @@
 package fiftyone.ipintelligence.engine.onpremise.flowelements;
 
 import fiftyone.ipintelligence.engine.onpremise.data.IPIntelligenceDataHash;
-import fiftyone.ipintelligence.engine.onpremise.data.ProfileMetaDataHash;
-import fiftyone.ipintelligence.engine.onpremise.data.PropertyMetaDataHash;
-import fiftyone.ipintelligence.engine.onpremise.data.ValueMetaDataHash;
+import fiftyone.ipintelligence.engine.onpremise.data.ProfileMetaDataIPI;
+import fiftyone.ipintelligence.engine.onpremise.data.PropertyMetaDataIPI;
+import fiftyone.ipintelligence.engine.onpremise.data.ValueMetaDataIPI;
 import fiftyone.ipintelligence.engine.onpremise.interop.*;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.*;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.Date;
@@ -136,8 +136,6 @@ public class IPIntelligenceOnPremiseEngine
                             e);
                     }
 
-                    properties.addAll(getMetricProperties());
-
                     propertiesPopulated = true;
                 }
             }
@@ -152,17 +150,9 @@ public class IPIntelligenceOnPremiseEngine
             engine.getMetaData().getProperties();
         PropertyMetaDataSwig swigProperty = properties.getByKey(name);
         if (swigProperty != null) {
-            result = new PropertyMetaDataHash(this, swigProperty);
+            result = new PropertyMetaDataIPI(this, swigProperty);
         }
         properties.delete();
-
-        if (result == null) {
-            for (FiftyOneAspectPropertyMetaData property : getMetricProperties()) {
-                if (property.getName().equalsIgnoreCase(name)) {
-                    return property;
-                }
-            }
-        }
 
         return result;
     }
@@ -181,7 +171,7 @@ public class IPIntelligenceOnPremiseEngine
         ProfileMetaDataSwig profile = profiles.getByKey(profileId);
         profiles.delete();
         return profile == null ?
-            null : new ProfileMetaDataHash(this, profile);
+            null : new ProfileMetaDataIPI(this, profile);
     }
 
     @Override
@@ -202,7 +192,7 @@ public class IPIntelligenceOnPremiseEngine
     public ValueMetaData getValue(String propertyName, String valueName) {
         ValueMetaDataKeySwig key = new ValueMetaDataKeySwig(propertyName, valueName);
         ValueMetaDataCollectionSwig values = engine.getMetaData().getValues();
-        ValueMetaDataHash result = new ValueMetaDataHash(this, values.getByKey(key));
+        ValueMetaDataIPI result = new ValueMetaDataIPI(this, values.getByKey(key));
         values.delete();
         key.delete();
         return result;
@@ -364,150 +354,6 @@ public class IPIntelligenceOnPremiseEngine
                 getDataFileUpdateAvailableTime());
             dataFileMetaData.setTempDataFilePath(getDataFileTempPath());
         }
-    }
-
-    /**
-     * Get the match metric properties which are not defined in the data file.
-     * @return meta data for metric properties
-     */
-    private List<FiftyOneAspectPropertyMetaData> getMetricProperties() {
-        List<String> dataFileList = Arrays.asList(
-            "Lite", "Premium", "Enterprise", "TAC");
-        FiftyOneAspectPropertyMetaData[] metricProperties =
-            new FiftyOneAspectPropertyMetaData[]{
-
-            new FiftyOneAspectPropertyMetaDataDefault(
-            	Constants.MatchMetrics.MATCHED_NODES,
-                this,
-                Constants.MatchMetrics.CATEGORY,
-                Integer.class,
-                dataFileList,
-                true,
-                null,
-                (byte)0,
-                true,
-                false,
-                false,
-                false,
-                false,
-                Constants.MatchMetrics.MATCHED_NODES_DESCRIPTION,
-                null,
-                Arrays.asList(),
-                new ValueMetaDataDefault("0")),
-            new FiftyOneAspectPropertyMetaDataDefault(
-            	Constants.MatchMetrics.DIFFERENCE,
-                this,
-                Constants.MatchMetrics.CATEGORY,
-                Integer.class,
-                dataFileList,
-                true,
-                null,
-                (byte)0,
-                true,
-                false,
-                false,
-                false,
-                false,
-                Constants.MatchMetrics.DIFFERENCE_DESCRIPTION,
-                null,
-                Arrays.asList(),
-                new ValueMetaDataDefault("0")),
-            new FiftyOneAspectPropertyMetaDataDefault(
-            	Constants.MatchMetrics.DRIFT,
-                this,
-                Constants.MatchMetrics.CATEGORY,
-                Integer.class,
-                dataFileList,
-                true,
-                null,
-                (byte)0,
-                true,
-                false,
-                false,
-                false,
-                false,
-                Constants.MatchMetrics.DRIFT_DESCRIPTION,
-                null,
-                Arrays.asList(),
-                new ValueMetaDataDefault("0")),
-            new FiftyOneAspectPropertyMetaDataDefault(
-            	Constants.MatchMetrics.DEVICE_ID,
-                this,
-                Constants.MatchMetrics.CATEGORY,
-                String.class,
-                dataFileList,
-                true,
-                null,
-                (byte)0,
-                true,
-                false,
-                false,
-                false,
-                false,
-                Constants.MatchMetrics.DEVICE_ID_DESCRIPTION,
-                null,
-                Arrays.asList(),
-                new ValueMetaDataDefault("0-0-0-0")),
-            new FiftyOneAspectPropertyMetaDataDefault(
-            	Constants.MatchMetrics.USER_AGENTS,
-                this,
-                Constants.MatchMetrics.CATEGORY,
-                List.class,
-                dataFileList,
-                true,
-                null,
-                (byte)0,
-                true,
-                true,
-                false,
-                false,
-                false,
-                Constants.MatchMetrics.USER_AGENTS_DESCRIPTION,
-                null,
-                Arrays.asList(),
-                new ValueMetaDataDefault("n/a")),
-            new FiftyOneAspectPropertyMetaDataDefault(
-            	Constants.MatchMetrics.METHOD,
-                this,
-                Constants.MatchMetrics.CATEGORY,
-                String.class,
-                dataFileList,
-                true,
-                null,
-                (byte) 0,
-                true,
-                true,
-                false,
-                false,
-                false,
-                Constants.MatchMetrics.METHOD_DESCRIPTION,
-                null,
-                Arrays.asList(
-                    new ValueMetaDataDefault("NONE"),
-                    new ValueMetaDataDefault("PERFORMANCE"),
-                    new ValueMetaDataDefault("COMBINED"),
-                    new ValueMetaDataDefault( "PREDICTIVE")),
-                new ValueMetaDataDefault("NONE")),
-            new FiftyOneAspectPropertyMetaDataDefault(
-            	Constants.MatchMetrics.ITERATIONS,
-                this,
-                Constants.MatchMetrics.CATEGORY,
-                Integer.class,
-                dataFileList,
-                true,
-                null,
-                (byte) 0,
-                true,
-                false,
-                false,
-                false,
-                false,
-                Constants.MatchMetrics.ITERATIONS_DESCRIPTION,
-                null,
-                Arrays.asList(),
-                new ValueMetaDataDefault("0"))
-        };
-        return Arrays.asList(metricProperties);
     }
 
     @Override

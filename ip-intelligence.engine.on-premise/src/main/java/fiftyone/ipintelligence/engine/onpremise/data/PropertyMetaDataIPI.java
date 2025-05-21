@@ -42,7 +42,7 @@ import java.util.List;
  * interface.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/data-model-specification/README.md#property">Specification</a>
  */
-public class PropertyMetaDataHash implements FiftyOneAspectPropertyMetaData {
+public class PropertyMetaDataIPI implements FiftyOneAspectPropertyMetaData {
 
     private final PropertyMetaDataSwig source;
 
@@ -67,7 +67,7 @@ public class PropertyMetaDataHash implements FiftyOneAspectPropertyMetaData {
      * @param engine the engine creating the instance
      * @param source the source metadata from the native engine
      */
-    public PropertyMetaDataHash(
+    public PropertyMetaDataIPI(
         IPIntelligenceOnPremiseEngine engine,
         PropertyMetaDataSwig source) {
         this.source = source;
@@ -130,7 +130,7 @@ public class PropertyMetaDataHash implements FiftyOneAspectPropertyMetaData {
 
     @Override
     public ComponentMetaData getComponent() {
-        return new ComponentMetaDataHash(
+        return new ComponentMetaDataIPI(
             engine,
             engine.getMetaData().getComponentForProperty(source));
     }
@@ -152,7 +152,7 @@ public class PropertyMetaDataHash implements FiftyOneAspectPropertyMetaData {
             ValueMetaDataSwig value = values.getByKey(
                 new ValueMetaDataKeySwig(getName(), valueName));
             if (value != null) {
-                result = new ValueMetaDataHash(engine, value);
+                result = new ValueMetaDataIPI(engine, value);
             }
         } finally {
             values.delete();
@@ -166,7 +166,7 @@ public class PropertyMetaDataHash implements FiftyOneAspectPropertyMetaData {
             engine.getMetaData().getDefaultValueForProperty(source);
         return value == null ?
             null :
-            new ValueMetaDataHash(engine, value);
+            new ValueMetaDataIPI(engine, value);
     }
 
     @Override
