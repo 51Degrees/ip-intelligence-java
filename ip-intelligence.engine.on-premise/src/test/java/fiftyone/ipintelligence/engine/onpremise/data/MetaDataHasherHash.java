@@ -22,7 +22,6 @@
 
 package fiftyone.ipintelligence.engine.onpremise.data;
 
-import fiftyone.ipintelligence.engine.onpremise.flowelements.Constants;
 import fiftyone.ipintelligence.shared.testhelpers.Wrapper;
 import fiftyone.ipintelligence.shared.testhelpers.data.MetaDataHasher;
 import fiftyone.pipeline.engines.fiftyone.data.ComponentMetaData;
@@ -47,10 +46,6 @@ public class MetaDataHasherHash implements MetaDataHasher {
                         hash ^= value.hashCode();
                     }
                     j++;
-                }
-                // Match metric property does not have component so don't include
-                if (!property.getCategory().equals(Constants.MatchMetrics.CATEGORY)) {
-                	hash ^= property.getComponent().hashCode();
                 }
                 if (property.getDefaultValue() != null) {
                     hash ^= property.getDefaultValue().hashCode();
