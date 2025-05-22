@@ -1,8 +1,6 @@
 param (
-    [Parameter(Mandatory=$true)]
-    [string]$VariableName,
-    [Parameter(Mandatory=$true)]
-    [string]$RepoName
+    [Parameter(Mandatory)][string]$RepoName,
+    [Parameter(Mandatory)][string]$VariableName
 )
 
-. ./java/get-next-package-version.ps1 -RepoName $RepoName -VariableName $VariableName
+. ./java/get-next-package-version.ps1 @PSBoundParameters

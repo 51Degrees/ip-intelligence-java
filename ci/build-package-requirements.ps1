@@ -1,15 +1,12 @@
-
 param(
-    [string]$ProjectDir = ".",
-    [string]$Name,
-    [Parameter(Mandatory=$true)]
-    $RepoName
+    [Parameter(Mandatory)]$RepoName,
+    [string]$Name
 )
 
 $RepoPath = [IO.Path]::Combine($pwd, $RepoName)
 $PathToBinaries = "$RepoPath/ip-intelligence.engine.on-premise/target/classes"
 
-./java/build-package-requirements.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -Name $Name 
+./java/build-package-requirements.ps1 @PSBoundParameters
 
 $Files = Get-ChildItem -Path $PathToBinaries/* -Include "*.dll", "*.so", "*.dylib"
 

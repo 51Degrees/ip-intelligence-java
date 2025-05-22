@@ -1,16 +1,13 @@
-
 param (
-    [string]$RepoName,
-    [Parameter(Mandatory=$true)]
-    [string]$DeviceDetection,
+    [Parameter(Mandatory)][string]$RepoName,
+    [Parameter(Mandatory)][string]$DeviceDetection,
     [string]$DeviceDetectionUrl
 )
 
-$CxxCiDir = Join-Path $RepoName "ip-intelligence.engine.on-premise" "src" "main" "cxx" "ip-intelligence-cxx"
-$CxxCiScript = Join-Path $pwd $CxxCiDir "ci" "fetch-assets.ps1"
+$cxxCiDir = "$RepoName/ip-intelligence.engine.on-premise/src/main/cxx/ip-intelligence-cxx"
 
-& $CxxCiScript `
-    -RepoName $CxxCiDir `
+& $cxxCiDir/ci/fetch-assets.ps1 `
+    -RepoName $cxxCiDir `
     -DeviceDetection $DeviceDetection `
     -DeviceDetectionUrl $DeviceDetectionUrl
 

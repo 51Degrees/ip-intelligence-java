@@ -1,15 +1,9 @@
-
 param(
-    [string]$Name = "Windows_Java_8",
-    [string]$Version = "0.0.0",
-    # Keys contain the License and Resource Keys needed to run the tests.
-    [Parameter(Mandatory=$true)]
-    [Hashtable]$Keys,
-    [Parameter(Mandatory=$true)]
-    [string]$RepoName,
-    [string]$OrgName
-
-    
+    [Parameter(Mandatory)][string]$RepoName,
+    [Parameter(Mandatory)][string]$OrgName,
+    [Parameter(Mandatory)][hashtable]$Keys,
+    [string]$Name,
+    [string]$Version
 )
 
 $RepoPath = [IO.Path]::Combine($pwd, $RepoName)
@@ -32,7 +26,7 @@ try {
     Write-Output "Entering ip-intelligence-java directory"
     Push-Location $RepoPath
     # If the Version parameter is set to "0.0.0", set the Version variable to the version specified in the pom.xml file
-    if ($Version -eq "0.0.0"){
+    if (!$Version){
         $Version = mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression="project.version" -q -DforceStdout
     }
 

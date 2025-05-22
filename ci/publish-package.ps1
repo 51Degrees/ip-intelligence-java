@@ -1,13 +1,7 @@
-
 param(
-    [Parameter(Mandatory=$true)]
-    [Hashtable]$Keys,
-    [Parameter(Mandatory=$true)]
-    $Version,
-    [Parameter(Mandatory=$true)]
-    [string]$RepoName
-    
-
+    [Parameter(Mandatory)][string]$RepoName,
+    [Parameter(Mandatory)][string]$Version,
+    [Parameter(Mandatory)][hashtable]$Keys
 )
 
 Write-Error "Disabled till ready to release."

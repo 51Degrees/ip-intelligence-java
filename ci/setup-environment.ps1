@@ -1,21 +1,14 @@
 param(
-    [Parameter(Mandatory=$true)]
-    [string]$RepoName,
-    [Parameter(Mandatory=$true)]
-    [string]$JavaSDKEnvVar,
-    [string]$ProjectDir = "."
+    [Parameter(Mandatory)][string]$RepoName,
+    [Parameter(Mandatory)][string]$JavaSDKEnvVar
 )
+$ErrorActionPreference = "Stop"
+$PSNativeCommandUseErrorActionPreference = $true
 
-./java/setup-enviroment.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -JavaSDKEnvVar $JavaSDKEnvVar
-
-if ($LASTEXITCODE -ne 0) {
-    exit $LASTEXITCODE
-}
+./java/setup-enviroment.ps1 @PSBoundParameters
 
 if ($IsLinux -or $IsMacOS) {
-    Write-Output "Marking PreBuild.sh as executable..."
-    chmod +x $RepoName/ip-intelligence.engine.on-premise/src/main/cxx/PreBuild.sh
-    Write-Output "Marking PreBuild.sh as executable -- done."
+    Write-Host "Marking PreBuild.sh as executable..."
+    chmod +x "$RepoName/ip-intelligence.engine.on-premise/src/main/cxx/PreBuild.sh"
+    Write-Host "Marking PreBuild.sh as executable -- done."
 }
-
-exit $LASTEXITCODE

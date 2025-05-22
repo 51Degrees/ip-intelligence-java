@@ -1,14 +1,10 @@
-
 param(
-    [Parameter(Mandatory=$true)]
-    [string]$RepoName,
-    [string]$ProjectDir = ".",
-    [string]$Name,
-    [Parameter(Mandatory=$true)]
-    [string]$Version,
-    [Parameter(Mandatory=$true)]
-    [Hashtable]$Keys
+    [Parameter(Mandatory)][string]$RepoName,
+    [Parameter(Mandatory)][string]$Version,
+    [Parameter(Mandatory)][Hashtable]$Keys,
+    [string]$Name
 )
+$ErrorActionPreference = "Stop"
 
 # Path to this repository
 $RepoPath = [IO.Path]::Combine($pwd, $RepoName)
@@ -31,7 +27,6 @@ foreach($file in $Files){
 
 ./java/build-package.ps1 `
     -RepoName $RepoName `
-    -ProjectDir $ProjectDir `
     -Name $Name `
     -Version $Version `
     -ExtraArgs "-DskipNativeBuild=true" `

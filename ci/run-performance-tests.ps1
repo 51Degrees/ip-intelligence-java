@@ -1,10 +1,7 @@
-
 param(
-    [string]$ProjectDir = ".",
-    [string]$Version = "0.0.0",
+    [Parameter(Mandatory)][string]$RepoName,
     [string]$Name,
-    [Parameter(Mandatory=$true)]
-    [string]$RepoName,
+    [string]$Version,
     [string]$Branch = "main" # this is actually the examples branch, but the name has to just be 'Branch' to be recognized by run-repo-script.ps1
 )
 
@@ -37,7 +34,7 @@ try {
     Write-Output "Entering '$RepoPath'"
     Push-Location $RepoPath
     # If the Version parameter is set to "0.0.0", set the Version variable to the version specified in the pom.xml file
-    if ($Version -eq "0.0.0"){
+    if (!$Version){
         $Version = mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression="project.version" -q -DforceStdout
     }
     Pop-Location
