@@ -17,7 +17,6 @@
         <module>ip-intelligence.engine.on-premise</module>
         <module>ip-intelligence.cloud</module>
         <module>ip-intelligence</module>
-        <module>ip-intelligence-java-examples</module>
     </modules>
 
     <developers>
