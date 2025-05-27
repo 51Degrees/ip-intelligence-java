@@ -4,25 +4,17 @@ param(
     [Parameter(Mandatory)][hashtable]$Keys,
     [string]$Name,
     [string]$Version,
-    [string]$Branch = "main" # this is actually the examples branch, but the name has to just be 'Branch' to be recognized by run-repo-script.ps1
+    [string]$Branch = "main", # this is actually the examples branch, but the name has to just be 'Branch' to be recognized by run-repo-script.ps1
+    [string]$ExamplesRepo = "$RepoName-examples",
+    [string]$ExamplesBranch = $Branch
 )
 
 $RepoPath = [IO.Path]::Combine($pwd, $RepoName)
-$ExamplesRepoName = "$RepoName-examples"
 
 try {
-    Write-Output "Cloning '$ExamplesRepoName'"
-    ./steps/clone-repo.ps1 -RepoName "ip-intelligence-java-examples" -OrgName $OrgName -Branch $Branch
-    
-    Write-Output "Moving TAC file for examples"
-    $TacFile = [IO.Path]::Combine($RepoPath, "TAC-IpIntelligenceV41.ipi") 
-    Copy-Item $TacFile ip-intelligence-java-examples/ip-intelligence-data/TAC-IpIntelligenceV41.ipi
-
-    Write-Output "Moving evidence files for examples"
-    $UAFile = [IO.Path]::Combine($RepoPath, "evidence.csv") 
-    $EvidenceFile = [IO.Path]::Combine($RepoPath, "evidence.yml")
-    Copy-Item $UAFile "ip-intelligence-java-examples/ip-intelligence-data/evidence.csv"
-    Copy-Item $EvidenceFile "ip-intelligence-java-examples/ip-intelligence-data/evidence.yml"
+    Write-Output "Cloning '$ExamplesRepo'"
+    ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $Branch
+    & "./$ExamplesRepo/ci/fetch-assets.ps1" -RepoName $ExamplesRepo -DeviceDetection $DeviceDetection -DeviceDetectionUrl $DeviceDetectionUrl
     
     Write-Output "Entering ip-intelligence-java directory"
     Push-Location $RepoPath
@@ -34,7 +26,7 @@ try {
     Pop-Location
 
     Write-Output "Entering ip-intelligence-examples directory"
-    Push-Location $ExamplesRepoName
+    Push-Location $ExamplesRepo
 
 
     Write-Output "Setting examples ip-intelligence package dependency to version '$Version'"
@@ -63,7 +55,7 @@ try {
 
 finally {
 
-    Write-Output "Leaving '$ExamplesRepoName'"
+    Write-Output "Leaving '$ExamplesRepo'"
     Pop-Location
 
 }
