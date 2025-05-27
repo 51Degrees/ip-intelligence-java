@@ -2,6 +2,8 @@ param(
     [Parameter(Mandatory)][string]$RepoName,
     [Parameter(Mandatory)][string]$OrgName,
     [Parameter(Mandatory)][hashtable]$Keys,
+    [Parameter(Mandatory)][string]$DeviceDetection,
+    [Parameter(Mandatory)][string]$DeviceDetectionUrl,
     [string]$Name,
     [string]$Version,
     [string]$Branch = "main", # this is actually the examples branch, but the name has to just be 'Branch' to be recognized by run-repo-script.ps1
@@ -13,7 +15,7 @@ $RepoPath = [IO.Path]::Combine($pwd, $RepoName)
 
 try {
     Write-Output "Cloning '$ExamplesRepo'"
-    ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $Branch
+    ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $ExamplesBranch
     & "./$ExamplesRepo/ci/fetch-assets.ps1" -RepoName $ExamplesRepo -DeviceDetection $DeviceDetection -DeviceDetectionUrl $DeviceDetectionUrl
     
     Write-Output "Entering ip-intelligence-java directory"
