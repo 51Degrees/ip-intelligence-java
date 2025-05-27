@@ -22,8 +22,8 @@ try{
         ./steps/clone-repo.ps1 -RepoName "ip-intelligence-java-examples" -OrgName $OrgName -Branch $Branch
 
         Write-Output "Moving TAC file for examples"
-        $TacFile = [IO.Path]::Combine($RepoPath, "TAC-HashV41.hash") 
-        Move-Item $TacFile ip-intelligence-java-examples/ip-intelligence-data/TAC-HashV41.hash
+        $TacFile = [IO.Path]::Combine($RepoPath, "TAC-IpIntelligenceV41.ipi") 
+        Move-Item $TacFile ip-intelligence-java-examples/ip-intelligence-data/TAC-IpIntelligenceV41.ipi
         
     }
 }

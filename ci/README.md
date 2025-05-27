@@ -48,7 +48,7 @@ graph TD
 It performs the following steps:
 
 1. Clone Examples Repo: Clone the "ip-intelligence-java-examples" repository into the common-ci directory.
-3. Set up test files: Move the TAC-HashV41.hash file to the ip-intelligence-java-examples/ip-intelligence-data directory and download Evidence and User-Agent files into ip-intelligence-data directory.
+3. Set up test files: Move the TAC-IpIntelligenceV41.ipi file to the ip-intelligence-java-examples/ip-intelligence-data directory and download Evidence and User-Agent files into ip-intelligence-data directory.
 4. Enter ip-intelligence-examples directory: Changes the current working directory to the ip-intelligence-java-examples folder.
 5. Set package dependency version: Sets the version of the ip-intelligence package dependency for the examples to the specified Version parameter. This will be the version installed in the local repository found in the .m2 folder.
 6. Test Examples: Runs the Maven clean test command, passing the TestResourceKey, SuperResourceKey, and LicenseKey as parameters.

@@ -1,6 +1,6 @@
 param (
     [Parameter(Mandatory)][string]$RepoName,
-    [string]$DataFile = "$RepoName/TAC-HashV41.hash"
+    [string]$DataFile = "$RepoName/TAC-IpIntelligenceV41.ipi"
 )
 $ErrorActionPreference = "Stop"
 
