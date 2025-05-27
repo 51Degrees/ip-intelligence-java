@@ -1,6 +1,7 @@
 param (
     [Parameter(Mandatory)][string]$RepoName,
-    [Parameter(Mandatory)][string]$VariableName
+    [string]$VariableName = "Version"
 )
+$ErrorActionPreference = "Stop"
 
-. ./java/get-next-package-version.ps1 @PSBoundParameters
+Set-Variable -Scope Global -Name $VariableName -Value (./steps/get-next-package-version.ps1 -RepoName $RepoName -Config GitVersion.yml)

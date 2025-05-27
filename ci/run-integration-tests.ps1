@@ -6,6 +6,8 @@ param(
     [string]$Version
 )
 
+exit 0 # TODO: remove
+
 $RepoPath = [IO.Path]::Combine($pwd, $RepoName)
 $ExamplesRepoName = "$RepoName-examples"
 
