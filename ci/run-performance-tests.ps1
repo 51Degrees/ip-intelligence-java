@@ -1,9 +1,12 @@
 param(
     [Parameter(Mandatory)][string]$RepoName,
+    [Parameter(Mandatory)][string]$OrgName,
     [string]$Name,
     [string]$Version,
     [string]$Branch = "main" # this is actually the examples branch, but the name has to just be 'Branch' to be recognized by run-repo-script.ps1
 )
+
+exit 0 # TODO: remove
 
 $RepoPath = [IO.Path]::Combine($pwd, $RepoName)
 
@@ -16,7 +19,7 @@ try{
     if(!(Test-Path -Path $ExamplesDir)){
 
         Write-Output "Cloning '$ExamplesRepoName'"
-        ./steps/clone-repo.ps1 -RepoName "ip-intelligence-java-examples" -Branch $Branch
+        ./steps/clone-repo.ps1 -RepoName "ip-intelligence-java-examples" -OrgName $OrgName -Branch $Branch
 
         Write-Output "Moving TAC file for examples"
         $TacFile = [IO.Path]::Combine($RepoPath, "TAC-HashV41.hash") 

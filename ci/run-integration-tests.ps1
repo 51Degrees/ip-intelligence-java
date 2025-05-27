@@ -3,7 +3,8 @@ param(
     [Parameter(Mandatory)][string]$OrgName,
     [Parameter(Mandatory)][hashtable]$Keys,
     [string]$Name,
-    [string]$Version
+    [string]$Version,
+    [string]$Branch = "main" # this is actually the examples branch, but the name has to just be 'Branch' to be recognized by run-repo-script.ps1
 )
 
 exit 0 # TODO: remove
@@ -13,7 +14,7 @@ $ExamplesRepoName = "$RepoName-examples"
 
 try {
     Write-Output "Cloning '$ExamplesRepoName'"
-    ./steps/clone-repo.ps1 -RepoName "ip-intelligence-java-examples" -OrgName $OrgName
+    ./steps/clone-repo.ps1 -RepoName "ip-intelligence-java-examples" -OrgName $OrgName -Branch $Branch
     
     Write-Output "Moving TAC file for examples"
     $TacFile = [IO.Path]::Combine($RepoPath, "TAC-HashV41.hash") 
