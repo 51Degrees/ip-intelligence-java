@@ -21,9 +21,9 @@ try {
     Copy-Item $TacFile ip-intelligence-java-examples/ip-intelligence-data/TAC-HashV41.hash
 
     Write-Output "Moving evidence files for examples"
-    $UAFile = [IO.Path]::Combine($RepoPath, "20000 User Agents.csv") 
+    $UAFile = [IO.Path]::Combine($RepoPath, "evidence.csv") 
     $EvidenceFile = [IO.Path]::Combine($RepoPath, "evidence.yml")
-    Copy-Item $UAFile "ip-intelligence-java-examples/ip-intelligence-data/20000 User Agents.csv"
+    Copy-Item $UAFile "ip-intelligence-java-examples/ip-intelligence-data/evidence.csv"
     Copy-Item $EvidenceFile "ip-intelligence-java-examples/ip-intelligence-data/evidence.yml"
     
     Write-Output "Entering ip-intelligence-java directory"
