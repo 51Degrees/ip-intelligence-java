@@ -7,8 +7,6 @@ param(
     [string]$Branch = "main" # this is actually the examples branch, but the name has to just be 'Branch' to be recognized by run-repo-script.ps1
 )
 
-exit 0 # TODO: remove
-
 $RepoPath = [IO.Path]::Combine($pwd, $RepoName)
 $ExamplesRepoName = "$RepoName-examples"
 
