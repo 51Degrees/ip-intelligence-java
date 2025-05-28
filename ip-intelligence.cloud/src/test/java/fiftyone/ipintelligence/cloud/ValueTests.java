@@ -43,7 +43,7 @@ public class ValueTests {
 
     public static void deviceId(WrapperCloud wrapper) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
-            data.addEvidence("header.client-ip", Constants.MobileUserAgent)
+            data.addEvidence("server.client-ip", Constants.MobileUserAgent)
                 .process();
             ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
             IPIntelligenceData device = (IPIntelligenceData) elementData;
@@ -57,7 +57,7 @@ public class ValueTests {
     @SuppressWarnings("unchecked")
     public static void valueTypes(WrapperCloud wrapper) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
-            data.addEvidence("header.client-ip", Constants.ChromeUserAgent)
+            data.addEvidence("server.client-ip", Constants.ChromeUserAgent)
                 .process();
             ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
             for (AspectPropertyMetaData property :
@@ -84,7 +84,7 @@ public class ValueTests {
     @SuppressWarnings("unchecked")
     public static void availableProperties(WrapperCloud wrapper) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
-            data.addEvidence("header.client-ip", Constants.MobileUserAgent)
+            data.addEvidence("server.client-ip", Constants.MobileUserAgent)
                 .process();
             ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
             for (AspectPropertyMetaData property :
@@ -102,7 +102,7 @@ public class ValueTests {
     @SuppressWarnings("unchecked")
     public static void typedGetters(WrapperCloud   wrapper) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
-            data.addEvidence("header.client-ip", Constants.MobileUserAgent)
+            data.addEvidence("server.client-ip", Constants.MobileUserAgent)
                 .process();
             ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
             List<String> missingGetters = new ArrayList<>();

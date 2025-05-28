@@ -48,7 +48,7 @@ public class ProcessTests {
         DataValidator validator) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
             data
-                .addEvidence("header.client-ip", "")
+                .addEvidence("server.client-ip", "")
                 .process();
             validator.validateData(data, false);
         }
