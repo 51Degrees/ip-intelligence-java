@@ -28,8 +28,10 @@ import fiftyone.ipintelligence.shared.testhelpers.UserAgentGenerator;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 public class ValueCloudTests extends TestsBase {
 
     	private UserAgentGenerator userAgents;

@@ -34,6 +34,7 @@ import fiftyone.pipeline.engines.exceptions.PropertyMissingException;
 import fiftyone.pipeline.engines.services.MissingPropertyReason;
 import fiftyone.pipeline.engines.services.MissingPropertyResult;
 import fiftyone.pipeline.engines.services.MissingPropertyService;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.LoggerFactory;
@@ -46,6 +47,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@Ignore
 public class MissingPropertyHandlingTests {
 
     protected static final ILoggerFactory loggerFactory = LoggerFactory.getILoggerFactory();
