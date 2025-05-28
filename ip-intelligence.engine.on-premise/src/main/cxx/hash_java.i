@@ -23,9 +23,8 @@
 
 %include "./ip-intelligence-cxx/src/common-cxx/JavaTypes.i"
 
-nofinalize(EvidenceIPIntelligence);
-nofinalize(ResultsIPIntelligence);
-nofinalize(ResultsHash);
+nofinalize(EvidenceIpi);
+nofinalize(ResultsIpi);
 
 %include "./ip-intelligence-cxx/src/ipi.i"
 
