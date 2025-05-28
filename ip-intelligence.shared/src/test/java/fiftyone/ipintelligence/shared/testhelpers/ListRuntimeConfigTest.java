@@ -26,7 +26,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 public class ListRuntimeConfigTest {
-    @Test @Ignore
+    @Test
     public void runtimeConfigTest () {
         System.out.println("Environment");
         System.getenv().forEach((key, value) -> System.out.format("%s: %s%n", key, value));
