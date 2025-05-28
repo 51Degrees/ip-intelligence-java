@@ -47,7 +47,7 @@ public class MetaDataHashTests extends TestsBase {
     @Before
     public void init() throws Exception {
         executorService = Executors.newCachedThreadPool();
-        testInitialize(Constants.PerformanceProfiles.HighPerformance);
+        testInitialize(Constants.PerformanceProfiles.MaxPerformance);
     }
 
     @After

@@ -63,7 +63,7 @@ public class IPIntelligenceOnPremisePipelineBuilder
     private Boolean dataUpdateVerifyMd5 = null;
     private DataUpdateUrlFormatter dataUpdateUrlFormatter = null;
     private Constants.PerformanceProfiles performanceProfile =
-        Constants.PerformanceProfiles.Balanced;
+        Constants.PerformanceProfiles.MaxPerformance;
 
     private DataUpdateService dataUpdateService;
 

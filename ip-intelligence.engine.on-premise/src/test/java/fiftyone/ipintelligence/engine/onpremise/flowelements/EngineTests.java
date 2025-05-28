@@ -42,7 +42,7 @@ public class EngineTests {
 
 	private IPIntelligenceOnPremiseEngine createEngine(File dataFile) throws Exception {
 		return new IPIntelligenceOnPremiseEngineBuilder(loggerFactory, null)
-                .setPerformanceProfile(Constants.PerformanceProfiles.HighPerformance)
+                .setPerformanceProfile(Constants.PerformanceProfiles.MaxPerformance)
                 .setAutoUpdate(false)
                 .build(dataFile.toString(), false);
 	}

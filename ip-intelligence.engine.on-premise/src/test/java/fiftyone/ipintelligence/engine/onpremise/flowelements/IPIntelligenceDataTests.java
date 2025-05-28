@@ -51,7 +51,7 @@ public class IPIntelligenceDataTests extends TestsBase {
 
     @Before
     public void init() throws Exception {
-        testInitialize(Constants.PerformanceProfiles.HighPerformance);
+        testInitialize(Constants.PerformanceProfiles.MaxPerformance);
         when(missingPropertyService.getMissingPropertyReason(anyString(), anyList()))
             .thenReturn(new MissingPropertyResult(
                 MissingPropertyReason.PropertyExcludedFromEngineConfiguration,

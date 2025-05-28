@@ -41,7 +41,7 @@ public class ValueTests {
 
     public static void deviceId(Wrapper wrapper) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
-            data.addEvidence("server.client-ip", Constants.MobileUserAgent)
+            data.addEvidence("server.client-ip", Constants.IPV4_ADDRESS)
                 .process();
             ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
             IPIntelligenceData ipiData = (IPIntelligenceData) elementData;
@@ -56,7 +56,7 @@ public class ValueTests {
     public static void valueTypes(Wrapper wrapper) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
             data.addEvidence("server.client-ip",
-                            Constants.ChromeUserAgent)
+                            Constants.IPV4_ADDRESS)
                 .process();
             ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
             for (FiftyOneAspectPropertyMetaData property :
@@ -67,7 +67,10 @@ public class ValueTests {
                     //((ElementPropertyMetaData) value).getType();
                     expectedType = property.getType();
                     assertNotNull("Value of " + property.getName() + " is null. ", value);
-                    assertTrue(AspectPropertyValue.class.isAssignableFrom(value.getClass()));
+                    assertTrue("Value for '" + property.getName() + "' property is not " + AspectPropertyValue.class.getName() + ".",
+                            AspectPropertyValue.class.isAssignableFrom(value.getClass()));
+                    assertTrue("Value for '" + property.getName() + "' property does not have value.",
+                            ((AspectPropertyValue<?>) value).hasValue());
                     assertTrue("Value of '" + property.getName() +
                             "' was of type " + ((AspectPropertyValue<?>) value).getValue().getClass().getSimpleName() +
                             " but should have been " + expectedType.getSimpleName() +
@@ -82,7 +85,7 @@ public class ValueTests {
     @SuppressWarnings("unchecked")
     public static void availableProperties(Wrapper wrapper) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
-            data.addEvidence("server.client-ip", Constants.MobileUserAgent)
+            data.addEvidence("server.client-ip", Constants.IPV4_ADDRESS)
                 .process();
             ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
             for (FiftyOneAspectPropertyMetaData property :
@@ -100,7 +103,7 @@ public class ValueTests {
     @SuppressWarnings("unchecked")
     public static void typedGetters(Wrapper wrapper) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
-            data.addEvidence("server.client-ip", Constants.MobileUserAgent)
+            data.addEvidence("server.client-ip", Constants.IPV4_ADDRESS)
                 .process();
             ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
             List<String> missingGetters = new ArrayList<>();

@@ -70,7 +70,7 @@ public class ProcessTests {
         DataValidator validator) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
             data
-                .addEvidence("header.irrelevant-header", "some evidence")
+                .addEvidence("server.irrelevant-header", "some evidence")
                 .process();
             validator.validateData(data, false);           
         }
@@ -81,7 +81,7 @@ public class ProcessTests {
         DataValidator validator) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
             data
-                .addEvidence("header.USER-AGENT", Constants.ChromeUserAgent)
+                .addEvidence("server.CLIENT-IP", Constants.IPV6_ADDRESS)
                 .process();
             validator.validateData(data, true);            
         }

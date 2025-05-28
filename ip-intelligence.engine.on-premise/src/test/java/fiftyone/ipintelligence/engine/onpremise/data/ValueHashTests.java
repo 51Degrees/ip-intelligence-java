@@ -25,6 +25,7 @@ package fiftyone.ipintelligence.engine.onpremise.data;
 import fiftyone.ipintelligence.engine.onpremise.TestsBase;
 import fiftyone.ipintelligence.shared.testhelpers.data.ValueTests;
 
+import fiftyone.pipeline.engines.Constants;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,8 +34,7 @@ public class ValueHashTests extends TestsBase {
 
     @Before
     public void init() throws Exception {
-        testInitialize(fiftyone.pipeline.engines
-        	.Constants.PerformanceProfiles.HighPerformance);
+        testInitialize(Constants.PerformanceProfiles.MaxPerformance);
     }
 
     @After

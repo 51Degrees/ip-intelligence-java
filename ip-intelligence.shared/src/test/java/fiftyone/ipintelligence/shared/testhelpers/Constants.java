@@ -22,22 +22,10 @@
 
 package fiftyone.ipintelligence.shared.testhelpers;
 
-import java.io.File;
-import java.util.Objects;
-
 public class Constants {
-    public static final int UAS_TO_TEST = 10;
+    public static final String[] ExcludedProperties = {};
 
-    public static final String[] ExcludedProperties = {"JavascriptImageOptimiser", "JavascriptBandwidth", "JavascriptGetHighEntropyValues"};
 
-    public static final String MobileUserAgent =
-        "Mozilla/5.0 (iPhone; CPU iPhone OS 7_1 like Mac OS X) " +
-            "AppleWebKit/537.51.2 (KHTML, like Gecko) Version/7.0 Mobile" +
-            "/11D167 Safari/9537.53";
-    
-
-    public static final String ChromeUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 " +
-            "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
-
-    public static final String RESOURCE_KEY_ENV_VAR = "TestResourceKey";
+    public static final String IPV4_ADDRESS = "116.154.188.222";
+    public static final String IPV6_ADDRESS = "2001:db8::";
 }

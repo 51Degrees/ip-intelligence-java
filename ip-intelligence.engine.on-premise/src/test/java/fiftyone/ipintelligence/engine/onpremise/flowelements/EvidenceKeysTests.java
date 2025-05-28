@@ -35,7 +35,7 @@ public class EvidenceKeysTests extends TestsBase {
 
     @Before
     public void init() throws Exception {
-        testInitialize(Constants.PerformanceProfiles.HighPerformance);
+        testInitialize(Constants.PerformanceProfiles.MaxPerformance);
     }
 
     @After
