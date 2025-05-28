@@ -28,28 +28,26 @@ import static org.junit.Assert.assertTrue;
 
 public class EvidenceKeyTests {
 
-    public static void containsUserAgent(Wrapper wrapper) {
-        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("header.client-ip"));
-    }
-
-    public static void containsHeaderNames(Wrapper wrapper) {
-        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("header.device-stock-ua"));
+    public static void containsClientIP(Wrapper wrapper) {
+        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("server.client-ip"));
     }
 
     public static void containsQueryParams(Wrapper wrapper) {
         assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("query.client-ip"));
-        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("query.device-stock-ua"));
     }
 
     public static void caseInsensitiveKeys(Wrapper wrapper) {
-        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("header.User-Agent"));
-        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("header.client-ip"));
-        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("header.USER-AGENT"));
-        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("HEADER.USER-AGENT"));
+        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("query.Client-IP"));
+        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("query.client-ip"));
+        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("query.CLIENT-IP"));
+        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("QUERY.client-ip"));
+        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("QUERY.CLIENT-IP"));
     }
 
     public static void containsOverrides(Wrapper wrapper) {
-        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("query.51d_screenpixelswidth"));
-        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("cookie.51d_screenpixelswidth"));
+        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("query.client-ip-51d"));
+        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("query.true-client-ip-51d"));
+        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("server.client-ip-51d"));
+        assertTrue(wrapper.getEngine().getEvidenceKeyFilter().include("server.true-client-ip-51d"));
     }
 }

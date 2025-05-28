@@ -44,13 +44,13 @@ public class EvidenceKeysTests extends TestsBase {
     }
 
     @Test
-    public void EvidenceKeys_Hash_ContainsUserAgent() {
-        EvidenceKeyTests.containsUserAgent(getWrapper());
+    public void EvidenceKeys_Hash_ContainsClientIP() {
+        EvidenceKeyTests.containsClientIP(getWrapper());
     }
 
     @Test
-    public void EvidenceKeys_Hash_ContainsHeaderNames() {
-        EvidenceKeyTests.containsHeaderNames(getWrapper());
+    public void EvidenceKeys_Hash_ContainsQueryParams() {
+        EvidenceKeyTests.containsQueryParams(getWrapper());
     }
 
     @Test
