@@ -84,7 +84,7 @@ public class IPIntelligenceCloudEngine
 
     @Override
     public String getElementDataKey() {
-        return "device";
+        return "ip-intelligence";
     }
 
     @Override
@@ -111,7 +111,7 @@ public class IPIntelligenceCloudEngine
 
             // Extract data from json to the aspectData instance.
             JSONObject jsonObj = new JSONObject(json);
-            JSONObject deviceObj = jsonObj.getJSONObject("device");
+            JSONObject deviceObj = jsonObj.getJSONObject("ip-intelligence");
 
             Map<String, Object> deviceMap =
                 new TreeMap<>(String.CASE_INSENSITIVE_ORDER);

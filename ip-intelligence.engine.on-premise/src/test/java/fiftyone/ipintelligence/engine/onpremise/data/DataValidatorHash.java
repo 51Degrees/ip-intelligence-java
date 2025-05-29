@@ -54,27 +54,13 @@ public class DataValidatorHash implements DataValidator {
             if (property.isAvailable()) {
                 assertTrue(map.containsKey(property.getName()));
                 AspectPropertyValue<?> value = (AspectPropertyValue<?>)map.get(property.getName());
-                if (validEvidence) {
-                    assertTrue(value.hasValue());
-                }
-                else {
-                    if (property.getCategory().equals("Metrics")) {
-                        assertTrue(value.hasValue());
-                    }
-                    else {
-                        assertFalse(value.hasValue());
-                    }
-                }
-
+                assertEquals(validEvidence, value.hasValue());
             }
         }
         assertNotNull(elementData.getRegisteredName());
-        assertFalse(elementData.getRegisteredName().getValue().isEmpty());
-        if (!validEvidence) {
-            List<IWeightedValue<String>> listValue = elementData.getRegisteredName().getValue();
-            assertEquals(1, listValue.size());
-            assertEquals(1, listValue.get(0).getWeighting(), 1e-6f);
-            assertEquals("", listValue.get(0).getValue());
+        assertEquals(validEvidence, elementData.getRegisteredName().hasValue());
+        if (validEvidence) {
+            assertFalse(elementData.getRegisteredName().getValue().isEmpty());
         }
     }
 }
