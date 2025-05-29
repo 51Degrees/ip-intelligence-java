@@ -20,7 +20,7 @@ $CxxDataDir = "$cxxCiDir/ip-intelligence-data"
 Write-Output "Entering $CxxDataDir"
 Push-Location $CxxDataDir
 try {
-    & get-lite-file-from-azure.ps1 -Force
+    & ./get-lite-file-from-azure.ps1 -Force
 } finally {
     Write-Output "Leaving $CxxDataDir"
     Pop-Location
