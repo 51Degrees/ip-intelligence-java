@@ -27,6 +27,7 @@ import fiftyone.ipintelligence.shared.testhelpers.Constants;
 import fiftyone.ipintelligence.shared.testhelpers.Wrapper;
 import fiftyone.pipeline.core.data.ElementData;
 import fiftyone.pipeline.core.data.FlowData;
+import fiftyone.pipeline.core.data.IWeightedValue;
 import fiftyone.pipeline.engines.data.AspectPropertyValue;
 import fiftyone.pipeline.engines.exceptions.PropertyMissingException;
 import fiftyone.pipeline.engines.fiftyone.data.FiftyOneAspectPropertyMetaData;
@@ -62,10 +63,9 @@ public class ValueTests {
             for (FiftyOneAspectPropertyMetaData property :
                 (List<FiftyOneAspectPropertyMetaData>) wrapper.getEngine().getProperties()) {
                 if (property.isAvailable() ) {
-                    Class<?> expectedType;
-                    Object value = elementData.get(property.getName());
+                    final Object value = elementData.get(property.getName());
                     //((ElementPropertyMetaData) value).getType();
-                    expectedType = property.getType();
+                    final Class<?> expectedType = property.getType();
                     assertNotNull("Value of " + property.getName() + " is null. ", value);
                     assertTrue("Value for '" + property.getName() + "' property is not " + AspectPropertyValue.class.getName() + ".",
                             AspectPropertyValue.class.isAssignableFrom(value.getClass()));
@@ -73,10 +73,29 @@ public class ValueTests {
                             ((AspectPropertyValue<?>) value).hasValue());
                     assertTrue("Value of '" + property.getName() +
                             "' was of type " + ((AspectPropertyValue<?>) value).getValue().getClass().getSimpleName() +
-                            " but should have been " + expectedType.getSimpleName() +
+                            " but should have been " + List.class.getSimpleName() +
                             ".",
-                        expectedType.isAssignableFrom(
+                            List.class.isAssignableFrom(
                             ((AspectPropertyValue<?>) value).getValue().getClass()));
+                    final List<?> listValue = (List<?>)((AspectPropertyValue<?>) value).getValue();
+                    assertFalse("List for '" + property.getName() + "' property is empty",
+                            listValue.isEmpty());
+                    for (int i = 0 ; i < listValue.size() ; i++) {
+                        final Object inListValue = listValue.get(i);
+                        assertTrue("Value [" + i + "] of '" + property.getName() +
+                                        "' was of type " + inListValue.getClass().getSimpleName() +
+                                        " but should have been " + expectedType.getSimpleName() +
+                                        ".",
+                                IWeightedValue.class.isAssignableFrom(
+                                        inListValue.getClass()));
+                        IWeightedValue<?> weightedValue = (IWeightedValue<?>) inListValue;
+                        assertTrue("Deep value [" + i + "] of '" + property.getName() +
+                                        "' was of type " + weightedValue.getValue().getClass().getSimpleName() +
+                                        " but should have been " + expectedType.getSimpleName() +
+                                        ".",
+                                expectedType.isAssignableFrom(
+                                        weightedValue.getValue().getClass()));
+                    }
                 }
             }
         }

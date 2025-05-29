@@ -24,6 +24,7 @@ package fiftyone.ipintelligence.shared;
 
 import fiftyone.pipeline.core.data.ElementPropertyMetaData;
 import fiftyone.pipeline.core.data.FlowData;
+import fiftyone.pipeline.core.data.IWeightedValue;
 import fiftyone.pipeline.core.data.TryGetResult;
 import fiftyone.pipeline.core.data.types.JavaScript;
 import fiftyone.pipeline.engines.data.AspectData;
@@ -33,6 +34,7 @@ import fiftyone.pipeline.engines.flowelements.AspectEngine;
 import fiftyone.pipeline.engines.services.MissingPropertyService;
 import org.slf4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -131,6 +133,17 @@ public abstract class IPIntelligenceDataBaseOnPremise extends IPIntelligenceData
     protected abstract AspectPropertyValue<JavaScript> getValueAsJavaScript(
         String propertyName);
 
+    private static Class<?>[] toWeightedListType(Class<?> deepType, boolean isList) {
+        final List<Class<?>> list = new ArrayList<>();
+        list.add(List.class);
+        list.add(IWeightedValue.class);
+        if  (isList) {
+            list.add(List.class);
+        }
+        list.add(deepType);
+        return list.toArray(new Class<?>[0]);
+    }
+
     /**
      * By default, the base map will not be populated as doing so is a fairly
      * expensive operation. Instead, we override the AsDictionary method to
@@ -152,7 +165,7 @@ public abstract class IPIntelligenceDataBaseOnPremise extends IPIntelligenceData
                         map.put(property.getName().toLowerCase(),
                             getAs(property.getName(),
                                 AspectPropertyValue.class,
-                                property.getType()));
+                                toWeightedListType(property.getType(), false)));
                     }
                     populateFromMap(map);
                     mapPopulated = true;
@@ -204,7 +217,7 @@ public abstract class IPIntelligenceDataBaseOnPremise extends IPIntelligenceData
             if (propertyIsAvailable(key)) {
                 if (type.equals(Object.class)) {
                     type = (Class<T>)AspectPropertyValue.class;
-                    parameterisedTypes = new Class<?>[]{ getPropertyType(key) };
+                    parameterisedTypes = toWeightedListType(getPropertyType(key), false);
                 }
                 synchronized (getLock) {
                     Object obj = null;
