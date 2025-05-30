@@ -19,5 +19,5 @@ jobs:
       data-filename: "51Degrees-EnterpriseV4.ipi.gz"
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
-      ip-intelligence-key: ${{ secrets.DEVICE_DETECTION_KEY }}
-      ip-intelligence-url: ${{ secrets.IPI_DATA_FILE_URL }}
+      data-key: ${{ secrets.DEVICE_DETECTION_KEY }}
+      data-url: ${{ secrets.IPI_DATA_FILE_URL }}
