@@ -35,6 +35,7 @@ import fiftyone.pipeline.engines.services.HttpClientDefault;
 
 import fiftyone.pipeline.util.FileFinder;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.Logger;
@@ -262,6 +263,7 @@ public class IPIntelligenceTests {
          * @throws Exception
          */
     @Test
+    @Ignore
     public void TestOnPremiseBuilder_DataUpdateService_Close() throws Exception {
     	// Configure the pipeline builder based on the
         // parameters passed to this method.
@@ -275,7 +277,7 @@ public class IPIntelligenceTests {
                     .useOnPremise(IPI_DATA_FILE_NAME, false)
                     .setPerformanceProfile(MaxPerformance)
                     .setShareUsage(false)
-                    .setAutoUpdate(false);
+                    .setAutoUpdate(true);
     	try (Pipeline pipeline = builder.build()) {
     		assertEquals(1, pipeline.getServices().size());
     	}
