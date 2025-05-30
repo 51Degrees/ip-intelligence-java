@@ -17,6 +17,9 @@ jobs:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}
       dryrun: ${{ inputs.dryrun || false }}
+      data-type: "IpIntelligence"
+      data-product: "EnterpriseV4"
+      data-filename: "51Degrees-EnterpriseV4.ipi.gz"
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
       data-key: ${{ secrets.DEVICE_DETECTION_KEY }}
