@@ -23,9 +23,7 @@
 package fiftyone.ipintelligence.data;
 
 import fiftyone.ipintelligence.shared.IPIntelligenceDataBaseOnPremise;
-import fiftyone.pipeline.core.data.ElementPropertyMetaData;
-import fiftyone.pipeline.core.data.ElementPropertyMetaDataDefault;
-import fiftyone.pipeline.core.data.FlowData;
+import fiftyone.pipeline.core.data.*;
 import fiftyone.pipeline.core.data.types.JavaScript;
 import fiftyone.pipeline.core.flowelements.Pipeline;
 import fiftyone.pipeline.engines.data.AspectData;
@@ -87,26 +85,38 @@ public class IPIntelligenceDataOnPremiseTests {
         pipeline = mock(Pipeline.class);
     }
 
+    private static <T> void assertValueInside(T expected, AspectPropertyValue<?> value) {
+        assertTrue(value.hasValue());
+        assertTrue(List.class.isAssignableFrom(value.getValue().getClass()));
+        final List<?> values = (List<?>)value.getValue();
+        assertEquals(1, values.size());
+        final Object firstValue = values.get(0);
+        assertTrue(IWeightedValue.class.isAssignableFrom(firstValue.getClass()));
+        final IWeightedValue<?> weightedValue = (IWeightedValue<?>)firstValue;
+        assertEquals(65535, weightedValue.getRawWeighting());
+        assertEquals(expected, weightedValue.getValue());
+    }
+
     @Test
     public void getList() throws NoValueException {
         setupElementProperties(List.class);
         List<String> expected = new ArrayList<>();
         TestResults<List<String>> results =
-            new TestResults<>(
-                logger,
-                flowData,
-                engine,
-                missingPropertyService,
-                expected);
+                new TestResults<>(
+                        logger,
+                        flowData,
+                        engine,
+                        missingPropertyService,
+                        expected);
 
         Object value = results.get(testPropertyName);
         assertTrue(AspectPropertyValue.class.isAssignableFrom(value.getClass()));
-        assertEquals(expected, ((AspectPropertyValue<?>)value).getValue());
+        assertValueInside(expected, (AspectPropertyValue<?>)value);
         Map<String, Object> map = results.asKeyMap();
         assertTrue(map.containsKey(testPropertyName));
         Object mapValue = map.get(testPropertyName);
         assertTrue(AspectPropertyValue.class.isAssignableFrom(mapValue.getClass()));
-        assertEquals(expected, ((AspectPropertyValue<?>)mapValue).getValue());
+        assertValueInside(expected, (AspectPropertyValue<?>)mapValue);
     }
 
     @Test
@@ -114,21 +124,21 @@ public class IPIntelligenceDataOnPremiseTests {
         setupElementProperties(String.class);
         String expected = "string";
         TestResults<String> results =
-            new TestResults<>(
-                logger,
-                flowData,
-                engine,
-                missingPropertyService,
-                expected);
+                new TestResults<>(
+                        logger,
+                        flowData,
+                        engine,
+                        missingPropertyService,
+                        expected);
 
         Object value = results.get(testPropertyName);
         assertTrue(AspectPropertyValue.class.isAssignableFrom(value.getClass()));
-        assertEquals(expected, ((AspectPropertyValue<?>)value).getValue());
+        assertValueInside(expected, (AspectPropertyValue<?>)value);
         Map<String, Object> map = results.asKeyMap();
         assertTrue(map.containsKey(testPropertyName));
         Object mapValue = map.get(testPropertyName);
         assertTrue(AspectPropertyValue.class.isAssignableFrom(mapValue.getClass()));
-        assertEquals(expected, ((AspectPropertyValue<?>)mapValue).getValue());
+        assertValueInside(expected, (AspectPropertyValue<?>)mapValue);
     }
 
     @Test
@@ -136,21 +146,21 @@ public class IPIntelligenceDataOnPremiseTests {
         setupElementProperties(Boolean.class);
         Boolean expected = true;
         TestResults<Boolean> results =
-            new TestResults<>(
-                logger,
-                flowData,
-                engine,
-                missingPropertyService,
-                expected);
+                new TestResults<>(
+                        logger,
+                        flowData,
+                        engine,
+                        missingPropertyService,
+                        expected);
 
         Object value = results.get(testPropertyName);
         assertTrue(AspectPropertyValue.class.isAssignableFrom(value.getClass()));
-        assertEquals(expected, ((AspectPropertyValue<?>)value).getValue());
+        assertValueInside(expected, (AspectPropertyValue<?>)value);
         Map<String, Object> map = results.asKeyMap();
         assertTrue(map.containsKey(testPropertyName));
         Object mapValue = map.get(testPropertyName);
         assertTrue(AspectPropertyValue.class.isAssignableFrom(mapValue.getClass()));
-        assertEquals(expected, ((AspectPropertyValue<?>)mapValue).getValue());
+        assertValueInside(expected, (AspectPropertyValue<?>)mapValue);
     }
 
     @Test
@@ -158,21 +168,21 @@ public class IPIntelligenceDataOnPremiseTests {
         setupElementProperties(Integer.class);
         int expected = 1;
         TestResults<Integer> results =
-            new TestResults<Integer>(
-                logger,
-                flowData,
-                engine,
-                missingPropertyService,
-                expected);
+                new TestResults<Integer>(
+                        logger,
+                        flowData,
+                        engine,
+                        missingPropertyService,
+                        expected);
 
         Object value = results.get(testPropertyName);
         assertTrue(AspectPropertyValue.class.isAssignableFrom(value.getClass()));
-        assertEquals(expected, ((AspectPropertyValue<?>)value).getValue());
+        assertValueInside(expected, (AspectPropertyValue<?>)value);
         Map<String, Object> map = results.asKeyMap();
         assertTrue(map.containsKey(testPropertyName));
         Object mapValue = map.get(testPropertyName);
         assertTrue(AspectPropertyValue.class.isAssignableFrom(mapValue.getClass()));
-        assertEquals(expected, ((AspectPropertyValue<?>)mapValue).getValue());
+        assertValueInside(expected, (AspectPropertyValue<?>)mapValue);
     }
 
     @Test
@@ -180,21 +190,21 @@ public class IPIntelligenceDataOnPremiseTests {
         setupElementProperties(Double.class);
         double expected = 1;
         TestResults<Double> results =
-            new TestResults<Double>(
-                logger,
-                flowData,
-                engine,
-                missingPropertyService,
-                expected);
+                new TestResults<Double>(
+                        logger,
+                        flowData,
+                        engine,
+                        missingPropertyService,
+                        expected);
 
         Object value = results.get(testPropertyName);
         assertTrue(AspectPropertyValue.class.isAssignableFrom(value.getClass()));
-        assertEquals(expected, ((AspectPropertyValue<?>)value).getValue());
+        assertValueInside(expected, (AspectPropertyValue<?>)value);
         Map<String, Object> map = results.asKeyMap();
         assertTrue(map.containsKey(testPropertyName));
         Object mapValue = map.get(testPropertyName);
         assertTrue(AspectPropertyValue.class.isAssignableFrom(mapValue.getClass()));
-        assertEquals(expected, ((AspectPropertyValue<?>)mapValue).getValue());
+        assertValueInside(expected, (AspectPropertyValue<?>)mapValue);
     }
 
     @Test
@@ -203,25 +213,25 @@ public class IPIntelligenceDataOnPremiseTests {
         String expectedString = "javascript";
         JavaScript expected = new JavaScript(expectedString);
         TestResults<JavaScript> results =
-            new TestResults<JavaScript>(
-                logger,
-                flowData,
-                engine,
-                missingPropertyService,
-                expected);
+                new TestResults<JavaScript>(
+                        logger,
+                        flowData,
+                        engine,
+                        missingPropertyService,
+                        expected);
 
         Object value = results.get(testPropertyName);
         assertTrue(AspectPropertyValue.class.isAssignableFrom(value.getClass()));
-        assertEquals(expected, ((AspectPropertyValue<?>)value).getValue());
+        assertValueInside(expected, (AspectPropertyValue<?>)value);
         Map<String, Object> map = results.asKeyMap();
         assertTrue(map.containsKey(testPropertyName));
         Object mapValue = map.get(testPropertyName);
         assertTrue(AspectPropertyValue.class.isAssignableFrom(mapValue.getClass()));
-        assertEquals(expected, ((AspectPropertyValue<?>)mapValue).getValue());
+        assertValueInside(expected, (AspectPropertyValue<?>)mapValue);
     }
 
-    private class TestResults<T> extends IPIntelligenceDataBaseOnPremise {
-        private Object value;
+    private static class TestResults<T> extends IPIntelligenceDataBaseOnPremise {
+        private final Object value;
 
         TestResults(
             Logger logger,
@@ -230,7 +240,10 @@ public class IPIntelligenceDataOnPremiseTests {
             MissingPropertyService missingPropertyService,
             Object value) {
             super(logger, flowData, engine, missingPropertyService);
-            this.value = value;
+            final List<IWeightedValue<?>> valueList = new ArrayList<>();
+            final IWeightedValue<Object> weightedValue = new WeightedValue<>(65535, value);
+            valueList.add(weightedValue);
+            this.value = valueList;
         }
 
 
