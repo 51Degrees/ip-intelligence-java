@@ -29,8 +29,8 @@ import java.util.List;
 // This interface sits at the top of the name space in order to make
 // life easier for consumers.
 /**
- * Interface exposing typed accessors for properties related to a device
- * returned by a IP Intelligence engine.
+ * Interface exposing typed accessors for properties related to an IP.
+ * This includes the network, and location.
  */
 public interface IPIntelligenceData extends AspectData
 {
