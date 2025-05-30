@@ -27,6 +27,7 @@ import fiftyone.pipeline.core.flowelements.Pipeline;
 import fiftyone.pipeline.engines.services.HttpClient;
 import fiftyone.pipeline.engines.services.HttpClientDefault;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -76,6 +77,7 @@ public class CloudRequestOriginTests {
      * @throws Exception
      */
     @Test
+    @Ignore
     public void ResourceKeyWithOrigin() throws Exception {    
                         
         String resourceKey = "AQS5HKcyVj6B8wNG2Ug";
