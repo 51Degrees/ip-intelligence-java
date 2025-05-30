@@ -68,7 +68,7 @@
 <!-- Node12 -->
 <g id="node5" class="node">
 <title>Node12</title>
-<g id="a_node5"><a xlink:href="interfacefiftyone_1_1ipintelligence_1_1shared_1_1_i_p_intelligence_data.html" target="_top" xlink:title="Interface exposing typed accessors for properties related to a device returned by a IP Intelligence e...">
+<g id="a_node5"><a xlink:href="interfacefiftyone_1_1ipintelligence_1_1shared_1_1_i_p_intelligence_data.html" target="_top" xlink:title="Interface exposing typed accessors for properties related to an IP.">
 <polygon fill="none" stroke="black" points="110,-80 110,-110 271,-110 271,-80 110,-80"/>
 <text text-anchor="start" x="118" y="-98" font-family="Helvetica,sans-Serif" font-size="10.00">fiftyone.ipintelligence.shared.</text>
 <text text-anchor="middle" x="190.5" y="-87" font-family="Helvetica,sans-Serif" font-size="10.00">IPIntelligenceData</text>

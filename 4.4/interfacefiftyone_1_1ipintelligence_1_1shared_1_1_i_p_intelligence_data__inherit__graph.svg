@@ -11,7 +11,7 @@
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:title="Interface exposing typed accessors for properties related to a device returned by a IP Intelligence e...">
+<g id="a_node1"><a xlink:title="Interface exposing typed accessors for properties related to an IP.">
 <polygon fill="#bfbfbf" stroke="black" points="109,-50.5 109,-80.5 270,-80.5 270,-50.5 109,-50.5"/>
 <text text-anchor="start" x="117" y="-68.5" font-family="Helvetica,sans-Serif" font-size="10.00">fiftyone.ipintelligence.shared.</text>
 <text text-anchor="middle" x="189.5" y="-57.5" font-family="Helvetica,sans-Serif" font-size="10.00">IPIntelligenceData</text>
