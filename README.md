@@ -30,23 +30,10 @@ how to use this.
 
 #### On-Premise
 
-If you are using on-premise detection, a "Lite" version of the data required is packaged 
-in this repository. It contains only a limited set of "essential" IP Intelligence properties. 
+In order to perform IP intelligence on-premise, you will need to use a
+data file.
 
-You may want to license our complete data file containing all properties. 
-[Details of our licenses](https://51degrees.com/pricing) are available on our website.
-
-If you want to use the lite file, you will need to install [GitLFS](https://git-lfs.github.com/), then:
-
-```
-git lfs install
-```
-
-Then, navigate to 'ip-intelligence.engine.on-premise/src/main/cxx/ip-intelligence-cxx/ip-intelligence-data' and execute:
-
-```
-git lfs pull
-```
+[ip-intelligence-data](https://github.com/51Degrees/ip-intelligence-data/) repository instructs how to obtain a 'Lite' data file, otherwise [contact us](https://51degrees.com/contact-us) to obtain an 'Enterprise' data file.
 
 ## Installation
 
