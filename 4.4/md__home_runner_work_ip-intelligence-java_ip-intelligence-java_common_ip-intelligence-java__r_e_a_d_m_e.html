@@ -78,14 +78,13 @@ $(document).ready(function(){initNavTree('md__home_runner_work_ip-intelligence-j
 <p>For runtime dependencies, see our <a href="http://51degrees.com/documentation/_info__dependencies.html">dependencies</a> page. The <a href="https://51degrees.com/documentation/_info__tested_versions.html">tested versions</a> page shows the JDK versions that we currently test against. The software may run fine against other versions, but additional caution should be applied.</p>
 <h3>Data</h3>
 <p>The Java API can either use our cloud service to get its data or it can use a local (on-premise) copy of the data.</p>
-<h4>Cloud</h4>
+<h4>Cloud (coming soon)</h4>
+<p>The cloud service for IP Intelligence is currently in development.</p>
 <p>You will require <a href="https://51degrees.com/documentation/_info__resource_keys.html">resource keys</a> to use the Cloud API, as described on our website. Get resource keys from our <a href="https://configure.51degrees.com/">configurator</a>, see our <a href="https://51degrees.com/documentation/_concepts__configurator.html">documentation</a> on how to use this.</p>
 <h4>On-Premise</h4>
-<p>If you are using on-premise detection, a "Lite" version of the data required is packaged in this repository. It contains only a limited set of "essential" IP Intelligence properties.</p>
-<p>You may want to license our complete data file containing all properties. <a href="https://51degrees.com/pricing">Details of our licenses</a> are available on our website.</p>
-<p>If you want to use the lite file, you will need to install <a href="https://git-lfs.github.com/">GitLFS</a>, then:</p>
-<div class="c-code__block c-code__block--outline"><div class="c-code__line">git lfs install</div></div><p>Then, navigate to 'ip-intelligence.engine.on-premise/src/main/cxx/ip-intelligence-cxx/ip-intelligence-data' and execute:</p>
-<div class="c-code__block c-code__block--outline"><div class="c-code__line">git lfs pull</div></div><h2>Installation</h2>
+<p>In order to perform IP intelligence on-premise, you will need to use a data file.</p>
+<p><a href="https://github.com/51Degrees/ip-intelligence-data/">ip-intelligence-data</a> repository instructs how to obtain a 'Lite' data file, otherwise <a href="https://51degrees.com/contact-us">contact us</a> to obtain an 'Enterprise' data file.</p>
+<h2>Installation</h2>
 <p>Our latest release is available as compiled JARs on Maven - or you can compile from source as described below.</p>
 <h3>Maven</h3>
 <p>The 51Degrees Java IP Intelligence package is available on maven. Make sure to select the <a href="https://mvnrepository.com/artifact/com.51degrees/ip-intelligence">latest version</a>.</p>
@@ -135,10 +134,10 @@ $(document).ready(function(){initNavTree('md__home_runner_work_ip-intelligence-j
 </ul>
 <h2>Projects</h2>
 <ul>
-<li><b>ip-intelligence</b> - This is the project to get all IP Intelligence capabilities.</li>
-<li><b>ip-intelligence.engine.on-premise</b> - when you want to use local detection.</li>
-<li><b>ip-intelligence.cloud</b> - when you want to use our cloud detection.</li>
-<li><b>ip-intelligence.shared</b> - Shared classes. </li>
+<li><b>ip-intelligence</b> - Main package providing all IP Intelligence capabilities including both cloud and on-premise engines.</li>
+<li><b>ip-intelligence.engine.on-premise</b> - On-premise detection engine using local data files for IP intelligence analysis.</li>
+<li><b>ip-intelligence.cloud</b> - Cloud-based detection service for IP intelligence (coming soon).</li>
+<li><b>ip-intelligence.shared</b> - Shared classes and utilities used across all IP intelligence engines. </li>
 </ul>
 </section></div><!-- PageDoc -->
 </div><!-- primary -->
