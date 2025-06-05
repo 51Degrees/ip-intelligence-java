@@ -98,8 +98,6 @@ var annotated =
             [ "GettingStartedOnPrem", "classfiftyone_1_1ipintelligence_1_1examples_1_1console_1_1_getting_started_on_prem.html", "classfiftyone_1_1ipintelligence_1_1examples_1_1console_1_1_getting_started_on_prem" ],
             [ "GettingStartedOnPremTest", "classfiftyone_1_1ipintelligence_1_1examples_1_1console_1_1_getting_started_on_prem_test.html", "classfiftyone_1_1ipintelligence_1_1examples_1_1console_1_1_getting_started_on_prem_test" ],
             [ "LoggerOutputStream", "classfiftyone_1_1ipintelligence_1_1examples_1_1console_1_1_logger_output_stream.html", "classfiftyone_1_1ipintelligence_1_1examples_1_1console_1_1_logger_output_stream" ],
-            [ "MatchMetrics", "classfiftyone_1_1ipintelligence_1_1examples_1_1console_1_1_match_metrics.html", "classfiftyone_1_1ipintelligence_1_1examples_1_1console_1_1_match_metrics" ],
-            [ "MatchMetricsTest", "classfiftyone_1_1ipintelligence_1_1examples_1_1console_1_1_match_metrics_test.html", "classfiftyone_1_1ipintelligence_1_1examples_1_1console_1_1_match_metrics_test" ],
             [ "MetadataOnPrem", "classfiftyone_1_1ipintelligence_1_1examples_1_1console_1_1_metadata_on_prem.html", "classfiftyone_1_1ipintelligence_1_1examples_1_1console_1_1_metadata_on_prem" ],
             [ "MetadataOnPremTest", "classfiftyone_1_1ipintelligence_1_1examples_1_1console_1_1_metadata_on_prem_test.html", "classfiftyone_1_1ipintelligence_1_1examples_1_1console_1_1_metadata_on_prem_test" ],
             [ "OfflineProcessing", "classfiftyone_1_1ipintelligence_1_1examples_1_1console_1_1_offline_processing.html", "classfiftyone_1_1ipintelligence_1_1examples_1_1console_1_1_offline_processing" ],
