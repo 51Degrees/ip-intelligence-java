@@ -3,151 +3,102 @@ param(
     [Parameter(Mandatory)][string]$OrgName,
     [string]$Name,
     [string]$Version,
-    [string]$Branch = "main" # this is actually the examples branch, but the name has to just be 'Branch' to be recognized by run-repo-script.ps1
+    [string]$Branch = "main", # this is actually the examples branch, but the name has to just be 'Branch' to be recognized by run-repo-script.ps1
+    [string]$ExamplesRepo = "$RepoName-examples"
 )
+$ErrorActionPreference = "Stop"
+$PSNativeCommandUseErrorActionPreference = $true
 
-exit 0 # TODO: remove
-
-$RepoPath = [IO.Path]::Combine($pwd, $RepoName)
-
-# Define the directory of the examples
-$ExamplesDir = [IO.Path]::Combine($pwd, "ip-intelligence-java-examples")
-
-# Download and move necessary files, catch errors if any
-try{
-
-    if(!(Test-Path -Path $ExamplesDir)){
-
-        Write-Output "Cloning '$ExamplesRepoName'"
-        ./steps/clone-repo.ps1 -RepoName "ip-intelligence-java-examples" -OrgName $OrgName -Branch $Branch
-
-        Write-Output "Moving TAC file for examples"
-        $TacFile = [IO.Path]::Combine($RepoPath, "TAC-IpIntelligenceV41.ipi") 
-        Move-Item $TacFile ip-intelligence-java-examples/ip-intelligence-data/TAC-IpIntelligenceV41.ipi
-        
-    }
-}
-catch {
-    Write-Output "An error occurred while downloading or moving files: $_"
+if (Test-Path $ExamplesRepo) {
+    Write-Host "Examples already cloned, skipping"
+} else {
+    Write-Host "Cloning '$ExamplesRepo'"
+    ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $Branch
+    & "./$ExamplesRepo/ci/fetch-assets.ps1" -RepoName $ExamplesRepo -DeviceDetection $DeviceDetection -DeviceDetectionUrl $DeviceDetectionUrl
 }
 
-# Run tests and copy files, catch errors if any
+if (!$Version) {
+    $Version = mvn -f $RepoName/pom.xml org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression="project.version" -q -DforceStdout
+}
+
+$failed = $false
+# Enter the Java project examples directory
+Write-Host "Entering '$ExamplesRepo'"
+Push-Location $ExamplesRepo
 try {
+    Write-Host "Setting examples ip-intelligence package dependency to version '$Version'"
+    mvn --batch-mode --no-transfer-progress versions:set-property "-Dproperty=device-detection.version" "-DnewVersion=$Version"
 
-    Write-Output "Entering '$RepoPath'"
-    Push-Location $RepoPath
-    # If the Version parameter is set to "0.0.0", set the Version variable to the version specified in the pom.xml file
-    if (!$Version){
-        $Version = mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression="project.version" -q -DforceStdout
+    Write-Host "Testing performance"
+    & {
+        $ErrorActionPreference = "Continue"
+        mvn --batch-mode --no-transfer-progress clean test "-DfailIfNoTests=false" "-Dtest=*Performance*"
     }
-    Pop-Location
+    if ($LASTEXITCODE -ne 0) {
+        Write-Warning "Tests failed"
+        $failed = $true
+    }
 
-    # Enter the Java project examples directory
-    Write-Output "Entering $ExamplesDir"
-    Push-Location $ExamplesDir
-
-    Write-Output "Setting examples ip-intelligence package dependency to version '$Version'"
-    mvn versions:set-property -Dproperty="ip-intelligence.version" "-DnewVersion=$Version"
-
-    mvn clean test -DfailIfNoTests=false -Dtest="*Performance*" 
-
-    # Copy the test results into the test-results folder
-    Get-ChildItem -Path . -Directory -Depth 1 | 
-    Where-Object { Test-Path "$($_.FullName)\pom.xml" } | 
-    ForEach-Object { 
-        $targetDir = "$($_.FullName)\target\surefire-reports"
-        $destDir = "..\$RepoName\test-results\performance"
-        $destDirSummary = "..\$RepoName\test-results\performance-summary"
-
-        if(!(Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir }
-        if(Test-Path $targetDir) {
-            Get-ChildItem -Path $targetDir | 
-            Where-Object { $_.Name -like "*Performance*" } |
-            ForEach-Object {
-                Copy-Item -Path $_.FullName -Destination $destDir
-            }
+    Write-Host "Copying test results"
+    $destDir = New-Item -ItemType directory -Force -Path "../$RepoName/test-results/performance"
+    Get-ChildItem -File -Depth 1 -Filter 'pom.xml' | ForEach-Object {
+        $targetDir = "$($_.DirectoryName)/target/surefire-reports"
+        if (Test-Path $targetDir) {
+            Copy-Item -Filter "*Performance*" $targetDir/* $destDir
         }
     }
-
     # Copy the test results into the test-results/performance-summary folder for performance comparison 
-    Copy-Item -Path $destDir -Destination $destDirSummary -Recurse
-}
-catch {
-    Write-Output "An error occurred while running tests or copying files: $_"
-}
-finally {
-    Write-Output "Leaving '$ExamplesDir'"
+    Copy-Item -Recurse $destDir "../$RepoName/test-results/performance-summary"
+} finally {
+    Write-Host "Leaving '$ExamplesRepo'"
     Pop-Location
 }
 
+# Initilise variables for storing data
+$profileNum = 0
+$profiles = @{}
+$currentThreadNum = 1
 
-$RepoPath = [IO.Path]::Combine($pwd, $RepoName)
+# Read the content of the performance results file line by line
+Get-Content "$RepoName/test-results/performance-summary/fiftyone.ipintelligence.examples.console.PerformanceBenchmarkTest-output.txt" | ForEach-Object {
+     # If the line matches a profile header, extract the profile properties and create a new profile.
+    if($_ -match "MaxPerformance AllProperties: (true|false), performanceGraph: (true|false), predictiveGraph (true|false)") {
+        $allProperties = [string]$Matches[1]
+        $performanceGraph = [string]$Matches[2]
+        $predictiveGraph = [string]$Matches[3]
 
-Write-Output "Entering '$RepoPath'"
-Push-Location $RepoPath
-
-try {
-    
-    # Define the file paths for the performance results and output file
-    $PerfResultsFile = [IO.Path]::Combine($RepoPath, "test-results", "performance-summary", "fiftyone.ipintelligence.examples.console.PerformanceBenchmarkTest-output.txt")
-    $outputFile = [IO.Path]::Combine($RepoPath, "test-results", "performance-summary","results_$Name.json")
-
-    #TODO: DELETE BELOW - ADDED FOR DEBUGGING
-    $content = Get-Content $PerfResultsFile
-    Write-Output $content
-
-    # Initilise variables for storing data
-    $profileNum = 0
-    $profiles = @{}
-    $currentThreadNum = 1
-
-    # Read the content of the performance results file line by line
-    Get-Content $PerfResultsFile | ForEach-Object {
-         # If the line matches a profile header, extract the profile properties and create a new profile.
-        if($_ -match "MaxPerformance AllProperties: (true|false), performanceGraph: (true|false), predictiveGraph (true|false)") {
-
-            $AllProperties = [string]$Matches[1]
-            $PerformanceGraph = [string]$Matches[2]
-            $PredictiveGraph = [string]$Matches[3]
-
-            $profileNum++
-            $currentProfile = $profiles["MaxPerformance-$AllProperties-$PerformanceGraph-$PredictiveGraph"] = @{ "Threads" = @{} }
-            $currentThreadNum = 1
+        $profileNum++
+        $currentProfile = $profiles["MaxPerformance-$allProperties-$performanceGraph-$predictiveGraph"] = @{ "Threads" = @{} }
+        $currentThreadNum = 1
+    }
+    # If the line matches a thread data line, extract the thread data and add it to the current profile.
+    elseif($_ -match "Thread:  ([\d,]+) detections, elapsed ([\d.]+) seconds, ([\d,]+) Detections per second") {
+        $currentProfile["Threads"]["Thread_$currentThreadNum"] = @{
+            "Detections" = [int]($Matches[1].Replace(",", ""))
+            "ElapsedSeconds" = [double]$Matches[2]
+            "DetectionsPerSecond" = [int]($Matches[3].Replace(",", ""))
         }
-        # If the line matches a thread data line, extract the thread data and add it to the current profile.
-        elseif($_ -match "Thread:  ([\d,]+) detections, elapsed ([\d.]+) seconds, ([\d,]+) Detections per second") {
-            $currentProfile["Threads"]["Thread_$currentThreadNum"] = @{
-                "Detections" = [int]($Matches[1].Replace(",", ""))
-                "ElapsedSeconds" = [double]$Matches[2]
-                "DetectionsPerSecond" = [int]($Matches[3].Replace(",", ""))
-            }
-            $currentThreadNum++
-        }
-        # If the line matches an overall data line, extract the overall data and add it to the current profile.
-        elseif($_ -match "Overall: ([\d,]+) detections, Average millisecs per detection: ([\d.]+), Detections per second: ([\d,]+)") {
-            $currentProfile["Overall"] = @{
-                "Detections" = [int]($Matches[1].Replace(",", ""))
-                "AvgMillisecsPerDetection" = [double]$Matches[2]
-                "DetectionsPerSecond" = [int]($Matches[3].Replace(",", ""))
-            }
+        $currentThreadNum++
+    }
+    # If the line matches an overall data line, extract the overall data and add it to the current profile.
+    elseif($_ -match "Overall: ([\d,]+) detections, Average millisecs per detection: ([\d.]+), Detections per second: ([\d,]+)") {
+        $currentProfile["Overall"] = @{
+            "Detections" = [int]($Matches[1].Replace(",", ""))
+            "AvgMillisecsPerDetection" = [double]$Matches[2]
+            "DetectionsPerSecond" = [int]($Matches[3].Replace(",", ""))
         }
     }
-
-    # Create a JSON object with specific performance metrics and write it to the output file.
-    Write-Output $profiles
-    Write-Output "{
-        'HigherIsBetter': {
-            'DetectionsPerSecond': $($profiles['MaxPerformance-false-true-false'].Overall.DetectionsPerSecond)
-        },
-        'LowerIsBetter': {
-            'AvgMillisecsPerDetection' : $($profiles['MaxPerformance-false-true-false'].Overall.AvgMillisecsPerDetection)
-        }
-    }" > $OutputFile
-}
-finally{
-    Write-Output "Leaving '$RepoPath'"
-    Pop-Location
 }
 
+# Create a JSON object with specific performance metrics and write it to the output file.
+Write-Host $profiles
+Write-Output "{
+    'HigherIsBetter': {
+        'DetectionsPerSecond': $($profiles['MaxPerformance-false-true-false'].Overall.DetectionsPerSecond)
+    },
+    'LowerIsBetter': {
+        'AvgMillisecsPerDetection' : $($profiles['MaxPerformance-false-true-false'].Overall.AvgMillisecsPerDetection)
+    }
+}" > "$RepoName/test-results/performance-summary/results_$Name.json"
 
-exit $LASTEXITCODE
+exit $failed ? 1 : 0
