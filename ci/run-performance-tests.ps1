@@ -27,7 +27,7 @@ Write-Host "Entering '$ExamplesRepo'"
 Push-Location $ExamplesRepo
 try {
     Write-Host "Setting examples ip-intelligence package dependency to version '$Version'"
-    mvn --batch-mode --no-transfer-progress versions:set-property "-Dproperty=device-detection.version" "-DnewVersion=$Version"
+    mvn --batch-mode --no-transfer-progress versions:set-property "-Dproperty=ip-intelligence.version" "-DnewVersion=$Version"
 
     Write-Host "Testing performance"
     & {
