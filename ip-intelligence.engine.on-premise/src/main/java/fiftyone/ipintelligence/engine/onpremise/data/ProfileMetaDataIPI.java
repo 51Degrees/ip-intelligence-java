@@ -36,7 +36,7 @@ import java.util.List;
 import static fiftyone.pipeline.util.StringManipulation.stringJoin;
 
 /**
- * Hash on-premise implementation of the {@link ProfileMetaData} interface.
+ * On-premise implementation of the {@link ProfileMetaData} interface.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/data-model-specification/README.md#profile">Specification</a>
  */
 public class ProfileMetaDataIPI implements ProfileMetaData {

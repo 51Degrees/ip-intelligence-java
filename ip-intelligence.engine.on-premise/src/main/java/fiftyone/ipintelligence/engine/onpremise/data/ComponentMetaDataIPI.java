@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Hash on-premise implementation of the {@link ComponentMetaData} interface.
+ * On-premise implementation of the {@link ComponentMetaData} interface.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/data-model-specification/README.md#component">Specification</a>
  */
 public class ComponentMetaDataIPI implements ComponentMetaData {

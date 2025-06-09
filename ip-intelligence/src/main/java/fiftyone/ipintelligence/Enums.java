@@ -23,7 +23,7 @@
 package fiftyone.ipintelligence;
 
 /**
- * @deprecated  no longer needed since there is only the Hash algorithm
+ * @deprecated  no longer needed since IP Intelligence uses a different algorithm than device detection
  */
 @Deprecated
 public class Enums {

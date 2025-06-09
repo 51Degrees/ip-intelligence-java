@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>ip-intelligence.engine.on-premise</artifactId>
-    <name>51Degrees :: IP Intelligence :: Hash :: On Premise</name>
+    <name>51Degrees :: IP Intelligence :: On Premise</name>
     <url>https://51degrees.com</url>
 
     <dependencies>

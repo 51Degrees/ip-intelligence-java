@@ -45,7 +45,7 @@ import static fiftyone.pipeline.util.Check.notFileExists;
 import static org.apache.commons.lang3.BooleanUtils.isFalse;
 
 /**
- * Hash IP Intelligence engine. This engine takes User-Agents and other
+ * On-premise IP Intelligence engine. This engine takes User-Agents and other
  * relevant HTTP headers and returns properties about the device which produced
  * them e.g. DeviceType or ReleaseDate.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-on-premise.md">Specification</a>
@@ -373,7 +373,7 @@ public class IPIntelligenceOnPremiseEngine
     @Override
     public void setCache(FlowCache cache) {
         throw new UnsupportedOperationException(
-            "A results cache cannot be configured in the on-premise Hash engine. " +
+            "A results cache cannot be configured in the on-premise IP Intelligence engine. " +
                 "The overhead of having to manage native object lifetimes when " +
                 "a cache is enabled outweighs the benefit of the cache.");
     }

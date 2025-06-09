@@ -28,7 +28,7 @@ import fiftyone.pipeline.engines.data.AspectPropertyValue;
 import java.util.List;
 
 /**
- * Hash specific interface for {@link IPIntelligenceData}.
+ * On-premise specific interface for {@link IPIntelligenceData}.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-on-premise.md#element-data">Specification</a>
  */
 public interface IPIntelligenceDataHash extends IPIntelligenceData {

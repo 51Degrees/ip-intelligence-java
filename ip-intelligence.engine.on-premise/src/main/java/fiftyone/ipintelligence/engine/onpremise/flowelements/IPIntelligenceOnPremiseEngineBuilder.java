@@ -187,7 +187,7 @@ public class IPIntelligenceOnPremiseEngineBuilder
     public IPIntelligenceOnPremiseEngineBuilder setCache(
         CacheConfiguration cacheConfiguration) {
         throw new UnsupportedOperationException(
-            "A results cache cannot be configured in the on-premise Hash " +
+            "A results cache cannot be configured in the on-premise IP Intelligence " +
             "engine. The overhead of having to manage native object " + 
             "lifetimes when a cache is enabled outweighs the benefit of the " +
             "cache.");
