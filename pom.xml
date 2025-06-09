@@ -300,7 +300,6 @@
                     <failBuildOnAnyVulnerability>true</failBuildOnAnyVulnerability>
                     <excludes>
                         <exclude>com.51degrees:ip-intelligence.examples.*</exclude>
-                        <exclude>com.51degrees:device.detection.shell.examples.*</exclude>
                     </excludes>
                 </configuration>
             </plugin>
