@@ -30,7 +30,7 @@ import fiftyone.pipeline.engines.fiftyone.data.ValueMetaData;
 import java.io.IOException;
 
 /**
- * Hash on-premise implementation of the {@link ValueMetaData} interface.
+ * On-premise implementation of the {@link ValueMetaData} interface.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/data-model-specification/README.md#value">Specification</a>
  */
 public class ValueMetaDataIPI implements ValueMetaData {

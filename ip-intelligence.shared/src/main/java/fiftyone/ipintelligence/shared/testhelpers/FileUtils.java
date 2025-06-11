@@ -40,7 +40,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 public class FileUtils {
     public static final String ENTERPRISE_IPI_DATA_FILE_NAME = "Enterprise-IpIntelligenceV41.ipi";
 
-    public static final String TAC_IPI_DATA_FILE_NAME = "TAC-IpIntelligenceV41.ipi";
+    public static final String ENTERPRISE_IPI_V41_DATA_FILE_NAME = "51Degrees-EnterpriseIpiV41.ipi";
     public static final String LITE_IPI_DATA_FILE_NAME = "51Degrees-LiteV41.ipi";
     private static  Optional<File> IPI_DATA_FILE;
     public static final String IP_ADDRESSES_FILE_NAME = "evidence.csv";
@@ -49,7 +49,7 @@ public class FileUtils {
     private static Optional<File> EVIDENCE_FILE;
 
     /**
-     * Helper to find the location of an Enterprise or Lite Hash file in the default search scope
+     * Helper to find the location of an Enterprise or Lite IPI file in the default search scope
      *
      * @return a file or null if not found
      */
@@ -58,7 +58,7 @@ public class FileUtils {
     }
 
     /**
-     * Helper to find the location of an Enterprise or Lite Hash file in the default search scope
+     * Helper to find the location of an Enterprise or Lite IPI file in the default search scope
      *
      * @return a file or empty if not found
      */
@@ -68,7 +68,7 @@ public class FileUtils {
                 return IPI_DATA_FILE.orElse(null);
             }
             // following throws exception if not found
-            IPI_DATA_FILE = Optional.of(getFilePath(TAC_IPI_DATA_FILE_NAME));
+            IPI_DATA_FILE = Optional.of(getFilePath(ENTERPRISE_IPI_V41_DATA_FILE_NAME));
             return IPI_DATA_FILE.get();
         } catch (Exception e) {
             try {
