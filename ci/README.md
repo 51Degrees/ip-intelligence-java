@@ -6,7 +6,7 @@ The following secrets are required:
     * Example: `github_pat_l0ng_r4nd0m_s7r1ng`
   
 The following secrets are required to run on-premise tests:
-* `DEVICE_DETECTION_KEY` - [license key](https://51degrees.com/pricing) for downloading assets (TAC hashes file and TAC CSV data file)
+* `DEVICE_DETECTION_KEY` - [license key](https://51degrees.com/pricing) for downloading assets (enterprise IPI data file)
     * Example: `V3RYL0NGR4ND0M57R1NG`
  
 The following secrets are requred to run cloud tests:
@@ -48,7 +48,7 @@ graph TD
 It performs the following steps:
 
 1. Clone Examples Repo: Clone the "ip-intelligence-java-examples" repository into the common-ci directory.
-3. Set up test files: Move the TAC-IpIntelligenceV41.ipi file to the ip-intelligence-java-examples/ip-intelligence-data directory and download Evidence and User-Agent files into ip-intelligence-data directory.
+3. Set up test files: Move the 51Degrees-EnterpriseIpiV41.ipi file to the ip-intelligence-java-examples/ip-intelligence-data directory and download Evidence and User-Agent files into ip-intelligence-data directory.
 4. Enter ip-intelligence-examples directory: Changes the current working directory to the ip-intelligence-java-examples folder.
 5. Set package dependency version: Sets the version of the ip-intelligence package dependency for the examples to the specified Version parameter. This will be the version installed in the local repository found in the .m2 folder.
 6. Test Examples: Runs the Maven clean test command, passing the TestResourceKey, SuperResourceKey, and LicenseKey as parameters.
