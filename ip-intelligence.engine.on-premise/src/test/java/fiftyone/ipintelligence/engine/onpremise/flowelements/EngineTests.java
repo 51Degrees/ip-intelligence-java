@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 import fiftyone.ipintelligence.shared.testhelpers.FileUtils;
 import fiftyone.pipeline.engines.Constants;
 import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.LITE_IPI_DATA_FILE_NAME;
-import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.TAC_IPI_DATA_FILE_NAME;
+import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.ENTERPRISE_IPI_V41_DATA_FILE_NAME;
 import static fiftyone.pipeline.util.FileFinder.getFilePath;
 
 public class EngineTests {
@@ -90,7 +90,7 @@ public class EngineTests {
 	 */
 	@Test
 	public void Engine_Hash_GetDataSourceTier_Enterprise() throws Exception {
-		testDataSourceTier(TAC_IPI_DATA_FILE_NAME);
+		testDataSourceTier(ENTERPRISE_IPI_V41_DATA_FILE_NAME);
 	}
 
 }
