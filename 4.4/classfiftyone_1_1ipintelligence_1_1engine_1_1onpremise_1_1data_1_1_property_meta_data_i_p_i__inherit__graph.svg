@@ -11,7 +11,7 @@
 <!-- Node0 -->
 <g id="node1" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:title="Hash on&#45;premise implementation of the FiftyOneAspectPropertyMetaData interface.">
+<g id="a_node1"><a xlink:title="On&#45;premise implementation of the FiftyOneAspectPropertyMetaData interface.">
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-30.5 241,-30.5 241,-0.5 0,-0.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">fiftyone.ipintelligence.engine.onpremise.data.</text>
 <text text-anchor="middle" x="120.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">PropertyMetaDataIPI</text>
