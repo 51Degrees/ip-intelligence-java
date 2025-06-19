@@ -824,7 +824,7 @@ INPUT                  = ../ip-intelligence/src/main \
                          ../ip-intelligence.engine.on-premise/src/main \
                          ../ip-intelligence.shared/src/main \
                          ../ip-intelligence-java-examples \
-                         ../README.md \
+                         ../README.md
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -849,7 +849,8 @@ INPUT_ENCODING         = UTF-8
 # *.m, *.markdown, *.md, *.mm, *.dox, *.py, *.pyw, *.f90, *.f95, *.f03, *.f08,
 # *.f, *.for, *.tcl, *.vhd, *.vhdl, *.ucf, *.qsf and *.ice.
 
-FILE_PATTERNS          = *.java
+FILE_PATTERNS          = *.java \
+                         *.md
 
 # The RECURSIVE tag can be used to specify whether or not subdirectories should
 # be searched for input files as well.
@@ -897,17 +898,16 @@ EXCLUDE_SYMBOLS        =
 # that contain example code fragments that are included (see the \include
 # command).
 
-EXAMPLE_PATH           = ../ip-intelligence.shell.examples \
-                         ../ip-intelligence.web.examples \
-                         ../ip-intelligence-java-examples \
-                         ../../../src/snippets
+EXAMPLE_PATH           = ../ip-intelligence-java-examples \
+                         ../../documentation/src/snippets
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp and
 # *.h) to filter out the source-files in the directories. If left blank all
 # files are included.
 
-EXAMPLE_PATTERNS       = *.java
+EXAMPLE_PATTERNS       = *.java \
+                         *.md
 
 # If the EXAMPLE_RECURSIVE tag is set to YES then subdirectories will be
 # searched for input files to be used with the \include or \dontinclude commands
@@ -2176,7 +2176,7 @@ SKIP_FUNCTION_MACROS   = NO
 # the path). If a tag file is not located in the directory in which doxygen is
 # run, you must also specify the path to the tagfile here.
 
-TAGFILES               = ../pipeline-java/docs/tagfile=../../pipeline-java/4.4/
+TAGFILES               =
 
 # When a file name is specified after GENERATE_TAGFILE, doxygen will create a
 # tag file that is based on the input files it reads. See section "Linking to
