@@ -24,6 +24,16 @@ for the JavaScript code in this file
 var NAVTREE =
 [
     [ "General Docs", "../../documentation/4.4/index.html", null ],
+    [ "API Specific CI Approach", "md__home_runner_work_ip-intelligence-java_ip-intelligence-java_common_ip-intelligence-java_ip-in5c4398e3f388a0d6f0a43d4aa1552b2b.html", null ],
+    [ "<img src=\"https://51degrees.com/DesktopModules/FiftyOne/Distributor/Logo.ashx?utm_source=github&utm_medium=repository&utm_content=home&utm_campaign=c-open-source\" alt=\"51Degrees\" title=\"Data rewards the curious\"/> <strong>IP Intelligence Data Files</strong>", "md__home_runner_work_ip-intelligence-java_ip-intelligence-java_common_ip-intelligence-java_ip-inaf2d12238ef2b718fc7f824ed39f299a.html", null ],
+    [ "51Degrees Ip Intelligence API", "md__home_runner_work_ip-intelligence-java_ip-intelligence-java_common_ip-intelligence-java_ip-in15b79fded445715b9312bd7f98a38c20.html", null ],
+    [ "API Specific CI Approach", "md__home_runner_work_ip-intelligence-java_ip-intelligence-java_common_ip-intelligence-java_ip-in66faa6d612614ba6af84629291186399.html", null ],
+    [ "51Degrees Common Code Library", "md__home_runner_work_ip-intelligence-java_ip-intelligence-java_common_ip-intelligence-java_ip-in213b4a696646646664599038dc5f9f22.html", null ],
+    [ "ip-graph-cxx", "md__home_runner_work_ip-intelligence-java_ip-intelligence-java_common_ip-intelligence-java_ip-in180c5ed19ea0faeb348b973b3082eb5c.html", null ],
+    [ "API Specific CI/CD Approach", "md__home_runner_work_ip-intelligence-java_ip-intelligence-java_common_ip-intelligence-java_ip-ind065ca936eca4f88f5f5adc3d8c3f9b7.html", null ],
+    [ "Contributing", "md__home_runner_work_ip-intelligence-java_ip-intelligence-java_common_ip-intelligence-java_ip-in3b75ab776564e7beb4ce5519e941bcb0.html", null ],
+    [ "<img src=\"https://51degrees.com/DesktopModules/FiftyOne/Distributor/Logo.ashx?utm_source=github&utm_medium=repository&utm_content=home&utm_campaign=c-open-source\" alt=\"51Degrees\" title=\"Data rewards the curious\"/> <strong>IP Intelligence Data Files</strong>", "md__home_runner_work_ip-intelligence-java_ip-intelligence-java_common_ip-intelligence-java_ip-in370ce319b60b500f00f777274c929949.html", null ],
+    [ "51Degrees IP Intelligence Engines - Examples", "md__home_runner_work_ip-intelligence-java_ip-intelligence-java_common_ip-intelligence-java_ip-in6acb6a471f950d60c20e37de6cf2be05.html", null ],
     [ "51Degrees IP Intelligence Engines", "md__home_runner_work_ip-intelligence-java_ip-intelligence-java_common_ip-intelligence-java__r_e_a_d_m_e.html", null ],
     [ "Deprecated List", "deprecated.html", null ],
     [ "Classes", "annotated.html", "annotated" ],
