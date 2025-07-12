@@ -129,7 +129,7 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@Override
 	public AspectPropertyValue<List<IWeightedValue<String>>> getRegion() { return getAs("region", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
 	/**
-	 * The name of the state that the supplied location in in.
+	 * The name of the state that the supplied location is in.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -146,10 +146,4 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@SuppressWarnings("unchecked")
 	@Override
 	public AspectPropertyValue<List<IWeightedValue<String>>> getTown() { return getAs("town", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
-	/**
-	 * The mobile country code of the network the device is connected to.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<List<IWeightedValue<String>>> getMcc() { return getAs("mcc", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
 }
