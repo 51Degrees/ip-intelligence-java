@@ -71,10 +71,6 @@ public interface IPIntelligenceData extends AspectData
 	 */
 	AspectPropertyValue<List<IWeightedValue<Float>>> getLongitude();
 	/**
-	 * The mobile country code of the network the device is connected to.
-	 */
-	AspectPropertyValue<List<IWeightedValue<String>>> getMcc();
-	/**
 	 * The name of the geographical region that the supplied location is in.
 	 */
 	AspectPropertyValue<List<IWeightedValue<String>>> getRegion();
@@ -91,7 +87,7 @@ public interface IPIntelligenceData extends AspectData
 	 */
 	AspectPropertyValue<List<IWeightedValue<String>>> getRegisteredOwner();
 	/**
-	 * The name of the state that the supplied location in in.
+	 * The name of the state that the supplied location is in.
 	 */
 	AspectPropertyValue<List<IWeightedValue<String>>> getState();
 	/**
