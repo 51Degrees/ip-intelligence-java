@@ -10,7 +10,6 @@ var classfiftyone_1_1ipintelligence_1_1shared_1_1_i_p_intelligence_data_base =
     [ "getIpRangeStart", "classfiftyone_1_1ipintelligence_1_1shared_1_1_i_p_intelligence_data_base.html#acb058ac0f03b7cf4c00da5b6380c4cb9", null ],
     [ "getLatitude", "classfiftyone_1_1ipintelligence_1_1shared_1_1_i_p_intelligence_data_base.html#a56e4472efe7469d87e3127751ec74f5b", null ],
     [ "getLongitude", "classfiftyone_1_1ipintelligence_1_1shared_1_1_i_p_intelligence_data_base.html#ab91d1f43229eba57ed25bbc625087955", null ],
-    [ "getMcc", "classfiftyone_1_1ipintelligence_1_1shared_1_1_i_p_intelligence_data_base.html#a08597869588caaafdc178e9ea2688c13", null ],
     [ "getRegion", "classfiftyone_1_1ipintelligence_1_1shared_1_1_i_p_intelligence_data_base.html#ae14bc40245c87a73536503b6d93d0ac0", null ],
     [ "getRegisteredCountry", "classfiftyone_1_1ipintelligence_1_1shared_1_1_i_p_intelligence_data_base.html#a0cebf17e6cb34dab122d31200aa4c467", null ],
     [ "getRegisteredName", "classfiftyone_1_1ipintelligence_1_1shared_1_1_i_p_intelligence_data_base.html#aab26a00a5da9a6bb4a14895ab16ff9c6", null ],
