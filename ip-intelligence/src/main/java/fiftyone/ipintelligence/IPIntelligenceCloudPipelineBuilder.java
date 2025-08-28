@@ -58,7 +58,7 @@ public class IPIntelligenceCloudPipelineBuilder
     /**
      * Build the pipeline using the configured values.
      * @return A new pipeline instance that contains a cloud request engine for 
-     * making requests to the 51Degrees cloud service and a 
+     * making requests to the 51Degrees Cloud service and a 
      * IPIntelligenceCloudEngine to interpret the IP Intelligence results.
      * @throws Exception 
      */

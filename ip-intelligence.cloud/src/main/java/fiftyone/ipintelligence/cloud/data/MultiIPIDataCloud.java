@@ -38,7 +38,7 @@ import java.util.Map;
 
 /**
  * Encapsulates a list of {@link IPIntelligenceData} instances which can be returned
- * by the 51Degrees cloud service when certain evidence is provided (e.g. TAC)
+ * by the 51Degrees Cloud service when certain evidence is provided (e.g. TAC)
  */
 public class MultiIPIDataCloud
     extends AspectDataBase

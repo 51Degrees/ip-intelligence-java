@@ -109,10 +109,10 @@ public class IPIntelligencePipelineBuilder {
 
     /**
      * Use the 51Degrees Cloud service to perform IP Intelligence.
-     * @param resourceKey The resource key to use when querying the cloud service. 
+     * @param resourceKey The resource key to use when querying the Cloud service. 
      * Obtain one from https://configure.51degrees.com
      * @return A builder that can be used to configure and build a pipeline
-     * that will use the cloud IP Intelligence engine.
+     * that will use the Cloud IP Intelligence engine.
      */
     public IPIntelligenceCloudPipelineBuilder useCloud(String resourceKey) {
         IPIntelligenceCloudPipelineBuilder builder =
