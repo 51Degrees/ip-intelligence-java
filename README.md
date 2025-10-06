@@ -94,6 +94,12 @@ running `mvn` by adding following options:
 
 This is not recommended unless absolutely necessary and should be used with caution.
 
+## Examples
+
+Examples can be found in
+[ip-intelligence-java-examples](https://github.com/51Degrees/ip-intelligence-java-examples)
+repository.
+
 ## Tests
 
 You will need [resource keys](https://51degrees.com/documentation/_info__resource_keys.html)
