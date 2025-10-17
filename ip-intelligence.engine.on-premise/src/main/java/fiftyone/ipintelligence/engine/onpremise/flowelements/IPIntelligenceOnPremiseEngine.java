@@ -299,17 +299,17 @@ public class IPIntelligenceOnPremiseEngine
             List<String> keys = evidenceKeys;
             for (Map.Entry<String, Object> evidenceItem :
                 flowData.getEvidence().asKeyMap().entrySet()) {
-                boolean containsKey = false;
+                String matchedKey = null;
                 for (String key : keys) {
                     if (key.equalsIgnoreCase(evidenceItem.getKey())) {
-                        containsKey = true;
+                        matchedKey = key;
                         break;
                     }
                 }
-                if (containsKey) {
+                if (matchedKey != null) {
                     relevantEvidence
                         .put(
-                                evidenceItem.getKey(),
+                                matchedKey,
                                 evidenceItem.getValue().toString());
                 }
             }
