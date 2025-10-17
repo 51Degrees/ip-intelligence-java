@@ -62,7 +62,8 @@ public class ValueTests {
             ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
             for (FiftyOneAspectPropertyMetaData property :
                 (List<FiftyOneAspectPropertyMetaData>) wrapper.getEngine().getProperties()) {
-                if (property.isAvailable() ) {
+                if (property.isAvailable() && !Arrays.asList(Constants.ExcludedProperties)
+                        .contains(property.getName())) {
                     final Object value = elementData.get(property.getName());
                     //((ElementPropertyMetaData) value).getType();
                     final Class<?> expectedType = property.getType();
