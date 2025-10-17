@@ -3,7 +3,7 @@ set -eu
 
 # mvn clean will delete target so that's the place to be building
 mkdir -p target/cxx-build
-mkdir target/classes
+mkdir -p target/classes
 cd target/cxx-build
 # shellcheck disable=SC1073
 echo "configure"

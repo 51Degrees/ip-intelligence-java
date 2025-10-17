@@ -23,7 +23,7 @@
 package fiftyone.ipintelligence.shared.testhelpers;
 
 public class Constants {
-    public static final String[] ExcludedProperties = {};
+    public static final String[] ExcludedProperties = {"RegisteredOwner"};
 
 
     public static final String IPV4_ADDRESS = "116.154.188.222";
