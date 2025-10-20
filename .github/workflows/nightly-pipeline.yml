@@ -68,6 +68,7 @@ jobs:
       cache-assets: true
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
+      IpIntelligenceUrl: ${{ secrets.IPI_DATA_FILE_URL }}
 
   Publish:
     if: ${{ !cancelled() }}
