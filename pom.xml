@@ -51,7 +51,7 @@
         <maven-project-info-reports-plugin.version>2.6</maven-project-info-reports-plugin.version>
         <maven-site-plugin.version>3.7.1</maven-site-plugin.version>
         <dependency-check-maven.version>6.5.3</dependency-check-maven.version>
-        <central-publishing-maven-plugin.version>0.7.0</central-publishing-maven-plugin.version>
+        <central-publishing-maven-plugin.version>0.9.0</central-publishing-maven-plugin.version>
 
         <skipPublishing>false</skipPublishing>
         <skippackagesign>true</skippackagesign>

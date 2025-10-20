@@ -1,6 +1,7 @@
 param(
     [Parameter(Mandatory)][string]$RepoName,
     [Parameter(Mandatory)][string]$OrgName,
+    [string]$IpIntelligenceUrl,
     [string]$Name,
     [string]$Version,
     [string]$Branch = "main", # this is actually the examples branch, but the name has to just be 'Branch' to be recognized by run-repo-script.ps1
@@ -9,12 +10,18 @@ param(
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 
+# Skip performance tests if IpIntelligenceUrl is not provided
+if (!$IpIntelligenceUrl) {
+    Write-Output "Skipping performance tests - IpIntelligenceUrl not provided"
+    exit 0
+}
+
 if (Test-Path $ExamplesRepo) {
     Write-Host "Examples already cloned, skipping"
 } else {
     Write-Host "Cloning '$ExamplesRepo'"
     ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $Branch
-    & "./$ExamplesRepo/ci/fetch-assets.ps1" -RepoName $ExamplesRepo -DeviceDetection $DeviceDetection -DeviceDetectionUrl $DeviceDetectionUrl
+    & "./$ExamplesRepo/ci/fetch-assets.ps1" -RepoName $ExamplesRepo -IpIntelligenceUrl $IpIntelligenceUrl
 }
 
 if (!$Version) {
