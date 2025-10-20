@@ -1,19 +1,26 @@
 param (
     [Parameter(Mandatory)][string]$RepoName,
-    [Parameter(Mandatory)][string]$DeviceDetection,
-    [string]$DeviceDetectionUrl
+    [string]$IpIntelligenceUrl
 )
 
 $cxxCiDir = "$RepoName/ip-intelligence.engine.on-premise/src/main/cxx/ip-intelligence-cxx"
 
-& $cxxCiDir/ci/fetch-assets.ps1 `
-    -RepoName $cxxCiDir `
-    -DeviceDetection $DeviceDetection `
-    -DeviceDetectionUrl $DeviceDetectionUrl
+# Skip fetching enterprise data file if URL not provided (e.g., in pull request builds)
+# Unit tests can use cached or lite data files
+if ($IpIntelligenceUrl) {
+    # The C++ submodule's fetch-assets.ps1 still uses old parameter names for backwards compatibility
+    # DeviceDetection parameter is not actually used, only the URL
+    & $cxxCiDir/ci/fetch-assets.ps1 `
+        -RepoName $cxxCiDir `
+        -DeviceDetection "not-used" `
+        -DeviceDetectionUrl $IpIntelligenceUrl
 
-if ($LASTEXITCODE -ne 0) {
-    Write-Warning "LASTEXITCODE = $LASTEXITCODE"
-    exit $LASTEXITCODE
+    if ($LASTEXITCODE -ne 0) {
+        Write-Warning "LASTEXITCODE = $LASTEXITCODE"
+        exit $LASTEXITCODE
+    }
+} else {
+    Write-Output "IpIntelligenceUrl not provided - skipping enterprise data file fetch"
 }
 
 $CxxDataDir = "$cxxCiDir/ip-intelligence-data"
