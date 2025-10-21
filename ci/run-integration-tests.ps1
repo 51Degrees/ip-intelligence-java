@@ -3,7 +3,7 @@ param(
     [Parameter(Mandatory)][string]$OrgName,
     [Parameter(Mandatory)][hashtable]$Keys,
     [string]$IpIntelligenceUrl,
-    [bool]$UsePublishTests = $false,
+    [string]$UsePublishTests,
     [string]$Name,
     [string]$Version,
     [string]$Branch = "main", # this is actually the examples branch, but the name has to just be 'Branch' to be recognized by run-repo-script.ps1
@@ -12,7 +12,11 @@ param(
 )
 
 # Skip integration tests unless explicitly enabled via UsePublishTests
-if (!$UsePublishTests) {
+$runTests = $false
+if ($UsePublishTests) {
+    $runTests = [bool]::Parse($UsePublishTests)
+}
+if (!$runTests) {
     Write-Output "Skipping integration tests - UsePublishTests not enabled"
     exit 0
 }
