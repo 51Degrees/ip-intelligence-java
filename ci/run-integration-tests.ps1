@@ -3,23 +3,12 @@ param(
     [Parameter(Mandatory)][string]$OrgName,
     [Parameter(Mandatory)][hashtable]$Keys,
     [string]$IpIntelligenceUrl,
-    [string]$UsePublishTests,
     [string]$Name,
     [string]$Version,
     [string]$Branch = "main", # this is actually the examples branch, but the name has to just be 'Branch' to be recognized by run-repo-script.ps1
     [string]$ExamplesRepo = "$RepoName-examples",
     [string]$ExamplesBranch = $Branch
 )
-
-# Skip integration tests unless explicitly enabled via UsePublishTests
-$runTests = $false
-if ($UsePublishTests) {
-    $runTests = [bool]::Parse($UsePublishTests)
-}
-if (!$runTests) {
-    Write-Output "Skipping integration tests - UsePublishTests not enabled"
-    exit 0
-}
 
 # Skip integration tests if IpIntelligenceUrl is not provided
 if (!$IpIntelligenceUrl) {
@@ -36,8 +25,8 @@ try {
 
     Write-Output "Entering ip-intelligence-java directory"
     Push-Location $RepoPath
-    # If the Version parameter is set to "0.0.0", set the Version variable to the version specified in the pom.xml file
-    if (!$Version){
+    # If Version parameter is not set, get it from pom.xml
+    if (!$Version) {
         $Version = mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression="project.version" -q -DforceStdout
     }
 
