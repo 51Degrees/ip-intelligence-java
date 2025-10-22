@@ -7,7 +7,6 @@ on:
     - cron:  '0 0 1 * *'
 
 jobs:
-  # Run the common workflow on each pull request
   Monthly_Copyright_Update:
     uses: 51Degrees/common-ci/.github/workflows/monthly-copyright-update.yml@main
     with:
