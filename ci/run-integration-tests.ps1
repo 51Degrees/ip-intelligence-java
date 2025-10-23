@@ -21,7 +21,7 @@ $RepoPath = [IO.Path]::Combine($pwd, $RepoName)
 try {
     Write-Output "Cloning '$ExamplesRepo'"
     ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $ExamplesBranch
-    & "./$ExamplesRepo/ci/fetch-assets.ps1" -RepoName $ExamplesRepo -IpIntelligenceUrl $IpIntelligenceUrl
+    & "./$ExamplesRepo/ci/fetch-assets.ps1" -IpIntelligenceUrl $IpIntelligenceUrl
 
     Write-Output "Entering ip-intelligence-java directory"
     Push-Location $RepoPath
@@ -44,10 +44,9 @@ try {
 
     Write-Output "Copying test results".
     # Copy the test results into the test-results folder
-    Get-ChildItem -Path . -Directory -Depth 1 | 
-    Where-Object { Test-Path "$($_.FullName)\pom.xml" } | 
-
-    ForEach-Object { 
+    Get-ChildItem -Path . -Directory -Depth 1 |
+    Where-Object { Test-Path "$($_.FullName)\pom.xml" } |
+    ForEach-Object {
         $targetDir = "$($_.FullName)\target\surefire-reports"
         $destDir = "..\$RepoName\test-results\integration"
         if(!(Test-Path $destDir)) { New-Item -ItemType Directory -Path $destDir }
