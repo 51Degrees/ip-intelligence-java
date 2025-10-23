@@ -21,7 +21,7 @@ if (Test-Path $ExamplesRepo) {
 } else {
     Write-Host "Cloning '$ExamplesRepo'"
     ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $Branch
-    & "./$ExamplesRepo/ci/fetch-assets.ps1" -RepoName $ExamplesRepo -IpIntelligenceUrl $IpIntelligenceUrl
+    & "./$ExamplesRepo/ci/fetch-assets.ps1" -IpIntelligenceUrl $IpIntelligenceUrl
 }
 
 if (!$Version) {
@@ -54,7 +54,7 @@ try {
             Copy-Item -Filter "*Performance*" $targetDir/* $destDir
         }
     }
-    # Copy the test results into the test-results/performance-summary folder for performance comparison 
+    # Copy the test results into the test-results/performance-summary folder for performance comparison
     Copy-Item -Recurse $destDir "../$RepoName/test-results/performance-summary"
 } finally {
     Write-Host "Leaving '$ExamplesRepo'"

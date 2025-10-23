@@ -1,36 +1,21 @@
 param (
-    [Parameter(Mandatory)][string]$RepoName,
-    [string]$IpIntelligenceUrl
+    [Parameter(Mandatory)][string]$IpIntelligenceUrl
 )
+$ErrorActionPreference = "Stop"
 
-$cxxCiDir = "$RepoName/ip-intelligence.engine.on-premise/src/main/cxx/ip-intelligence-cxx"
+$ipIntelligenceData = "$PSSCriptRoot/../ip-intelligence.engine.on-premise/src/main/cxx/ip-intelligence-cxx/ip-intelligence-data"
 
-# Skip fetching enterprise data file if URL not provided (e.g., in pull request builds)
-# Unit tests can use cached or lite data files
-if ($IpIntelligenceUrl) {
-    # The C++ submodule's fetch-assets.ps1 still uses old parameter names for backwards compatibility
-    # DeviceDetection parameter is not actually used, only the URL
-    & $cxxCiDir/ci/fetch-assets.ps1 `
-        -RepoName $cxxCiDir `
-        -DeviceDetection "not-used" `
-        -DeviceDetectionUrl $IpIntelligenceUrl
+./steps/fetch-assets.ps1 -IpIntelligenceUrl $IpIntelligenceUrl -Assets '51Degrees-EnterpriseIpiV41.ipi', '51Degrees-LiteIpiV41.ipi'
+New-Item -ItemType SymbolicLink -Force -Target "$PWD/assets/51Degrees-EnterpriseIpiV41.ipi" -Path "$ipIntelligenceData/51Degrees-EnterpriseIpiV41.ipi"
+New-Item -ItemType SymbolicLink -Force -Target "$PWD/assets/51Degrees-LiteIpiV41.ipi" -Path "$ipIntelligenceData/51Degrees-LiteIpiV41.ipi"
 
-    if ($LASTEXITCODE -ne 0) {
-        Write-Warning "LASTEXITCODE = $LASTEXITCODE"
-        exit $LASTEXITCODE
-    }
-} else {
-    Write-Output "IpIntelligenceUrl not provided - skipping enterprise data file fetch"
-}
+Write-Host "Assets hashes:"
+Get-FileHash -Algorithm MD5 -Path assets/*
 
-$CxxDataDir = "$cxxCiDir/ip-intelligence-data"
-Write-Output "Entering $CxxDataDir"
-Push-Location $CxxDataDir
+Push-Location $ipIntelligenceData
 try {
-    & ./get-lite-file-from-azure.ps1 -Force
+    ./evidence-gen.ps1 -v4 10000 -v6 10000
+    ./evidence-gen.ps1 -v4 10000 -v6 10000 -csv -path "evidence.csv"
 } finally {
-    Write-Output "Leaving $CxxDataDir"
     Pop-Location
 }
-
-exit $LASTEXITCODE
