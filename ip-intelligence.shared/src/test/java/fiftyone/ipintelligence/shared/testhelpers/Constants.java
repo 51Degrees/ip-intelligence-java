@@ -27,5 +27,5 @@ public class Constants {
 
 
     public static final String IPV4_ADDRESS = "50.154.29.201";
-    public static final String IPV6_ADDRESS = "c50f:2ad9:2597:9255:5a6a:925b:5c41:5eca";
+    public static final String IPV6_ADDRESS = "2001:4860:4860::8888";
 }
