@@ -1,3 +1,4 @@
 [submodule "ip-intelligence.engine.on-premise/src/main/cxx/ip-intelligence-cxx"]
 	path = ip-intelligence.engine.on-premise/src/main/cxx/ip-intelligence-cxx
 	url = ../ip-intelligence-cxx
+	branch = feature/weighted-values

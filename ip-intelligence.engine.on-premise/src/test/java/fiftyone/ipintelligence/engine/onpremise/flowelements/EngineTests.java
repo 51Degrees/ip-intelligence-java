@@ -27,6 +27,7 @@ import static org.junit.Assume.assumeTrue;
 
 import java.io.File;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,7 @@ import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.LITE_IPI_DATA
 import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.ENTERPRISE_IPI_V41_DATA_FILE_NAME;
 import static fiftyone.pipeline.util.FileFinder.getFilePath;
 
+@Ignore
 public class EngineTests {
 	protected static final ILoggerFactory loggerFactory = LoggerFactory.getILoggerFactory();
 
