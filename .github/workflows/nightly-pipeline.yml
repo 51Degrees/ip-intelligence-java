@@ -23,7 +23,7 @@ jobs:
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
       data-key: ${{ secrets.DEVICE_DETECTION_KEY }}
-      data-url: ${{ secrets.IPI_DATA_FILE_URL }}
+      data-url: ${{ secrets.IPI_DATA_FILE_SAMPLE_URL }}
 
   PackageUpdate:
     name: Nightly Package Update
@@ -68,7 +68,7 @@ jobs:
       cache-assets: true
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
-      IpIntelligenceUrl: ${{ secrets.IPI_DATA_FILE_URL }}
+      IpIntelligenceUrl: ${{ secrets.IPI_DATA_FILE_SAMPLE_URL }}
 
   Publish:
     if: ${{ !cancelled() }}
@@ -82,7 +82,7 @@ jobs:
       cache-assets: true
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
-      IpIntelligenceUrl: ${{ secrets.IPI_DATA_FILE_URL }}
+      IpIntelligenceUrl: ${{ secrets.IPI_DATA_FILE_SAMPLE_URL }}
       TestResourceKey: ${{ secrets.SUPER_RESOURCE_KEY}}
       MavenSettings: ${{ secrets.MAVEN_SETTINGS }}
       JavaGpgKeyPassphrase: ${{ secrets.JAVA_GPG_KEY_PASSPHRASE }}

@@ -14,4 +14,4 @@ jobs:
       cache-assets: true
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
-      IpIntelligenceUrl: ${{ secrets.IPI_DATA_FILE_URL }}
+      IpIntelligenceUrl: ${{ secrets.IPI_DATA_FILE_SAMPLE_URL }}
