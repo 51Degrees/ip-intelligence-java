@@ -21,7 +21,7 @@ if (Test-Path $ExamplesRepo) {
 } else {
     Write-Host "Cloning '$ExamplesRepo'"
     ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch "feature/non-weighted"
-    & "./$ExamplesRepo/ci/fetch-assets.ps1" -RepoName $ExamplesRepo -IpIntelligenceUrl $IpIntelligenceUrl
+    & "./$ExamplesRepo/ci/fetch-assets.ps1" -IpIntelligenceUrl $IpIntelligenceUrl
 }
 
 if (!$Version) {
