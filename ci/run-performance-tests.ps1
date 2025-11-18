@@ -20,7 +20,7 @@ if (Test-Path $ExamplesRepo) {
     Write-Host "Examples already cloned, skipping"
 } else {
     Write-Host "Cloning '$ExamplesRepo'"
-    ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $Branch
+    ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch "feature/non-weighted"
     & "./$ExamplesRepo/ci/fetch-assets.ps1" -IpIntelligenceUrl $IpIntelligenceUrl
 }
 

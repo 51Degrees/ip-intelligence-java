@@ -18,4 +18,4 @@ jobs:
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
       data-key: ${{ secrets.DEVICE_DETECTION_KEY }}
-      data-url: ${{ secrets.IPI_DATA_FILE_URL }}
+      data-url: ${{ secrets.IPI_DATA_FILE_SAMPLE_URL }}

@@ -79,7 +79,7 @@ public class MissingPropertyHandlingTests {
             engine.processEngine(flowData, ipiData);
 
             // TODO: Select fitting property. Was `getPriceBand`
-            AspectPropertyValue<List<IWeightedValue<Float>>> latitude = ipiData.getLatitude();
+            AspectPropertyValue<Float> latitude = ipiData.getLatitude();
             assertNotNull(latitude);
             assertFalse(latitude.hasValue());
             assertEquals(
@@ -124,7 +124,7 @@ public class MissingPropertyHandlingTests {
 
             try {
                 // TODO: Select fitting property. Was `getDeviceType`
-                AspectPropertyValue<List<IWeightedValue<Float>>> deviceType = ipiData.getLongitude();
+                AspectPropertyValue<Float> deviceType = ipiData.getLongitude();
                 fail("A PropertyMissingException should have been thrown");
             } catch (PropertyMissingException e) {
                 assertEquals(
