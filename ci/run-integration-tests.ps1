@@ -5,7 +5,7 @@ param(
     [string]$IpIntelligenceUrl,
     [string]$Name,
     [string]$Version,
-    [string]$Branch = "feature/non-weighted", # this is actually the examples branch, but the name has to just be 'Branch' to be recognized by run-repo-script.ps1
+    [string]$Branch = "main", # this is actually the examples branch, but the name has to just be 'Branch' to be recognized by run-repo-script.ps1
     [string]$ExamplesRepo = "$RepoName-examples",
     [string]$ExamplesBranch = $Branch
 )
@@ -20,7 +20,7 @@ $RepoPath = [IO.Path]::Combine($pwd, $RepoName)
 
 try {
     Write-Output "Cloning '$ExamplesRepo'"
-    ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $Branch
+    ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch "feature/non-weighted"
     & "./$ExamplesRepo/ci/fetch-assets.ps1" -IpIntelligenceUrl $IpIntelligenceUrl
 
     Write-Output "Entering ip-intelligence-java directory"
