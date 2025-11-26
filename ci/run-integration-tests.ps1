@@ -20,7 +20,7 @@ $RepoPath = [IO.Path]::Combine($pwd, $RepoName)
 
 try {
     Write-Output "Cloning '$ExamplesRepo'"
-    ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch "feature/non-weighted"
+    ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $Branch
     & "./$ExamplesRepo/ci/fetch-assets.ps1" -IpIntelligenceUrl $IpIntelligenceUrl
 
     Write-Output "Entering ip-intelligence-java directory"
