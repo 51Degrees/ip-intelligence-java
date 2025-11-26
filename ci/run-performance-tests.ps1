@@ -4,7 +4,7 @@ param(
     [string]$IpIntelligenceUrl,
     [string]$Name,
     [string]$Version,
-    [string]$Branch = "main", # this is actually the examples branch, but the name has to just be 'Branch' to be recognized by run-repo-script.ps1
+    [string]$Branch = "feature/non-weighted", # this is actually the examples branch, but the name has to just be 'Branch' to be recognized by run-repo-script.ps1
     [string]$ExamplesRepo = "$RepoName-examples"
 )
 $ErrorActionPreference = "Stop"
