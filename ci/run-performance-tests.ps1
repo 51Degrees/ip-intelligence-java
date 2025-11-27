@@ -24,8 +24,10 @@ if (Test-Path $ExamplesRepo) {
     & "./$ExamplesRepo/ci/fetch-assets.ps1" -IpIntelligenceUrl $IpIntelligenceUrl
 }
 
+$mavenOpts = '--batch-mode', '--no-transfer-progress'
+
 if (!$Version) {
-    $Version = mvn -f $RepoName/pom.xml org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression="project.version" -q -DforceStdout
+    $Version = mvn @mavenOpts -f $RepoName/pom.xml org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression="project.version" -q -DforceStdout
 }
 
 $failed = $false
@@ -34,12 +36,12 @@ Write-Host "Entering '$ExamplesRepo'"
 Push-Location $ExamplesRepo
 try {
     Write-Host "Setting examples ip-intelligence package dependency to version '$Version'"
-    mvn --batch-mode --no-transfer-progress versions:set-property "-Dproperty=ip-intelligence.version" "-DnewVersion=$Version"
+    mvn @mavenOpts versions:set-property "-Dproperty=ip-intelligence.version" "-DnewVersion=$Version"
 
     Write-Host "Testing performance"
     & {
         $ErrorActionPreference = "Continue"
-        mvn --batch-mode --no-transfer-progress clean test "-DfailIfNoTests=false" "-Dtest=*Performance*"
+        mvn @mavenOpts clean test "-DfailIfNoTests=false" "-Dtest=*Performance*"
     }
     if ($LASTEXITCODE -ne 0) {
         Write-Warning "Tests failed"

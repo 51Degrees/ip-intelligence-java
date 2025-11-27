@@ -17,6 +17,7 @@ if (!$IpIntelligenceUrl) {
 }
 
 $RepoPath = [IO.Path]::Combine($pwd, $RepoName)
+$mavenOpts = '--batch-mode', '--no-transfer-progress'
 
 try {
     Write-Output "Cloning '$ExamplesRepo'"
@@ -27,7 +28,7 @@ try {
     Push-Location $RepoPath
     # If Version parameter is not set, get it from pom.xml
     if (!$Version) {
-        $Version = mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression="project.version" -q -DforceStdout
+        $Version = mvn @mavenOpts org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression="project.version" -q -DforceStdout
     }
 
     Pop-Location
@@ -37,10 +38,10 @@ try {
 
 
     Write-Output "Setting examples ip-intelligence package dependency to version '$Version'"
-    mvn versions:set-property -Dproperty="ip-intelligence.version" "-DnewVersion=$Version"
+    mvn @mavenOpts versions:set-property -Dproperty="ip-intelligence.version" "-DnewVersion=$Version"
 
     Write-Output "Testing Examples"
-    mvn clean test "-DTestResourceKey=$($Keys.TestResourceKey)" "-DSuperResourceKey=$($Keys.TestResourceKey)" "-DLicenseKey=$($Keys.IPIntelligence)"
+    mvn @mavenOpts clean test "-DTestResourceKey=$($Keys.TestResourceKey)" "-DSuperResourceKey=$($Keys.TestResourceKey)" "-DLicenseKey=$($Keys.IPIntelligence)"
 
     Write-Output "Copying test results".
     # Copy the test results into the test-results folder
