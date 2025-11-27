@@ -8,20 +8,20 @@
 
 package fiftyone.ipintelligence.engine.onpremise.interop.swig;
 
-public class IntegerValueSwig implements AutoCloseable {
+public class UTF8StringValueSwig implements AutoCloseable {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  protected IntegerValueSwig(long cPtr, boolean cMemoryOwn) {
+  protected UTF8StringValueSwig(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  protected static long getCPtr(IntegerValueSwig obj) {
+  protected static long getCPtr(UTF8StringValueSwig obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
-  protected static long swigRelease(IntegerValueSwig obj) {
+  protected static long swigRelease(UTF8StringValueSwig obj) {
     long ptr = 0;
     if (obj != null) {
       if (!obj.swigCMemOwn)
@@ -37,7 +37,7 @@ public class IntegerValueSwig implements AutoCloseable {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        IpIntelligenceOnPremiseEngineModuleJNI.delete_IntegerValueSwig(swigCPtr);
+        IpIntelligenceOnPremiseEngineModuleJNI.delete_UTF8StringValueSwig(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -48,20 +48,20 @@ public class IntegerValueSwig implements AutoCloseable {
     this.delete();
   }
 
-  public IntegerValueSwig() {
-    this(IpIntelligenceOnPremiseEngineModuleJNI.new_IntegerValueSwig(), true);
+  public UTF8StringValueSwig() {
+    this(IpIntelligenceOnPremiseEngineModuleJNI.new_UTF8StringValueSwig(), true);
   }
 
   public boolean hasValue() {
-    return IpIntelligenceOnPremiseEngineModuleJNI.IntegerValueSwig_hasValue(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.UTF8StringValueSwig_hasValue(swigCPtr, this);
   }
 
   public String getNoValueMessage() {
-    return IpIntelligenceOnPremiseEngineModuleJNI.IntegerValueSwig_getNoValueMessage(swigCPtr, this);
+    return IpIntelligenceOnPremiseEngineModuleJNI.UTF8StringValueSwig_getNoValueMessage(swigCPtr, this);
   }
 
-  public int getValue() {
-    return IpIntelligenceOnPremiseEngineModuleJNI.IntegerValueSwig_getValue(swigCPtr, this);
+  public UTF8StringSwig getValue() {
+    return new UTF8StringSwig(IpIntelligenceOnPremiseEngineModuleJNI.UTF8StringValueSwig_getValue(swigCPtr, this), true);
   }
 
 }
