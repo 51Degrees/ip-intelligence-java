@@ -9,8 +9,7 @@
     "Image": "ubuntu-22.04",
     "Name": "Ubuntu_Java_17",
     "JavaSDKEnvVar": "JAVA_HOME_17_X64",
-    "RunPerformance": true,
-    "PackageRequirement" : true
+    "RunPerformance": true
   },
   {
     "Image": "ubuntu-22.04",
@@ -67,8 +66,7 @@
     "Image": "macos-15",
     "Name": "MacOS_Java_17",
     "JavaSDKEnvVar": "JAVA_HOME_17_arm64",
-    "RunPerformance": true,
-    "PackageRequirement": true
+    "RunPerformance": true
   },
   {
     "Image": "macos-15",
