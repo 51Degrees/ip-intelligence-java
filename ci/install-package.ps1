@@ -8,6 +8,18 @@ param(
 if ($IsMacOS) {
     Write-Host "=== macOS Native Library Debug ==="
 
+    # Check Java architecture - this is what LibLoader.getArch() will see
+    Write-Host ""
+    Write-Host "=== Java Architecture Debug ==="
+    Write-Host "JAVA_HOME: $env:JAVA_HOME"
+    Write-Host "Java version:"
+    java -version 2>&1 | ForEach-Object { Write-Host "  $_" }
+    Write-Host "os.arch property (what LibLoader sees):"
+    java -XshowSettings:properties 2>&1 | Select-String "os.arch" | ForEach-Object { Write-Host "  $_" }
+    Write-Host "Machine hardware (uname -m):"
+    Write-Host "  $(uname -m)"
+    Write-Host ""
+
     # Get maven local repo path
     $mvnLocalRepo = mvn help:evaluate -Dexpression="settings.localRepository" -q -DforceStdout
     Write-Host "Maven local repo: $mvnLocalRepo"
@@ -79,6 +91,22 @@ if ($IsMacOS) {
                     file $lib.FullName
                     # Show architecture
                     lipo -info $lib.FullName 2>&1
+                }
+
+                # Check symbols in ARM64 library
+                $arm64Lib = $extractedLibs | Where-Object { $_.Name -match "aarch64" } | Select-Object -First 1
+                if ($arm64Lib) {
+                    Write-Host ""
+                    Write-Host "=== Checking JNI symbols in ARM64 library ==="
+                    Write-Host "Looking for ConfigIpiSwig symbol:"
+                    nm -g $arm64Lib.FullName 2>&1 | Select-String "ConfigIpiSwig" | Select-Object -First 5
+                    Write-Host ""
+                    Write-Host "Total exported symbols:"
+                    $symbolCount = (nm -g $arm64Lib.FullName 2>&1 | Measure-Object -Line).Lines
+                    Write-Host "  $symbolCount symbols"
+                    Write-Host ""
+                    Write-Host "Sample JNI symbols (first 10):"
+                    nm -g $arm64Lib.FullName 2>&1 | Select-String "Java_" | Select-Object -First 10
                 }
             } else {
                 Write-Host "No .dylib files extracted"
