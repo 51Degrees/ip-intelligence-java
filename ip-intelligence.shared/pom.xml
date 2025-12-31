@@ -11,7 +11,7 @@
 
     <artifactId>ip-intelligence.shared</artifactId>
     <name>51Degrees :: IP Intelligence :: Shared</name>
-    <description>Shared functionality for implementing IP Intelligence engine for the 51Degrees Pipeline API</description>
+    <description>Shared code used by 51Degrees IP Intelligence modules for the Pipeline API.</description>
     <url>https://51degrees.com</url>
 
     <dependencies>
