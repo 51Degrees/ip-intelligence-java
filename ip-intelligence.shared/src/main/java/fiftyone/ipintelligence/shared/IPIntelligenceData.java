@@ -120,6 +120,22 @@ public interface IPIntelligenceData extends AspectData
 	 */
 	AspectPropertyValue<Boolean> getIsHosted();
 	/**
+	 * The ISO 3166-2 code for the supplied location. This is using the 'ISO3166-2-lvl4' property from OpenStreetMap.
+	 */
+	AspectPropertyValue<String> getIso31662Lvl4();
+	/**
+	 * The alphanumeric code representing the subdivision from the ISO 3166-2 code of the supplied location. This is using the 'ISO3166-2-lvl4' property from OpenStreetMap.
+	 */
+	AspectPropertyValue<String> getIso31662Lvl4SubdivisionOnly();
+	/**
+	 * The ISO 3166-2 code for the supplied location. This is using the 'ISO3166-2-lvl8' property from OpenStreetMap.
+	 */
+	AspectPropertyValue<String> getIso31662Lvl8();
+	/**
+	 * The alphanumeric code representing the subdivision from the ISO 3166-2 code of the supplied location. This is using the 'ISO3166-2-lvl8' property from OpenStreetMap.
+	 */
+	AspectPropertyValue<String> getIso31662Lvl8SubdivisionOnly();
+	/**
 	 * Indicates whether the IP address is associated with a Proxy server.
 	 */
 	AspectPropertyValue<Boolean> getIsProxy();

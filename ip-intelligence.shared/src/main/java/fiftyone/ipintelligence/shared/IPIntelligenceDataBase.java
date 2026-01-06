@@ -160,6 +160,30 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@Override
 	public AspectPropertyValue<Boolean> getIsTor() { return getAs("istor", AspectPropertyValue.class, Boolean.class); }
 	/**
+	 * The ISO 3166-2 code for the supplied location. This is using the 'ISO3166-2-lvl4' property from OpenStreetMap.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getIso31662Lvl4() { return getAs("iso31662lvl4", AspectPropertyValue.class, String.class); }
+	/**
+	 * The alphanumeric code representing the subdivision from the ISO 3166-2 code of the supplied location. This is using the 'ISO3166-2-lvl4' property from OpenStreetMap.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getIso31662Lvl4SubdivisionOnly() { return getAs("iso31662lvl4subdivisiononly", AspectPropertyValue.class, String.class); }
+	/**
+	 * The ISO 3166-2 code for the supplied location. This is using the 'ISO3166-2-lvl8' property from OpenStreetMap.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getIso31662Lvl8() { return getAs("iso31662lvl8", AspectPropertyValue.class, String.class); }
+	/**
+	 * The alphanumeric code representing the subdivision from the ISO 3166-2 code of the supplied location. This is using the 'ISO3166-2-lvl8' property from OpenStreetMap.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getIso31662Lvl8SubdivisionOnly() { return getAs("iso31662lvl8subdivisiononly", AspectPropertyValue.class, String.class); }
+	/**
 	 * The 3-character ISO 3166-1 continent code for the supplied location.
 	 */
 	@SuppressWarnings("unchecked")
