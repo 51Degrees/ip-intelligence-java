@@ -76,7 +76,7 @@ public class IPIntelligenceOnPremisePipelineBuilder
 
     IPIntelligenceOnPremisePipelineBuilder(
         ILoggerFactory loggerFactory,
-        DataUpdateService dataUpdateServicet) {
+        DataUpdateService dataUpdateService) {
         super(loggerFactory);
         this.dataUpdateService = dataUpdateService;
         // Make sure to add dataUpdateService to the list of managed services
