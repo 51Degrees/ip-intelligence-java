@@ -11,6 +11,7 @@
 
     <artifactId>ip-intelligence.engine.on-premise</artifactId>
     <name>51Degrees :: IP Intelligence :: On Premise</name>
+	<description>Provides the On-premise IP Intelligence engine for the 51Degrees Pipeline API. This can be used as an alternative to legacy IP Intelligence services such as MaxMind or IPinfo.</description>
     <url>https://51degrees.com</url>
 
     <dependencies>
