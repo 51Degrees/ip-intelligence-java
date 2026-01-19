@@ -11,7 +11,7 @@
 
     <artifactId>ip-intelligence.cloud</artifactId>
     <name>51Degrees :: IP Intelligence :: Cloud</name>
-    <description>IP Intelligence that consumes the 51Degrees cloud service.</description>
+    <description>Provides IP Intelligence for the 51Degrees Pipeline API using the 51Degrees Cloud service. This can be used as an alternative to legacy IP Intelligence services such as MaxMind or IPinfo.</description>
     <url>https://51degrees.com</url>
 
     <dependencies>
