@@ -51,18 +51,6 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 		super(logger, flowData, engine, missingPropertyService);
 	}
 	/**
-	 * Start of the IP range to which the evidence IP belongs.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<InetAddress> getIpRangeStart() { return getAs("iprangestart", AspectPropertyValue.class, InetAddress.class); }
-	/**
-	 * End of the IP range to which the evidence IP belongs.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<InetAddress> getIpRangeEnd() { return getAs("iprangeend", AspectPropertyValue.class, InetAddress.class); }
-	/**
 	 * Name of the IP range. This is usually the owner.
 	 */
 	@SuppressWarnings("unchecked")
@@ -80,6 +68,18 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@SuppressWarnings("unchecked")
 	@Override
 	public AspectPropertyValue<String> getRegisteredCountry() { return getAs("registeredcountry", AspectPropertyValue.class, String.class); }
+	/**
+	 * Start of the IP range to which the evidence IP belongs.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<InetAddress> getIpRangeStart() { return getAs("iprangestart", AspectPropertyValue.class, InetAddress.class); }
+	/**
+	 * End of the IP range to which the evidence IP belongs.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<InetAddress> getIpRangeEnd() { return getAs("iprangeend", AspectPropertyValue.class, InetAddress.class); }
 	/**
 	 * Radius in kilometers of the circle centred around the most probable location that encompasses the entire area. Where multiple areas are returned, this will only cover the area the most probable location is in. See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
 	 */
