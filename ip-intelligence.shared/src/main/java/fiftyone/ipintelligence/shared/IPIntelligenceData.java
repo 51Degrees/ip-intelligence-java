@@ -67,6 +67,22 @@ public interface IPIntelligenceData extends AspectData
 	 */
 	AspectPropertyValue<String> getContinentName();
 	/**
+	 * A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence. These are weighted and ordered by each country's proportion of the area.
+	 */
+	AspectPropertyValue<List<IWeightedValue<String>>> getCountriesGeographical();
+	/**
+	 * A full list of countries in ISO 3166-1 alpha-2 country code format. Countries that overlap with the area likely associated with the provided evidence are listed first, weighted and ordered by each country's proportion of the area. This is then followed by the remaining countries, ordered according to ISO 3166-1 alpha 2 standard.
+	 */
+	AspectPropertyValue<List<IWeightedValue<String>>> getCountriesGeographicalAll();
+	/**
+	 * A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence. These are weighted and ordered by each country's proportion of the total population within the area.
+	 */
+	AspectPropertyValue<List<IWeightedValue<String>>> getCountriesPopulation();
+	/**
+	 * A full list of countries in ISO 3166-1 alpha-2 country code format. Countries that overlap with the area likely associated with the provided evidence are listed first, weighted and ordered by each country's proportion of the total population within the area. This is then followed by the remaining countries, ordered according to ISO 3166-1 alpha 2 standard.
+	 */
+	AspectPropertyValue<List<IWeightedValue<String>>> getCountriesPopulationAll();
+	/**
 	 * The name of the country that the supplied location is in.
 	 */
 	AspectPropertyValue<String> getCountry();
