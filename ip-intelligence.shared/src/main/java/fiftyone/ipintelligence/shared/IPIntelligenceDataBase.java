@@ -219,30 +219,6 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@Override
 	public AspectPropertyValue<String> getCountryCode3() { return getAs("countrycode3", AspectPropertyValue.class, String.class); }
 	/**
-	 * A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence. These are weighted and ordered by each country's proportion of the area.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<List<IWeightedValue<String>>> getCountriesGeographical() { return getAs("countriesgeographical", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
-	/**
-	 * A full list of countries in ISO 3166-1 alpha-2 country code format. Countries that overlap with the area likely associated with the provided evidence are listed first, weighted and ordered by each country's proportion of the area. This is then followed by the remaining countries, ordered according to ISO 3166-1 alpha 2 standard.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<List<IWeightedValue<String>>> getCountriesGeographicalAll() { return getAs("countriesgeographicalall", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
-	/**
-	 * A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence. These are weighted and ordered by each country's proportion of the total population within the area.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<List<IWeightedValue<String>>> getCountriesPopulation() { return getAs("countriespopulation", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
-	/**
-	 * A full list of countries in ISO 3166-1 alpha-2 country code format. Countries that overlap with the area likely associated with the provided evidence are listed first, weighted and ordered by each country's proportion of the total population within the area. This is then followed by the remaining countries, ordered according to ISO 3166-1 alpha 2 standard.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<List<IWeightedValue<String>>> getCountriesPopulationAll() { return getAs("countriespopulationall", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
-	/**
 	 * The Alpha-3 ISO 4217 code of the currency associated with the supplied location.
 	 */
 	@SuppressWarnings("unchecked")
@@ -338,4 +314,22 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@SuppressWarnings("unchecked")
 	@Override
 	public AspectPropertyValue<String> getAsn() { return getAs("asn", AspectPropertyValue.class, String.class); }
+	/**
+	 * Refers to the diversity of hardware devices observed from the IP range. An integer between 1-10, a lower value indicates a low number of devices seen per IP address, while a higher value indicates a high number of devices seen per IP address. A 0 value indicates that the probability is unknown.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<Integer> getHardwareDiversity() { return getAs("hardwarediversity", AspectPropertyValue.class, Integer.class); }
+	/**
+	 * Refers to the diversity of software observed from the IP range. An integer between 1-10, a lower value indicates a low number of software seen per IP address, while a higher value indicates a high number of software seen per IP address. A 0 value indicates that the probability is unknown.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<Integer> getPlatformDiversity() { return getAs("platformdiversity", AspectPropertyValue.class, Integer.class); }
+	/**
+	 * Refers to the diversity of browsers observed from the IP range. An integer between 1-10, a lower value indicates a low number of browsers seen per IP address, while a higher value indicates a high number of browsers seen per IP address. A 0 value indicates that the probability is unknown.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<Integer> getBrowserDiversity() { return getAs("browserdiversity", AspectPropertyValue.class, Integer.class); }
 }

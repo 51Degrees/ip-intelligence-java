@@ -55,6 +55,10 @@ public interface IPIntelligenceData extends AspectData
 	 */
 	AspectPropertyValue<String> getAsnName();
 	/**
+	 * Refers to the diversity of browsers observed from the IP range. An integer between 1-10, a lower value indicates a low number of browsers seen per IP address, while a higher value indicates a high number of browsers seen per IP address. A 0 value indicates that the probability is unknown.
+	 */
+	AspectPropertyValue<Integer> getBrowserDiversity();
+	/**
 	 * Indicates the type of connection being used. Returns either Broadband, Cellular, or Hosting and Anonymous.
 	 */
 	AspectPropertyValue<String> getConnectionType();
@@ -66,22 +70,6 @@ public interface IPIntelligenceData extends AspectData
 	 * The name of the continent the supplied location is in.
 	 */
 	AspectPropertyValue<String> getContinentName();
-	/**
-	 * A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence. These are weighted and ordered by each country's proportion of the area.
-	 */
-	AspectPropertyValue<List<IWeightedValue<String>>> getCountriesGeographical();
-	/**
-	 * A full list of countries in ISO 3166-1 alpha-2 country code format. Countries that overlap with the area likely associated with the provided evidence are listed first, weighted and ordered by each country's proportion of the area. This is then followed by the remaining countries, ordered according to ISO 3166-1 alpha 2 standard.
-	 */
-	AspectPropertyValue<List<IWeightedValue<String>>> getCountriesGeographicalAll();
-	/**
-	 * A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence. These are weighted and ordered by each country's proportion of the total population within the area.
-	 */
-	AspectPropertyValue<List<IWeightedValue<String>>> getCountriesPopulation();
-	/**
-	 * A full list of countries in ISO 3166-1 alpha-2 country code format. Countries that overlap with the area likely associated with the provided evidence are listed first, weighted and ordered by each country's proportion of the total population within the area. This is then followed by the remaining countries, ordered according to ISO 3166-1 alpha 2 standard.
-	 */
-	AspectPropertyValue<List<IWeightedValue<String>>> getCountriesPopulationAll();
 	/**
 	 * The name of the country that the supplied location is in.
 	 */
@@ -106,6 +94,10 @@ public interface IPIntelligenceData extends AspectData
 	 * ITU international telephone numbering plan code for the country.
 	 */
 	AspectPropertyValue<String> getDialCode();
+	/**
+	 * Refers to the diversity of hardware devices observed from the IP range. An integer between 1-10, a lower value indicates a low number of devices seen per IP address, while a higher value indicates a high number of devices seen per IP address. A 0 value indicates that the probability is unknown.
+	 */
+	AspectPropertyValue<Integer> getHardwareDiversity();
 	/**
 	 * The confidence that the IP address is a human user versus associated with hosting. A 0-10 value where; 0-3: Low confidence the user is human, 4-6: Medium confidence, 7-10: High confidence. A -1 value indicates that the probability is unknown.
 	 */
@@ -186,6 +178,10 @@ public interface IPIntelligenceData extends AspectData
 	 * The mobile country code of the network the device is connected to.
 	 */
 	AspectPropertyValue<List<IWeightedValue<String>>> getMcc();
+	/**
+	 * Refers to the diversity of software observed from the IP range. An integer between 1-10, a lower value indicates a low number of software seen per IP address, while a higher value indicates a high number of software seen per IP address. A 0 value indicates that the probability is unknown.
+	 */
+	AspectPropertyValue<Integer> getPlatformDiversity();
 	/**
 	 * The name of the geographical region that the supplied location is in.
 	 */
