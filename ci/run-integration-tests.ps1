@@ -21,7 +21,7 @@ $mavenOpts = '--batch-mode', '--no-transfer-progress'
 
 try {
     Write-Output "Cloning '$ExamplesRepo'"
-    ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $Branch
+    ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch "main" # FIXME: REVERT to `$ExamplesBranch`
     & "./$ExamplesRepo/ci/fetch-assets.ps1" -IpIntelligenceUrl $IpIntelligenceUrl
 
     Write-Output "Entering ip-intelligence-java directory"
