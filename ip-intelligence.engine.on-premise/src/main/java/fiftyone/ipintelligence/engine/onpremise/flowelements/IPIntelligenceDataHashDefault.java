@@ -199,7 +199,7 @@ public class IPIntelligenceDataHashDefault
                     WeightedBoolListValueSwig::hasValue,
                     WeightedBoolListValueSwig::getNoValueMessage,
                     WeightedBoolListValueSwig::getValue,
-                    x -> new WeightedValue<>(x.getRawWeight(), x.getValue())
+                    x -> new WeightedValue<>(x.getShortRawWeight(), x.getValue())
             );
         } else if (valueType.equals(Double.class)) {
             populateWeightedValues(
@@ -208,7 +208,7 @@ public class IPIntelligenceDataHashDefault
                     WeightedDoubleListValueSwig::hasValue,
                     WeightedDoubleListValueSwig::getNoValueMessage,
                     WeightedDoubleListValueSwig::getValue,
-                    x -> new WeightedValue<>(x.getRawWeight(), x.getValue())
+                    x -> new WeightedValue<>(x.getShortRawWeight(), x.getValue())
             );
         } else if (valueType.equals(Float.class)) {
             populateWeightedValues(
@@ -217,7 +217,7 @@ public class IPIntelligenceDataHashDefault
                     WeightedDoubleListValueSwig::hasValue,
                     WeightedDoubleListValueSwig::getNoValueMessage,
                     WeightedDoubleListValueSwig::getValue,
-                    x -> new WeightedValue<>(x.getRawWeight(), (float)x.getValue())
+                    x -> new WeightedValue<>(x.getShortRawWeight(), (float)x.getValue())
             );
         } else if (valueType.equals(Integer.class)) {
             populateWeightedValues(
@@ -226,7 +226,7 @@ public class IPIntelligenceDataHashDefault
                     WeightedIntListValueSwig::hasValue,
                     WeightedIntListValueSwig::getNoValueMessage,
                     WeightedIntListValueSwig::getValue,
-                    x -> new WeightedValue<>(x.getRawWeight(), x.getValue())
+                    x -> new WeightedValue<>(x.getShortRawWeight(), x.getValue())
             );
         } else if (valueType.equals(InetAddress.class)
                 || valueType.equals(Inet4Address.class)
@@ -239,7 +239,7 @@ public class IPIntelligenceDataHashDefault
                     WeightedStringListValueSwig::getValue,
                     x -> {
                         try {
-                            return new WeightedValue<>(x.getRawWeight(), InetAddress.getByName(x.getValue()));
+                            return new WeightedValue<>(x.getShortRawWeight(), InetAddress.getByName(x.getValue()));
                         } catch (UnknownHostException e) {
                             throw new RuntimeException(e);
                         }
@@ -261,7 +261,7 @@ public class IPIntelligenceDataHashDefault
                             }
                             theString = new String(bytes, StandardCharsets.UTF_8);
                         }
-                        return new WeightedValue<>(x.getRawWeight(), theString);
+                        return new WeightedValue<>(x.getShortRawWeight(), theString);
                     }
             );
         } else {
