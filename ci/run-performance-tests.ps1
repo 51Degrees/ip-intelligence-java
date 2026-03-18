@@ -71,13 +71,10 @@ $currentThreadNum = 1
 # Read the content of the performance results file line by line
 Get-Content "$RepoName/test-results/performance-summary/fiftyone.ipintelligence.examples.console.PerformanceBenchmarkTest-output.txt" | ForEach-Object {
      # If the line matches a profile header, extract the profile properties and create a new profile.
-    if($_ -match "MaxPerformance AllProperties: (true|false), performanceGraph: (true|false), predictiveGraph (true|false)") {
+    if($_ -match "MaxPerformance AllProperties: (true|false)") {
         $allProperties = [string]$Matches[1]
-        $performanceGraph = [string]$Matches[2]
-        $predictiveGraph = [string]$Matches[3]
-
         $profileNum++
-        $currentProfile = $profiles["MaxPerformance-$allProperties-$performanceGraph-$predictiveGraph"] = @{ "Threads" = @{} }
+        $currentProfile = $profiles["MaxPerformance-$allProperties"] = @{ "Threads" = @{} }
         $currentThreadNum = 1
     }
     # If the line matches a thread data line, extract the thread data and add it to the current profile.
