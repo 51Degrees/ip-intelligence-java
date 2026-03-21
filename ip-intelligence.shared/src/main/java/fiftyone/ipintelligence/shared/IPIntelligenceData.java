@@ -83,6 +83,14 @@ public interface IPIntelligenceData extends AspectData
 	 */
 	AspectPropertyValue<String> getCountryCode3();
 	/**
+	 * A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence, weighted and ordered by each country's proportion of the area. Administrative areas that cannot be cleanly resolved to the country level will not contribute to the resulting data.
+	 */
+	AspectPropertyValue<List<IWeightedValue<List<String>>>> getCountryCodesGeographical();
+	/**
+	 * A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence, weighted and ordered by each country's proportion of the total population within the area. Administrative areas that cannot be cleanly resolved to the country level will not contribute to the resulting data.
+	 */
+	AspectPropertyValue<List<IWeightedValue<List<String>>>> getCountryCodesPopulation();
+	/**
 	 * The name of the county that the supplied location is in. In this case, a county is defined as an administrative sub-section of a country or state.
 	 */
 	AspectPropertyValue<String> getCounty();
