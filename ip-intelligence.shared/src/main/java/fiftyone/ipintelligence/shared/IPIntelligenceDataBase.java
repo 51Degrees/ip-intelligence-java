@@ -301,13 +301,13 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public AspectPropertyValue<List<IWeightedValue<List<String>>>> getCountryCodesGeographical() { return getAs("countrycodesgeographical", AspectPropertyValue.class, List.class, IWeightedValue.class, List.class, String.class); }
+	public AspectPropertyValue<List<IWeightedValue<String>>> getCountryCodesGeographical() { return getAs("countrycodesgeographical", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
 	/**
 	 * A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence, weighted and ordered by each country's proportion of the total population within the area. Administrative areas that cannot be cleanly resolved to the country level will not contribute to the resulting data.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public AspectPropertyValue<List<IWeightedValue<List<String>>>> getCountryCodesPopulation() { return getAs("countrycodespopulation", AspectPropertyValue.class, List.class, IWeightedValue.class, List.class, String.class); }
+	public AspectPropertyValue<List<IWeightedValue<String>>> getCountryCodesPopulation() { return getAs("countrycodespopulation", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
 	/**
 	 * The mobile country code of the network the device is connected to.
 	 */
