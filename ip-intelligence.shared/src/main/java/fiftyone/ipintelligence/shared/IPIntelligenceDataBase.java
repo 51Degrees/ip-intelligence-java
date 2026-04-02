@@ -51,36 +51,6 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 		super(logger, flowData, engine, missingPropertyService);
 	}
 	/**
-	 * Name of the IP range. This is usually the owner.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<String> getRegisteredName() { return getAs("registeredname", AspectPropertyValue.class, String.class); }
-	/**
-	 * Registered owner of the range.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<String> getRegisteredOwner() { return getAs("registeredowner", AspectPropertyValue.class, String.class); }
-	/**
-	 * Country code of the registered range.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<String> getRegisteredCountry() { return getAs("registeredcountry", AspectPropertyValue.class, String.class); }
-	/**
-	 * Start of the IP range to which the evidence IP belongs.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<InetAddress> getIpRangeStart() { return getAs("iprangestart", AspectPropertyValue.class, InetAddress.class); }
-	/**
-	 * End of the IP range to which the evidence IP belongs.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<InetAddress> getIpRangeEnd() { return getAs("iprangeend", AspectPropertyValue.class, InetAddress.class); }
-	/**
 	 * Radius in kilometers of the circle centred around the most probable location that encompasses the entire area. Where multiple areas are returned, this will only cover the area the most probable location is in. See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
 	 */
 	@SuppressWarnings("unchecked")
@@ -93,29 +63,119 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@Override
 	public AspectPropertyValue<Integer> getAccuracyRadiusMin() { return getAs("accuracyradiusmin", AspectPropertyValue.class, Integer.class); }
 	/**
-	 * Average latitude of the IP. For privacy, this is randomized within around 1 kilometer of the result. Randomized result will change only once per day.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<Float> getLatitude() { return getAs("latitude", AspectPropertyValue.class, Float.class); }
-	/**
-	 * Average longitude of the IP. For privacy, this is randomized within around 1 kilometer of the result. Randomized result will change only once per day.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<Float> getLongitude() { return getAs("longitude", AspectPropertyValue.class, Float.class); }
-	/**
 	 * Any shapes associated with the location. Usually this is the area which the IP range covers. This is returned as a WKT String stored as a reduced format of WKB.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public AspectPropertyValue<WktString> getAreas() { return getAs("areas", AspectPropertyValue.class, WktString.class); }
 	/**
+	 * Autonomous System Number associated with the IP address.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getAsn() { return getAs("asn", AspectPropertyValue.class, String.class); }
+	/**
+	 * The name registered to the Asn associated with the IP address.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getAsnName() { return getAs("asnname", AspectPropertyValue.class, String.class); }
+	/**
+	 * Refers to the diversity of browsers observed from the IP range. An integer between 1-10, a lower value indicates a low number of browsers seen per IP address, while a higher value indicates a high number of browsers seen per IP address. A 0 value indicates that the probability is unknown.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<Integer> getBrowserDiversity() { return getAs("browserdiversity", AspectPropertyValue.class, Integer.class); }
+	/**
 	 * Indicates the type of connection being used. Returns either Broadband, Cellular, or Hosting and Anonymous.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public AspectPropertyValue<String> getConnectionType() { return getAs("connectiontype", AspectPropertyValue.class, String.class); }
+	/**
+	 * The 3-character ISO 3166-1 continent code for the supplied location.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getContinentCode2() { return getAs("continentcode2", AspectPropertyValue.class, String.class); }
+	/**
+	 * The name of the continent the supplied location is in.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getContinentName() { return getAs("continentname", AspectPropertyValue.class, String.class); }
+	/**
+	 * The name of the country that the supplied location is in.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getCountry() { return getAs("country", AspectPropertyValue.class, String.class); }
+	/**
+	 * The 2-character ISO 3166-1 code of the country that the supplied location is in.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getCountryCode() { return getAs("countrycode", AspectPropertyValue.class, String.class); }
+	/**
+	 * The 3-character ISO 3166-1 alpha-3 code of the country that the supplied location is in.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getCountryCode3() { return getAs("countrycode3", AspectPropertyValue.class, String.class); }
+	/**
+	 * A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence, weighted and ordered by each country's proportion of the area. Administrative areas that cannot be cleanly resolved to the country level will not contribute to the resulting data.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<List<IWeightedValue<String>>> getCountryCodesGeographical() { return getAs("countrycodesgeographical", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
+	/**
+	 * A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence, weighted and ordered by each country's proportion of the total population within the area. Administrative areas that cannot be cleanly resolved to the country level will not contribute to the resulting data.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<List<IWeightedValue<String>>> getCountryCodesPopulation() { return getAs("countrycodespopulation", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
+	/**
+	 * The name of the county that the supplied location is in. In this case, a county is defined as an administrative sub-section of a country or state.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getCounty() { return getAs("county", AspectPropertyValue.class, String.class); }
+	/**
+	 * The Alpha-3 ISO 4217 code of the currency associated with the supplied location.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getCurrencyCode() { return getAs("currencycode", AspectPropertyValue.class, String.class); }
+	/**
+	 * ITU international telephone numbering plan code for the country.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getDialCode() { return getAs("dialcode", AspectPropertyValue.class, String.class); }
+	/**
+	 * Refers to the diversity of hardware devices observed from the IP range. An integer between 1-10, a lower value indicates a low number of devices seen per IP address, while a higher value indicates a high number of devices seen per IP address. A 0 value indicates that the probability is unknown.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<Integer> getHardwareDiversity() { return getAs("hardwarediversity", AspectPropertyValue.class, Integer.class); }
+	/**
+	 * The confidence that the IP address is a human user versus associated with hosting. A 0-10 value where; 0-3: Low confidence the user is human, 4-6: Medium confidence, 7-10: High confidence. A -1 value indicates that the probability is unknown.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<Integer> getHumanProbability() { return getAs("humanprobability", AspectPropertyValue.class, Integer.class); }
+	/**
+	 * End of the IP range to which the evidence IP belongs.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<InetAddress> getIpRangeEnd() { return getAs("iprangeend", AspectPropertyValue.class, InetAddress.class); }
+	/**
+	 * Start of the IP range to which the evidence IP belongs.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<InetAddress> getIpRangeStart() { return getAs("iprangestart", AspectPropertyValue.class, InetAddress.class); }
 	/**
 	 * Indicates whether the IP address is associated with a broadband connection. Includes DSL, Cable, Fibre, and Satellite connections.
 	 */
@@ -129,35 +189,17 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@Override
 	public AspectPropertyValue<Boolean> getIsCellular() { return getAs("iscellular", AspectPropertyValue.class, Boolean.class); }
 	/**
+	 * Indicates whether the country of the supplied location is within the European Union.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<Boolean> getIsEu() { return getAs("iseu", AspectPropertyValue.class, Boolean.class); }
+	/**
 	 * Indicates whether the IP address is associated with hosting. Includes both hosting and anonymised connections such as hosting networks, hosting ASNs, VPNs, proxies, TOR networks, and unreachable IP addresses.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public AspectPropertyValue<Boolean> getIsHosted() { return getAs("ishosted", AspectPropertyValue.class, Boolean.class); }
-	/**
-	 * Indicates whether the IP address is associated with a VPN server.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<Boolean> getIsVPN() { return getAs("isvpn", AspectPropertyValue.class, Boolean.class); }
-	/**
-	 * Indicates whether the IP address is associated with a Proxy server.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<Boolean> getIsProxy() { return getAs("isproxy", AspectPropertyValue.class, Boolean.class); }
-	/**
-	 * Indicates whether the IP address is associated with a public router.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<Boolean> getIsPublicRouter() { return getAs("ispublicrouter", AspectPropertyValue.class, Boolean.class); }
-	/**
-	 * Indicates whether the IP address is associated with a TOR server.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<Boolean> getIsTor() { return getAs("istor", AspectPropertyValue.class, Boolean.class); }
 	/**
 	 * The ISO 3166-2 code for the supplied location. This is using the 'ISO3166-2-lvl4' property from OpenStreetMap.
 	 */
@@ -183,65 +225,29 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@Override
 	public AspectPropertyValue<String> getIso31662Lvl8SubdivisionOnly() { return getAs("iso31662lvl8subdivisiononly", AspectPropertyValue.class, String.class); }
 	/**
-	 * The 3-character ISO 3166-1 continent code for the supplied location.
+	 * Indicates whether the IP address is associated with a Proxy server.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public AspectPropertyValue<String> getContinentCode2() { return getAs("continentcode2", AspectPropertyValue.class, String.class); }
+	public AspectPropertyValue<Boolean> getIsProxy() { return getAs("isproxy", AspectPropertyValue.class, Boolean.class); }
 	/**
-	 * The name of the continent the supplied location is in.
+	 * Indicates whether the IP address is associated with a public router.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public AspectPropertyValue<String> getContinentName() { return getAs("continentname", AspectPropertyValue.class, String.class); }
+	public AspectPropertyValue<Boolean> getIsPublicRouter() { return getAs("ispublicrouter", AspectPropertyValue.class, Boolean.class); }
 	/**
-	 * The name of the county that the supplied location is in. In this case, a county is defined as an administrative sub-section of a country or state.
+	 * Indicates whether the IP address is associated with a TOR server.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public AspectPropertyValue<String> getCounty() { return getAs("county", AspectPropertyValue.class, String.class); }
+	public AspectPropertyValue<Boolean> getIsTor() { return getAs("istor", AspectPropertyValue.class, Boolean.class); }
 	/**
-	 * The name of the country that the supplied location is in.
+	 * Indicates whether the IP address is associated with a VPN server.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public AspectPropertyValue<String> getCountry() { return getAs("country", AspectPropertyValue.class, String.class); }
-	/**
-	 * The 2-character ISO 3166-1 code of the country that the supplied location is in.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<String> getCountryCode() { return getAs("countrycode", AspectPropertyValue.class, String.class); }
-	/**
-	 * The 3-character ISO 3166-1 alpha-3 code of the country that the supplied location is in.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<String> getCountryCode3() { return getAs("countrycode3", AspectPropertyValue.class, String.class); }
-	/**
-	 * The Alpha-3 ISO 4217 code of the currency associated with the supplied location.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<String> getCurrencyCode() { return getAs("currencycode", AspectPropertyValue.class, String.class); }
-	/**
-	 * Indicates whether the country of the supplied location is within the European Union.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<Boolean> getIsEu() { return getAs("iseu", AspectPropertyValue.class, Boolean.class); }
-	/**
-	 * ITU international telephone numbering plan code for the country.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<String> getDialCode() { return getAs("dialcode", AspectPropertyValue.class, String.class); }
-	/**
-	 * The confidence that the IP address is a human user versus associated with hosting. A 0-10 value where; 0-3: Low confidence the user is human, 4-6: Medium confidence, 7-10: High confidence. A -1 value indicates that the probability is unknown.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<Integer> getHumanProbability() { return getAs("humanprobability", AspectPropertyValue.class, Integer.class); }
+	public AspectPropertyValue<Boolean> getIsVPN() { return getAs("isvpn", AspectPropertyValue.class, Boolean.class); }
 	/**
 	 * The Alpha-2 ISO 639 Language code associated with the supplied location.
 	 */
@@ -249,17 +255,71 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@Override
 	public AspectPropertyValue<String> getLanguageCode() { return getAs("languagecode", AspectPropertyValue.class, String.class); }
 	/**
+	 * Average latitude of the IP. For privacy, this is randomized within around 1 kilometer of the result. Randomized result will change only once per day.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<Float> getLatitude() { return getAs("latitude", AspectPropertyValue.class, Float.class); }
+	/**
 	 * The confidence in the town and country provided.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public AspectPropertyValue<String> getLocationConfidence() { return getAs("locationconfidence", AspectPropertyValue.class, String.class); }
 	/**
+	 * Average longitude of the IP. For privacy, this is randomized within around 1 kilometer of the result. Randomized result will change only once per day.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<Float> getLongitude() { return getAs("longitude", AspectPropertyValue.class, Float.class); }
+	/**
+	 * The mobile country code of the network the device is connected to.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<List<IWeightedValue<String>>> getMcc() { return getAs("mcc", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
+	/**
+	 * Refers to the diversity of software observed from the IP range. An integer between 1-10, a lower value indicates a low number of software seen per IP address, while a higher value indicates a high number of software seen per IP address. A 0 value indicates that the probability is unknown.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<Integer> getPlatformDiversity() { return getAs("platformdiversity", AspectPropertyValue.class, Integer.class); }
+	/**
 	 * The name of the geographical region that the supplied location is in.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public AspectPropertyValue<String> getRegion() { return getAs("region", AspectPropertyValue.class, String.class); }
+	/**
+	 * Country code of the registered range.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getRegisteredCountry() { return getAs("registeredcountry", AspectPropertyValue.class, String.class); }
+	/**
+	 * Name of the IP range. This is usually the owner.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getRegisteredName() { return getAs("registeredname", AspectPropertyValue.class, String.class); }
+	/**
+	 * Registered owner of the range.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getRegisteredOwner() { return getAs("registeredowner", AspectPropertyValue.class, String.class); }
+	/**
+	 * The name of the state that the supplied location is in.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getState() { return getAs("state", AspectPropertyValue.class, String.class); }
+	/**
+	 * The name of the suburb that the supplied location is in.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getSuburb() { return getAs("suburb", AspectPropertyValue.class, String.class); }
 	/**
 	 * The time zone at the supplied location in the IANA Time Zone format.
 	 */
@@ -279,69 +339,9 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@Override
 	public AspectPropertyValue<String> getTown() { return getAs("town", AspectPropertyValue.class, String.class); }
 	/**
-	 * The name of the state that the supplied location is in.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<String> getState() { return getAs("state", AspectPropertyValue.class, String.class); }
-	/**
-	 * The name of the suburb that the supplied location is in.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<String> getSuburb() { return getAs("suburb", AspectPropertyValue.class, String.class); }
-	/**
 	 * The zip or postal code that the supplied location falls under.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public AspectPropertyValue<String> getZipCode() { return getAs("zipcode", AspectPropertyValue.class, String.class); }
-	/**
-	 * A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence, weighted and ordered by each country's proportion of the area. Administrative areas that cannot be cleanly resolved to the country level will not contribute to the resulting data.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<List<IWeightedValue<String>>> getCountryCodesGeographical() { return getAs("countrycodesgeographical", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
-	/**
-	 * A list of countries in ISO 3166-1 alpha-2 country code format that overlap with the area likely associated with the provided evidence, weighted and ordered by each country's proportion of the total population within the area. Administrative areas that cannot be cleanly resolved to the country level will not contribute to the resulting data.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<List<IWeightedValue<String>>> getCountryCodesPopulation() { return getAs("countrycodespopulation", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
-	/**
-	 * The mobile country code of the network the device is connected to.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<List<IWeightedValue<String>>> getMcc() { return getAs("mcc", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
-	/**
-	 * The name registered to the Asn associated with the IP address.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<String> getAsnName() { return getAs("asnname", AspectPropertyValue.class, String.class); }
-	/**
-	 * Autonomous System Number associated with the IP address.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<String> getAsn() { return getAs("asn", AspectPropertyValue.class, String.class); }
-	/**
-	 * Refers to the diversity of hardware devices observed from the IP range. An integer between 1-10, a lower value indicates a low number of devices seen per IP address, while a higher value indicates a high number of devices seen per IP address. A 0 value indicates that the probability is unknown.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<Integer> getHardwareDiversity() { return getAs("hardwarediversity", AspectPropertyValue.class, Integer.class); }
-	/**
-	 * Refers to the diversity of software observed from the IP range. An integer between 1-10, a lower value indicates a low number of software seen per IP address, while a higher value indicates a high number of software seen per IP address. A 0 value indicates that the probability is unknown.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<Integer> getPlatformDiversity() { return getAs("platformdiversity", AspectPropertyValue.class, Integer.class); }
-	/**
-	 * Refers to the diversity of browsers observed from the IP range. An integer between 1-10, a lower value indicates a low number of browsers seen per IP address, while a higher value indicates a high number of browsers seen per IP address. A 0 value indicates that the probability is unknown.
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public AspectPropertyValue<Integer> getBrowserDiversity() { return getAs("browserdiversity", AspectPropertyValue.class, Integer.class); }
 }
