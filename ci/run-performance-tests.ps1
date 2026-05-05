@@ -98,13 +98,13 @@ Get-Content "$RepoName/test-results/performance-summary/fiftyone.ipintelligence.
 
 # Create a JSON object with specific performance metrics and write it to the output file.
 Write-Host $profiles
-Write-Output "{
-    'HigherIsBetter': {
-        'DetectionsPerSecond': $($profiles['MaxPerformance-false-true-false'].Overall.DetectionsPerSecond)
-    },
-    'LowerIsBetter': {
-        'AvgMillisecsPerDetection' : $($profiles['MaxPerformance-false-true-false'].Overall.AvgMillisecsPerDetection)
+@{
+    HigherIsBetter = @{
+        DetectionsPerSecond = $profiles['MaxPerformance-false'].Overall.DetectionsPerSecond
     }
-}" > "$RepoName/test-results/performance-summary/results_$Name.json"
+    LowerIsBetter = @{
+        AvgMillisecsPerDetection = $profiles['MaxPerformance-false'].Overall.AvgMillisecsPerDetection
+    }
+} | ConvertTo-Json > "$RepoName/test-results/performance-summary/results_$Name.json"
 
 exit $failed ? 1 : 0
