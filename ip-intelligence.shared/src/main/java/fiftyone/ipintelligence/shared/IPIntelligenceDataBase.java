@@ -165,6 +165,12 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@Override
 	public AspectPropertyValue<Integer> getHumanProbability() { return getAs("humanprobability", AspectPropertyValue.class, Integer.class); }
 	/**
+	 * The IPv4 address of the request.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<InetAddress> getIp() { return getAs("ip", AspectPropertyValue.class, InetAddress.class); }
+	/**
 	 * End of the IP range to which the evidence IP belongs.
 	 */
 	@SuppressWarnings("unchecked")
@@ -176,6 +182,12 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@SuppressWarnings("unchecked")
 	@Override
 	public AspectPropertyValue<InetAddress> getIpRangeStart() { return getAs("iprangestart", AspectPropertyValue.class, InetAddress.class); }
+	/**
+	 * The IPv6 address of the request.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<InetAddress> getIpV6() { return getAs("ipv6", AspectPropertyValue.class, InetAddress.class); }
 	/**
 	 * Indicates whether the IP address is associated with a broadband connection. Includes DSL, Cable, Fibre, and Satellite connections.
 	 */
