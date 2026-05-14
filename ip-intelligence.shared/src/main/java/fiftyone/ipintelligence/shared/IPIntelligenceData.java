@@ -111,6 +111,10 @@ public interface IPIntelligenceData extends AspectData
 	 */
 	AspectPropertyValue<Integer> getHumanProbability();
 	/**
+	 * The IPv4 address of the request.
+	 */
+	AspectPropertyValue<InetAddress> getIp();
+	/**
 	 * End of the IP range to which the evidence IP belongs.
 	 */
 	AspectPropertyValue<InetAddress> getIpRangeEnd();
@@ -118,6 +122,10 @@ public interface IPIntelligenceData extends AspectData
 	 * Start of the IP range to which the evidence IP belongs.
 	 */
 	AspectPropertyValue<InetAddress> getIpRangeStart();
+	/**
+	 * The IPv6 address of the request.
+	 */
+	AspectPropertyValue<InetAddress> getIpV6();
 	/**
 	 * Indicates whether the IP address is associated with a broadband connection. Includes DSL, Cable, Fibre, and Satellite connections.
 	 */
