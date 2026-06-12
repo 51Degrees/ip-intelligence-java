@@ -28,6 +28,14 @@ to use the Cloud API, as described on our website. Get resource keys from
 our [configurator](https://configure.51degrees.com/), see our [documentation](https://51degrees.com/documentation/_concepts__configurator.html) on 
 how to use this.
 
+The cloud property tiers changed in May 2026 and a free resource key
+populates the free tier properties only (Country, LocationConfidence, Ip
+and IpV6). A free key selecting these properties can be created at
+https://configure.51degrees.com/Wkqxf3Bs, whilst a key created at
+https://configure.51degrees.com/hYzn3TV3 also includes the paid properties
+used by the examples. See https://51degrees.com/pricing to get a paid
+subscription with more properties.
+
 #### On-Premise
 
 In order to perform IP intelligence on-premise, you will need to use a

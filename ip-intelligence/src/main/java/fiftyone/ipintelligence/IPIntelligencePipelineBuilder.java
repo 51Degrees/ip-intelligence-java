@@ -109,8 +109,11 @@ public class IPIntelligencePipelineBuilder {
 
     /**
      * Use the 51Degrees Cloud service to perform IP Intelligence.
-     * @param resourceKey The resource key to use when querying the Cloud service. 
-     * Obtain one from https://configure.51degrees.com
+     * @param resourceKey The resource key to use when querying the Cloud service.
+     * A free key may be obtained from https://configure.51degrees.com/Wkqxf3Bs
+     * and populates the free tier properties only. See
+     * https://51degrees.com/pricing to get a paid subscription with more
+     * properties.
      * @return A builder that can be used to configure and build a pipeline
      * that will use the Cloud IP Intelligence engine.
      */
