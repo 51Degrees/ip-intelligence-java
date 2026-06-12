@@ -30,6 +30,29 @@ import java.util.Objects;
  */
 public class KeyUtils {
     /**
+     * Name of the aligned environment variable or system property which
+     * supplies the resource key. This name is checked before any legacy name.
+     */
+    public static final String RESOURCE_KEY_ENV_VAR = "51DEGREES_RESOURCE_KEY";
+
+    /**
+     * Obtain a resource key from an environment variable or a system property.
+     * <p>
+     * The aligned name {@link #RESOURCE_KEY_ENV_VAR} is checked first and the
+     * supplied legacy name is checked second. Each name is looked up using
+     * {@link #getNamedKey(String)}.
+     * @param legacyKeyName legacy name to try when the aligned name is not set
+     * @return the resource key, or null if neither name is set
+     */
+    public static String getResourceKey(String legacyKeyName) {
+        String resourceKey = getNamedKey(RESOURCE_KEY_ENV_VAR);
+        if (Objects.isNull(resourceKey)) {
+            resourceKey = getNamedKey(legacyKeyName);
+        }
+        return resourceKey;
+    }
+
+    /**
      * Obtain a key either from environment variable or from a property.
      * <p>
      * Try resource key as env var, then as upper case env var, the system property
