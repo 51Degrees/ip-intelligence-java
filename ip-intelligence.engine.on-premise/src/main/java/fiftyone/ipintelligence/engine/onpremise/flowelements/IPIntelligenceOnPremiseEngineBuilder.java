@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.engine.onpremise.flowelements;
 
-import fiftyone.ipintelligence.engine.onpremise.data.IPIntelligenceDataHash;
+import fiftyone.ipintelligence.engine.onpremise.data.IPIntelligenceDataOnPremise;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.ConfigIpiSwig;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.RequiredPropertiesConfigSwig;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.VectorStringSwig;
@@ -51,15 +51,15 @@ import static fiftyone.pipeline.util.StringManipulation.stringJoin;
  * Builder for the {@link IPIntelligenceOnPremiseEngine}. All options for the engine
  * should be set here.
  * <p>
- * Default values are taken from ip-intelligence-cxx/src/hash/hash.c
+ * Default values are taken from the ip-intelligence-cxx engine configuration
  */
-@ElementBuilder(alternateName = "HashIPIntelligence")
+@ElementBuilder(alternateName = "IPIntelligenceOnPremise")
 public class IPIntelligenceOnPremiseEngineBuilder
     extends OnPremiseIPIntelligenceEngineBuilderBase<
     IPIntelligenceOnPremiseEngineBuilder,
     IPIntelligenceOnPremiseEngine> {
 
-    private final String dataDownloadType = "HashV41";
+    private final String dataDownloadType = "IPIV41";
    
     /**
      * Native configuration instance for this engine.
@@ -172,7 +172,6 @@ public class IPIntelligenceOnPremiseEngineBuilder
      * Provide a hint as to how many threads will access the pipeline simultaneously
      * <p>
      * Default is the result of {@link Runtime#getRuntime()#getAvailableProcessors()}
-     * @see <a href="https://51degrees.com/documentation/_device_detection__features__concurrent_processing.html">Concurrent processing</a>
      * @param concurrency expected concurrent accesses
      * @return this builder
      */
@@ -239,25 +238,25 @@ public class IPIntelligenceOnPremiseEngineBuilder
             dataFile,
             config,
             requiredProperties,
-            new HashDataFactory(loggerFactory),
+            new OnPremiseDataFactory(loggerFactory),
             tempDir);
     }
 
-    private static class HashDataFactory implements
-        ElementDataFactory<IPIntelligenceDataHash> {
+    private static class OnPremiseDataFactory implements
+        ElementDataFactory<IPIntelligenceDataOnPremise> {
 
         private final ILoggerFactory loggerFactory;
 
-        public HashDataFactory(ILoggerFactory loggerFactory) {
+        public OnPremiseDataFactory(ILoggerFactory loggerFactory) {
             this.loggerFactory = loggerFactory;
         }
 
         @Override
-        public IPIntelligenceDataHash create(
+        public IPIntelligenceDataOnPremise create(
             FlowData flowData,
-            FlowElement<IPIntelligenceDataHash, ?> engine) {
-            return new IPIntelligenceDataHashDefault(
-                loggerFactory.getLogger(IPIntelligenceDataHash.class.getName()),
+            FlowElement<IPIntelligenceDataOnPremise, ?> engine) {
+            return new IPIntelligenceDataOnPremiseDefault(
+                loggerFactory.getLogger(IPIntelligenceDataOnPremise.class.getName()),
                 flowData,
                 (IPIntelligenceOnPremiseEngine) engine,
                 MissingPropertyServiceDefault.getInstance());

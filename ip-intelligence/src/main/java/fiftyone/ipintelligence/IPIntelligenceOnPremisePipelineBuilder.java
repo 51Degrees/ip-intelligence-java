@@ -325,9 +325,9 @@ public class IPIntelligenceOnPremisePipelineBuilder
     public Pipeline build() throws Exception {
         AspectEngine<? extends AspectData, ? extends AspectPropertyMetaData> IPIntelligenceEngine;
 
-        IPIntelligenceOnPremiseEngineBuilder hashBuilder =
+        IPIntelligenceOnPremiseEngineBuilder engineBuilder =
                 new IPIntelligenceOnPremiseEngineBuilder(loggerFactory, dataUpdateService);
-        IPIntelligenceEngine = configureAndBuild(hashBuilder);
+        IPIntelligenceEngine = configureAndBuild(engineBuilder);
 
         if (IPIntelligenceEngine != null) {
             // Add the share usage element to the list if enabled
@@ -348,8 +348,8 @@ public class IPIntelligenceOnPremisePipelineBuilder
     }
 
     /**
-     * Private method used to set configuration options common to 
-     * both hash and pattern engines and build the engine.
+     * Private method used to set configuration options on
+     * the on-premise engine builder and build the engine.
      * @param builder The builder to configure.
      * @return A new IP Intelligence engine instance.
      * @throws Exception 

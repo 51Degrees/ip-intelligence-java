@@ -30,7 +30,7 @@ import fiftyone.pipeline.engines.fiftyone.data.ProfileMetaData;
 import fiftyone.pipeline.engines.fiftyone.data.ValueMetaData;
 
 
-public class MetaDataHasherHash implements MetaDataHasher {
+public class MetaDataHasherOnPremise implements MetaDataHasher {
 
     @Override
     public int hashProperties(int hash, Wrapper wrapper) {

@@ -38,12 +38,17 @@ import java.util.Map;
 
 /**
  * Encapsulates a list of {@link IPIntelligenceData} instances which can be returned
- * by the 51Degrees Cloud service when certain evidence is provided (e.g. TAC)
+ * by the 51Degrees Cloud service when the evidence provided matches more than
+ * one profile.
+ * @deprecated multi-profile responses (e.g. hardware profile lookup) are a
+ * device detection feature and have no equivalent in IP Intelligence. This
+ * class will be removed in a future version.
  */
+@Deprecated
 public class MultiIPIDataCloud
     extends AspectDataBase
     implements MultiProfileData<IPIntelligenceData> {
-    private static final String DEVICE_LIST_KEY = "profiles";
+    private static final String PROFILE_LIST_KEY = "profiles";
 
     /**
      * Constructs a new instance with a non-thread-safe, case-insensitive
@@ -58,7 +63,7 @@ public class MultiIPIDataCloud
         FlowData flowData,
         AspectEngine<? extends AspectData, ? extends AspectPropertyMetaData> engine) {
         super(logger, flowData, engine);
-        this.put(DEVICE_LIST_KEY, new ArrayList<IPIntelligenceData>());
+        this.put(PROFILE_LIST_KEY, new ArrayList<IPIntelligenceData>());
     }
 
     /**
@@ -77,7 +82,7 @@ public class MultiIPIDataCloud
         AspectEngine<? extends AspectData, ? extends AspectPropertyMetaData> engine,
         MissingPropertyService missingPropertyService) {
         super(logger, flowData, engine, missingPropertyService);
-        this.put(DEVICE_LIST_KEY, new ArrayList<IPIntelligenceData>());
+        this.put(PROFILE_LIST_KEY, new ArrayList<IPIntelligenceData>());
     }
 
     @Override
@@ -96,6 +101,6 @@ public class MultiIPIDataCloud
      */
     @SuppressWarnings("unchecked")
     private List<IPIntelligenceData> getDeviceList() {
-        return (List<IPIntelligenceData>)this.get(DEVICE_LIST_KEY);
+        return (List<IPIntelligenceData>)this.get(PROFILE_LIST_KEY);
     }
 }

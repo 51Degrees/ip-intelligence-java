@@ -81,7 +81,7 @@ public class EngineTests {
 	 * @throws Exception
 	 */
 	@Test
-	public void Engine_Hash_GetDataSourceTier_Lite() throws Exception {
+	public void Engine_OnPremise_GetDataSourceTier_Lite() throws Exception {
 		testDataSourceTier(LITE_IPI_DATA_FILE_NAME);
 	}
 	
@@ -91,7 +91,7 @@ public class EngineTests {
 	 * @throws Exception
 	 */
 	@Test
-	public void Engine_Hash_GetDataSourceTier_Enterprise() throws Exception {
+	public void Engine_OnPremise_GetDataSourceTier_Enterprise() throws Exception {
 		testDataSourceTier(ENTERPRISE_IPI_V41_DATA_FILE_NAME);
 	}
 

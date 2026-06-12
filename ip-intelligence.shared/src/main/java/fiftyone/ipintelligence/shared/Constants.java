@@ -30,12 +30,18 @@ public class Constants {
     /**
      * The suffix that is used to identify a TAC in evidence.
      * https://en.wikipedia.org/wiki/Type_Allocation_Code
+     * @deprecated TAC is a device detection concept and is not used by
+     * IP Intelligence. This constant will be removed in a future version.
      */
+    @Deprecated
     public static final String EVIDENCE_TAC_SUFFIX = "tac";
 
     /**
      * The complete key for supplying a TAC as evidence.
+     * @deprecated TAC is a device detection concept and is not used by
+     * IP Intelligence. This constant will be removed in a future version.
      */
+    @Deprecated
     public static final String EVIDENCE_QUERY_TAC_KEY =
         EVIDENCE_QUERY_PREFIX +
         EVIDENCE_SEPERATOR +
@@ -48,12 +54,20 @@ public class Constants {
      * for Android devices and by
      * https://gist.github.com/soapyigu/c99e1f45553070726f14c1bb0a54053b#file-machinename-swift
      * for iOS devices.
+     * @deprecated the native model name is a device detection concept and is
+     * not used by IP Intelligence. This constant will be removed in a future
+     * version.
      */
+    @Deprecated
     public static final String EVIDENCE_NATIVE_MODEL_SUFFIX = "nativemodel";
 
     /**
      * The complete key for supplying a native model name as evidence.
+     * @deprecated the native model name is a device detection concept and is
+     * not used by IP Intelligence. This constant will be removed in a future
+     * version.
      */
+    @Deprecated
     public static final String EVIDENCE_QUERY_NATIVE_MODEL_KEY =
         EVIDENCE_QUERY_PREFIX +
         EVIDENCE_SEPERATOR +

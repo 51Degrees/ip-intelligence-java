@@ -22,10 +22,20 @@
 
 package fiftyone.ipintelligence.engine.onpremise;
 
+/**
+ * @deprecated match methods are a device detection (Hash algorithm) concept
+ * and are not used by IP Intelligence. This class will be removed in a
+ * future version.
+ */
+@Deprecated
 public class Enums {
     /**
-     * Enumeration of possible match methods used by the Hash engine.
+     * Enumeration of possible match methods used by the device detection
+     * Hash engine.
+     * @deprecated not used by IP Intelligence; will be removed in a future
+     * version.
      */
+    @Deprecated
     public enum MatchMethods {
         NONE,
         PERFORMANCE,

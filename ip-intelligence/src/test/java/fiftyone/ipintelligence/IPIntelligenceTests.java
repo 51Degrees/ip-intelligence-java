@@ -24,7 +24,7 @@ package fiftyone.ipintelligence;
 
 import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPremiseEngine;
 import fiftyone.ipintelligence.shared.IPIntelligenceData;
-import fiftyone.ipintelligence.shared.testhelpers.UserAgentGenerator;
+import fiftyone.ipintelligence.shared.testhelpers.IpAddressGenerator;
 import fiftyone.ipintelligence.shared.testhelpers.FileUtils;
 import fiftyone.pipeline.core.data.FlowData;
 import fiftyone.pipeline.core.data.FlowError;
@@ -54,7 +54,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.IP_ADDRESSES_FILE_NAME;
-import static fiftyone.pipeline.core.Constants.EVIDENCE_HTTPHEADER_PREFIX;
+import static fiftyone.pipeline.core.Constants.EVIDENCE_QUERY_PREFIX;
 import static fiftyone.pipeline.core.Constants.EVIDENCE_SEPERATOR;
 import static fiftyone.pipeline.engines.Constants.PerformanceProfiles.*;
 import static org.junit.Assert.assertEquals;
@@ -69,9 +69,9 @@ public class IPIntelligenceTests {
 
     private static final Logger logger = LoggerFactory.getLogger(IPIntelligenceTests.class);
 
-    private static final String IPI_DATA_FILE_NAME = FileUtils.getHashFileName();
+    private static final String IPI_DATA_FILE_NAME = FileUtils.getIpiFileName();
 
-    private static UserAgentGenerator userAgents;
+    private static IpAddressGenerator ipAddresses;
     TestConfig[] ipiConfigs = {
         // ******** IPI with a single thread *********
         new TestConfig(IPI_DATA_FILE_NAME, MaxPerformance, false, false, "IPI-MaxPerformance-NoCache-SingleThread"),
@@ -103,7 +103,7 @@ public class IPIntelligenceTests {
 
     @BeforeClass
     public static void initClass() throws IOException {
-        userAgents = new UserAgentGenerator(
+        ipAddresses = new IpAddressGenerator(
             FileFinder.getFilePath(IP_ADDRESSES_FILE_NAME));
     }
 
@@ -136,10 +136,10 @@ public class IPIntelligenceTests {
     }
 
     @Test
-    public void IPI_AllConfigurations_100_UserAgents() throws Exception {
+    public void IPI_AllConfigurations_100_IpAddresses() throws Exception {
         for (TestConfig config : ipiConfigs) {
             logger.info("Testing '" + config.name + "'");
-            TestOnPremise_AllConfigurations_100_UserAgents(
+            TestOnPremise_AllConfigurations_100_IpAddresses(
                 config.dataFileName,
                 config.performanceProfile,
                 config.useCache,
@@ -147,7 +147,7 @@ public class IPIntelligenceTests {
         }
     }
 
-    public void TestOnPremise_AllConfigurations_100_UserAgents(
+    public void TestOnPremise_AllConfigurations_100_IpAddresses(
         String datafileName,
         Constants.PerformanceProfiles performanceProfile,
         boolean useCache,
@@ -177,12 +177,12 @@ public class IPIntelligenceTests {
                 callables.add(new Callable<Void>() {
                     @Override
                     public Void call() throws Exception {
-                        for (String userAgent : userAgents.getRandomUserAgents(100)) {
+                        for (String ipAddress : ipAddresses.getRandomIpAddresses(100)) {
                             try (FlowData flowData = pipeline.createFlowData()) {
                                 flowData.addEvidence(
-                                    EVIDENCE_HTTPHEADER_PREFIX +
-                                        EVIDENCE_SEPERATOR + "User-Agent",
-                                    userAgent)
+                                    EVIDENCE_QUERY_PREFIX +
+                                        EVIDENCE_SEPERATOR + "client-ip",
+                                    ipAddress)
                                     .process();
                                 if (flowData.getErrors() != null) {
                                     assertEquals(

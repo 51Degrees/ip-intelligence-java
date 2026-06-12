@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.engine.onpremise.flowelements;
 
-import fiftyone.ipintelligence.engine.onpremise.data.IPIntelligenceDataHash;
+import fiftyone.ipintelligence.engine.onpremise.data.IPIntelligenceDataOnPremise;
 import fiftyone.ipintelligence.engine.onpremise.data.ProfileMetaDataIPI;
 import fiftyone.ipintelligence.engine.onpremise.data.PropertyMetaDataIPI;
 import fiftyone.ipintelligence.engine.onpremise.data.ValueMetaDataIPI;
@@ -45,13 +45,13 @@ import static fiftyone.pipeline.util.Check.notFileExists;
 import static org.apache.commons.lang3.BooleanUtils.isFalse;
 
 /**
- * On-premise IP Intelligence engine. This engine takes User-Agents and other
- * relevant HTTP headers and returns properties about the device which produced
- * them e.g. DeviceType or ReleaseDate.
+ * On-premise IP Intelligence engine. This engine takes IP addresses and
+ * other relevant HTTP headers and returns properties about the IP range
+ * that the IP address falls within.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-on-premise.md">Specification</a>
  */
 public class IPIntelligenceOnPremiseEngine
-    extends FiftyOneOnPremiseAspectEngineBase<IPIntelligenceDataHash,
+    extends FiftyOneOnPremiseAspectEngineBase<IPIntelligenceDataOnPremise,
     FiftyOneAspectPropertyMetaData> {
     private EngineIpiSwig engine = null;
     private final List<FiftyOneAspectPropertyMetaData> properties = new ArrayList<>();
@@ -71,7 +71,7 @@ public class IPIntelligenceOnPremiseEngine
      *                   the properties which the engine should be initialised
      *                   with
      * @param IPIDataFactory the factory to use when creating a
-     *                          {@link IPIntelligenceDataHash} instance
+     *                          {@link IPIntelligenceDataOnPremise} instance
      * @param tempDataFileDir the file where a temporary data file copy
      *                        will be stored if one is created
      */
@@ -80,7 +80,7 @@ public class IPIntelligenceOnPremiseEngine
         AspectEngineDataFile dataFile,
         ConfigIpiSwig config,
         RequiredPropertiesConfigSwig properties,
-        ElementDataFactory<IPIntelligenceDataHash> IPIDataFactory,
+        ElementDataFactory<IPIntelligenceDataOnPremise> IPIDataFactory,
         String tempDataFileDir) {
         super(logger, IPIDataFactory, tempDataFileDir);
         this.config = config;
@@ -293,7 +293,7 @@ public class IPIntelligenceOnPremiseEngine
     }
 
     @Override
-    protected void processEngine(FlowData flowData, IPIntelligenceDataHash IPIData) {
+    protected void processEngine(FlowData flowData, IPIntelligenceDataOnPremise IPIData) {
         try (EvidenceIpiSwig relevantEvidence =
             new EvidenceIpiSwig()) {
             List<String> keys = evidenceKeys;
@@ -313,7 +313,7 @@ public class IPIntelligenceOnPremiseEngine
                                 evidenceItem.getValue().toString());
                 }
             }
-            ((IPIntelligenceDataHashDefault) IPIData).setResults(
+            ((IPIntelligenceDataOnPremiseDefault) IPIData).setResults(
                 engine.process(relevantEvidence));
         }
     }
@@ -366,7 +366,7 @@ public class IPIntelligenceOnPremiseEngine
         super.addDataFile(dataFile);
         if (dataFile instanceof  FiftyOneDataFile) {
             FiftyOneDataFile fiftyOneDataFile = (FiftyOneDataFile)dataFile;
-            fiftyOneDataFile.setDataUpdateDownloadType("HashV41");
+            fiftyOneDataFile.setDataUpdateDownloadType("IPIV41");
         }
     }
 

@@ -20,15 +20,26 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence;
+package fiftyone.ipintelligence.engine.onpremise.data;
+
+import fiftyone.ipintelligence.shared.IPIntelligenceData;
+import fiftyone.pipeline.engines.data.AspectPropertyValue;
+
+import java.util.List;
 
 /**
- * @deprecated  no longer needed since IP Intelligence uses a different algorithm than device detection
+ * On-premise specific interface for {@link IPIntelligenceData}.
+ * @see <a href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-on-premise.md#element-data">Specification</a>
  */
-@Deprecated
-public class Enums {
-    public enum IPIntelligenceAlgorithm {
-        Hash,
-        Pattern
-    }
+public interface IPIntelligenceDataOnPremise extends IPIntelligenceData {
+
+    /**
+     * Get the values for the specified property as a List&lt;&gt;.
+     * @param propertyName name of the property to get values for
+     * @param parametrizedTypes types parametrizing {@link AspectPropertyValue} starting with {@link List}
+     * @return values as a list
+     */
+    AspectPropertyValue<List<?>> getValues(
+            String propertyName,
+            Class<?>[] parametrizedTypes);
 }

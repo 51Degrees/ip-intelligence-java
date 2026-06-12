@@ -53,7 +53,7 @@ import static org.mockito.Mockito.*;
 @SuppressWarnings({"rawtypes", "deprecation"})
 public class IPIntelligenceOnPremisePipelineBuilderTest {
 
-    private static final String IPI_DATA_FILE_NAME = FileUtils.getHashFileName();
+    private static final String IPI_DATA_FILE_NAME = FileUtils.getIpiFileName();
     private IPIntelligenceOnPremisePipelineBuilder builder;
     private File datafile = FileFinder.getFilePath(IPI_DATA_FILE_NAME);
     private ILoggerFactory loggerFactory;

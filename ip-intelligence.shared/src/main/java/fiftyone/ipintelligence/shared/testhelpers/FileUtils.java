@@ -44,7 +44,6 @@ public class FileUtils {
     public static final String LITE_IPI_DATA_FILE_NAME = "51Degrees-LiteV41.ipi";
     private static  Optional<File> IPI_DATA_FILE;
     public static final String IP_ADDRESSES_FILE_NAME = "evidence.csv";
-    private static File UA_FILE;
     public static final String EVIDENCE_FILE_NAME = "evidence.yml";
     private static Optional<File> EVIDENCE_FILE;
 
@@ -53,8 +52,32 @@ public class FileUtils {
      *
      * @return a file or null if not found
      */
+    public static String getIpiFileName() {
+        return Objects.isNull(getIpiFile()) ? null : getIpiFile().getPath();
+    }
+
+    /**
+     * Helper to find the location of an Enterprise or Lite IPI file in the default search scope
+     *
+     * @return a file or null if not found
+     * @deprecated "Hash" refers to the device detection algorithm and has no
+     * meaning for IP Intelligence. Use {@link #getIpiFileName()} instead.
+     */
+    @Deprecated
     public static String getHashFileName() {
-        return Objects.isNull(getHashFile()) ? null : getHashFile().getPath();
+        return getIpiFileName();
+    }
+
+    /**
+     * Helper to find the location of an Enterprise or Lite IPI file in the default search scope
+     *
+     * @return a file or null if not found
+     * @deprecated "Hash" refers to the device detection algorithm and has no
+     * meaning for IP Intelligence. Use {@link #getIpiFile()} instead.
+     */
+    @Deprecated
+    public static File getHashFile() {
+        return getIpiFile();
     }
 
     /**
@@ -62,7 +85,7 @@ public class FileUtils {
      *
      * @return a file or empty if not found
      */
-    public static File getHashFile() {
+    public static File getIpiFile() {
         try {
             if (Objects.nonNull(IPI_DATA_FILE)){
                 return IPI_DATA_FILE.orElse(null);
@@ -104,7 +127,7 @@ public class FileUtils {
     /**
      * Prefix for temp files that are created by {@link #jarFileHelper(String)}
      **/
-    public static String TEMP_FILE_PREFIX = "DDTempFile";
+    public static String TEMP_FILE_PREFIX = "IPITempFile";
 
     /**
      * Search the classpath for a resource. If it doesn't exist throw an exception.

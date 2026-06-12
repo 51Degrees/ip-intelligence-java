@@ -30,7 +30,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ValueHashTests extends TestsBase {
+public class ValueOnPremiseTests extends TestsBase {
 
     @Before
     public void init() throws Exception {
@@ -43,22 +43,22 @@ public class ValueHashTests extends TestsBase {
     }
     
     @Test
-    public void Values_Hash_ValueTypes() throws Exception {
+    public void Values_OnPremise_ValueTypes() throws Exception {
         ValueTests.valueTypes(getWrapper());
     }
 
     @Test
-    public void Values_Hash_AvailableProperties() throws Exception {
+    public void Values_OnPremise_AvailableProperties() throws Exception {
         ValueTests.availableProperties(getWrapper());
     }
 
     @Test
-    public void Values_Hash_TypedGetters() throws Exception {
+    public void Values_OnPremise_TypedGetters() throws Exception {
         ValueTests.typedGetters(getWrapper());
     }
 
     @Test
-    public void Values_Hash_DeviceId() throws Exception {
+    public void Values_OnPremise_DeviceId() throws Exception {
         ValueTests.deviceId(getWrapper());
     }
 }

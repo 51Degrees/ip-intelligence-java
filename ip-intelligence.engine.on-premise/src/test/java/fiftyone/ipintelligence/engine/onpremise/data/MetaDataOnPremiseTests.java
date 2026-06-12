@@ -36,7 +36,7 @@ import java.util.concurrent.Executors;
 import static org.junit.Assume.assumeTrue;
 
 @Ignore
-public class MetaDataHashTests extends TestsBase {
+public class MetaDataOnPremiseTests extends TestsBase {
     private static final double expectedPropertiesSeconds = 300.1;
     private static final double expectedValuesSeconds = 300.1;
     private static final double expectedComponentsSeconds = 300.01;
@@ -57,8 +57,8 @@ public class MetaDataHashTests extends TestsBase {
     }
 
     @Test
-    public void MetaData_Hash_Reload() throws ExecutionException, InterruptedException {
-        fiftyone.ipintelligence.shared.testhelpers.data.MetaDataTests.reload(getWrapper(), new MetaDataHasherHash(), executorService);
+    public void MetaData_OnPremise_Reload() throws ExecutionException, InterruptedException {
+        fiftyone.ipintelligence.shared.testhelpers.data.MetaDataTests.reload(getWrapper(), new MetaDataHasherOnPremise(), executorService);
     }
 
     /**
@@ -68,7 +68,7 @@ public class MetaDataHashTests extends TestsBase {
      */
     @Test
     public void MetaData_Performance_Properties() {
-        MetaDataHasherHash hasher = new MetaDataHasherHash();
+        MetaDataHasherOnPremise hasher = new MetaDataHasherOnPremise();
         long start = System.currentTimeMillis();
         hasher.hashProperties(0, getWrapper());
         double time = ((double)System.currentTimeMillis() - (double)start) /
@@ -86,7 +86,7 @@ public class MetaDataHashTests extends TestsBase {
      */
     @Test
     public void MetaData_Performance_Components() {
-        MetaDataHasherHash hasher = new MetaDataHasherHash();
+        MetaDataHasherOnPremise hasher = new MetaDataHasherOnPremise();
         long start = System.currentTimeMillis();
         hasher.hashComponents(0, getWrapper());
         double time = ((double)System.currentTimeMillis() - (double)start) /
@@ -104,7 +104,7 @@ public class MetaDataHashTests extends TestsBase {
      */
     @Test
     public void MetaData_Performance_Values() {
-        MetaDataHasherHash hasher = new MetaDataHasherHash();
+        MetaDataHasherOnPremise hasher = new MetaDataHasherOnPremise();
         long start = System.currentTimeMillis();
         hasher.hashValues(0, getWrapper());
         double time = ((double)System.currentTimeMillis() - (double)start) /
@@ -122,7 +122,7 @@ public class MetaDataHashTests extends TestsBase {
      */
     @Test
     public void MetaData_Performance_Profiles() {
-        MetaDataHasherHash hasher = new MetaDataHasherHash();
+        MetaDataHasherOnPremise hasher = new MetaDataHasherOnPremise();
         long start = System.currentTimeMillis();
         hasher.hashProfiles(0, getWrapper());
         double time = ((double)System.currentTimeMillis() - (double)start) /
