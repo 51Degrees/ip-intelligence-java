@@ -35,6 +35,13 @@ data file.
 
 [ip-intelligence-data](https://github.com/51Degrees/ip-intelligence-data/) repository instructs how to obtain a 'Lite' data file, otherwise [contact us](https://51degrees.com/contact-us) to obtain an 'Enterprise' data file.
 
+For tests, the data file can be supplied explicitly by setting the
+`51DEGREES_IPI_PATH` environment variable or system property to the path of
+the .ipi file. When it is not set, the project space is searched for the
+expected file name, with the free 'Lite' file expected in the
+[ip-intelligence-data](https://github.com/51Degrees/ip-intelligence-data/)
+location.
+
 ## Installation
 
 Our latest release is available as compiled JARs on Maven - or you can compile from source as described below.
@@ -104,6 +111,13 @@ repository.
 
 You will need [resource keys](https://51degrees.com/documentation/_info__resource_keys.html)
 (see above) to complete the tests and run examples which include exercising the cloud API.
+
+The tests look for a resource key in the following order:
+
+1. The aligned `51DEGREES_RESOURCE_KEY` name, set as an environment variable
+   or as a system property.
+2. The legacy `TestResourceKey` name, which is still supported and is checked
+   after the aligned name.
 
 To verify the code:
 
