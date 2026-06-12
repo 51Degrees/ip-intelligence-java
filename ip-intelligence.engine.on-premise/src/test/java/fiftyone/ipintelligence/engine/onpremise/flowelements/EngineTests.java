@@ -66,13 +66,17 @@ public class EngineTests {
 		IPIntelligenceOnPremiseEngine engine = createEngine(dataFile);
 		String tier = engine.getDataSourceTier();
 		engine.close();
-		
+
+		// getDataSourceTier() returns the data set name embedded in the .ipi
+		// file header, which is the common-metadata product name. The values
+		// below were confirmed by loading the actual data files: IPIV4Lite,
+		// IPIV4Enterprise and IPIV4Asn. (The device detection "TAC" tier has
+		// no equivalent for IP Intelligence.)
 		if (fileName.equals(LITE_IPI_DATA_FILE_NAME)) {
-			assertEquals("Lite", tier);
+			assertEquals("IPIV4Lite", tier);
 		}
 		else {
-			assertTrue(tier.equalsIgnoreCase("Enterprise") ||
-					tier.equalsIgnoreCase("TAC"));
+			assertEquals("IPIV4Enterprise", tier);
 		}
 	}
 	
