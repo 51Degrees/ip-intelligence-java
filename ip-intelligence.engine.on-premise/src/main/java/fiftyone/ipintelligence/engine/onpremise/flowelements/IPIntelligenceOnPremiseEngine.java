@@ -45,9 +45,9 @@ import static fiftyone.pipeline.util.Check.notFileExists;
 import static org.apache.commons.lang3.BooleanUtils.isFalse;
 
 /**
- * On-premise IP Intelligence engine. This engine takes User-Agents and other
- * relevant HTTP headers and returns properties about the device which produced
- * them e.g. DeviceType or ReleaseDate.
+ * On-premise IP Intelligence engine. This engine takes an IP address as
+ * evidence and returns properties about the network and location associated
+ * with it e.g. RegisteredName or CountryCode.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-on-premise.md">Specification</a>
  */
 public class IPIntelligenceOnPremiseEngine
@@ -70,7 +70,7 @@ public class IPIntelligenceOnPremiseEngine
      * @param properties native required properties configuration which define
      *                   the properties which the engine should be initialised
      *                   with
-     * @param IPIDataFactory the factory to use when creating a
+     * @param ipiDataFactory the factory to use when creating a
      *                          {@link IPIntelligenceDataHash} instance
      * @param tempDataFileDir the file where a temporary data file copy
      *                        will be stored if one is created
@@ -80,9 +80,9 @@ public class IPIntelligenceOnPremiseEngine
         AspectEngineDataFile dataFile,
         ConfigIpiSwig config,
         RequiredPropertiesConfigSwig properties,
-        ElementDataFactory<IPIntelligenceDataHash> IPIDataFactory,
+        ElementDataFactory<IPIntelligenceDataHash> ipiDataFactory,
         String tempDataFileDir) {
-        super(logger, IPIDataFactory, tempDataFileDir);
+        super(logger, ipiDataFactory, tempDataFileDir);
         this.config = config;
         this.propertiesConfigSwig = properties;
         addDataFile(dataFile);
@@ -293,7 +293,7 @@ public class IPIntelligenceOnPremiseEngine
     }
 
     @Override
-    protected void processEngine(FlowData flowData, IPIntelligenceDataHash IPIData) {
+    protected void processEngine(FlowData flowData, IPIntelligenceDataHash ipiData) {
         try (EvidenceIpiSwig relevantEvidence =
             new EvidenceIpiSwig()) {
             List<String> keys = evidenceKeys;
@@ -313,7 +313,7 @@ public class IPIntelligenceOnPremiseEngine
                                 evidenceItem.getValue().toString());
                 }
             }
-            ((IPIntelligenceDataHashDefault) IPIData).setResults(
+            ((IPIntelligenceDataHashDefault) ipiData).setResults(
                 engine.process(relevantEvidence));
         }
     }
@@ -366,7 +366,7 @@ public class IPIntelligenceOnPremiseEngine
         super.addDataFile(dataFile);
         if (dataFile instanceof  FiftyOneDataFile) {
             FiftyOneDataFile fiftyOneDataFile = (FiftyOneDataFile)dataFile;
-            fiftyOneDataFile.setDataUpdateDownloadType("HashV41");
+            fiftyOneDataFile.setDataUpdateDownloadType("IPIV41");
         }
     }
 

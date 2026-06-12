@@ -24,7 +24,6 @@ package fiftyone.ipintelligence.cloud.data;
 
 import fiftyone.ipintelligence.cloud.TestsBase;
 import fiftyone.ipintelligence.cloud.ValueTests;
-import fiftyone.ipintelligence.shared.testhelpers.UserAgentGenerator;
 
 import org.junit.After;
 import org.junit.Before;
@@ -34,8 +33,6 @@ import org.junit.Test;
 @Ignore
 public class ValueCloudTests extends TestsBase {
 
-    	private UserAgentGenerator userAgents;
-    	
         @Before
         public void init() throws Exception {
             testInitialize();
@@ -62,8 +59,8 @@ public class ValueCloudTests extends TestsBase {
         }
 
         @Test
-        public void ValueTests_Cloud_DeviceId() throws Exception {
-            ValueTests.deviceId(getWrapper());
+        public void ValueTests_Cloud_RegisteredName() throws Exception {
+            ValueTests.registeredName(getWrapper());
         }
     }
 

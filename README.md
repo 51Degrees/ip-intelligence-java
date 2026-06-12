@@ -116,6 +116,6 @@ For tests and examples that require a license key add the following option:
 ## Projects
 
 - **ip-intelligence** - Main package providing all IP Intelligence capabilities including both cloud and on-premise engines.
-- **ip-intelligence.engine.on-premise** - On-premise detection engine using local data files for IP intelligence analysis.
-- **ip-intelligence.cloud** - Cloud-based detection service for IP intelligence (coming soon).
+- **ip-intelligence.engine.on-premise** - On-premise engine using local data files for IP intelligence analysis.
+- **ip-intelligence.cloud** - Cloud-based IP intelligence engine (coming soon).
 - **ip-intelligence.shared** - Shared classes and utilities used across all IP intelligence engines.

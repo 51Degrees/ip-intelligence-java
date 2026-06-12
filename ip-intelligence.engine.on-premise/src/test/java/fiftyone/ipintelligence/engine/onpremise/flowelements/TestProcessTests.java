@@ -43,27 +43,27 @@ public class TestProcessTests extends TestsBase {
     }
 
     @Test
-    public void Process_Hash_NoEvidence() throws Exception {
+    public void Process_Ipi_NoEvidence() throws Exception {
         ProcessTests.noEvidence(getWrapper(), new DataValidatorHash(getWrapper().getEngine()));
     }
 
     @Test
-    public void Process_Hash_EmptyUserAgent() throws Exception {
-        ProcessTests.emptyUserAgent(getWrapper(), new DataValidatorHash(getWrapper().getEngine()));
+    public void Process_Ipi_EmptyIpAddress() throws Exception {
+        ProcessTests.emptyIpAddress(getWrapper(), new DataValidatorHash(getWrapper().getEngine()));
     }
 
     @Test
-    public void Process_Hash_NoHeaders() throws Exception {
+    public void Process_Ipi_NoHeaders() throws Exception {
         ProcessTests.noHeaders(getWrapper(), new DataValidatorHash(getWrapper().getEngine()));
     }
 
     @Test
-    public void Process_Hash_NoUsefulHeaders() throws Exception {
+    public void Process_Ipi_NoUsefulHeaders() throws Exception {
         ProcessTests.noUsefulHeaders(getWrapper(), new DataValidatorHash(getWrapper().getEngine()));
     }
 
     @Test
-    public void Process_Hash_CaseInsensitiveKeys() throws Exception {
+    public void Process_Ipi_CaseInsensitiveKeys() throws Exception {
         ProcessTests.caseInsensitiveEvidenceKeys(getWrapper(), new DataValidatorHash(getWrapper().getEngine()));
     }
 }

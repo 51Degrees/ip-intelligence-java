@@ -40,7 +40,7 @@ import static org.junit.Assert.*;
 
 public class ValueTests {
 
-    public static void deviceId(Wrapper wrapper) throws Exception {
+    public static void registeredName(Wrapper wrapper) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
             data.addEvidence("server.client-ip", Constants.IPV4_ADDRESS)
                 .process();
@@ -48,7 +48,7 @@ public class ValueTests {
             IPIntelligenceData ipiData = (IPIntelligenceData) elementData;
             assertNotNull("The registered name should not be null.",
                 ipiData.getRegisteredName().getValue());
-            assertFalse("The ipiData id should not be empty.",
+            assertFalse("The registered name should not be empty.",
                     ipiData.getRegisteredName().getValue().isEmpty());
         }
     }

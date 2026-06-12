@@ -32,20 +32,20 @@ import java.util.List;
 import java.util.Random;
 import java.util.regex.Pattern;
 
-public class UserAgentGenerator {
+public class IpAddressGenerator {
 
-    private final List<String> userAgents;
+    private final List<String> ipAddresses;
 
     private Random random = new Random();
 
-    public UserAgentGenerator(File userAgentFile) throws IOException {
-        userAgents = Files.readAllLines(
-            userAgentFile.toPath(),
+    public IpAddressGenerator(File ipAddressFile) throws IOException {
+        ipAddresses = Files.readAllLines(
+            ipAddressFile.toPath(),
             Charset.defaultCharset());
     }
 
-    public String getRandomUserAgent(int randomness) {
-        String value = userAgents.get(random.nextInt(userAgents.size()));
+    public String getRandomIpAddress(int randomness) {
+        String value = ipAddresses.get(random.nextInt(ipAddresses.size()));
         if (randomness > 0) {
             byte[] bytes = value.getBytes(StandardCharsets.US_ASCII);
             for (int i = 0; i < randomness; i++) {
@@ -63,7 +63,7 @@ public class UserAgentGenerator {
     public Iterable<String> getIterable(int count, int randomness) {
         List<String> result = new ArrayList<>(count);
         for (int i = 0; i < count; i++) {
-            result.add(getRandomUserAgent(randomness));
+            result.add(getRandomIpAddress(randomness));
         }
         return result;
     }
@@ -73,9 +73,9 @@ public class UserAgentGenerator {
         int index = 0;
         List<String> result = new ArrayList<>();
         Pattern regex = Pattern.compile(pattern);
-        while (counter < count && index < userAgents.size()) {
-            if (regex.matcher(userAgents.get(index)).matches()) {
-                result.add(userAgents.get(index));
+        while (counter < count && index < ipAddresses.size()) {
+            if (regex.matcher(ipAddresses.get(index)).matches()) {
+                result.add(ipAddresses.get(index));
                 counter++;
             }
             index++;
@@ -87,7 +87,7 @@ public class UserAgentGenerator {
         return getIterable(count, "(.*?)");
     }
 
-    public Iterable<String> getRandomUserAgents(int count) {
+    public Iterable<String> getRandomIpAddresses(int count) {
         return getIterable(count);
     }
 }

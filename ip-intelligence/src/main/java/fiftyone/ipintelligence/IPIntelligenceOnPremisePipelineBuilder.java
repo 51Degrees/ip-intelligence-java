@@ -87,7 +87,8 @@ public class IPIntelligenceOnPremisePipelineBuilder
      * Set the filename of the IP Intelligence data file that the
      * engine should use.
      * @param filename The data file.
-     * @param createTempDataCopy
+     * @param createTempDataCopy If true, the engine will create a temporary
+     * copy of the data file rather than using the data file directly.
      * @return This builder instance.
      * @throws Exception Thrown if the filename has an unknown extension.
      */
@@ -240,7 +241,7 @@ public class IPIntelligenceOnPremisePipelineBuilder
 
     /**
      * Set the performance profile for the IP Intelligence engine.
-     * Defaults to balanced.
+     * Defaults to MaxPerformance.
      * @param profile The performance profile to use.
      * @return This builder instance.
      */
@@ -323,20 +324,20 @@ public class IPIntelligenceOnPremisePipelineBuilder
      */
     @Override
     public Pipeline build() throws Exception {
-        AspectEngine<? extends AspectData, ? extends AspectPropertyMetaData> IPIntelligenceEngine;
+        AspectEngine<? extends AspectData, ? extends AspectPropertyMetaData> ipIntelligenceEngine;
 
-        IPIntelligenceOnPremiseEngineBuilder hashBuilder =
+        IPIntelligenceOnPremiseEngineBuilder engineBuilder =
                 new IPIntelligenceOnPremiseEngineBuilder(loggerFactory, dataUpdateService);
-        IPIntelligenceEngine = configureAndBuild(hashBuilder);
+        ipIntelligenceEngine = configureAndBuild(engineBuilder);
 
-        if (IPIntelligenceEngine != null) {
+        if (ipIntelligenceEngine != null) {
             // Add the share usage element to the list if enabled
             if (shareUsageEnabled) {
                 getFlowElements().add(
                     new ShareUsageBuilder(loggerFactory).build());
             }
             // Add the IP Intelligence engine to the list
-            getFlowElements().add(IPIntelligenceEngine);
+            getFlowElements().add(ipIntelligenceEngine);
         } else {
             throw new RuntimeException("Unexpected error creating IP Intelligence engine.");
         }
@@ -348,8 +349,8 @@ public class IPIntelligenceOnPremisePipelineBuilder
     }
 
     /**
-     * Private method used to set configuration options common to 
-     * both hash and pattern engines and build the engine.
+     * Private method used to set configuration options on the
+     * engine builder and build the engine.
      * @param builder The builder to configure.
      * @return A new IP Intelligence engine instance.
      * @throws Exception 

@@ -93,7 +93,7 @@ public class IPIntelligencePipelineBuilder {
      * @param createTempDataCopy If true, the engine will create a temporary 
      * copy of the data file rather than using the data file directly.
      * @return A builder that can be used to configure and build a pipeline
-     * that will use the on-premise detection engine.
+     * that will use the on-premise IP intelligence engine.
      * @throws Exception Thrown if a required parameter is null.
      */
     public IPIntelligenceOnPremisePipelineBuilder useOnPremise(

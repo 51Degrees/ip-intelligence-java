@@ -38,12 +38,13 @@ import java.util.Map;
 
 /**
  * Encapsulates a list of {@link IPIntelligenceData} instances which can be returned
- * by the 51Degrees Cloud service when certain evidence is provided (e.g. TAC)
+ * by the 51Degrees Cloud service when evidence matching multiple profiles is
+ * provided.
  */
 public class MultiIPIDataCloud
     extends AspectDataBase
     implements MultiProfileData<IPIntelligenceData> {
-    private static final String DEVICE_LIST_KEY = "profiles";
+    private static final String PROFILE_LIST_KEY = "profiles";
 
     /**
      * Constructs a new instance with a non-thread-safe, case-insensitive
@@ -58,7 +59,7 @@ public class MultiIPIDataCloud
         FlowData flowData,
         AspectEngine<? extends AspectData, ? extends AspectPropertyMetaData> engine) {
         super(logger, flowData, engine);
-        this.put(DEVICE_LIST_KEY, new ArrayList<IPIntelligenceData>());
+        this.put(PROFILE_LIST_KEY, new ArrayList<IPIntelligenceData>());
     }
 
     /**
@@ -77,25 +78,25 @@ public class MultiIPIDataCloud
         AspectEngine<? extends AspectData, ? extends AspectPropertyMetaData> engine,
         MissingPropertyService missingPropertyService) {
         super(logger, flowData, engine, missingPropertyService);
-        this.put(DEVICE_LIST_KEY, new ArrayList<IPIntelligenceData>());
+        this.put(PROFILE_LIST_KEY, new ArrayList<IPIntelligenceData>());
     }
 
     @Override
     public List<IPIntelligenceData> getProfiles() {
-        return getDeviceList();
+        return getProfileList();
     }
 
     @Override
     public void addProfile(IPIntelligenceData profile) {
-        getDeviceList().add(profile);
+        getProfileList().add(profile);
     }
 
     /**
-     * Internal method to get the list of devices form the underlying data.
-     * @return the list of devices form the underlying data.
+     * Internal method to get the list of profiles from the underlying data.
+     * @return the list of profiles from the underlying data.
      */
     @SuppressWarnings("unchecked")
-    private List<IPIntelligenceData> getDeviceList() {
-        return (List<IPIntelligenceData>)this.get(DEVICE_LIST_KEY);
+    private List<IPIntelligenceData> getProfileList() {
+        return (List<IPIntelligenceData>)this.get(PROFILE_LIST_KEY);
     }
 }

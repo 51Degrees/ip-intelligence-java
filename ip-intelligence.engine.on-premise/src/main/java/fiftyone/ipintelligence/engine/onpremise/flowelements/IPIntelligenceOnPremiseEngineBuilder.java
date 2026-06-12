@@ -51,7 +51,7 @@ import static fiftyone.pipeline.util.StringManipulation.stringJoin;
  * Builder for the {@link IPIntelligenceOnPremiseEngine}. All options for the engine
  * should be set here.
  * <p>
- * Default values are taken from ip-intelligence-cxx/src/hash/hash.c
+ * Default values are taken from ip-intelligence-cxx/src/ipi.c
  */
 @ElementBuilder(alternateName = "HashIPIntelligence")
 public class IPIntelligenceOnPremiseEngineBuilder
@@ -59,7 +59,7 @@ public class IPIntelligenceOnPremiseEngineBuilder
     IPIntelligenceOnPremiseEngineBuilder,
     IPIntelligenceOnPremiseEngine> {
 
-    private final String dataDownloadType = "HashV41";
+    private final String dataDownloadType = "IPIV41";
    
     /**
      * Native configuration instance for this engine.
@@ -171,8 +171,7 @@ public class IPIntelligenceOnPremiseEngineBuilder
     /**
      * Provide a hint as to how many threads will access the pipeline simultaneously
      * <p>
-     * Default is the result of {@link Runtime#getRuntime()#getAvailableProcessors()}
-     * @see <a href="https://51degrees.com/documentation/_device_detection__features__concurrent_processing.html">Concurrent processing</a>
+     * Default is the result of {@link Runtime#availableProcessors()}
      * @param concurrency expected concurrent accesses
      * @return this builder
      */
@@ -239,16 +238,16 @@ public class IPIntelligenceOnPremiseEngineBuilder
             dataFile,
             config,
             requiredProperties,
-            new HashDataFactory(loggerFactory),
+            new IpiDataFactory(loggerFactory),
             tempDir);
     }
 
-    private static class HashDataFactory implements
+    private static class IpiDataFactory implements
         ElementDataFactory<IPIntelligenceDataHash> {
 
         private final ILoggerFactory loggerFactory;
 
-        public HashDataFactory(ILoggerFactory loggerFactory) {
+        public IpiDataFactory(ILoggerFactory loggerFactory) {
             this.loggerFactory = loggerFactory;
         }
 
