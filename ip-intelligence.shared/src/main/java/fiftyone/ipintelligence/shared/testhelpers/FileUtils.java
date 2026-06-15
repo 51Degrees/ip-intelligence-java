@@ -38,6 +38,13 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class FileUtils {
+    /**
+     * Name of the aligned environment variable or system property which can
+     * supply an explicit path to the IPI data file. When set and the file
+     * exists it is used in preference to searching the project space.
+     */
+    public static final String IPI_PATH_ENV_VAR = "51DEGREES_IPI_PATH";
+
     public static final String ENTERPRISE_IPI_DATA_FILE_NAME = "Enterprise-IpIntelligenceV41.ipi";
 
     public static final String ENTERPRISE_IPI_V41_DATA_FILE_NAME = "51Degrees-EnterpriseIpiV41.ipi";
@@ -62,6 +69,10 @@ public class FileUtils {
      * @return a file or empty if not found
      */
     public static File getHashFile() {
+        File explicitFile = getExplicitHashFile();
+        if (Objects.nonNull(explicitFile)) {
+            return explicitFile;
+        }
         try {
             if (Objects.nonNull(IPI_DATA_FILE)){
                 return IPI_DATA_FILE.orElse(null);
@@ -85,6 +96,26 @@ public class FileUtils {
                 }
             }
         }
+    }
+
+    /**
+     * Check the aligned {@link #IPI_PATH_ENV_VAR} environment variable and
+     * system property for an explicit path to the IPI data file.
+     *
+     * @return a file if the path is set and the file exists, otherwise null
+     */
+    private static File getExplicitHashFile() {
+        String explicitPath = System.getenv(IPI_PATH_ENV_VAR);
+        if (Objects.isNull(explicitPath)) {
+            explicitPath = System.getProperty(IPI_PATH_ENV_VAR);
+        }
+        if (Objects.nonNull(explicitPath)) {
+            File explicitFile = new File(explicitPath);
+            if (explicitFile.exists()) {
+                return explicitFile;
+            }
+        }
+        return null;
     }
 
     public static File getEvidenceFile() {

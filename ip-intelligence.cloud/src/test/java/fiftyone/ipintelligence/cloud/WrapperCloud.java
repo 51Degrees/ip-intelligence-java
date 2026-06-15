@@ -47,7 +47,7 @@ public class WrapperCloud implements Closeable {
     public WrapperCloud() throws Exception {
         cloudRequestEngine = 
                 new CloudRequestEngineBuilder(loggerFactory)
-                .setResourceKey(KeyUtils.getNamedKey("TestResourceKey"))
+                .setResourceKey(KeyUtils.getResourceKey("TestResourceKey"))
                 .build();
         IPIntelligenceCloudEngine = new IPIntelligenceCloudEngineBuilder(loggerFactory)
                 .build();
