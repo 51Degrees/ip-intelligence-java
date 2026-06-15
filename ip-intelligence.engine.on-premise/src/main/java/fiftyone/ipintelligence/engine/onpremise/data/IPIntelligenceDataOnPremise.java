@@ -22,43 +22,24 @@
 
 package fiftyone.ipintelligence.engine.onpremise.data;
 
-import fiftyone.ipintelligence.engine.onpremise.TestsBase;
-import fiftyone.ipintelligence.shared.testhelpers.data.ValueTests;
+import fiftyone.ipintelligence.shared.IPIntelligenceData;
+import fiftyone.pipeline.engines.data.AspectPropertyValue;
 
-import fiftyone.pipeline.engines.Constants;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import java.util.List;
 
-public class ValueHashTests extends TestsBase {
+/**
+ * On-premise specific interface for {@link IPIntelligenceData}.
+ * @see <a href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-on-premise.md#element-data">Specification</a>
+ */
+public interface IPIntelligenceDataOnPremise extends IPIntelligenceData {
 
-    @Before
-    public void init() throws Exception {
-        testInitialize(Constants.PerformanceProfiles.MaxPerformance);
-    }
-
-    @After
-    public void cleanup() {
-        testCleanup();
-    }
-    
-    @Test
-    public void Values_Ipi_ValueTypes() throws Exception {
-        ValueTests.valueTypes(getWrapper());
-    }
-
-    @Test
-    public void Values_Ipi_AvailableProperties() throws Exception {
-        ValueTests.availableProperties(getWrapper());
-    }
-
-    @Test
-    public void Values_Ipi_TypedGetters() throws Exception {
-        ValueTests.typedGetters(getWrapper());
-    }
-
-    @Test
-    public void Values_Ipi_RegisteredName() throws Exception {
-        ValueTests.registeredName(getWrapper());
-    }
+    /**
+     * Get the values for the specified property as a List&lt;&gt;.
+     * @param propertyName name of the property to get values for
+     * @param parametrizedTypes types parametrizing {@link AspectPropertyValue} starting with {@link List}
+     * @return values as a list
+     */
+    AspectPropertyValue<List<?>> getValues(
+            String propertyName,
+            Class<?>[] parametrizedTypes);
 }

@@ -23,7 +23,7 @@
 package fiftyone.ipintelligence.engine.onpremise.flowelements;
 
 import fiftyone.ipintelligence.engine.onpremise.TestsBase;
-import fiftyone.ipintelligence.engine.onpremise.data.DataValidatorHash;
+import fiftyone.ipintelligence.engine.onpremise.data.DataValidatorOnPremise;
 import fiftyone.ipintelligence.shared.testhelpers.flowelements.ProcessTests;
 import fiftyone.pipeline.engines.Constants;
 import org.junit.After;
@@ -43,27 +43,27 @@ public class TestProcessTests extends TestsBase {
     }
 
     @Test
-    public void Process_Ipi_NoEvidence() throws Exception {
-        ProcessTests.noEvidence(getWrapper(), new DataValidatorHash(getWrapper().getEngine()));
+    public void Process_OnPremise_NoEvidence() throws Exception {
+        ProcessTests.noEvidence(getWrapper(), new DataValidatorOnPremise(getWrapper().getEngine()));
     }
 
     @Test
-    public void Process_Ipi_EmptyIpAddress() throws Exception {
-        ProcessTests.emptyIpAddress(getWrapper(), new DataValidatorHash(getWrapper().getEngine()));
+    public void Process_OnPremise_EmptyIpAddress() throws Exception {
+        ProcessTests.emptyIpAddress(getWrapper(), new DataValidatorOnPremise(getWrapper().getEngine()));
     }
 
     @Test
-    public void Process_Ipi_NoHeaders() throws Exception {
-        ProcessTests.noHeaders(getWrapper(), new DataValidatorHash(getWrapper().getEngine()));
+    public void Process_OnPremise_NoHeaders() throws Exception {
+        ProcessTests.noHeaders(getWrapper(), new DataValidatorOnPremise(getWrapper().getEngine()));
     }
 
     @Test
-    public void Process_Ipi_NoUsefulHeaders() throws Exception {
-        ProcessTests.noUsefulHeaders(getWrapper(), new DataValidatorHash(getWrapper().getEngine()));
+    public void Process_OnPremise_NoUsefulHeaders() throws Exception {
+        ProcessTests.noUsefulHeaders(getWrapper(), new DataValidatorOnPremise(getWrapper().getEngine()));
     }
 
     @Test
-    public void Process_Ipi_CaseInsensitiveKeys() throws Exception {
-        ProcessTests.caseInsensitiveEvidenceKeys(getWrapper(), new DataValidatorHash(getWrapper().getEngine()));
+    public void Process_OnPremise_CaseInsensitiveKeys() throws Exception {
+        ProcessTests.caseInsensitiveEvidenceKeys(getWrapper(), new DataValidatorOnPremise(getWrapper().getEngine()));
     }
 }

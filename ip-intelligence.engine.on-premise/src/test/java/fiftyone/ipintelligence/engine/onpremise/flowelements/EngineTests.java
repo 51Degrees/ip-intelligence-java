@@ -32,6 +32,7 @@ import org.junit.Test;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.LoggerFactory;
 
+import fiftyone.ipintelligence.shared.testhelpers.FileUtils;
 import fiftyone.pipeline.engines.Constants;
 import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.LITE_IPI_DATA_FILE_NAME;
 import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.ENTERPRISE_IPI_V41_DATA_FILE_NAME;
@@ -65,12 +66,17 @@ public class EngineTests {
 		IPIntelligenceOnPremiseEngine engine = createEngine(dataFile);
 		String tier = engine.getDataSourceTier();
 		engine.close();
-		
+
+		// getDataSourceTier() returns the data set name embedded in the .ipi
+		// file header, which is the common-metadata product name. The values
+		// below were confirmed by loading the actual data files: IPIV4Lite,
+		// IPIV4Enterprise and IPIV4Asn. (The device detection "TAC" tier has
+		// no equivalent for IP Intelligence.)
 		if (fileName.equals(LITE_IPI_DATA_FILE_NAME)) {
-			assertEquals("Lite", tier);
+			assertEquals("IPIV4Lite", tier);
 		}
 		else {
-			assertTrue(tier.equalsIgnoreCase("Enterprise"));
+			assertEquals("IPIV4Enterprise", tier);
 		}
 	}
 	
@@ -79,7 +85,7 @@ public class EngineTests {
 	 * @throws Exception
 	 */
 	@Test
-	public void Engine_Ipi_GetDataSourceTier_Lite() throws Exception {
+	public void Engine_OnPremise_GetDataSourceTier_Lite() throws Exception {
 		testDataSourceTier(LITE_IPI_DATA_FILE_NAME);
 	}
 	
@@ -89,7 +95,7 @@ public class EngineTests {
 	 * @throws Exception
 	 */
 	@Test
-	public void Engine_Ipi_GetDataSourceTier_Enterprise() throws Exception {
+	public void Engine_OnPremise_GetDataSourceTier_Enterprise() throws Exception {
 		testDataSourceTier(ENTERPRISE_IPI_V41_DATA_FILE_NAME);
 	}
 

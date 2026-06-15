@@ -38,9 +38,13 @@ import java.util.Map;
 
 /**
  * Encapsulates a list of {@link IPIntelligenceData} instances which can be returned
- * by the 51Degrees Cloud service when evidence matching multiple profiles is
- * provided.
+ * by the 51Degrees Cloud service when the evidence provided matches more than
+ * one profile.
+ * @deprecated multi-profile responses (e.g. hardware profile lookup) are a
+ * device detection feature and have no equivalent in IP Intelligence. This
+ * class will be removed in a future version.
  */
+@Deprecated
 public class MultiIPIDataCloud
     extends AspectDataBase
     implements MultiProfileData<IPIntelligenceData> {

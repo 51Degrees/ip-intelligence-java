@@ -87,8 +87,7 @@ public class IPIntelligenceOnPremisePipelineBuilder
      * Set the filename of the IP Intelligence data file that the
      * engine should use.
      * @param filename The data file.
-     * @param createTempDataCopy If true, the engine will create a temporary
-     * copy of the data file rather than using the data file directly.
+     * @param createTempDataCopy
      * @return This builder instance.
      * @throws Exception Thrown if the filename has an unknown extension.
      */
@@ -241,7 +240,7 @@ public class IPIntelligenceOnPremisePipelineBuilder
 
     /**
      * Set the performance profile for the IP Intelligence engine.
-     * Defaults to MaxPerformance.
+     * Defaults to balanced.
      * @param profile The performance profile to use.
      * @return This builder instance.
      */
@@ -324,20 +323,20 @@ public class IPIntelligenceOnPremisePipelineBuilder
      */
     @Override
     public Pipeline build() throws Exception {
-        AspectEngine<? extends AspectData, ? extends AspectPropertyMetaData> ipIntelligenceEngine;
+        AspectEngine<? extends AspectData, ? extends AspectPropertyMetaData> IPIntelligenceEngine;
 
         IPIntelligenceOnPremiseEngineBuilder engineBuilder =
                 new IPIntelligenceOnPremiseEngineBuilder(loggerFactory, dataUpdateService);
-        ipIntelligenceEngine = configureAndBuild(engineBuilder);
+        IPIntelligenceEngine = configureAndBuild(engineBuilder);
 
-        if (ipIntelligenceEngine != null) {
+        if (IPIntelligenceEngine != null) {
             // Add the share usage element to the list if enabled
             if (shareUsageEnabled) {
                 getFlowElements().add(
                     new ShareUsageBuilder(loggerFactory).build());
             }
             // Add the IP Intelligence engine to the list
-            getFlowElements().add(ipIntelligenceEngine);
+            getFlowElements().add(IPIntelligenceEngine);
         } else {
             throw new RuntimeException("Unexpected error creating IP Intelligence engine.");
         }
@@ -349,8 +348,8 @@ public class IPIntelligenceOnPremisePipelineBuilder
     }
 
     /**
-     * Private method used to set configuration options on the
-     * engine builder and build the engine.
+     * Private method used to set configuration options on
+     * the on-premise engine builder and build the engine.
      * @param builder The builder to configure.
      * @return A new IP Intelligence engine instance.
      * @throws Exception 

@@ -36,7 +36,11 @@ import org.slf4j.Logger;
  * uses it to populate a {@link MultiIPIDataCloud} instance for easier
  * consumption.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/hardware-profile-lookup-cloud.md">Specification</a>
+ * @deprecated hardware profile lookup is a device detection feature and has
+ * no equivalent in IP Intelligence. This engine will be removed in a future
+ * version.
  */
+@Deprecated
 public class HardwareProfileCloudEngine
     extends PropertyKeyedCloudEngineBase<MultiIPIDataCloud, IPIntelligenceData> {
 

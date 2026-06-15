@@ -31,10 +31,10 @@ import static fiftyone.pipeline.util.FileFinder.getFilePath;
 
 public class TestsBase {
 
-    private WrapperHash wrapper = null;
+    private WrapperOnPremise wrapper = null;
     private IpAddressGenerator ipAddresses;
 
-    protected WrapperHash getWrapper() {
+    protected WrapperOnPremise getWrapper() {
         return wrapper;
     }
 
@@ -43,8 +43,8 @@ public class TestsBase {
     }
 
     protected void testInitialize(Constants.PerformanceProfiles profile) throws Exception {
-        wrapper = new WrapperHash(
-            FileUtils.getHashFile(),
+        wrapper = new WrapperOnPremise(
+            FileUtils.getIpiFile(),
             profile);
         ipAddresses = new IpAddressGenerator(
             getFilePath(IP_ADDRESSES_FILE_NAME));

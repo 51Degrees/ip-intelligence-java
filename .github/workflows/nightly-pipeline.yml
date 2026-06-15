@@ -22,7 +22,7 @@ jobs:
       data-filename: "51Degrees-EnterpriseV4.ipi.gz"
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
-      data-key: ${{ secrets.DEVICE_DETECTION_KEY }}
+      data-key: ${{ secrets.IP_INTELLIGENCE_KEY }}
       data-url: ${{ secrets.IPI_DATA_FILE_URL }}
 
   PackageUpdate:

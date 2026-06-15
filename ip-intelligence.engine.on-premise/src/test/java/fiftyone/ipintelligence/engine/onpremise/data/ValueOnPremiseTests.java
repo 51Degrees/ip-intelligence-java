@@ -20,15 +20,45 @@
  * such notice(s) shall fulfill the requirements of that article.
  * ********************************************************************* */
 
-package fiftyone.ipintelligence;
+package fiftyone.ipintelligence.engine.onpremise.data;
 
-/**
- * @deprecated  no longer needed since IP Intelligence uses a different algorithm than device detection
- */
-@Deprecated
-public class Enums {
-    public enum IPIntelligenceAlgorithm {
-        Hash,
-        Pattern
+import fiftyone.ipintelligence.engine.onpremise.TestsBase;
+import fiftyone.ipintelligence.shared.testhelpers.data.ValueTests;
+
+import fiftyone.pipeline.engines.Constants;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+public class ValueOnPremiseTests extends TestsBase {
+
+    @Before
+    public void init() throws Exception {
+        testInitialize(Constants.PerformanceProfiles.MaxPerformance);
+    }
+
+    @After
+    public void cleanup() {
+        testCleanup();
+    }
+    
+    @Test
+    public void Values_OnPremise_ValueTypes() throws Exception {
+        ValueTests.valueTypes(getWrapper());
+    }
+
+    @Test
+    public void Values_OnPremise_AvailableProperties() throws Exception {
+        ValueTests.availableProperties(getWrapper());
+    }
+
+    @Test
+    public void Values_OnPremise_TypedGetters() throws Exception {
+        ValueTests.typedGetters(getWrapper());
+    }
+
+    @Test
+    public void Values_OnPremise_RegisteredName() throws Exception {
+        ValueTests.registeredName(getWrapper());
     }
 }

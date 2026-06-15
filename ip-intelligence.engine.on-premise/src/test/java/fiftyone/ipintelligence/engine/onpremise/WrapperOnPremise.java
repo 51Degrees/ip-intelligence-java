@@ -37,13 +37,13 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
-public class WrapperHash implements Wrapper {
+public class WrapperOnPremise implements Wrapper {
 
     protected static final ILoggerFactory loggerFactory = LoggerFactory.getILoggerFactory();
     private Pipeline pipeline;
     private IPIntelligenceOnPremiseEngine engine;
 
-    public WrapperHash(File dataFile, Constants.PerformanceProfiles profile) throws Exception {
+    public WrapperOnPremise(File dataFile, Constants.PerformanceProfiles profile) throws Exception {
         engine = new IPIntelligenceOnPremiseEngineBuilder(loggerFactory, null)
                 .setPerformanceProfile(profile)
                 .setAutoUpdate(false)

@@ -37,11 +37,11 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class DataValidatorHash implements DataValidator {
+public class DataValidatorOnPremise implements DataValidator {
 
     private IPIntelligenceOnPremiseEngine engine;
 
-    public DataValidatorHash(IPIntelligenceOnPremiseEngine engine) {
+    public DataValidatorOnPremise(IPIntelligenceOnPremiseEngine engine) {
         this.engine = engine;
     }
 

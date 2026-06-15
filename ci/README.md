@@ -6,7 +6,7 @@ The following secrets are required:
     * Example: `github_pat_l0ng_r4nd0m_s7r1ng`
   
 The following secrets are required to run on-premise tests:
-* `DEVICE_DETECTION_KEY` - [license key](https://51degrees.com/pricing) for downloading assets (enterprise IPI data file)
+* `IP_INTELLIGENCE_KEY` - [license key](https://51degrees.com/pricing) for downloading assets (enterprise IPI data file)
     * Example: `V3RYL0NGR4ND0M57R1NG`
  
 The following secrets are requred to run cloud tests:
@@ -22,8 +22,8 @@ The following secrets are required for publishing releases (this should only be 
 * `CODE_SIGNING_CERT_PASSWORD` - Password for the `CODE_SIGNING_CERT`
 
 The following secrets are optional:
-* `IPI_DATA_FILE_URL` - URL for downloading the enterprise IPI data file
-    * Default: the 51Degrees Distributor URL using the `DEVICE_DETECTION_KEY` license key
+* `IPI_DATA_FILE_URL` - URL for downloading the enterprise IP Intelligence data file
+    * Default: `https://distributor.51degrees.com/api/v2/download?LicenseKeys=IP_INTELLIGENCE_KEY&Type=IPIV41&Download=True&Product=IPIV4Enterprise`
 
 ## Integration Tests
 
@@ -48,7 +48,7 @@ graph TD
 It performs the following steps:
 
 1. Clone Examples Repo: Clone the "ip-intelligence-java-examples" repository into the common-ci directory.
-3. Set up test files: Move the 51Degrees-EnterpriseIpiV41.ipi file to the ip-intelligence-java-examples/ip-intelligence-data directory and download Evidence files into ip-intelligence-data directory.
+3. Set up test files: Move the 51Degrees-EnterpriseIpiV41.ipi file to the ip-intelligence-java-examples/ip-intelligence-data directory and download evidence files into ip-intelligence-data directory.
 4. Enter ip-intelligence-examples directory: Changes the current working directory to the ip-intelligence-java-examples folder.
 5. Set package dependency version: Sets the version of the ip-intelligence package dependency for the examples to the specified Version parameter. This will be the version installed in the local repository found in the .m2 folder.
 6. Test Examples: Runs the Maven clean test command, passing the TestResourceKey, SuperResourceKey, and LicenseKey as parameters.

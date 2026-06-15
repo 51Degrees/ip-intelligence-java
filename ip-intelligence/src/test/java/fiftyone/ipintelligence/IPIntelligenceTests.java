@@ -54,6 +54,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.IP_ADDRESSES_FILE_NAME;
+import static fiftyone.pipeline.core.Constants.EVIDENCE_QUERY_PREFIX;
+import static fiftyone.pipeline.core.Constants.EVIDENCE_SEPERATOR;
 import static fiftyone.pipeline.engines.Constants.PerformanceProfiles.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assume.assumeTrue;
@@ -67,16 +69,36 @@ public class IPIntelligenceTests {
 
     private static final Logger logger = LoggerFactory.getLogger(IPIntelligenceTests.class);
 
-    private static final String IPI_DATA_FILE_NAME = FileUtils.getHashFileName();
+    private static final String IPI_DATA_FILE_NAME = FileUtils.getIpiFileName();
 
     private static IpAddressGenerator ipAddresses;
     TestConfig[] ipiConfigs = {
         // ******** IPI with a single thread *********
         new TestConfig(IPI_DATA_FILE_NAME, MaxPerformance, false, false, "IPI-MaxPerformance-NoCache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, HighPerformance, false, false, "Hash-HighPerformance-NoCache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, LowMemory, false, false, "Hash-LowMemory-NoCache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, Balanced, false, false, "Hash-Balanced-NoCache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, false, false, "Hash-HighPerformance-NoCache-SingleThread"),
         new TestConfig(IPI_DATA_FILE_NAME, MaxPerformance, true, false, "IPI-MaxPerformance-Cache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, HighPerformance, true, false, "Hash-HighPerformance-Cache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, LowMemory, true, false, "Hash-LowMemory-Cache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, Balanced, true, false, "Hash-Balanced-Cache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, false, "Hash-BalancedTemp-Cache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, false, "Hash-BalancedTemp-Cache-SingleThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, false, "Hash-BalancedTemp-Cache-SingleThread"),
         // ******** IPI with multiple threads *********
         new TestConfig(IPI_DATA_FILE_NAME, MaxPerformance, false, true, "IPI-MaxPerformance-NoCache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, HighPerformance, false, true, "Hash-HighPerformance-NoCache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, LowMemory, false, true, "Hash-LowMemory-NoCache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, Balanced, false, true, "Hash-Balanced-NoCache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, false, true, "Hash-HighPerformance-NoCache-MultiThread"),
         new TestConfig(IPI_DATA_FILE_NAME, MaxPerformance, true, true, "IPI-MaxPerformance-Cache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, HighPerformance, true, true, "Hash-HighPerformance-Cache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, LowMemory, true, true, "Hash-LowMemory-Cache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, Balanced, true, true, "Hash-Balanced-Cache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, true, "Hash-BalancedTemp-Cache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, true, "Hash-BalancedTemp-Cache-MultiThread"),
+//        new TestConfig(IPI_DATA_FILE_NAME, BalancedTemp, true, true, "Hash-BalancedTemp-Cache-MultiThread")
     };
 
     @BeforeClass
@@ -158,7 +180,8 @@ public class IPIntelligenceTests {
                         for (String ipAddress : ipAddresses.getRandomIpAddresses(100)) {
                             try (FlowData flowData = pipeline.createFlowData()) {
                                 flowData.addEvidence(
-                                    "server.client-ip",
+                                    EVIDENCE_QUERY_PREFIX +
+                                        EVIDENCE_SEPERATOR + "client-ip",
                                     ipAddress)
                                     .process();
                                 if (flowData.getErrors() != null) {
@@ -226,9 +249,9 @@ public class IPIntelligenceTests {
                             .setAutoUpdate(false);
             try (Pipeline pipeline = builder.build()) {
                 assertEquals(1, pipeline.getServices().size());
-                IPIntelligenceOnPremiseEngine engine =
+                IPIntelligenceOnPremiseEngine ddhe =
                         pipeline.getElement(IPIntelligenceOnPremiseEngine.class);
-                String tempDir = engine.getTempDataDirPath();
+                String tempDir = ddhe.getTempDataDirPath();
                 Path tempPath = Paths.get(tempDir);
             }
         }

@@ -44,24 +44,24 @@ public class EvidenceKeysTests extends TestsBase {
     }
 
     @Test
-    public void EvidenceKeys_Ipi_ContainsClientIP() {
+    public void EvidenceKeys_OnPremise_ContainsClientIP() {
         EvidenceKeyTests.containsClientIP(getWrapper());
     }
 
     @Test
-    public void EvidenceKeys_Ipi_ContainsQueryParams() {
+    public void EvidenceKeys_OnPremise_ContainsQueryParams() {
         EvidenceKeyTests.containsQueryParams(getWrapper());
     }
 
     @Test
-    public void EvidenceKeys_Ipi_ContainsOverrides() {
+    public void EvidenceKeys_OnPremise_ContainsOverrides() {
         assumeFalse("Need to run test with Enterprise data",
                 getWrapper().getEngine().getDataSourceTier().equals("Lite"));
         EvidenceKeyTests.containsOverrides(getWrapper());
     }
 
     @Test
-    public void EvidenceKeys_Ipi_CaseInsensitiveKeys() {
+    public void EvidenceKeys_OnPremise_CaseInsensitiveKeys() {
         EvidenceKeyTests.caseInsensitiveKeys(getWrapper());
     }
 }

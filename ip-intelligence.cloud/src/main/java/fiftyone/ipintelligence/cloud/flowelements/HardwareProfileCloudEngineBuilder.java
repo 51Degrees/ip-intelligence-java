@@ -35,6 +35,13 @@ import org.slf4j.ILoggerFactory;
 import java.util.List;
 
 
+/**
+ * Builder for the {@link HardwareProfileCloudEngine}.
+ * @deprecated hardware profile lookup is a device detection feature and has
+ * no equivalent in IP Intelligence. This builder will be removed in a future
+ * version.
+ */
+@Deprecated
 @ElementBuilder
 public class HardwareProfileCloudEngineBuilder extends AspectEngineBuilderBase<
     HardwareProfileCloudEngineBuilder,

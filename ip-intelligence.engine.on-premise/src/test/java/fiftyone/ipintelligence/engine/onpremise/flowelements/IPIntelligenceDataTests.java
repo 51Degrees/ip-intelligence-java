@@ -71,7 +71,7 @@ public class IPIntelligenceDataTests extends TestsBase {
     @Test
     public void IPIData_ResultsClose() throws Exception {
         try (FlowData flowData = getWrapper().getPipeline().createFlowData()) {
-	        IPIntelligenceDataHashDefault data = new IPIntelligenceDataHashDefault(
+	        IPIntelligenceDataOnPremiseDefault data = new IPIntelligenceDataOnPremiseDefault(
 	            logger,
 	            flowData,
 	            getWrapper().getEngine(),
@@ -90,7 +90,7 @@ public class IPIntelligenceDataTests extends TestsBase {
     /**
      * Verify that the {@link ResultsIpiSwig#containsProperty(String)} method
      * is called the expected number of times when the target method is called
-     * on the {@link IPIntelligenceDataHashDefault} instance.
+     * on the {@link IPIntelligenceDataOnPremiseDefault} instance.
      * @param data instance to call method on
      * @param results to be checked
      * @param getMethod to call on the data
@@ -99,7 +99,7 @@ public class IPIntelligenceDataTests extends TestsBase {
      * @throws IllegalAccessException exception
      */
     private void verifyCallsToContainsProperty(
-        IPIntelligenceDataHashDefault data,
+        IPIntelligenceDataOnPremiseDefault data,
         ResultsIpiSwig results,
         Method getMethod,
         int expectedCount)
@@ -144,7 +144,7 @@ public class IPIntelligenceDataTests extends TestsBase {
     public void IPIData_ContainsProperty_SingleResult()
         throws Exception {
         try (FlowData flowData = getWrapper().getPipeline().createFlowData()) {
-	        IPIntelligenceDataHashDefault data = new IPIntelligenceDataHashDefault(
+	        IPIntelligenceDataOnPremiseDefault data = new IPIntelligenceDataOnPremiseDefault(
 	            logger,
 	            flowData,
 	            getWrapper().getEngine(),
@@ -178,7 +178,7 @@ public class IPIntelligenceDataTests extends TestsBase {
     public void IPIData_ContainsProperty_MultipleResults()
         throws Exception {
         try (FlowData flowData = getWrapper().getPipeline().createFlowData()) {
-	        IPIntelligenceDataHashDefault data = new IPIntelligenceDataHashDefault(
+	        IPIntelligenceDataOnPremiseDefault data = new IPIntelligenceDataOnPremiseDefault(
 	            logger,
 	            flowData,
 	            getWrapper().getEngine(),
@@ -222,7 +222,7 @@ public class IPIntelligenceDataTests extends TestsBase {
     @Test
     public void IPIData_MissingProperty_SingleResult() throws Exception {
         try (FlowData flowData = getWrapper().getPipeline().createFlowData()) {
-	        IPIntelligenceDataHashDefault data = new IPIntelligenceDataHashDefault(
+	        IPIntelligenceDataOnPremiseDefault data = new IPIntelligenceDataOnPremiseDefault(
 	            logger,
 	            flowData,
 	            getWrapper().getEngine(),
@@ -254,7 +254,7 @@ public class IPIntelligenceDataTests extends TestsBase {
     @Test
     public void IPIData_MissingProperty_MultipleResults() throws Exception {
         try (FlowData flowData = getWrapper().getPipeline().createFlowData()) {
-	        IPIntelligenceDataHashDefault data = new IPIntelligenceDataHashDefault(
+	        IPIntelligenceDataOnPremiseDefault data = new IPIntelligenceDataOnPremiseDefault(
 	            logger,
 	            flowData,
 	            getWrapper().getEngine(),
@@ -286,10 +286,10 @@ public class IPIntelligenceDataTests extends TestsBase {
 
     /**
      * Interface used for lambda in
-     * {@link #checkThrowsIllegalState(IPIntelligenceDataHashDefault, IPIDataHashCall)}.
+     * {@link #checkThrowsIllegalState(IPIntelligenceDataOnPremiseDefault, IPIDataMethodCall)}.
      */
-    private interface IPIDataHashCall {
-        void call(IPIntelligenceDataHashDefault instance);
+    private interface IPIDataMethodCall {
+        void call(IPIntelligenceDataOnPremiseDefault instance);
     }
 
     /**
@@ -299,8 +299,8 @@ public class IPIntelligenceDataTests extends TestsBase {
      * @throws Exception exception
      */
     private void checkThrowsIllegalState(
-        IPIntelligenceDataHashDefault instance,
-        IPIDataHashCall methodCall) throws Exception {
+        IPIntelligenceDataOnPremiseDefault instance,
+        IPIDataMethodCall methodCall) throws Exception {
         try {
             methodCall.call(instance);
             fail("An exception was not thrown by even though the instance " +
@@ -316,14 +316,14 @@ public class IPIntelligenceDataTests extends TestsBase {
     }
 
     /**
-     * Check that once a {@link IPIntelligenceDataHashDefault} instance has been closed,
+     * Check that once a {@link IPIntelligenceDataOnPremiseDefault} instance has been closed,
      * an {@link IllegalStateException} is throw when calling get methods.
      * @throws Exception exception
      */
     @Test
     public void IPIData_Closed() throws Exception {
         try (FlowData flowData = getWrapper().getPipeline().createFlowData()) {
-	        IPIntelligenceDataHashDefault data = new IPIntelligenceDataHashDefault(
+	        IPIntelligenceDataOnPremiseDefault data = new IPIntelligenceDataOnPremiseDefault(
 	            logger,
 	            flowData,
 	            getWrapper().getEngine(),
