@@ -32,7 +32,6 @@ import org.junit.Test;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.LoggerFactory;
 
-import fiftyone.ipintelligence.shared.testhelpers.FileUtils;
 import fiftyone.pipeline.engines.Constants;
 import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.LITE_IPI_DATA_FILE_NAME;
 import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.ENTERPRISE_IPI_V41_DATA_FILE_NAME;
@@ -71,8 +70,7 @@ public class EngineTests {
 			assertEquals("Lite", tier);
 		}
 		else {
-			assertTrue(tier.equalsIgnoreCase("Enterprise") ||
-					tier.equalsIgnoreCase("TAC"));
+			assertTrue(tier.equalsIgnoreCase("Enterprise"));
 		}
 	}
 	
@@ -81,7 +79,7 @@ public class EngineTests {
 	 * @throws Exception
 	 */
 	@Test
-	public void Engine_Hash_GetDataSourceTier_Lite() throws Exception {
+	public void Engine_Ipi_GetDataSourceTier_Lite() throws Exception {
 		testDataSourceTier(LITE_IPI_DATA_FILE_NAME);
 	}
 	
@@ -91,7 +89,7 @@ public class EngineTests {
 	 * @throws Exception
 	 */
 	@Test
-	public void Engine_Hash_GetDataSourceTier_Enterprise() throws Exception {
+	public void Engine_Ipi_GetDataSourceTier_Enterprise() throws Exception {
 		testDataSourceTier(ENTERPRISE_IPI_V41_DATA_FILE_NAME);
 	}
 

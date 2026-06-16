@@ -43,7 +43,7 @@ public class ProcessTests {
         }
     }
 
-    public static void emptyUserAgent(
+    public static void emptyIpAddress(
         Wrapper wrapper,
         DataValidator validator) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {

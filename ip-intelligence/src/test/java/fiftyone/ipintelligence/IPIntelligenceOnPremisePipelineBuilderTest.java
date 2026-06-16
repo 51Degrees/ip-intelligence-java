@@ -100,17 +100,17 @@ public class IPIntelligenceOnPremisePipelineBuilderTest {
     @Test
     public void setFilename_DatExtension_ExceptionThrown() {
         try {
-            builder.setFilename(IPI_DATA_FILE_NAME.replace(".hash", ".dat"), true);
+            builder.setFilename(IPI_DATA_FILE_NAME.replace(".ipi", ".dat"), true);
             fail();
         } catch (Exception e) {
-            assertTrue(e.getMessage().contains("The Pattern data format data"));
+            assertTrue(e.getMessage().contains("Unrecognised filename."));
         }
     }
 
     @Test
     public void setFilename_OtherExtension_ExceptionThrown() {
         try {
-            builder.setFilename(IPI_DATA_FILE_NAME.replace(".hash", ".any"), true);
+            builder.setFilename(IPI_DATA_FILE_NAME.replace(".ipi", ".any"), true);
             fail();
         } catch (Exception e) {
             assertTrue(e.getMessage().contains("Unrecognised filename."));

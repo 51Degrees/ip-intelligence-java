@@ -78,7 +78,6 @@ public class MissingPropertyHandlingTests {
             engine.aspectProperties = properties;
             engine.processEngine(flowData, ipiData);
 
-            // TODO: Select fitting property. Was `getPriceBand`
             AspectPropertyValue<Float> latitude = ipiData.getLatitude();
             assertNotNull(latitude);
             assertFalse(latitude.hasValue());
@@ -123,8 +122,7 @@ public class MissingPropertyHandlingTests {
             engine.processEngine(flowData, ipiData);
 
             try {
-                // TODO: Select fitting property. Was `getDeviceType`
-                AspectPropertyValue<Float> deviceType = ipiData.getLongitude();
+                AspectPropertyValue<Float> longitude = ipiData.getLongitude();
                 fail("A PropertyMissingException should have been thrown");
             } catch (PropertyMissingException e) {
                 assertEquals(
@@ -139,11 +137,11 @@ public class MissingPropertyHandlingTests {
 
     private static String nullValueJson =
             "{\n" +
-                    "  'device': {\n" +
-                    "    'platformname': 'Windows',\n" +
-                    "    'platformversion': '10.0',\n" +
-                    "    'priceband': null,\n" +
-                    "    'pricebandnullreason': '" + expectedNullReason + "'\n" +
+                    "  'ip-intelligence': {\n" +
+                    "    'registeredname': 'Example Network',\n" +
+                    "    'registeredcountry': 'US',\n" +
+                    "    'latitude': null,\n" +
+                    "    'latitudenullreason': '" + expectedNullReason + "'\n" +
                     "  },\n" +
                     "  'javascriptProperties': []\n" +
                     "}\n";
@@ -156,8 +154,8 @@ public class MissingPropertyHandlingTests {
                 private static final long serialVersionUID = -819525441539357267L;
 
                 {
-                    add(new AspectPropertyMetaDataDefault("platformname", null, null, String.class, null, true));
-                    add(new AspectPropertyMetaDataDefault("platformversion", null, null, String.class, null, true));
+                    add(new AspectPropertyMetaDataDefault("registeredname", null, null, String.class, null, true));
+                    add(new AspectPropertyMetaDataDefault("registeredcountry", null, null, String.class, null, true));
                 }
             };
 

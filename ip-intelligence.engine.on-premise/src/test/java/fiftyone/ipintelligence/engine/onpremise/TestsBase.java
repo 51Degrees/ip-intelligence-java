@@ -22,7 +22,7 @@
 
 package fiftyone.ipintelligence.engine.onpremise;
 
-import fiftyone.ipintelligence.shared.testhelpers.UserAgentGenerator;
+import fiftyone.ipintelligence.shared.testhelpers.IpAddressGenerator;
 import fiftyone.ipintelligence.shared.testhelpers.FileUtils;
 import fiftyone.pipeline.engines.Constants;
 
@@ -32,21 +32,21 @@ import static fiftyone.pipeline.util.FileFinder.getFilePath;
 public class TestsBase {
 
     private WrapperHash wrapper = null;
-    private UserAgentGenerator userAgents;
+    private IpAddressGenerator ipAddresses;
 
     protected WrapperHash getWrapper() {
         return wrapper;
     }
 
-    protected UserAgentGenerator getUserAgents() {
-        return userAgents;
+    protected IpAddressGenerator getIpAddresses() {
+        return ipAddresses;
     }
 
     protected void testInitialize(Constants.PerformanceProfiles profile) throws Exception {
         wrapper = new WrapperHash(
             FileUtils.getHashFile(),
             profile);
-        userAgents = new UserAgentGenerator(
+        ipAddresses = new IpAddressGenerator(
             getFilePath(IP_ADDRESSES_FILE_NAME));
     }
 
