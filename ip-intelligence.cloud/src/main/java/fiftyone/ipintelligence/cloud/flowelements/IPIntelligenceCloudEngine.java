@@ -41,10 +41,14 @@ import fiftyone.pipeline.engines.data.AspectPropertyValueDefault;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 
+import fiftyone.pipeline.core.data.IWeightedValue;
+import fiftyone.pipeline.core.data.WeightedValue;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.TreeMap;
 import org.json.JSONArray;
 
@@ -57,6 +61,10 @@ public class IPIntelligenceCloudEngine
     extends CloudAspectEngineBase<IPIntelligenceDataCloud> {
     List<AspectPropertyMetaData> aspectProperties;
     private String dataSourceTier;
+    // Lower-cased names of properties the cloud returns as weighted lists
+    // (cloud type "Weighted..."), so processEngine can read their value/weight
+    // pairs rather than treating them as a plain list.
+    private final Set<String> weightedPropertyNames = new HashSet<>();
     CloudRequestEngine cloudRequestEngine;
 
     /**
@@ -117,6 +125,13 @@ public class IPIntelligenceCloudEngine
                 new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
             for (AspectPropertyMetaData property : getProperties()) {
+                if (weightedPropertyNames.contains(
+                        property.getName().toLowerCase())) {
+                    deviceMap.put(
+                        property.getName(),
+                        getWeightedListAspectPropertyValue(deviceObj, property));
+                    continue;
+                }
                 String type = property.getType().getSimpleName();
                 switch(type) {
                     case ("List"):
@@ -212,10 +227,14 @@ public class IPIntelligenceCloudEngine
             map.size() > 0 &&
             map.containsKey(getElementDataKey())) {
             aspectProperties = new ArrayList<>();
+            weightedPropertyNames.clear();
             dataSourceTier = map.get(getElementDataKey()).dataTier;
 
             for (AccessiblePropertyMetaData.PropertyMetaData item :
                 map.get(getElementDataKey()).properties) {
+                if (item.type != null && item.type.startsWith("Weighted")) {
+                    weightedPropertyNames.add(item.name.toLowerCase());
+                }
                 AspectPropertyMetaData property = new AspectPropertyMetaDataDefault(
                     item.name,
                     this,
@@ -346,6 +365,42 @@ public class IPIntelligenceCloudEngine
             listValue.setValue(strings);
         }
         return listValue;
+    }
+
+    /**
+     * Get the weighted-string-list representation of a value from the cloud
+     * engine's JSON response, and wrap it in an {@link AspectPropertyValue}.
+     * The cloud returns each weighted value as a JSON object with a
+     * {@code rawweighting} and a {@code value}, e.g.
+     * <code>[{"rawweighting":59439,"value":"GB"}, ...]</code>.
+     * @param deviceObj to get the value from
+     * @param property to get the value of
+     * @return {@link AspectPropertyValue} containing a list of
+     * {@link IWeightedValue}, or the reason for the value not being present
+     */
+    private AspectPropertyValue<List<IWeightedValue<String>>>
+        getWeightedListAspectPropertyValue(
+            JSONObject deviceObj,
+            AspectPropertyMetaData property) {
+        String key = property.getName().toLowerCase();
+        AspectPropertyValue<List<IWeightedValue<String>>> weightedValue =
+            new AspectPropertyValueDefault<>();
+        if (deviceObj.isNull(key)) {
+            weightedValue.setNoValueMessage(getNoValueReason(deviceObj, key));
+        }
+        else {
+            JSONArray jsonArray = deviceObj.getJSONArray(key);
+            List<IWeightedValue<String>> values =
+                new ArrayList<>(jsonArray.length());
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject element = jsonArray.getJSONObject(i);
+                values.add(new WeightedValue<String>(
+                    element.getInt("rawweighting"),
+                    Objects.toString(element.get("value"), null)));
+            }
+            weightedValue.setValue(values);
+        }
+        return weightedValue;
     }
 
     /**
