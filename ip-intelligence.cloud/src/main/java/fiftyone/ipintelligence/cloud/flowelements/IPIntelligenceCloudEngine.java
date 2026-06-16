@@ -84,7 +84,7 @@ public class IPIntelligenceCloudEngine
 
     @Override
     public String getElementDataKey() {
-        return "ip-intelligence";
+        return "ip";
     }
 
     @Override
@@ -111,7 +111,7 @@ public class IPIntelligenceCloudEngine
 
             // Extract data from json to the aspectData instance.
             JSONObject jsonObj = new JSONObject(json);
-            JSONObject deviceObj = jsonObj.getJSONObject("ip-intelligence");
+            JSONObject deviceObj = jsonObj.getJSONObject("ip");
 
             Map<String, Object> deviceMap =
                 new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
@@ -220,7 +220,7 @@ public class IPIntelligenceCloudEngine
                     item.name,
                     this,
                     item.category,
-                    item.getPropertyType(),
+                    resolvePropertyType(item),
                     new ArrayList<String>(),
                     true);
                 aspectProperties.add(property);
@@ -232,6 +232,35 @@ public class IPIntelligenceCloudEngine
                 " the IP Intelligence cloud engine", this);
             return false;
         }
+    }
+
+    /**
+     * Resolve the Java type for a cloud property. The shared
+     * {@link AccessiblePropertyMetaData.PropertyMetaData#getPropertyType()}
+     * only knows a fixed set of scalar types, so the IP Intelligence specific
+     * cloud types are mapped here (mirroring the device-detection-dotnet
+     * approach of resolving weighted types in the engine):
+     * <ul>
+     *   <li>Weighted values (e.g. {@code WeightedString}) are returned by the
+     *       cloud as a JSON array of value/weight pairs, so they are mapped to
+     *       {@link List} and read by the existing list handling.</li>
+     *   <li>{@code IPAddress} is reported as a plain string value.</li>
+     * </ul>
+     * Any other type is delegated to the shared metadata mapping.
+     * @param item the cloud property meta data
+     * @return the Java type to use for the property
+     */
+    private Class<?> resolvePropertyType(
+        AccessiblePropertyMetaData.PropertyMetaData item) {
+        if (item.type != null) {
+            if (item.type.startsWith("Weighted")) {
+                return List.class;
+            }
+            if (item.type.equals("IPAddress")) {
+                return String.class;
+            }
+        }
+        return item.getPropertyType();
     }
 
     /**
