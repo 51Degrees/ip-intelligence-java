@@ -130,9 +130,9 @@ public class IPIntelligenceCloudEngine
             for (AspectPropertyMetaData property : getProperties()) {
                 if (weightedPropertyNames.contains(
                         property.getName().toLowerCase())) {
-                    deviceMap.put(
+                    propertyMap.put(
                         property.getName(),
-                        getWeightedListAspectPropertyValue(deviceObj, property));
+                        getWeightedListAspectPropertyValue(ipiObj, property));
                     continue;
                 }
                 String type = property.getType().getSimpleName();
@@ -153,9 +153,9 @@ public class IPIntelligenceCloudEngine
                             getStringAspectPropertyValue(ipiObj, property));
                             break;
                     case ("InetAddress"):
-                        deviceMap.put(
+                        propertyMap.put(
                             property.getName(),
-                            getInetAddressAspectPropertyValue(deviceObj, property));
+                            getInetAddressAspectPropertyValue(ipiObj, property));
                         break;
                     case ("boolean"):
                         propertyMap.put(
