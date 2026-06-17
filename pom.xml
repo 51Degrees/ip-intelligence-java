@@ -163,9 +163,9 @@
                 <!--
                     Reports unused code (local variables, private fields, private
                     methods, private parameters and unnecessary imports) as part of
-                    the build. javac's -Xlint cannot detect these, so they were going
-                    unnoticed. Bound to the compile phase so violations surface during
-                    a normal build and fail it. Rules are defined in ci/pmd-ruleset.xml.
+                    the build. javac's -Xlint cannot detect these.
+                     Bound to the compile phase so violations surface during
+                    a normal build and fail it.
                 -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
@@ -175,7 +175,7 @@
                         <!--suppress UnresolvedMavenProperty -->
                         <ruleset>${maven.multiModuleProjectDirectory}/ci/pmd-ruleset.xml</ruleset>
                     </rulesets>
-                    <!-- Analyse test sources too - that is where unused code commonly hides. -->
+                    <!-- Analyse test sources -->
                     <includeTests>true</includeTests>
                     <failOnViolation>true</failOnViolation>
                     <printFailingErrors>true</printFailingErrors>

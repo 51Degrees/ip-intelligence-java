@@ -7,11 +7,9 @@
     <description>
         Reports unused code as part of the build. The Java compiler's -Xlint
         cannot detect unused local variables, private fields, private methods or
-        private/constructor parameters, so these slip through unnoticed. PMD fills
-        that gap. Kept deliberately narrow (unused declarations only) so the gate
-        stays meaningful and low-noise.
+        private/constructor parameters.
 
-        Note: there is no reliable rule for "unused public class/method" - those may
+        Note: there is no reliable rule for "unused public class/method" as those may
         form part of the published API and cannot be judged from this codebase alone,
         so they are intentionally out of scope.
     </description>
