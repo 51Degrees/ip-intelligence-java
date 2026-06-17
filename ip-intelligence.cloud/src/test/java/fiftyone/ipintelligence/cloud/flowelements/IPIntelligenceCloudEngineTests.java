@@ -29,6 +29,7 @@ import fiftyone.pipeline.core.data.AccessiblePropertyMetaData.ProductMetaData;
 import fiftyone.pipeline.core.data.AccessiblePropertyMetaData.PropertyMetaData;
 import fiftyone.pipeline.core.data.FlowData;
 import fiftyone.pipeline.core.data.IWeightedValue;
+import fiftyone.pipeline.core.data.WktString;
 import fiftyone.pipeline.core.flowelements.Pipeline;
 import fiftyone.pipeline.engines.data.AspectPropertyValue;
 import fiftyone.pipeline.engines.services.MissingPropertyService;
@@ -134,6 +135,46 @@ public class IPIntelligenceCloudEngineTests {
             AspectPropertyValue<InetAddress> value = data.getIp();
             assertTrue(value.hasValue());
             assertEquals(InetAddress.getByName("1.2.3.4"), value.getValue());
+        }
+    }
+
+    /**
+     * A property the cloud reports with the {@code WktString} type (e.g.
+     * {@code Areas}) is wrapped in a {@link WktString}. The cloud serialises it
+     * as an object that holds the text under a {@code "value"} key, so this also
+     * exercises that the text is extracted rather than the object stringified.
+     */
+    @Test
+    public void wktStringProperty_parsedAsWktString() throws Exception {
+        try (IPIntelligenceCloudEngine engine = buildEngine(
+                new PropertyMetaData("areas", "WktString", "cat", null))) {
+
+            IPIntelligenceDataCloud data = process(engine,
+                "{ 'ip': { 'areas': { 'value': 'POLYGON((1 2,3 4,5 6,1 2))' } } }");
+
+            AspectPropertyValue<WktString> value = data.getAreas();
+            assertTrue(value.hasValue());
+            assertEquals("POLYGON((1 2,3 4,5 6,1 2))", value.getValue().getValue());
+        }
+    }
+
+    /**
+     * A property the cloud reports with the {@code Single} type (the .NET
+     * 32-bit float used for e.g. Latitude/Longitude) is parsed into a
+     * {@link Float}, so the typed getter returns the declared type rather than
+     * throwing on an unknown type.
+     */
+    @Test
+    public void singleProperty_parsedAsFloat() throws Exception {
+        try (IPIntelligenceCloudEngine engine = buildEngine(
+                new PropertyMetaData("latitude", "Single", "cat", null))) {
+
+            IPIntelligenceDataCloud data = process(engine,
+                "{ 'ip': { 'latitude': 42.447 } }");
+
+            AspectPropertyValue<Float> value = data.getLatitude();
+            assertTrue(value.hasValue());
+            assertEquals(42.447f, value.getValue(), 0.0001f);
         }
     }
 

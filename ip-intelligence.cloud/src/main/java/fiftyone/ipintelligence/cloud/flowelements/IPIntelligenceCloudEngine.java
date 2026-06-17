@@ -43,6 +43,7 @@ import org.slf4j.Logger;
 
 import fiftyone.pipeline.core.data.IWeightedValue;
 import fiftyone.pipeline.core.data.WeightedValue;
+import fiftyone.pipeline.core.data.WktString;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -157,6 +158,11 @@ public class IPIntelligenceCloudEngine
                             property.getName(),
                             getInetAddressAspectPropertyValue(ipiObj, property));
                         break;
+                    case ("WktString"):
+                        propertyMap.put(
+                            property.getName(),
+                            getWktStringAspectPropertyValue(ipiObj, property));
+                        break;
                     case ("boolean"):
                         propertyMap.put(
                             property.getName(),
@@ -171,6 +177,11 @@ public class IPIntelligenceCloudEngine
                         propertyMap.put(
                             property.getName(),
                             getDoubleAspectPropertyValue(ipiObj, property));
+                        break;
+                    case ("Float"):
+                        propertyMap.put(
+                            property.getName(),
+                            getFloatAspectPropertyValue(ipiObj, property));
                         break;
                     default:
                         propertyMap.put(
@@ -273,8 +284,14 @@ public class IPIntelligenceCloudEngine
      *       {@link List} and read by the existing list handling.</li>
      *   <li>{@code IPAddress} is parsed into an {@link InetAddress} so the
  *       typed getters (e.g. {@code getIp()}) return the expected type.</li>
+     *   <li>{@code WktString} (e.g. the {@code Areas} property) is wrapped in a
+     *       {@link WktString} so the typed getter ({@code getAreas()}) returns
+     *       the expected type.</li>
      * </ul>
-     * Any other type is delegated to the shared metadata mapping.
+     * Any other type is delegated to the shared metadata mapping, which only
+     * knows the scalar cloud types and throws on anything else - so every IP
+     * Intelligence specific cloud type must be handled here (mirroring
+     * {@code IpiCloudEngine.GetPropertyType} in ip-intelligence-dotnet).
      * @param item the cloud property meta data
      * @return the Java type to use for the property
      */
@@ -286,6 +303,15 @@ public class IPIntelligenceCloudEngine
             }
             if (item.type.equals("IPAddress")) {
                 return InetAddress.class;
+            }
+            if (item.type.equals("WktString")) {
+                return WktString.class;
+            }
+            // The cloud is a .NET service and reports 32-bit floats (e.g.
+            // Latitude/Longitude) as "Single"; the shared mapping only knows
+            // "Double", so map it here to the Float the typed getters expect.
+            if (item.type.equals("Single")) {
+                return Float.class;
             }
         }
         return item.getPropertyType();
@@ -323,6 +349,27 @@ public class IPIntelligenceCloudEngine
             doubleValue.setValue(ipiObj.getDouble(key));
         }
         return doubleValue;
+    }
+
+    /**
+     * Get the {@link Float} representation of a value from the cloud engine's
+     * JSON response, and wrap it in an {@link AspectPropertyValue}. Used for
+     * cloud "Single" properties (e.g. Latitude/Longitude).
+     * @param ipiObj to get the value from
+     * @param property to get the value of
+     * @return {@link AspectPropertyValue} with a parsed value, or the reason
+     * for the value not being present
+     */
+    private AspectPropertyValue<Float> getFloatAspectPropertyValue(JSONObject ipiObj, AspectPropertyMetaData property) {
+        String key = property.getName().toLowerCase();
+        AspectPropertyValue<Float> floatValue = new AspectPropertyValueDefault<>();
+        if(ipiObj.isNull(key)){
+            floatValue.setNoValueMessage(getNoValueReason(ipiObj, key));
+        }
+        else {
+            floatValue.setValue(ipiObj.getFloat(key));
+        }
+        return floatValue;
     }
 
     /**
@@ -460,6 +507,38 @@ public class IPIntelligenceCloudEngine
             jsValue.setValue(new JavaScript(ipiObj.getString(key)));
         }
         return jsValue;
+    }
+
+    /**
+     * Get the {@link WktString} representation of a value from the cloud
+     * engine's JSON response, and wrap it in an {@link AspectPropertyValue}.
+     * The cloud serialises WKT geometry (e.g. the {@code Areas} property) as an
+     * object wrapping the text under a {@code "value"} key, so the text is
+     * extracted and wrapped in a {@link WktString} to match the typed getter
+     * ({@code getAreas()}).
+     * @param ipiObj to get the value from
+     * @param property to get the value of
+     * @return {@link AspectPropertyValue} with a parsed value, or the reason
+     * for the value not being present
+     */
+    private AspectPropertyValue<WktString> getWktStringAspectPropertyValue(
+        JSONObject ipiObj,
+        AspectPropertyMetaData property){
+        String key = property.getName().toLowerCase();
+        AspectPropertyValue<WktString> wktValue = new AspectPropertyValueDefault<>();
+        if(ipiObj.isNull(key)){
+            wktValue.setNoValueMessage(getNoValueReason(ipiObj, key));
+        } else {
+            // The cloud serialises WKT geometry as an object that wraps the
+            // text under a "value" key, e.g. {"value":"POLYGON((...))"};
+            // fall back to a plain string for forward compatibility.
+            Object raw = ipiObj.get(key);
+            String wkt = (raw instanceof JSONObject)
+                ? ((JSONObject) raw).getString("value")
+                : ipiObj.getString(key);
+            wktValue.setValue(new WktString(wkt));
+        }
+        return wktValue;
     }
 
     /**
