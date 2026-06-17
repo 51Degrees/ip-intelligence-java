@@ -102,7 +102,7 @@ public class IPIntelligenceOnPremiseEngine
 
     @Override
     public String getElementDataKey() {
-        return "ip-intelligence";
+        return "ip";
     }
 
     /**

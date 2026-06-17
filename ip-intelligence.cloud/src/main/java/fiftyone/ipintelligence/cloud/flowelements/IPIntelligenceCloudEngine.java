@@ -43,6 +43,8 @@ import org.slf4j.Logger;
 
 import fiftyone.pipeline.core.data.IWeightedValue;
 import fiftyone.pipeline.core.data.WeightedValue;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -149,6 +151,11 @@ public class IPIntelligenceCloudEngine
                             property.getName(),
                             getStringAspectPropertyValue(deviceObj, property));
                             break;
+                    case ("InetAddress"):
+                        deviceMap.put(
+                            property.getName(),
+                            getInetAddressAspectPropertyValue(deviceObj, property));
+                        break;
                     case ("boolean"):
                         deviceMap.put(
                             property.getName(),
@@ -263,7 +270,8 @@ public class IPIntelligenceCloudEngine
      *   <li>Weighted values (e.g. {@code WeightedString}) are returned by the
      *       cloud as a JSON array of value/weight pairs, so they are mapped to
      *       {@link List} and read by the existing list handling.</li>
-     *   <li>{@code IPAddress} is reported as a plain string value.</li>
+     *   <li>{@code IPAddress} is parsed into an {@link InetAddress} so the
+ *       typed getters (e.g. {@code getIp()}) return the expected type.</li>
      * </ul>
      * Any other type is delegated to the shared metadata mapping.
      * @param item the cloud property meta data
@@ -276,7 +284,7 @@ public class IPIntelligenceCloudEngine
                 return List.class;
             }
             if (item.type.equals("IPAddress")) {
-                return String.class;
+                return InetAddress.class;
             }
         }
         return item.getPropertyType();
@@ -401,6 +409,35 @@ public class IPIntelligenceCloudEngine
             weightedValue.setValue(values);
         }
         return weightedValue;
+    }
+
+    /**
+     * Get the {@link InetAddress} representation of a value from the cloud
+     * engine's JSON response, and wrap it in an {@link AspectPropertyValue}.
+     * The cloud reports IP addresses as plain strings; they are parsed with
+     * {@link InetAddress#getByName(String)} (which parses an IP literal without
+     * a DNS lookup), mirroring the on-premise engine.
+     * @param deviceObj to get the value from
+     * @param property to get the value of
+     * @return {@link AspectPropertyValue} with a parsed value, or the reason
+     * for the value not being present
+     */
+    private AspectPropertyValue<InetAddress> getInetAddressAspectPropertyValue(
+        JSONObject deviceObj,
+        AspectPropertyMetaData property) {
+        String key = property.getName().toLowerCase();
+        AspectPropertyValue<InetAddress> ipValue = new AspectPropertyValueDefault<>();
+        if (deviceObj.isNull(key)) {
+            ipValue.setNoValueMessage(getNoValueReason(deviceObj, key));
+        }
+        else {
+            try {
+                ipValue.setValue(InetAddress.getByName(deviceObj.getString(key)));
+            } catch (UnknownHostException e) {
+                ipValue.setNoValueMessage(e.getMessage());
+            }
+        }
+        return ipValue;
     }
 
     /**
