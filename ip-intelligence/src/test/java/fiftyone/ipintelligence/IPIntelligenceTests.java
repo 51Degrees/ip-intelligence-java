@@ -43,6 +43,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -56,6 +57,7 @@ import java.util.concurrent.Future;
 import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.IP_ADDRESSES_FILE_NAME;
 import static fiftyone.pipeline.engines.Constants.PerformanceProfiles.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -230,6 +232,8 @@ public class IPIntelligenceTests {
                         pipeline.getElement(IPIntelligenceOnPremiseEngine.class);
                 String tempDir = engine.getTempDataDirPath();
                 Path tempPath = Paths.get(tempDir);
+                assertTrue("A temp data file should have been created under " + tempPath,
+                        Files.exists(tempPath));
             }
         }
         logger.info("Completed {} creations", i);
