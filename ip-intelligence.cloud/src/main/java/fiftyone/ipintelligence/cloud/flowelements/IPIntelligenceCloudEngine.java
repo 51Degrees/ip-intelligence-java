@@ -41,10 +41,16 @@ import fiftyone.pipeline.engines.data.AspectPropertyValueDefault;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 
+import fiftyone.pipeline.core.data.IWeightedValue;
+import fiftyone.pipeline.core.data.WeightedValue;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.TreeMap;
 import org.json.JSONArray;
 
@@ -58,6 +64,10 @@ public class IPIntelligenceCloudEngine
     extends CloudAspectEngineBase<IPIntelligenceDataCloud> {
     List<AspectPropertyMetaData> aspectProperties;
     private String dataSourceTier;
+    // Lower-cased names of properties the cloud returns as weighted lists
+    // (cloud type "Weighted..."), so processEngine can read their value/weight
+    // pairs rather than treating them as a plain list.
+    private final Set<String> weightedPropertyNames = new HashSet<>();
     CloudRequestEngine cloudRequestEngine;
 
     /**
@@ -85,7 +95,7 @@ public class IPIntelligenceCloudEngine
 
     @Override
     public String getElementDataKey() {
-        return "ip-intelligence";
+        return "ip";
     }
 
     @Override
@@ -112,12 +122,19 @@ public class IPIntelligenceCloudEngine
 
             // Extract data from json to the aspectData instance.
             JSONObject jsonObj = new JSONObject(json);
-            JSONObject ipiObj = jsonObj.getJSONObject("ip-intelligence");
+            JSONObject ipiObj = jsonObj.getJSONObject("ip");
 
             Map<String, Object> propertyMap =
                 new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
             for (AspectPropertyMetaData property : getProperties()) {
+                if (weightedPropertyNames.contains(
+                        property.getName().toLowerCase())) {
+                    propertyMap.put(
+                        property.getName(),
+                        getWeightedListAspectPropertyValue(ipiObj, property));
+                    continue;
+                }
                 String type = property.getType().getSimpleName();
                 switch(type) {
                     case ("List"):
@@ -135,6 +152,11 @@ public class IPIntelligenceCloudEngine
                             property.getName(),
                             getStringAspectPropertyValue(ipiObj, property));
                             break;
+                    case ("InetAddress"):
+                        propertyMap.put(
+                            property.getName(),
+                            getInetAddressAspectPropertyValue(ipiObj, property));
+                        break;
                     case ("boolean"):
                         propertyMap.put(
                             property.getName(),
@@ -213,15 +235,19 @@ public class IPIntelligenceCloudEngine
             map.size() > 0 &&
             map.containsKey(getElementDataKey())) {
             aspectProperties = new ArrayList<>();
+            weightedPropertyNames.clear();
             dataSourceTier = map.get(getElementDataKey()).dataTier;
 
             for (AccessiblePropertyMetaData.PropertyMetaData item :
                 map.get(getElementDataKey()).properties) {
+                if (item.type != null && item.type.startsWith("Weighted")) {
+                    weightedPropertyNames.add(item.name.toLowerCase());
+                }
                 AspectPropertyMetaData property = new AspectPropertyMetaDataDefault(
                     item.name,
                     this,
                     item.category,
-                    item.getPropertyType(),
+                    resolvePropertyType(item),
                     new ArrayList<String>(),
                     true);
                 aspectProperties.add(property);
@@ -233,6 +259,36 @@ public class IPIntelligenceCloudEngine
                 " the IP Intelligence cloud engine", this);
             return false;
         }
+    }
+
+    /**
+     * Resolve the Java type for a cloud property. The shared
+     * {@link AccessiblePropertyMetaData.PropertyMetaData#getPropertyType()}
+     * only knows a fixed set of scalar types, so the IP Intelligence specific
+     * cloud types are mapped here (mirroring the device-detection-dotnet
+     * approach of resolving weighted types in the engine):
+     * <ul>
+     *   <li>Weighted values (e.g. {@code WeightedString}) are returned by the
+     *       cloud as a JSON array of value/weight pairs, so they are mapped to
+     *       {@link List} and read by the existing list handling.</li>
+     *   <li>{@code IPAddress} is parsed into an {@link InetAddress} so the
+ *       typed getters (e.g. {@code getIp()}) return the expected type.</li>
+     * </ul>
+     * Any other type is delegated to the shared metadata mapping.
+     * @param item the cloud property meta data
+     * @return the Java type to use for the property
+     */
+    private Class<?> resolvePropertyType(
+        AccessiblePropertyMetaData.PropertyMetaData item) {
+        if (item.type != null) {
+            if (item.type.startsWith("Weighted")) {
+                return List.class;
+            }
+            if (item.type.equals("IPAddress")) {
+                return InetAddress.class;
+            }
+        }
+        return item.getPropertyType();
     }
 
     /**
@@ -318,6 +374,71 @@ public class IPIntelligenceCloudEngine
             listValue.setValue(strings);
         }
         return listValue;
+    }
+
+    /**
+     * Get the weighted-string-list representation of a value from the cloud
+     * engine's JSON response, and wrap it in an {@link AspectPropertyValue}.
+     * The cloud returns each weighted value as a JSON object with a
+     * {@code rawweighting} and a {@code value}, e.g.
+     * <code>[{"rawweighting":59439,"value":"GB"}, ...]</code>.
+     * @param deviceObj to get the value from
+     * @param property to get the value of
+     * @return {@link AspectPropertyValue} containing a list of
+     * {@link IWeightedValue}, or the reason for the value not being present
+     */
+    private AspectPropertyValue<List<IWeightedValue<String>>>
+        getWeightedListAspectPropertyValue(
+            JSONObject deviceObj,
+            AspectPropertyMetaData property) {
+        String key = property.getName().toLowerCase();
+        AspectPropertyValue<List<IWeightedValue<String>>> weightedValue =
+            new AspectPropertyValueDefault<>();
+        if (deviceObj.isNull(key)) {
+            weightedValue.setNoValueMessage(getNoValueReason(deviceObj, key));
+        }
+        else {
+            JSONArray jsonArray = deviceObj.getJSONArray(key);
+            List<IWeightedValue<String>> values =
+                new ArrayList<>(jsonArray.length());
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject element = jsonArray.getJSONObject(i);
+                values.add(new WeightedValue<String>(
+                    element.getInt("rawweighting"),
+                    Objects.toString(element.get("value"), null)));
+            }
+            weightedValue.setValue(values);
+        }
+        return weightedValue;
+    }
+
+    /**
+     * Get the {@link InetAddress} representation of a value from the cloud
+     * engine's JSON response, and wrap it in an {@link AspectPropertyValue}.
+     * The cloud reports IP addresses as plain strings; they are parsed with
+     * {@link InetAddress#getByName(String)} (which parses an IP literal without
+     * a DNS lookup), mirroring the on-premise engine.
+     * @param deviceObj to get the value from
+     * @param property to get the value of
+     * @return {@link AspectPropertyValue} with a parsed value, or the reason
+     * for the value not being present
+     */
+    private AspectPropertyValue<InetAddress> getInetAddressAspectPropertyValue(
+        JSONObject deviceObj,
+        AspectPropertyMetaData property) {
+        String key = property.getName().toLowerCase();
+        AspectPropertyValue<InetAddress> ipValue = new AspectPropertyValueDefault<>();
+        if (deviceObj.isNull(key)) {
+            ipValue.setNoValueMessage(getNoValueReason(deviceObj, key));
+        }
+        else {
+            try {
+                ipValue.setValue(InetAddress.getByName(deviceObj.getString(key)));
+            } catch (UnknownHostException e) {
+                ipValue.setNoValueMessage(e.getMessage());
+            }
+        }
+        return ipValue;
     }
 
     /**
