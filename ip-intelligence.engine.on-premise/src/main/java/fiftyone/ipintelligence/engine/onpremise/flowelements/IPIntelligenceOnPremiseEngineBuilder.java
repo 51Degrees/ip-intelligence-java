@@ -51,7 +51,7 @@ import static fiftyone.pipeline.util.StringManipulation.stringJoin;
  * Builder for the {@link IPIntelligenceOnPremiseEngine}. All options for the engine
  * should be set here.
  * <p>
- * Default values are taken from ip-intelligence-cxx/src/hash/hash.c
+ * Default values are taken from ip-intelligence-cxx/src/ipi.c
  */
 @ElementBuilder(alternateName = "HashIPIntelligence")
 public class IPIntelligenceOnPremiseEngineBuilder
@@ -59,7 +59,7 @@ public class IPIntelligenceOnPremiseEngineBuilder
     IPIntelligenceOnPremiseEngineBuilder,
     IPIntelligenceOnPremiseEngine> {
 
-    private final String dataDownloadType = "HashV41";
+    private final String dataDownloadType = "IPIV41";
    
     /**
      * Native configuration instance for this engine.
@@ -239,16 +239,16 @@ public class IPIntelligenceOnPremiseEngineBuilder
             dataFile,
             config,
             requiredProperties,
-            new HashDataFactory(loggerFactory),
+            new IpiDataFactory(loggerFactory),
             tempDir);
     }
 
-    private static class HashDataFactory implements
+    private static class IpiDataFactory implements
         ElementDataFactory<IPIntelligenceDataHash> {
 
         private final ILoggerFactory loggerFactory;
 
-        public HashDataFactory(ILoggerFactory loggerFactory) {
+        public IpiDataFactory(ILoggerFactory loggerFactory) {
             this.loggerFactory = loggerFactory;
         }
 

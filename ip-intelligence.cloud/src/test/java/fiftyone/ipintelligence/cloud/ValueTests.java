@@ -41,16 +41,16 @@ import static org.junit.Assert.*;
 
 public class ValueTests {
 
-    public static void deviceId(WrapperCloud wrapper) throws Exception {
+    public static void registeredName(WrapperCloud wrapper) throws Exception {
         try (FlowData data = wrapper.getPipeline().createFlowData()) {
             data.addEvidence("server.client-ip", Constants.IPV4_ADDRESS)
                 .process();
             ElementData elementData = data.get(wrapper.getEngine().getElementDataKey());
-            IPIntelligenceData device = (IPIntelligenceData) elementData;
-            assertNotNull("The device id should not be null.",
-                device.getRegisteredName().getValue());
-            assertFalse("The device id should not be empty.",
-                device.getRegisteredName().getValue().isEmpty());
+            IPIntelligenceData ipiData = (IPIntelligenceData) elementData;
+            assertNotNull("The registered name should not be null.",
+                ipiData.getRegisteredName().getValue());
+            assertFalse("The registered name should not be empty.",
+                ipiData.getRegisteredName().getValue().isEmpty());
         }
     }
 

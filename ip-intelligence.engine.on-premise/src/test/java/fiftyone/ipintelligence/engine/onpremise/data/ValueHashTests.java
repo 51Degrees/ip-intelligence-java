@@ -43,22 +43,22 @@ public class ValueHashTests extends TestsBase {
     }
     
     @Test
-    public void Values_Hash_ValueTypes() throws Exception {
+    public void Values_Ipi_ValueTypes() throws Exception {
         ValueTests.valueTypes(getWrapper());
     }
 
     @Test
-    public void Values_Hash_AvailableProperties() throws Exception {
+    public void Values_Ipi_AvailableProperties() throws Exception {
         ValueTests.availableProperties(getWrapper());
     }
 
     @Test
-    public void Values_Hash_TypedGetters() throws Exception {
+    public void Values_Ipi_TypedGetters() throws Exception {
         ValueTests.typedGetters(getWrapper());
     }
 
     @Test
-    public void Values_Hash_DeviceId() throws Exception {
-        ValueTests.deviceId(getWrapper());
+    public void Values_Ipi_RegisteredName() throws Exception {
+        ValueTests.registeredName(getWrapper());
     }
 }

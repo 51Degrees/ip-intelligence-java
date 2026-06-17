@@ -22,7 +22,6 @@
 
 package fiftyone.ipintelligence.engine.onpremise.flowelements;
 
-import fiftyone.ipintelligence.engine.onpremise.Enums;
 import fiftyone.ipintelligence.engine.onpremise.data.IPIntelligenceDataHash;
 import fiftyone.ipintelligence.engine.onpremise.interop.swig.*;
 import fiftyone.ipintelligence.shared.IPIntelligenceDataBaseOnPremise;
@@ -62,13 +61,6 @@ public class IPIntelligenceDataHashDefault
      * True if the {@link #close()} method has been called.
      */
     private boolean closed = false;
-
-    /**
-     * Pre-populated list of match methods. This to avoid calling the
-     * '.values()' method every time.
-     */
-    private static final Enums.MatchMethods[] matchMethods =
-            Enums.MatchMethods.values();
 
     /**
      * List of native results which make up this result instance. Usually, this

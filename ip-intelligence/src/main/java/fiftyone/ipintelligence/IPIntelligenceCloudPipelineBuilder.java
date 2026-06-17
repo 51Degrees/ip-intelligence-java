@@ -33,7 +33,7 @@ import fiftyone.pipeline.engines.services.HttpClient;
 import org.slf4j.ILoggerFactory;
 
 /**
- * Builder used to create pipelines with an cloud-based 
+ * Builder used to create pipelines with a cloud-based
  * IP Intelligence engine.
  */
 public class IPIntelligenceCloudPipelineBuilder
@@ -99,16 +99,16 @@ public class IPIntelligenceCloudPipelineBuilder
         CloudRequestEngine cloudRequestEngine = cloudRequestEngineBuilder.build();
 
         // Configure and build the IP Intelligence engine
-        IPIntelligenceCloudEngineBuilder IPIntelligenceEngineBuilder =
+        IPIntelligenceCloudEngineBuilder ipIntelligenceEngineBuilder =
             new IPIntelligenceCloudEngineBuilder(loggerFactory);
         if (lazyLoading) {
-            IPIntelligenceEngineBuilder.setLazyLoading(new LazyLoadingConfiguration(
+            ipIntelligenceEngineBuilder.setLazyLoading(new LazyLoadingConfiguration(
                 (int) lazyLoadingTimeoutMillis));
         }
 
         // Add the elements to the list
         flowElements.add(cloudRequestEngine);
-        flowElements.add(IPIntelligenceEngineBuilder.build());
+        flowElements.add(ipIntelligenceEngineBuilder.build());
 
         // Build and return the pipeline
         return super.build();

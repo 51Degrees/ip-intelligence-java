@@ -56,7 +56,8 @@ import org.json.JSONArray;
 
 /**
  * Engine that takes the JSON response from the {@link CloudRequestEngine} and
- * uses it populate a {@link IPIntelligenceDataCloud} instance for easier consumption.
+ * uses it to populate a {@link IPIntelligenceDataCloud} instance for easier
+ * consumption.
  * @see <a href="https://github.com/51Degrees/specifications/blob/main/ip-intelligence-specification/pipeline-elements/ip-intelligence-cloud.md">Specification</a>
  */
 public class IPIntelligenceCloudEngine
@@ -72,13 +73,13 @@ public class IPIntelligenceCloudEngine
     /**
      * Construct a new instance of the {@link IPIntelligenceCloudEngine}.
      * @param logger logger instance to use for logging
-     * @param IPIDataFactory the factory to use when creating a
+     * @param ipiDataFactory the factory to use when creating a
      *                          {@link IPIntelligenceDataCloud} instance
      */
     public IPIntelligenceCloudEngine(
         Logger logger,
-        ElementDataFactory<IPIntelligenceDataCloud> IPIDataFactory) {
-        super(logger, IPIDataFactory);
+        ElementDataFactory<IPIntelligenceDataCloud> ipiDataFactory) {
+        super(logger, ipiDataFactory);
         this.cloudRequestEngine = null;
     }
 
@@ -121,9 +122,9 @@ public class IPIntelligenceCloudEngine
 
             // Extract data from json to the aspectData instance.
             JSONObject jsonObj = new JSONObject(json);
-            JSONObject deviceObj = jsonObj.getJSONObject("ip");
+            JSONObject ipiObj = jsonObj.getJSONObject("ip");
 
-            Map<String, Object> deviceMap =
+            Map<String, Object> propertyMap =
                 new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
             for (AspectPropertyMetaData property : getProperties()) {
@@ -137,19 +138,19 @@ public class IPIntelligenceCloudEngine
                 String type = property.getType().getSimpleName();
                 switch(type) {
                     case ("List"):
-                        deviceMap.put(
+                        propertyMap.put(
                             property.getName(),
-                            getListAspectPropertyValue(deviceObj, property));
+                            getListAspectPropertyValue(ipiObj, property));
                         break;
                     case ("JavaScript"):
-                        deviceMap.put(
+                        propertyMap.put(
                             property.getName(),
-                            getJavaScriptAspectPropertyValue(deviceObj, property));
+                            getJavaScriptAspectPropertyValue(ipiObj, property));
                         break;
                     case ("String"):
-                        deviceMap.put(
+                        propertyMap.put(
                             property.getName(),
-                            getStringAspectPropertyValue(deviceObj, property));
+                            getStringAspectPropertyValue(ipiObj, property));
                             break;
                     case ("InetAddress"):
                         deviceMap.put(
@@ -157,47 +158,47 @@ public class IPIntelligenceCloudEngine
                             getInetAddressAspectPropertyValue(deviceObj, property));
                         break;
                     case ("boolean"):
-                        deviceMap.put(
+                        propertyMap.put(
                             property.getName(),
-                            getBooleanAspectPropertyValue(deviceObj, property));
+                            getBooleanAspectPropertyValue(ipiObj, property));
                         break;
                     case ("int"):
-                        deviceMap.put(
+                        propertyMap.put(
                             property.getName(),
-                            getIntegerAspectPropertyValue(deviceObj, property));
+                            getIntegerAspectPropertyValue(ipiObj, property));
                         break;
                     case ("double"):
-                        deviceMap.put(
+                        propertyMap.put(
                             property.getName(),
-                            getDoubleAspectPropertyValue(deviceObj, property));
+                            getDoubleAspectPropertyValue(ipiObj, property));
                         break;
                     default:
-                        deviceMap.put(
+                        propertyMap.put(
                             property.getName(),
-                            getStringAspectPropertyValue(deviceObj, property));
+                            getStringAspectPropertyValue(ipiObj, property));
                             break;
                 }
             }
 
             // Add no value messages for any properties which have not yet been
             // populated.
-            for (String key : deviceObj.keySet()) {
+            for (String key : ipiObj.keySet()) {
                 if (key.endsWith("nullreason")) {
                     String actualKey = key
                         .replace("nullreason", "");
-                    if (deviceMap.containsKey(actualKey) == false) {
+                    if (propertyMap.containsKey(actualKey) == false) {
                         AspectPropertyValue<?> nullValue =
                             new AspectPropertyValueDefault<Object>();
                         nullValue.setNoValueMessage(
-                            deviceObj.optString(key, "Unknown"));
-                        deviceMap.put(
+                            ipiObj.optString(key, "Unknown"));
+                        propertyMap.put(
                             actualKey,
                             nullValue);
                     }
                 }
             }
 
-            aspectData.populateFromMap(deviceMap);
+            aspectData.populateFromMap(propertyMap);
         }
     }
 
@@ -293,33 +294,33 @@ public class IPIntelligenceCloudEngine
     /**
      * Get the integer representation of a value from the cloud engine's JSON
      * response, and wrap it in an {@link AspectPropertyValue}.
-     * @param deviceObj to get the value from
+     * @param ipiObj to get the value from
      * @param property to get the value of
      * @return {@link AspectPropertyValue} with a parsed value, or the reason
      * for the value not being present
      */
     private AspectPropertyValue<Integer> getIntegerAspectPropertyValue(
-        JSONObject deviceObj,
+        JSONObject ipiObj,
         AspectPropertyMetaData property) {
         String key = property.getName().toLowerCase();
         AspectPropertyValue<Integer> intValue = new AspectPropertyValueDefault<>();
-        if(deviceObj.isNull(key)){
-            intValue.setNoValueMessage(getNoValueReason(deviceObj, key));
+        if(ipiObj.isNull(key)){
+            intValue.setNoValueMessage(getNoValueReason(ipiObj, key));
         }
         else {
-            intValue.setValue(deviceObj.getInt(key));
+            intValue.setValue(ipiObj.getInt(key));
         }
         return intValue;
     }
 
-    private AspectPropertyValue<Double> getDoubleAspectPropertyValue(JSONObject deviceObj, AspectPropertyMetaData property) {
+    private AspectPropertyValue<Double> getDoubleAspectPropertyValue(JSONObject ipiObj, AspectPropertyMetaData property) {
         String key = property.getName().toLowerCase();
         AspectPropertyValue<Double> doubleValue = new AspectPropertyValueDefault<>();
-        if(deviceObj.isNull(key)){
-            doubleValue.setNoValueMessage(getNoValueReason(deviceObj, key));
+        if(ipiObj.isNull(key)){
+            doubleValue.setNoValueMessage(getNoValueReason(ipiObj, key));
         }
         else {
-            doubleValue.setValue(deviceObj.getDouble(key));
+            doubleValue.setValue(ipiObj.getDouble(key));
         }
         return doubleValue;
     }
@@ -327,21 +328,21 @@ public class IPIntelligenceCloudEngine
     /**
      * Get the boolean representation of a value from the cloud engine's JSON
      * response, and wrap it in an {@link AspectPropertyValue}.
-     * @param deviceObj to get the value from
+     * @param ipiObj to get the value from
      * @param property to get the value of
      * @return {@link AspectPropertyValue} with a parsed value, or the reason
      * for the value not being present
      */
     private AspectPropertyValue<Boolean> getBooleanAspectPropertyValue(
-        JSONObject deviceObj,
+        JSONObject ipiObj,
         AspectPropertyMetaData property) {
         String key = property.getName().toLowerCase();
         AspectPropertyValue<Boolean> booleanValue = new AspectPropertyValueDefault<>();
-        if(deviceObj.isNull(key)){
-            booleanValue.setNoValueMessage(getNoValueReason(deviceObj, key));
+        if(ipiObj.isNull(key)){
+            booleanValue.setNoValueMessage(getNoValueReason(ipiObj, key));
         }
         else {
-            booleanValue.setValue(deviceObj.getBoolean(key));
+            booleanValue.setValue(ipiObj.getBoolean(key));
         }
         return booleanValue;
     }
@@ -349,23 +350,23 @@ public class IPIntelligenceCloudEngine
     /**
      * Get the string list representation of a value from the cloud engine's
      * JSON response, and wrap it in an {@link AspectPropertyValue}.
-     * @param deviceObj to get the value from
+     * @param ipiObj to get the value from
      * @param property to get the value of
      * @return {@link AspectPropertyValue} with a parsed value, or the reason
      * for the value not being present
      */
     private AspectPropertyValue<List<String>> getListAspectPropertyValue(
-        JSONObject deviceObj,
+        JSONObject ipiObj,
         AspectPropertyMetaData property){
         String key = property.getName().toLowerCase();
         AspectPropertyValue<List<String>> listValue = new AspectPropertyValueDefault<>();
-        if(deviceObj.isNull(key))
+        if(ipiObj.isNull(key))
         {
-            listValue.setNoValueMessage(getNoValueReason(deviceObj, key));
+            listValue.setNoValueMessage(getNoValueReason(ipiObj, key));
         }
         else 
         {
-            JSONArray jsonArray = deviceObj.getJSONArray(key);
+            JSONArray jsonArray = ipiObj.getJSONArray(key);
             List<String> strings = new ArrayList<>(jsonArray.length());
             for (Object object : jsonArray.toList()) {
                 strings.add(Objects.toString(object, null));
@@ -443,20 +444,20 @@ public class IPIntelligenceCloudEngine
     /**
      * Get the JavaScript representation of a value from the cloud engine's JSON
      * response, and wrap it in an {@link AspectPropertyValue}.
-     * @param deviceObj to get the value from
+     * @param ipiObj to get the value from
      * @param property to get the value of
      * @return {@link AspectPropertyValue} with a parsed value, or the reason
      * for the value not being present
      */
     private AspectPropertyValue<JavaScript> getJavaScriptAspectPropertyValue(
-        JSONObject deviceObj,
+        JSONObject ipiObj,
         AspectPropertyMetaData property){
         String key = property.getName().toLowerCase();
         AspectPropertyValue<JavaScript> jsValue = new AspectPropertyValueDefault<>();
-        if(deviceObj.isNull(key)){
-            jsValue.setNoValueMessage(getNoValueReason(deviceObj, key));
+        if(ipiObj.isNull(key)){
+            jsValue.setNoValueMessage(getNoValueReason(ipiObj, key));
         } else {
-            jsValue.setValue(new JavaScript(deviceObj.getString(key)));
+            jsValue.setValue(new JavaScript(ipiObj.getString(key)));
         }
         return jsValue;
     }
@@ -464,21 +465,21 @@ public class IPIntelligenceCloudEngine
     /**
      * Get the string representation of a value from the cloud engine's JSON
      * response, and wrap it in an {@link AspectPropertyValue}.
-     * @param deviceObj to get the value from
+     * @param ipiObj to get the value from
      * @param property to get the value of
      * @return {@link AspectPropertyValue} with a parsed value, or the reason
      * for the value not being present
      */
     private AspectPropertyValue<String> getStringAspectPropertyValue(
-        JSONObject deviceObj,
+        JSONObject ipiObj,
         AspectPropertyMetaData property){
         String key = property.getName().toLowerCase();
         AspectPropertyValue<String> stringValue = new AspectPropertyValueDefault<>();
-        if(deviceObj.isNull(key)){
-            stringValue.setNoValueMessage(getNoValueReason(deviceObj, key));
+        if(ipiObj.isNull(key)){
+            stringValue.setNoValueMessage(getNoValueReason(ipiObj, key));
         }
         else {
-            stringValue.setValue(deviceObj.getString(key));
+            stringValue.setValue(ipiObj.getString(key));
         }
         return stringValue;
     }
@@ -486,12 +487,12 @@ public class IPIntelligenceCloudEngine
     /**
      * Get the reason for the value of a property not being present in the cloud
      * engine's JSON response.
-     * @param deviceObj to get the null reason from
+     * @param ipiObj to get the null reason from
      * @param key to get the null reason from
      * @return the reason for the missing property
      */
-    private String getNoValueReason(JSONObject deviceObj, String key){
-        Object reason = tryToGet(deviceObj, key + "nullreason");
+    private String getNoValueReason(JSONObject ipiObj, String key){
+        Object reason = tryToGet(ipiObj, key + "nullreason");
         return reason == null ? null : reason.toString();
     }
 
