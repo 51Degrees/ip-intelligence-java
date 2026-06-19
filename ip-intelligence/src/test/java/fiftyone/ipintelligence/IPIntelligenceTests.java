@@ -58,7 +58,6 @@ import static fiftyone.ipintelligence.shared.testhelpers.FileUtils.IP_ADDRESSES_
 import static fiftyone.pipeline.engines.Constants.PerformanceProfiles.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assume.assumeTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;

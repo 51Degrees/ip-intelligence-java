@@ -181,6 +181,11 @@
                     <printFailingErrors>true</printFailingErrors>
                     <!-- Avoid requiring the site/jxr report just to run the check. -->
                     <linkXRef>false</linkXRef>
+                    <!-- SWIG-generated interop bindings are machine-generated and
+                         regenerated from the native build, so they must not be gated. -->
+                    <excludes>
+                        <exclude>**/interop/swig/*.java</exclude>
+                    </excludes>
                 </configuration>
                 <executions>
                     <execution>

@@ -34,7 +34,6 @@ import fiftyone.pipeline.engines.fiftyone.flowelements.ShareUsageBuilder;
 import fiftyone.pipeline.engines.flowelements.AspectEngine;
 import fiftyone.pipeline.engines.flowelements.PrePackagedPipelineBuilderBase;
 import fiftyone.pipeline.engines.services.DataUpdateService;
-import fiftyone.pipeline.engines.services.HttpClient;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.LoggerFactory;
 
