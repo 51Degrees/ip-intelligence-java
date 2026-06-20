@@ -26,13 +26,10 @@ import fiftyone.ipintelligence.engine.onpremise.flowelements.IPIntelligenceOnPre
 import fiftyone.ipintelligence.shared.IPIntelligenceData;
 import fiftyone.ipintelligence.shared.testhelpers.data.DataValidator;
 import fiftyone.pipeline.core.data.FlowData;
-import fiftyone.pipeline.core.data.IWeightedValue;
 import fiftyone.pipeline.engines.data.AspectPropertyValue;
 import fiftyone.pipeline.engines.exceptions.NoValueException;
 import fiftyone.pipeline.engines.fiftyone.data.FiftyOneAspectPropertyMetaData;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;

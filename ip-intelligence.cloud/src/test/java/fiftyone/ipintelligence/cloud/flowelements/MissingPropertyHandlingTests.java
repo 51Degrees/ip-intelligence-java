@@ -26,7 +26,6 @@ import fiftyone.ipintelligence.cloud.data.IPIntelligenceDataCloud;
 import fiftyone.pipeline.cloudrequestengine.data.CloudRequestData;
 import fiftyone.pipeline.cloudrequestengine.flowelements.CloudRequestEngine;
 import fiftyone.pipeline.core.data.FlowData;
-import fiftyone.pipeline.core.data.IWeightedValue;
 import fiftyone.pipeline.engines.data.AspectPropertyMetaData;
 import fiftyone.pipeline.engines.data.AspectPropertyMetaDataDefault;
 import fiftyone.pipeline.engines.data.AspectPropertyValue;

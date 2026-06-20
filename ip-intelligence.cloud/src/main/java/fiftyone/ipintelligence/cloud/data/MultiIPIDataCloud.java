@@ -41,7 +41,7 @@ import java.util.Map;
  * by the 51Degrees Cloud service when evidence matching multiple profiles is
  * provided.
  */
-public class MultiIPIDataCloud
+public final class MultiIPIDataCloud
     extends AspectDataBase
     implements MultiProfileData<IPIntelligenceData> {
     private static final String PROFILE_LIST_KEY = "profiles";

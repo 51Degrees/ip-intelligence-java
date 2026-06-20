@@ -42,7 +42,6 @@ import org.slf4j.Logger;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.nio.file.Files;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -160,7 +159,7 @@ public class IPIntelligenceOnPremisePipelineBuilderTest {
     @Test
     public void setDataUpdateService_RegisterDataFileTriggered() throws Exception {
         DataUpdateServiceDefault dataUpdateServiceDefault = mock(DataUpdateServiceDefault.class);
-        Pipeline pipeline = builder
+        builder
                 .setAutoUpdate(true)
                 .setDataUpdateService(dataUpdateServiceDefault)
                 .build();
