@@ -26,14 +26,18 @@ import fiftyone.pipeline.core.data.ElementPropertyMetaData;
 import fiftyone.pipeline.core.data.FlowData;
 import fiftyone.pipeline.core.data.IWeightedValue;
 import fiftyone.pipeline.core.data.TryGetResult;
+import fiftyone.pipeline.core.data.WktString;
 import fiftyone.pipeline.core.data.types.JavaScript;
 import fiftyone.pipeline.engines.data.AspectData;
 import fiftyone.pipeline.engines.data.AspectPropertyMetaData;
 import fiftyone.pipeline.engines.data.AspectPropertyValue;
+import fiftyone.pipeline.engines.data.AspectPropertyValueDefault;
 import fiftyone.pipeline.engines.flowelements.AspectEngine;
 import fiftyone.pipeline.engines.services.MissingPropertyService;
 import org.slf4j.Logger;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -132,6 +136,69 @@ public abstract class IPIntelligenceDataBaseOnPremise extends IPIntelligenceData
      */
     protected abstract AspectPropertyValue<JavaScript> getValueAsJavaScript(
         String propertyName);
+
+    /**
+     * Get the value for the specified property as a {@link Float}. Used for
+     * {@code single} (32-bit float) properties such as Latitude/Longitude. The
+     * native engine exposes numeric values as doubles, so this is derived from
+     * {@link #getValueAsDouble(String)} rather than adding a new native binding
+     * or abstract method.
+     * @param propertyName name of the property to get the value for
+     * @return value as a float
+     */
+    protected AspectPropertyValue<Float> getValueAsFloat(String propertyName) {
+        AspectPropertyValue<Double> dbl = getValueAsDouble(propertyName);
+        AspectPropertyValue<Float> result = new AspectPropertyValueDefault<>();
+        if (dbl.hasValue()) {
+            result.setValue((float) (double) dbl.getValue());
+        } else {
+            result.setNoValueMessage(dbl.getNoValueMessage());
+        }
+        return result;
+    }
+
+    /**
+     * Get the value for the specified property as an {@link InetAddress}. Used
+     * for {@code ipaddress} properties (e.g. Ip, IpRangeStart/End). The native
+     * engine returns the address as its string form, so this parses that string
+     * with {@link InetAddress#getByName(String)} (which resolves an IP literal
+     * without performing a DNS lookup).
+     * @param propertyName name of the property to get the value for
+     * @return value as an InetAddress
+     */
+    protected AspectPropertyValue<InetAddress> getValueAsIpAddress(String propertyName) {
+        AspectPropertyValue<String> str = getValueAsString(propertyName);
+        AspectPropertyValue<InetAddress> result = new AspectPropertyValueDefault<>();
+        if (str.hasValue()) {
+            try {
+                result.setValue(InetAddress.getByName(str.getValue()));
+            } catch (UnknownHostException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            result.setNoValueMessage(str.getNoValueMessage());
+        }
+        return result;
+    }
+
+    /**
+     * Get the value for the specified property as a {@link WktString}. Used for
+     * {@code wkb}/{@code wkbr} geometry properties (e.g. Areas). The native
+     * engine returns the geometry as its WKT string form, which is wrapped in a
+     * {@link WktString} so the typed getter returns the declared type.
+     * @param propertyName name of the property to get the value for
+     * @return value as a WktString
+     */
+    protected AspectPropertyValue<WktString> getValueAsWktString(String propertyName) {
+        AspectPropertyValue<String> str = getValueAsString(propertyName);
+        AspectPropertyValue<WktString> result = new AspectPropertyValueDefault<>();
+        if (str.hasValue()) {
+            result.setValue(new WktString(str.getValue()));
+        } else {
+            result.setNoValueMessage(str.getNoValueMessage());
+        }
+        return result;
+    }
 
     private static Class<?>[] toWeightedListType(Class<?> deepType, boolean isList) {
         final List<Class<?>> list = new ArrayList<>();
@@ -232,6 +299,12 @@ public abstract class IPIntelligenceDataBaseOnPremise extends IPIntelligenceData
                                 obj = getValueAsInteger(key);
                             } else if (innerType.equals(Double.class)) {
                                 obj = getValueAsDouble(key);
+                            } else if (innerType.equals(Float.class)) {
+                                obj = getValueAsFloat(key);
+                            } else if (InetAddress.class.isAssignableFrom(innerType)) {
+                                obj = getValueAsIpAddress(key);
+                            } else if (innerType.equals(WktString.class)) {
+                                obj = getValueAsWktString(key);
                             } else if (innerType.equals(List.class)) {
                                 obj = getValues(key, parameterisedTypes);
                             } else if (innerType.equals(JavaScript.class)) {
