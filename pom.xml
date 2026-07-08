@@ -14,6 +14,7 @@
 
     <modules>
         <module>ip-intelligence.shared</module>
+        <module>ip-intelligence.translation</module>
         <module>ip-intelligence.engine.on-premise</module>
         <module>ip-intelligence.cloud</module>
         <module>ip-intelligence</module>
