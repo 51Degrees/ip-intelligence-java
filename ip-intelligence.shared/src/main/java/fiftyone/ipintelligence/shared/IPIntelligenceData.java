@@ -63,7 +63,7 @@ public interface IPIntelligenceData extends AspectData
 	 */
 	AspectPropertyValue<String> getConnectionType();
 	/**
-	 * The 3-character ISO 3166-1 continent code for the supplied location.
+	 * The 2-character ISO 3166-1 continent code for the supplied location.
 	 */
 	AspectPropertyValue<String> getContinentCode2();
 	/**
@@ -227,7 +227,7 @@ public interface IPIntelligenceData extends AspectData
 	 */
 	AspectPropertyValue<String> getTimeZoneIana();
 	/**
-	 * The offset from UTC in minutes in the supplied location, at the time that the value is produced.
+	 * The offset from UTC in minutes in the supplied location, at the time that the value is produced. A value of -1 indicates unknown.
 	 */
 	AspectPropertyValue<Integer> getTimeZoneOffset();
 	/**

@@ -93,7 +93,7 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@Override
 	public AspectPropertyValue<String> getConnectionType() { return getAs("connectiontype", AspectPropertyValue.class, String.class); }
 	/**
-	 * The 3-character ISO 3166-1 continent code for the supplied location.
+	 * The 2-character ISO 3166-1 continent code for the supplied location.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -339,7 +339,7 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@Override
 	public AspectPropertyValue<String> getTimeZoneIana() { return getAs("timezoneiana", AspectPropertyValue.class, String.class); }
 	/**
-	 * The offset from UTC in minutes in the supplied location, at the time that the value is produced.
+	 * The offset from UTC in minutes in the supplied location, at the time that the value is produced. A value of -1 indicates unknown.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
