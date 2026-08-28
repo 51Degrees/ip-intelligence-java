@@ -64,18 +64,24 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	public AspectPropertyValue<Integer> getAccuracyRadiusMin() { return getAs("accuracyradiusmin", AspectPropertyValue.class, Integer.class); }
 	/**
 	 * Any shapes associated with the location. Usually this is the area which the IP range covers. This is returned as a WKT String stored as a reduced format of WKB.
+	 *
+	 * @see <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">More information</a>
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public AspectPropertyValue<WktString> getAreas() { return getAs("areas", AspectPropertyValue.class, WktString.class); }
 	/**
 	 * Autonomous System Number associated with the IP address.
+	 *
+	 * @see <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">More information</a>
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public AspectPropertyValue<String> getAsn() { return getAs("asn", AspectPropertyValue.class, String.class); }
 	/**
 	 * The name registered to the Asn associated with the IP address.
+	 *
+	 * @see <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">More information</a>
 	 */
 	@SuppressWarnings("unchecked")
 	@Override

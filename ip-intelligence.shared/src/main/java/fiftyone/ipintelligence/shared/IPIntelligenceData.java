@@ -44,14 +44,20 @@ public interface IPIntelligenceData extends AspectData
 	AspectPropertyValue<Integer> getAccuracyRadiusMin();
 	/**
 	 * Any shapes associated with the location. Usually this is the area which the IP range covers. This is returned as a WKT String stored as a reduced format of WKB.
+	 *
+	 * @see <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">More information</a>
 	 */
 	AspectPropertyValue<WktString> getAreas();
 	/**
 	 * Autonomous System Number associated with the IP address.
+	 *
+	 * @see <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">More information</a>
 	 */
 	AspectPropertyValue<String> getAsn();
 	/**
 	 * The name registered to the Asn associated with the IP address.
+	 *
+	 * @see <a href="https://en.wikipedia.org/wiki/Autonomous_system_(Internet)">More information</a>
 	 */
 	AspectPropertyValue<String> getAsnName();
 	/**
