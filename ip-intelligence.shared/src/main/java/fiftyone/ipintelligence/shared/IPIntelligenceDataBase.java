@@ -279,7 +279,15 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@Override
 	public AspectPropertyValue<Float> getLatitude() { return getAs("latitude", AspectPropertyValue.class, Float.class); }
 	/**
-	 * The confidence in the town and country provided.
+	 * The confidence in the town and country provided. Returns one of High, Medium, Low, or Unknown. The confidence must be checked before using the returned location values.
+	 * <p>
+	 * Possible values:
+	 * <pre>
+	 * High      High confidence results can be relied upon and considered useful for all practical purposes.
+	 * Medium    Medium confidence results might be useful where the use case can tolerate a degree of inaccuracy.
+	 * Low       Low confidence results should be discarded when the results might be used to make consequential decisions.
+	 * Unknown   Unknown confidence results should be treated in the same way as Low and discarded when the results might be used to m...
+	 * </pre>
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -345,7 +353,7 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@Override
 	public AspectPropertyValue<String> getTimeZoneIana() { return getAs("timezoneiana", AspectPropertyValue.class, String.class); }
 	/**
-	 * The offset from UTC in minutes in the supplied location, at the time that the value is produced. A value of -1 indicates unknown.
+	 * The offset from UTC in minutes in the supplied location, at the time that the value is produced. A value of -1 means the offset is unknown and is only returned when no location can be determined for the IP address. Real offsets are whole multiples of 15 minutes, so -1 never collides with a genuine value.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
