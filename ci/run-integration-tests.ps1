@@ -20,6 +20,12 @@ $RepoPath = [IO.Path]::Combine($pwd, $RepoName)
 $mavenOpts = '--batch-mode', '--no-transfer-progress'
 
 try {
+    # The branch under test usually has no twin in the examples repo
+    if (!(git ls-remote --heads "https://github.com/$OrgName/$ExamplesRepo" "refs/heads/$Branch")) {
+        Write-Output "No '$Branch' branch in '$ExamplesRepo', using 'main'"
+        $Branch = "main"
+    }
+
     Write-Output "Cloning '$ExamplesRepo'"
     ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $Branch
     & "./$ExamplesRepo/ci/fetch-assets.ps1" -IpIntelligenceUrl $IpIntelligenceUrl

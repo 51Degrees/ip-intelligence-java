@@ -58,6 +58,7 @@ jobs:
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
       IpIntelligenceUrl: ${{ secrets.IPI_DATA_FILE_URL }}
+      TestResourceKey: ${{ secrets._51DEGREES_RESOURCE_KEY_BESPOKE }}
 
   Publish:
     if: ${{ !cancelled() }}
