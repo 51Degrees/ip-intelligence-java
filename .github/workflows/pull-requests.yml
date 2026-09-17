@@ -2,6 +2,10 @@ name: Pull Requests
 
 on:
   workflow_dispatch:
+    inputs:
+      dryrun:
+        type: boolean
+        default: false
 
 jobs:
   PullRequests:
