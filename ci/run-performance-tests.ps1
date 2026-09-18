@@ -19,6 +19,12 @@ if (!$IpIntelligenceUrl) {
 if (Test-Path $ExamplesRepo) {
     Write-Host "Examples already cloned, skipping"
 } else {
+    # The branch under test usually has no twin in the examples repo
+    if (!(git ls-remote --heads "https://github.com/$OrgName/$ExamplesRepo" "refs/heads/$Branch")) {
+        Write-Host "No '$Branch' branch in '$ExamplesRepo', using 'main'"
+        $Branch = "main"
+    }
+
     Write-Host "Cloning '$ExamplesRepo'"
     ./steps/clone-repo.ps1 -RepoName $ExamplesRepo -OrgName $OrgName -Branch $Branch
     & "./$ExamplesRepo/ci/fetch-assets.ps1" -IpIntelligenceUrl $IpIntelligenceUrl

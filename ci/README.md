@@ -47,7 +47,7 @@ graph TD
 
 It performs the following steps:
 
-1. Clone Examples Repo: Clone the "ip-intelligence-java-examples" repository into the common-ci directory.
+1. Clone Examples Repo: Clone the "ip-intelligence-java-examples" repository into the common-ci directory. The branch with the same name as the one under test is used if it exists there, otherwise `main`.
 3. Set up test files: Move the 51Degrees-EnterpriseIpiV41.ipi file to the ip-intelligence-java-examples/ip-intelligence-data directory and download Evidence files into ip-intelligence-data directory.
 4. Enter ip-intelligence-examples directory: Changes the current working directory to the ip-intelligence-java-examples folder.
 5. Set package dependency version: Sets the version of the ip-intelligence package dependency for the examples to the specified Version parameter. This will be the version installed in the local repository found in the .m2 folder.
