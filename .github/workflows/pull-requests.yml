@@ -2,6 +2,13 @@ name: Pull Requests
 
 on:
   workflow_dispatch:
+    inputs:
+      dryrun:
+        type: boolean
+        default: false
+      common-ci-ref:
+        type: string
+        default: ''
 
 jobs:
   PullRequests:
@@ -11,6 +18,7 @@ jobs:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}
       dryrun: ${{ inputs.dryrun || false }}
+      common-ci-ref: ${{ inputs.common-ci-ref || '' }}
       cache-assets: true
     secrets:
       token: ${{ secrets.ACCESS_TOKEN }}
