@@ -105,6 +105,12 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@Override
 	public AspectPropertyValue<String> getContinentCode2() { return getAs("continentcode2", AspectPropertyValue.class, String.class); }
 	/**
+	 * The GeoNames identifier of the continent associated with the supplied location.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getContinentGeoNameId() { return getAs("continentgeonameid", AspectPropertyValue.class, String.class); }
+	/**
 	 * The name of the continent the supplied location is in.
 	 */
 	@SuppressWarnings("unchecked")
@@ -141,11 +147,29 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@Override
 	public AspectPropertyValue<List<IWeightedValue<String>>> getCountryCodesPopulation() { return getAs("countrycodespopulation", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
 	/**
+	 * The GeoNames identifier of the country associated with the supplied location.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getCountryGeoNameId() { return getAs("countrygeonameid", AspectPropertyValue.class, String.class); }
+	/**
+	 * A list of GeoNames country identifiers that overlap within the area associated in the provided evidence. Results are weighted and ordered by each country's proportion of the overlapping area. Areas that cannot be resolved will not contribute to the resulting data.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<List<IWeightedValue<String>>> getCountryGeoNamesGeographical() { return getAs("countrygeonamesgeographical", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
+	/**
 	 * The name of the county that the supplied location is in. In this case, a county is defined as an administrative sub-section of a country or state.
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public AspectPropertyValue<String> getCounty() { return getAs("county", AspectPropertyValue.class, String.class); }
+	/**
+	 * The GeoNames identifier of the county, a second-level administrative subdivision (admin2) associated with the supplied location.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getCountyGeoNameId() { return getAs("countygeonameid", AspectPropertyValue.class, String.class); }
 	/**
 	 * The Alpha-3 ISO 4217 code of the currency associated with the supplied location.
 	 */
@@ -323,6 +347,12 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@Override
 	public AspectPropertyValue<String> getRegisteredCountry() { return getAs("registeredcountry", AspectPropertyValue.class, String.class); }
 	/**
+	 * The GeoNames identifier of the country in which the IP address range is registered.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getRegisteredCountryGeoNameId() { return getAs("registeredcountrygeonameid", AspectPropertyValue.class, String.class); }
+	/**
 	 * Name of the IP range. This is usually the owner.
 	 */
 	@SuppressWarnings("unchecked")
@@ -340,6 +370,18 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@SuppressWarnings("unchecked")
 	@Override
 	public AspectPropertyValue<String> getState() { return getAs("state", AspectPropertyValue.class, String.class); }
+	/**
+	 * The GeoNames database identifier for the state (first-level administrative subdivision, admin1) that the supplied location is in.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getStateGeoNameId() { return getAs("stategeonameid", AspectPropertyValue.class, String.class); }
+	/**
+	 * A list of GeoNames state identifiers, first-level administrative subdivisions (admin1) that overlap within the area associated in the provided evidence. Results are weighted and ordered by each state's proportion of the overlapping area. Areas that cannot be resolved to the state level will not contribute to the resulting data.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<List<IWeightedValue<String>>> getStateGeoNamesGeographical() { return getAs("stategeonamesgeographical", AspectPropertyValue.class, List.class, IWeightedValue.class, String.class); }
 	/**
 	 * The name of the suburb that the supplied location is in.
 	 */
@@ -364,6 +406,12 @@ public abstract class IPIntelligenceDataBase extends AspectDataBase implements I
 	@SuppressWarnings("unchecked")
 	@Override
 	public AspectPropertyValue<String> getTown() { return getAs("town", AspectPropertyValue.class, String.class); }
+	/**
+	 * The GeoNames identifier of the town or populated place nearest to the supplied location.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public AspectPropertyValue<String> getTownGeoNameId() { return getAs("towngeonameid", AspectPropertyValue.class, String.class); }
 	/**
 	 * The zip or postal code that the supplied location falls under.
 	 */
