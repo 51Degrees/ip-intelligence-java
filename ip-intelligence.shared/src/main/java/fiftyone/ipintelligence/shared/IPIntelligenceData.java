@@ -73,6 +73,10 @@ public interface IPIntelligenceData extends AspectData
 	 */
 	AspectPropertyValue<String> getContinentCode2();
 	/**
+	 * The GeoNames identifier of the continent associated with the supplied location.
+	 */
+	AspectPropertyValue<String> getContinentGeoNameId();
+	/**
 	 * The name of the continent the supplied location is in.
 	 */
 	AspectPropertyValue<String> getContinentName();
@@ -97,9 +101,21 @@ public interface IPIntelligenceData extends AspectData
 	 */
 	AspectPropertyValue<List<IWeightedValue<String>>> getCountryCodesPopulation();
 	/**
+	 * The GeoNames identifier of the country associated with the supplied location.
+	 */
+	AspectPropertyValue<String> getCountryGeoNameId();
+	/**
+	 * A list of GeoNames country identifiers that overlap within the area associated in the provided evidence. Results are weighted and ordered by each country's proportion of the overlapping area. Areas that cannot be resolved will not contribute to the resulting data.
+	 */
+	AspectPropertyValue<List<IWeightedValue<String>>> getCountryGeoNamesGeographical();
+	/**
 	 * The name of the county that the supplied location is in. In this case, a county is defined as an administrative sub-section of a country or state.
 	 */
 	AspectPropertyValue<String> getCounty();
+	/**
+	 * The GeoNames identifier of the county, a second-level administrative subdivision (admin2) associated with the supplied location.
+	 */
+	AspectPropertyValue<String> getCountyGeoNameId();
 	/**
 	 * The Alpha-3 ISO 4217 code of the currency associated with the supplied location.
 	 */
@@ -221,6 +237,10 @@ public interface IPIntelligenceData extends AspectData
 	 */
 	AspectPropertyValue<String> getRegisteredCountry();
 	/**
+	 * The GeoNames identifier of the country in which the IP address range is registered.
+	 */
+	AspectPropertyValue<String> getRegisteredCountryGeoNameId();
+	/**
 	 * Name of the IP range. This is usually the owner.
 	 */
 	AspectPropertyValue<String> getRegisteredName();
@@ -232,6 +252,14 @@ public interface IPIntelligenceData extends AspectData
 	 * The name of the state that the supplied location is in.
 	 */
 	AspectPropertyValue<String> getState();
+	/**
+	 * The GeoNames database identifier for the state (first-level administrative subdivision, admin1) that the supplied location is in.
+	 */
+	AspectPropertyValue<String> getStateGeoNameId();
+	/**
+	 * A list of GeoNames state identifiers, first-level administrative subdivisions (admin1) that overlap within the area associated in the provided evidence. Results are weighted and ordered by each state's proportion of the overlapping area. Areas that cannot be resolved to the state level will not contribute to the resulting data.
+	 */
+	AspectPropertyValue<List<IWeightedValue<String>>> getStateGeoNamesGeographical();
 	/**
 	 * The name of the suburb that the supplied location is in.
 	 */
@@ -248,6 +276,10 @@ public interface IPIntelligenceData extends AspectData
 	 * The name of the town that the supplied location is in.
 	 */
 	AspectPropertyValue<String> getTown();
+	/**
+	 * The GeoNames identifier of the town or populated place nearest to the supplied location.
+	 */
+	AspectPropertyValue<String> getTownGeoNameId();
 	/**
 	 * The zip or postal code that the supplied location falls under.
 	 */
