@@ -212,17 +212,27 @@ public class IPIntelligenceTests {
     	}
     }
 
+    @Test
+    public void TestOnPremiseBuilder_CreateTempFile_LowMemory() throws Exception {
+        TestOnPremiseBuilder_CreateTempFile(LowMemory);
+    }
+
+    @Test
+    public void TestOnPremiseBuilder_CreateTempFile_MaxPerformance() throws Exception {
+        TestOnPremiseBuilder_CreateTempFile(MaxPerformance);
+    }
+
     /**
      * This tests that creating a temp file works
      */
-    @Test
-    public void TestOnPremiseBuilder_CreateTempFile() throws Exception {
+    public void TestOnPremiseBuilder_CreateTempFile(
+        Constants.PerformanceProfiles performanceProfile) throws Exception {
         int i;
         for (i=0; i < 10; i++) {
             IPIntelligenceOnPremisePipelineBuilder builder =
                     new IPIntelligencePipelineBuilder()
                             .useOnPremise(IPI_DATA_FILE_NAME, true)
-                            .setPerformanceProfile(LowMemory)
+                            .setPerformanceProfile(performanceProfile)
                             .setShareUsage(false)
                             .setAutoUpdate(false);
             try (Pipeline pipeline = builder.build()) {
