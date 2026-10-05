@@ -222,7 +222,7 @@ public class IPIntelligenceTests {
             IPIntelligenceOnPremisePipelineBuilder builder =
                     new IPIntelligencePipelineBuilder()
                             .useOnPremise(IPI_DATA_FILE_NAME, true)
-                            .setPerformanceProfile(MaxPerformance)
+                            .setPerformanceProfile(LowMemory)
                             .setShareUsage(false)
                             .setAutoUpdate(false);
             try (Pipeline pipeline = builder.build()) {
