@@ -25,6 +25,10 @@ The following secrets are optional:
 * `IPI_DATA_FILE_URL` - URL for downloading the enterprise IPI data file
     * Default: the 51Degrees Distributor URL using the `DEVICE_DETECTION_KEY` license key
 
+## Environment
+
+On Windows, [setup-environment.ps1](setup-environment.ps1) installs WMIC if the runner does not have it. Maven Surefire needs it to check that Maven is still alive, and without it can end a long running test that had not failed. The reasoning is in [install-wmic.ps1](install-wmic.ps1).
+
 ## Integration Tests
 
 The integration testing approach differs from the 'general' inversion of control approach outlined in the [Design.md](https://github.com/51Degrees/common-ci/blob/gh-refact/design.md) as the it cannot be generic. 
