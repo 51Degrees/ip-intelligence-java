@@ -35,15 +35,15 @@ import java.util.List;
 public interface IPIntelligenceData extends AspectData
 {
 	/**
-	 * Radius in kilometers of the circle centred around the most probable location that encompasses the entire area. Where multiple areas are returned, this will only cover the area the most probable location is in. See Areas property. This will likely be a very large distance. It is recommend to use the AccuracyRadiusMin property.
+	 * Radius in kilometers of the circle centred around the most probable location that encompasses the entire area, measured against the trimmed area. Where multiple areas are returned, this will only cover the area the most probable location is in. See Areas property. This will likely be a very large distance. It is recommended to use the AccuracyRadiusMin property.
 	 */
 	AspectPropertyValue<Integer> getAccuracyRadiusMax();
 	/**
-	 * Radius in kilometers of the largest circle centred around the most probable location that fits within the area. Where multiple areas are returned, only the area that the most probable location falls within is considered. See Areas property.
+	 * Radius in kilometers of the largest circle centred around the most probable location that fits within the area, measured against the trimmed area. Where multiple areas are returned, only the area that the most probable location falls within is considered. See Areas property.
 	 */
 	AspectPropertyValue<Integer> getAccuracyRadiusMin();
 	/**
-	 * Any shapes associated with the location. Usually this is the area which the IP range covers. This is returned as a WKT String stored as a reduced format of WKB.
+	 * The area the IP range is likely to be in, trimmed to the land of the country the location is in, so it does not reach into neighbouring countries or over the sea. Returned as a WKT string stored as a reduced format of WKB.
 	 *
 	 * @see <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">More information</a>
 	 */
@@ -105,15 +105,11 @@ public interface IPIntelligenceData extends AspectData
 	 */
 	AspectPropertyValue<String> getCountryGeoNameId();
 	/**
-	 * A list of GeoNames country identifiers that overlap within the area associated in the provided evidence. Results are weighted and ordered by each country's proportion of the overlapping area. Areas that cannot be resolved will not contribute to the resulting data.
-	 */
-	AspectPropertyValue<List<IWeightedValue<String>>> getCountryGeoNamesGeographical();
-	/**
 	 * The name of the county that the supplied location is in. In this case, a county is defined as an administrative sub-section of a country or state.
 	 */
 	AspectPropertyValue<String> getCounty();
 	/**
-	 * The GeoNames identifier of the county, a second-level administrative subdivision (admin2) associated with the supplied location.
+	 * The GeoNames identifier of the county, a second-level administrative subdivision (admin2) associated with the supplied location. Unknown where the nearest subdivision lies in a different country from the location.
 	 */
 	AspectPropertyValue<String> getCountyGeoNameId();
 	/**
@@ -253,13 +249,13 @@ public interface IPIntelligenceData extends AspectData
 	 */
 	AspectPropertyValue<String> getState();
 	/**
-	 * The GeoNames database identifier for the state (first-level administrative subdivision, admin1) that the supplied location is in.
+	 * The GeoNames database identifier for the state (first-level administrative subdivision, admin1) that the supplied location is in. Unknown where the nearest subdivision lies in a different country from the location.
 	 */
 	AspectPropertyValue<String> getStateGeoNameId();
 	/**
-	 * A list of GeoNames state identifiers, first-level administrative subdivisions (admin1) that overlap within the area associated in the provided evidence. Results are weighted and ordered by each state's proportion of the overlapping area. Areas that cannot be resolved to the state level will not contribute to the resulting data.
+	 * GeoNames identifiers of the first-level administrative subdivisions (admin1) of the location's country that overlap the area associated with the supplied evidence, weighted and ordered by each subdivision's share of that area. Subdivisions covering less than 1% of the area are omitted, at most the 20 largest are returned, and the weights of those returned are scaled to sum to 100%.
 	 */
-	AspectPropertyValue<List<IWeightedValue<String>>> getStateGeoNamesGeographical();
+	AspectPropertyValue<List<IWeightedValue<String>>> getStateGeoNameIdsGeographical();
 	/**
 	 * The name of the suburb that the supplied location is in.
 	 */
@@ -277,7 +273,7 @@ public interface IPIntelligenceData extends AspectData
 	 */
 	AspectPropertyValue<String> getTown();
 	/**
-	 * The GeoNames identifier of the town or populated place nearest to the supplied location.
+	 * The GeoNames identifier of the town or populated place nearest to the supplied location. Unknown where the nearest populated place lies in a different country from the location.
 	 */
 	AspectPropertyValue<String> getTownGeoNameId();
 	/**
