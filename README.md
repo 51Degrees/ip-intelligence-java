@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This repo has been merged into the monorepo https://github.com/51Degrees/51degrees-java, under `ip-intelligence/`. Please refer to the new monorepository for issues and PRs. The Maven packages keep their coordinates and are published from there, from version 4.5.127.
+
 # 51Degrees IP Intelligence Engines
 
 ![51Degrees](https://51degrees.com/img/logo.png?utm_source=github&utm_medium=readme&utm_campaign=ip-intelligence-java&utm_content=readme.md&utm_term=51degrees-ip-intelligence-engines "Data rewards the curious") **Java IP Intelligence**
